@@ -7,8 +7,10 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Creative from "../assets/creative.png";
+import { useNavigate } from "react-router-dom";
 
 const Society = () => {
+  const navigate = useNavigate();
   return (
     <div className="m-10">
       <h1 className="my-5 text-3xl font-semibold text-center">
@@ -28,7 +30,12 @@ const Society = () => {
                 <p className="text-center">Creative Computing Society</p>
               </CardContent>
               <CardFooter>
-                <Button className="w-full">Preview</Button>
+                <Button
+                  onClick={() => navigate(`creative-computing-society`)}
+                  className="w-full"
+                >
+                  Preview
+                </Button>
               </CardFooter>
             </Card>
           ))}
