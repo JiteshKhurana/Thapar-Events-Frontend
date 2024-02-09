@@ -1,7 +1,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -11,24 +10,29 @@ import Creative from "../assets/creative.png";
 
 const Society = () => {
   return (
-    <div>
-      <h1 className="mx-10 my-5 text-3xl font-semibold">
-        Explore Societies @TIET
+    <div className="m-10">
+      <h1 className="my-5 text-3xl font-semibold text-center">
+        Explore Societies
       </h1>
-      <Card className="w-1/4">
-        <CardHeader>
-          <CardTitle>
-            <img src={Creative} />
-          </CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Creative Computing Society</p>
-        </CardContent>
-        <CardFooter>
-          <Button>Preview</Button>
-        </CardFooter>
-      </Card>
+      <div className="flex flex-wrap justify-center">
+        {Array(12)
+          .fill(0)
+          .map(() => (
+            <Card className="w-1/4 bg-gradient-to-r from-sky-500 to-indigo-500 m-5">
+              <CardHeader>
+                <CardTitle>
+                  <img src={Creative} className="w-1/2 h-1/2 mx-auto " />
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-center">Creative Computing Society</p>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full">Preview</Button>
+              </CardFooter>
+            </Card>
+          ))}
+      </div>
     </div>
   );
 };

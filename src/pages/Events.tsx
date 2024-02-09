@@ -26,64 +26,68 @@ const Events = () => {
           <ComboBox />
           <TabsContent value="upcoming">
             <div className="flex flex-wrap justify-center">
-              {Array(12).fill(
-                <Card className="w-1/4 m-5">
-                  <img src={Event} className="h-44" />
-                  <CardHeader className="flex flex-row space-x-5">
-                    <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <CardTitle>Escalade</CardTitle>
-                      <CardDescription>
-                        Creative Computing Society
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <Badge variant="outline">#Engineering</Badge>
-                    <Badge variant="outline">#Coffee</Badge>
-                    <Badge variant="outline">#Coding</Badge>
-                  </CardContent>
-                  <CardFooter className="justify-between">
-                    <Button variant={"outline"} className="w-2/5">
-                      Preview
-                    </Button>
-                    <Button className="w-2/5">Apply</Button>
-                  </CardFooter>
-                </Card>
-              )}
+              {Array(12)
+                .fill(0)
+                .map(() => (
+                  <Card className="w-1/4 m-5">
+                    <img src={Event} className="h-44" />
+                    <CardHeader className="flex flex-row space-x-5">
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <CardTitle>Escalade</CardTitle>
+                        <CardDescription>
+                          Creative Computing Society
+                        </CardDescription>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <Badge variant="outline">#Engineering</Badge>
+                      <Badge variant="outline">#Coffee</Badge>
+                      <Badge variant="outline">#Coding</Badge>
+                    </CardContent>
+                    <CardFooter className="justify-between">
+                      <Button variant={"outline"} className="w-2/5">
+                        Preview
+                      </Button>
+                      <Button className="w-2/5">Apply</Button>
+                    </CardFooter>
+                  </Card>
+                ))}
             </div>
           </TabsContent>
           <TabsContent value="past">
             <div className="flex flex-wrap justify-center">
-              {Array(12).fill(
-                <Card className="w-1/4 m-5">
-                  <img src={Event} className="h-44" />
-                  <CardHeader className="flex flex-row space-x-5">
-                    <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <CardTitle>Hackathon</CardTitle>
-                      <CardDescription>MLSC</CardDescription>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <Badge variant="outline">#Engineering</Badge>
-                    <Badge variant="outline">#Coffee</Badge>
-                    <Badge variant="outline">#Coding</Badge>
-                  </CardContent>
-                  <CardFooter className="justify-between">
-                    <Button variant={"outline"} className="w-2/5">
-                      Preview
-                    </Button>
-                    <Button className="w-2/5">Apply</Button>
-                  </CardFooter>
-                </Card>
-              )}
+              {Array(12)
+                .fill(0)
+                .map(() => (
+                  <Card className="w-1/4 m-5">
+                    <img src={Event} className="h-44" />
+                    <CardHeader className="flex flex-row space-x-5">
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <CardTitle>Hackathon</CardTitle>
+                        <CardDescription>MLSC</CardDescription>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <Badge variant="outline">#Engineering</Badge>
+                      <Badge variant="outline">#Coffee</Badge>
+                      <Badge variant="outline">#Coding</Badge>
+                    </CardContent>
+                    <CardFooter className="justify-between">
+                      <Button variant={"outline"} className="w-2/5">
+                        Preview
+                      </Button>
+                      <Button className="w-2/5">Apply</Button>
+                    </CardFooter>
+                  </Card>
+                ))}
             </div>
           </TabsContent>
         </Tabs>
