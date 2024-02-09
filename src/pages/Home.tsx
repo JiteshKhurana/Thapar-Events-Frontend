@@ -5,7 +5,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Calendar } from "@/components/ui/calendar";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -16,7 +16,7 @@ import {
 
 const Home = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-
+  const navigate = useNavigate();
   return (
     <div>
       <div className="relative">
@@ -33,10 +33,15 @@ const Home = () => {
           <br /> and level up your skills.
         </p>
         <div>
-          <Button className="absolute bottom-80 left-16" size="lg">
+          <Button
+            onClick={() => navigate("societies")}
+            className="absolute bottom-80 left-16"
+            size="lg"
+          >
             Explore Now
           </Button>
           <Button
+            onClick={() => navigate("events")}
             className="absolute bottom-80 left-72"
             size="lg"
             variant={"secondary"}

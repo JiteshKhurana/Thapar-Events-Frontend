@@ -32,19 +32,16 @@ const NavBar = () => {
         <div>
           <ul className="flex space-x-9">
             <Link to="/">
-              <li className="hover:text-red-700">Home</li>
+              <li className="hover:text-blue-600">Home</li>
             </Link>
             <Link to="/events">
-              <li className="hover:text-red-700">Events</li>
+              <li className="hover:text-blue-600">Events</li>
             </Link>
             <Link to="/societies">
-              <li className="hover:text-red-700">Societies</li>
+              <li className="hover:text-blue-600">Societies</li>
             </Link>
             <Link to="/contact-us">
-              <li className="hover:text-red-700">Contact Us</li>
-            </Link>
-            <Link to="/about-us">
-              <li className="hover:text-red-700">About Us</li>
+              <li className="hover:text-blue-600">Contact Us</li>
             </Link>
           </ul>
         </div>

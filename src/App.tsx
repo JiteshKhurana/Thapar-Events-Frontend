@@ -5,7 +5,6 @@ import Events from "./pages/Events";
 import Society from "./pages/Society";
 import SocietyDetail from "./pages/SocietyDetail";
 import ContactUs from "./pages/ContactUs";
-import AboutUs from "./pages/AboutUs";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
@@ -20,7 +19,6 @@ function App() {
           <Route path="/societies" element={<Society />} />
           <Route path="/societies/:name" element={<SocietyDetail />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
         <Footer />
       </BrowserRouter>
