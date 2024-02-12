@@ -30,7 +30,7 @@ const Events = () => {
                 .fill(0)
                 .map(() => (
                   <Card className="w-1/4 m-5">
-                    <img src={Event} className="h-44" />
+                    <img src={Event} className="w-full" />
                     <CardHeader className="flex flex-row space-x-5">
                       <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" />

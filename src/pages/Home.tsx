@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import ThaparBG from "../assets/thaparbg.png";
 import Slider1 from "../assets/slider.png";
 import Autoplay from "embla-carousel-autoplay";
 import { Calendar } from "@/components/ui/calendar";
@@ -20,7 +19,16 @@ const Home = () => {
   return (
     <div>
       <div className="relative">
-        <img src={ThaparBG} alt="bg-thapar" className="brightness-50" />
+        <div className="overflow-hidden brightness-50">
+          <iframe
+            className="w-full aspect-video pointer-events-none -mt-16"
+            src={
+              "https://www.youtube.com/embed/LOWbKBodXFg?si=yqu9x7AaH7arwj5Y&amp;start=0&autoplay=1&mute=1&loop=1&controls=0&disablekb=1"
+            }
+            title="YouTube video player"
+            allow=" encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        </div>
         <h1 className="absolute top-28 left-16 text-8xl text-white font-semibold">
           Competitions,
           <br />
@@ -28,21 +36,21 @@ const Home = () => {
           <br />
           Fests &<br /> more!
         </h1>
-        <p className="absolute bottom-96 left-16 text-xl text-gray-300 font-light">
+        <p className="absolute bottom-44 left-16 text-xl text-gray-300 font-light">
           Make the most of every opportunity to learn, enjoy
           <br /> and level up your skills.
         </p>
         <div>
           <Button
             onClick={() => navigate("societies")}
-            className="absolute bottom-80 left-16"
+            className="absolute bottom-28 left-16"
             size="lg"
           >
             Explore Now
           </Button>
           <Button
             onClick={() => navigate("events")}
-            className="absolute bottom-80 left-72"
+            className="absolute bottom-28 left-72"
             size="lg"
             variant={"secondary"}
           >
