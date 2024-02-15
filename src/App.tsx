@@ -5,14 +5,12 @@ import Events from "./pages/Events";
 import Society from "./pages/Society";
 import SocietyDetail from "./pages/SocietyDetail";
 import ContactUs from "./pages/ContactUs";
-import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
-        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />

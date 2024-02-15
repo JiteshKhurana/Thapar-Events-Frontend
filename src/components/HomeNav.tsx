@@ -5,7 +5,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
 import { ModeToggle } from "./mode-toggle.tsx";
 
-const NavBar = () => {
+const HomeNav = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       console.log(tokenResponse);
@@ -19,15 +19,15 @@ const NavBar = () => {
     onError: (errorResponse) => console.log(errorResponse),
   });
   return (
-    <div className="flex items-center p-2 mt-2 justify-between w-full">
+    <div className="absolute z-10 flex items-center p-2 mt-2 justify-between w-full">
       <div className="flex space-x-5 items-center ml-16">
         <a href="/">
           <img src={Logo} alt="logo" className="w-10" />
         </a>
-        <h1 className="text-3xl">Invincible</h1>
+        <h1 className="text-white text-3xl">Invincible</h1>
       </div>
       <div>
-        <ul className="flex space-x-9">
+        <ul className="flex space-x-9 text-white">
           <Link to="/">
             <li className="hover:text-blue-600">Home</li>
           </Link>
@@ -50,4 +50,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default HomeNav;

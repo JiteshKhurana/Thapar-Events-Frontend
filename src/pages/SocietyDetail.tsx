@@ -13,10 +13,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import NavBar from "@/components/NavBar";
 
 const SocietyDetail = () => {
   return (
     <div>
+      <NavBar />
       <div className="relative">
         <img src={Banner} />
         <div className="absolute left-10 bottom-10 flex items-center space-x-5">
