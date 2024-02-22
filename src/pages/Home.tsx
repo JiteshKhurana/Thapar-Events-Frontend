@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/carousel";
 import HomeNav from "@/components/HomeNav";
 
-const Home = () => {
+const Home: React.FC = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const navigate = useNavigate();
   return (

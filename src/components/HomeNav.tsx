@@ -5,16 +5,31 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
 import { ModeToggle } from "./mode-toggle.tsx";
 
-const HomeNav = () => {
+const HomeNav: React.FC = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse);
       const userInfo = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
         { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
       );
-
-      console.log(userInfo);
+      // Create User
+      axios
+        .post(
+          "https://thapar-event-management-system-production.up.railway.app/create",
+          {
+            email: userInfo.data.email,
+            name: userInfo.data.name,
+            token: tokenResponse.access_token,
+          }
+        )
+        .then((resp) => {
+          localStorage.setItem("token", resp.data.token);
+          localStorage.setItem("name", resp.data.user.name);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
@@ -42,8 +57,12 @@ const HomeNav = () => {
           </Link>
         </ul>
       </div>
-      <div className="flex space-x-5 mr-16">
-        <Button onClick={() => googleLogin()}>Sign in</Button>
+      <div className="flex space-x-5 mr-16 justify-center">
+        {localStorage.getItem("token") ? (
+          <Button>Hi {localStorage.getItem("name")}</Button>
+        ) : (
+          <Button onClick={() => googleLogin()}>Sign in</Button>
+        )}
         <ModeToggle />
       </div>
     </div>

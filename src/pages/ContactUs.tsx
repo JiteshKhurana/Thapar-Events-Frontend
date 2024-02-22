@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import NavBar from "@/components/NavBar";
 
-const ContactUs = () => {
+const ContactUs: React.FC = () => {
   return (
     <div>
       <NavBar />

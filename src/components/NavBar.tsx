@@ -1,20 +1,20 @@
 import Logo from "../assets/tietlogo.png";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
 import { ModeToggle } from "./mode-toggle.tsx";
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       console.log(tokenResponse);
-      const userInfo = await axios.get(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
-      );
+      // const userInfo = await axios.get(
+      //   "https://www.googleapis.com/oauth2/v3/userinfo",
+      //   { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
+      // );
 
-      console.log(userInfo);
+      // console.log(userInfo);
     },
     onError: (errorResponse) => console.log(errorResponse),
   });

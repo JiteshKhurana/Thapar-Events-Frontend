@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ComboBox } from "@/components/ComboBox";
+import { ComboBox } from "@/components/ui/ComboBox";
 import { Badge } from "@/components/ui/badge";
 import Event from "../assets/event.png";
 
@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 
-const Events = () => {
+const Events: React.FC = () => {
   return (
     <div>
       <NavBar />

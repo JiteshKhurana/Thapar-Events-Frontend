@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
 
-const SocietyDetail = () => {
+const SocietyDetail: React.FC = () => {
   return (
     <div>
       <NavBar />

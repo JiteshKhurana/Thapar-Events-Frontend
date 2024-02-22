@@ -7,7 +7,7 @@ import Play from "../assets/play.svg";
 import Apple from "../assets/apple.svg";
 import { Separator } from "./ui/separator";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <div className="my-8 pt-8">
       <div className="flex justify-between mx-10">

@@ -10,7 +10,7 @@ import Creative from "../assets/creative.png";
 import { useNavigate } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 
-const Society = () => {
+const Society: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div>
