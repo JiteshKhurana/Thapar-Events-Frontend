@@ -8,13 +8,11 @@ import {
 import { Button } from "@/components/ui/button";
 import Creative from "../assets/creative.png";
 import { useNavigate } from "react-router-dom";
-import NavBar from "@/components/NavBar";
 
 const Society: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <NavBar />
       <div className="m-10">
         <h1 className="my-5 text-3xl font-semibold text-center">
           Explore Societies

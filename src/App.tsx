@@ -6,11 +6,13 @@ import Society from "./pages/Society";
 import SocietyDetail from "./pages/SocietyDetail";
 import ContactUs from "./pages/ContactUs";
 import Footer from "./components/Footer";
+import HomeNav from "./components/HomeNav";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
+        <HomeNav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />

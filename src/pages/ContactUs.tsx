@@ -2,12 +2,10 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import NavBar from "@/components/NavBar";
 
 const ContactUs: React.FC = () => {
   return (
     <div>
-      <NavBar />
       <div className="mx-10">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-medium my-8">Our Team</h2>

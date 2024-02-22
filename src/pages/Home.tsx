@@ -12,18 +12,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import HomeNav from "@/components/HomeNav";
 
 const Home: React.FC = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const navigate = useNavigate();
   return (
     <div>
-      <HomeNav />
       <div className="relative">
         <div className="overflow-hidden brightness-50">
           <iframe
-            className="w-full aspect-video pointer-events-none -mt-12"
+            className="w-full aspect-video pointer-events-none -mt-14"
             src={
               "https://www.youtube.com/embed/LOWbKBodXFg?si=yqu9x7AaH7arwj5Y&amp;start=0&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=LOWbKBodXFg"
             }
