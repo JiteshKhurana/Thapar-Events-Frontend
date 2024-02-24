@@ -4,6 +4,7 @@ import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
 import { ModeToggle } from "./mode-toggle.tsx";
+import { toast } from "sonner";
 
 const HomeNav: React.FC = () => {
   const googleLogin = useGoogleLogin({
@@ -22,14 +23,13 @@ const HomeNav: React.FC = () => {
           }
         )
         .then((resp) => {
-          console.log(resp);
           localStorage.setItem("token", resp.data.token);
           localStorage.setItem("name", resp.data.user.name);
           localStorage.setItem("user_id", resp.data.user._id);
           window.location.reload();
         })
         .catch((error) => {
-          console.log(error);
+          toast(error);
         });
     },
     onError: (errorResponse) => console.log(errorResponse),

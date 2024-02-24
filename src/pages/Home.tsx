@@ -28,6 +28,7 @@ const Home: React.FC = () => {
             allow=" encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
         </div>
+
         <h1 className="absolute top-28 left-16 text-8xl text-white font-semibold">
           Competitions,
           <br />
