@@ -7,6 +7,7 @@ import SocietyDetail from "./pages/SocietyDetail";
 import ContactUs from "./pages/ContactUs";
 import Footer from "./components/Footer";
 import HomeNav from "./components/HomeNav";
+import User from "./pages/User";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/societies" element={<Society />} />
           <Route path="/societies/:name" element={<SocietyDetail />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/user/:userid" element={<User />} />
         </Routes>
         <Footer />
       </BrowserRouter>

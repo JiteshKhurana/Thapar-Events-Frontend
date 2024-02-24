@@ -4,7 +4,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Calendar } from "@/components/ui/calendar";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -15,7 +15,6 @@ import {
 
 const Home: React.FC = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const navigate = useNavigate();
   return (
     <div>
       <div className="relative">
@@ -41,21 +40,20 @@ const Home: React.FC = () => {
           <br /> and level up your skills.
         </p>
         <div>
-          <Button
-            onClick={() => navigate("societies")}
-            className="absolute bottom-28 left-16"
-            size="lg"
-          >
-            Explore Now
-          </Button>
-          <Button
-            onClick={() => navigate("events")}
-            className="absolute bottom-28 left-72"
-            size="lg"
-            variant={"secondary"}
-          >
-            View Past Events
-          </Button>
+          <Link to={"/societies"}>
+            <Button className="absolute bottom-28 left-16" size="lg">
+              Explore Now
+            </Button>
+          </Link>
+          <Link to={"/events"}>
+            <Button
+              className="absolute bottom-28 left-72"
+              size="lg"
+              variant={"secondary"}
+            >
+              View Past Events
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="mx-96 my-5">

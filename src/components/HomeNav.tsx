@@ -1,5 +1,5 @@
 import Logo from "../assets/tietlogo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
@@ -12,7 +12,6 @@ const HomeNav: React.FC = () => {
         "https://www.googleapis.com/oauth2/v3/userinfo",
         { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
       );
-      // Create User
       axios
         .post(
           "https://thapar-event-management-system-production.up.railway.app/create",
@@ -23,8 +22,10 @@ const HomeNav: React.FC = () => {
           }
         )
         .then((resp) => {
+          console.log(resp);
           localStorage.setItem("token", resp.data.token);
           localStorage.setItem("name", resp.data.user.name);
+          localStorage.setItem("user_id", resp.data.user._id);
           window.location.reload();
         })
         .catch((error) => {
@@ -34,7 +35,7 @@ const HomeNav: React.FC = () => {
     onError: (errorResponse) => console.log(errorResponse),
   });
   const location = useLocation();
-
+  const navigate = useNavigate();
   return location.pathname === "/" ? (
     <div className="absolute z-10 flex items-center p-2 mt-2 justify-between w-full">
       <div className="flex space-x-5 items-center ml-16">
@@ -61,7 +62,11 @@ const HomeNav: React.FC = () => {
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
         {localStorage.getItem("token") ? (
-          <Button>HI {localStorage.getItem("name")?.toUpperCase()}</Button>
+          <Button
+            onClick={() => navigate("/user/" + localStorage.getItem("user_id"))}
+          >
+            HI {localStorage.getItem("name")?.toUpperCase()}
+          </Button>
         ) : (
           <Button onClick={() => googleLogin()}>Sign in</Button>
         )}
@@ -94,7 +99,11 @@ const HomeNav: React.FC = () => {
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
         {localStorage.getItem("token") ? (
-          <Button>HI {localStorage.getItem("name")?.toUpperCase()}</Button>
+          <Button
+            onClick={() => navigate("/user/" + localStorage.getItem("user_id"))}
+          >
+            HI {localStorage.getItem("name")?.toUpperCase()}
+          </Button>
         ) : (
           <Button onClick={() => googleLogin()}>Sign in</Button>
         )}
