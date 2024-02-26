@@ -4,7 +4,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Calendar } from "@/components/ui/calendar";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -12,18 +12,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import HomeNav from "@/components/HomeNav";
 
-const Home = () => {
+const Home: React.FC = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const navigate = useNavigate();
   return (
     <div>
-      <HomeNav />
       <div className="relative">
         <div className="overflow-hidden brightness-50">
           <iframe
-            className="w-full aspect-video pointer-events-none -mt-12"
+            className="w-full aspect-video pointer-events-none -mt-14"
             src={
               "https://www.youtube.com/embed/LOWbKBodXFg?si=yqu9x7AaH7arwj5Y&amp;start=0&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=LOWbKBodXFg"
             }
@@ -31,6 +28,7 @@ const Home = () => {
             allow=" encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
         </div>
+
         <h1 className="absolute top-28 left-16 text-8xl text-white font-semibold">
           Competitions,
           <br />
@@ -43,21 +41,20 @@ const Home = () => {
           <br /> and level up your skills.
         </p>
         <div>
-          <Button
-            onClick={() => navigate("societies")}
-            className="absolute bottom-28 left-16"
-            size="lg"
-          >
-            Explore Now
-          </Button>
-          <Button
-            onClick={() => navigate("events")}
-            className="absolute bottom-28 left-72"
-            size="lg"
-            variant={"secondary"}
-          >
-            View Past Events
-          </Button>
+          <Link to={"/societies"}>
+            <Button className="absolute bottom-28 left-16" size="lg">
+              Explore Now
+            </Button>
+          </Link>
+          <Link to={"/events"}>
+            <Button
+              className="absolute bottom-28 left-72"
+              size="lg"
+              variant={"secondary"}
+            >
+              View Past Events
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="mx-96 my-5">
