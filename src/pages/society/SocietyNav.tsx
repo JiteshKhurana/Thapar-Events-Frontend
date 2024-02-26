@@ -4,7 +4,7 @@ import tietlogo from "../../assets/tietlogo.png"
 const SocietyNav = () => {
     return (
         <div>
-            <nav className="w-full h-[90px] dark:bg-neutral-900 flex justify-around items-center px-[7px]">
+            <nav className="w-full h-[90px] border-b-2 dark:bg-neutral-900 flex justify-around items-center px-[7px]">
                 <div className="logo flex items-center">
                     <img src={tietlogo} className="w-[45px]"></img>
                     <h1 className="text-4xl ml-[5px] font-semibold">ThaparTube</h1>

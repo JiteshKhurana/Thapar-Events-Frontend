@@ -42,7 +42,7 @@ import HomeNav from "./components/HomeNav";
 import User from "./pages/User";
 import EditUser from "./pages/EditUser";
 import { Toaster } from "@/components/ui/sonner";
-  import Societyroot from "./pages/society/Societyroot";
+import Societyroot from "./pages/society/Societyroot";
 import SocietyEvents from "./pages/society/SocietyEvents";
 import SocietyDashboard from "./pages/society/SocietyDashboard";
 import EditSocietyProfile from "./pages/society/EditSocietyProfile";
