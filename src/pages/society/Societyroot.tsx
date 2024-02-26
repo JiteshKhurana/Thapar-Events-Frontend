@@ -55,7 +55,7 @@ const Societyroot = () => {
                     </div>
                 </ResizablePanel>
                 <ResizableHandle />
-                <ResizablePanel><Outlet />Two</ResizablePanel>
+                <ResizablePanel><Outlet /></ResizablePanel>
             </ResizablePanelGroup>
         </div>
     )

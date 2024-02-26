@@ -55,7 +55,9 @@ function App() {
       <BrowserRouter>
         <HomeNav />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} > 
+          
+          </Route>
           <Route path="/events" element={<Events />} />
           <Route path="/societies" element={<Society />} />
           <Route path="/societies/:name" element={<SocietyDetail />} />
