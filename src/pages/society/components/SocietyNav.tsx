@@ -1,4 +1,4 @@
-import tietlogo from "../../assets/tietlogo.png"
+import tietlogo from "../../../assets/tietlogo.png"
 
 
 const SocietyNav = () => {
@@ -10,7 +10,7 @@ const SocietyNav = () => {
                     <h1 className="text-4xl ml-[5px] font-semibold">ConnectHub</h1>
                 </div>
                 <div className="heading"> <span className="text-xl font-semibold">Creative Computing Society</span> <span>| Society DashBoard</span> </div>
-                <div className="society-photo"><img src="https://avatars.githubusercontent.com/u/34922904?s=280&v=4" className="w-[45px] mr-[10px]"></img></div>
+                <div className="society-photo bg-black rounded-full w-[50px] h-[50px]"><img src="https://avatars.githubusercontent.com/u/34922904?s=280&v=4" className="w-[50px] h-[50px] mr-[10px]"></img></div>
             </nav>
 
         </div>

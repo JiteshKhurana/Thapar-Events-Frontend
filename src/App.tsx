@@ -67,8 +67,8 @@ function App() {
           <Route path="/society/" element={<Societyroot/>}>
               <Route path="dashboard" element={<SocietyDashboard/>}></Route> 
               <Route path="societyevents" element={<SocietyEvents/>}></Route> 
-              <Route path="editprofile" element={<EditSocietyProfile/>}></Route> 
           </Route>
+          <Route path="editsocietyprofile" element={<EditSocietyProfile/>}></Route> 
         </Routes>
         <Toaster />
         <Footer />

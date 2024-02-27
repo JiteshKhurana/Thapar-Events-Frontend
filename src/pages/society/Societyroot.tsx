@@ -1,4 +1,4 @@
-import SocietyNav from "./SocietyNav"
+import SocietyNav from "./components/SocietyNav"
 import {
     ResizableHandle,
     ResizablePanel,
@@ -38,7 +38,7 @@ const Societyroot = () => {
                                         Events
                                     </li>
                                 </NavLink>
-                                <NavLink to={'editprofile'}>
+                                <NavLink to={'/editsocietyprofile'}>
                                     <li className="flex items-center gap-2">
                                         <box-icon name='edit' ></box-icon>
                                         Edit Profile
