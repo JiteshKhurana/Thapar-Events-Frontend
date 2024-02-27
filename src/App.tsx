@@ -42,7 +42,7 @@ import HomeNav from "./components/HomeNav";
 import User from "./pages/User";
 import EditUser from "./pages/EditUser";
 import { Toaster } from "@/components/ui/sonner";
-  import Societyroot from "./pages/society/Societyroot";
+import Societyroot from "./pages/society/Societyroot";
 import SocietyEvents from "./pages/society/SocietyEvents";
 import SocietyDashboard from "./pages/society/SocietyDashboard";
 import EditSocietyProfile from "./pages/society/EditSocietyProfile";
@@ -55,7 +55,9 @@ function App() {
       <BrowserRouter>
         <HomeNav />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} > 
+          
+          </Route>
           <Route path="/events" element={<Events />} />
           <Route path="/societies" element={<Society />} />
           <Route path="/societies/:name" element={<SocietyDetail />} />
@@ -65,8 +67,8 @@ function App() {
           <Route path="/society/" element={<Societyroot/>}>
               <Route path="dashboard" element={<SocietyDashboard/>}></Route> 
               <Route path="societyevents" element={<SocietyEvents/>}></Route> 
-              <Route path="editprofile" element={<EditSocietyProfile/>}></Route> 
           </Route>
+          <Route path="editsocietyprofile" element={<EditSocietyProfile/>}></Route> 
         </Routes>
         <Toaster />
         <Footer />
