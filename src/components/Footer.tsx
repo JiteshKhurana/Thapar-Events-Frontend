@@ -1,26 +1,24 @@
 import Logo from "../assets/tietlogo.png";
-import Facebook from "../assets/facebook.svg";
-import Linkedin from "../assets/linkedin.svg";
-import X from "../assets/x.svg";
-import Insta from "../assets/insta.svg";
-import Play from "../assets/play.svg";
-import Apple from "../assets/apple.svg";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import { Separator } from "./ui/separator";
 
 const Footer: React.FC = () => {
   return (
-    <div className="my-8 pt-8">
-      <div className="flex justify-between mx-10">
-        <div>
+    <div className="my-8 pt-8 mx-16">
+      <div className="grid grid-cols-12">
+        <div className="col-span-4">
           <img src={Logo} alt="logo" className="h-10" />
           <div className="flex space-x-2 mt-3">
-            <img src={Facebook} alt="face" />
-            <img src={X} alt="x" />
-            <img src={Insta} alt="insta" />
-            <img src={Linkedin} alt="link" />
+            <FaFacebook />
+            <FaTwitter />
+            <FaInstagram />
+            <FaLinkedin />
           </div>
         </div>
-        <div className="flex text-xs text-[#7C7C7C] space-x-10">
+        <div className="col-span-8 flex text-xs text-[#7C7C7C] space-x-10">
           <div className="space-y-4">
             <p>About Us</p>
             <p>Sitemap</p>
@@ -41,27 +39,11 @@ const Footer: React.FC = () => {
             <p>Trust & Safety</p>
           </div>
         </div>
-        <div className="flex flex-col space-y-6">
-          <button className="bg-black rounded-xl flex p-2 space-x-2">
-            <img className="my-auto" src={Apple} alt="apple" />
-            <div className="text-white">
-              <p className="text-sm font-light">Download on the</p>
-              <h2 className="font-medium text-start">App Store</h2>
-            </div>
-          </button>
-          <button className="bg-black rounded-xl flex p-2 space-x-2">
-            <img className="my-auto" src={Play} alt="play" />
-            <div className="text-white">
-              <p className="text-sm font-light">Download on the</p>
-              <h2 className="font-medium text-start">Play Store</h2>
-            </div>
-          </button>
-        </div>
       </div>
       <Separator className="my-2" />
-      <p className="text-xs text-[#7C7C7C] mx-36">
+      <p className="text-xs text-[#7C7C7C] text-center">
         All trademarks are the property of their respective owners
-        <br /> All rights reserved © 2024 Thapar
+        <br /> All rights reserved © 2024 Invincible
       </p>
     </div>
   );

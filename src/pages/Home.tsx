@@ -29,14 +29,14 @@ const Home: React.FC = () => {
           ></iframe>
         </div>
 
-        <h1 className="absolute top-28 left-16 text-8xl text-white font-semibold">
+        <h1 className="absolute bottom-1/3 left-16 text-8xl text-white font-semibold">
           Competitions,
           <br />
           Workshops,
           <br />
           Fests &<br /> more!
         </h1>
-        <p className="absolute bottom-44 left-16 text-xl text-gray-300 font-light">
+        <p className="absolute bottom-1/4 left-16 text-xl text-gray-300 font-light">
           Make the most of every opportunity to learn, enjoy
           <br /> and level up your skills.
         </p>
