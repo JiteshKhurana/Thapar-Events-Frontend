@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import ActiveEventCard from "./components/ActiveEventCard";
 import { BiPlus } from "react-icons/bi";
 
+
 const SocietyDashboard: React.FC = () => {
   return (
     <div className="w-full min-h-full  flex flex-col ">
@@ -63,6 +64,7 @@ const SocietyDashboard: React.FC = () => {
           <ActiveEventCard />
           <ActiveEventCard />
           <ActiveEventCard />
+
         </div>
       </div>
     </div>
