@@ -8,7 +8,7 @@ import { BiCalendarEvent } from "react-icons/bi";
 const ActiveEventCard = () => {
   return (
     <div>
-        <div className="active-event-card my-2 flex p-5 w-[80%] border-[1px] border-gray-400 rounded-xl justify-between">
+        <div className="active-event-card my-2 flex p-3 pr-6 w-[80%] border-[1px] border-gray-400 rounded-xl justify-between">
                         <div className="left-data flex">
                             <div className="active-event-img w-[100px] h-[100px] rounded-md " style={{
                                 backgroundImage: 'url(\'https://www.ccstiet.com/media/events/Code_Strike/images/codestrike_no7fba.jpg\')',
