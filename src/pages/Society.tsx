@@ -29,7 +29,7 @@ const Society: React.FC = () => {
   useEffect(() => {
     axios
       .get(
-        "http://thapar-event-management-system-production.up.railway.app/soc/get"
+        "https://thapar-event-management-system-production.up.railway.app/soc/get"
       )
       .then((resp) => {
         setSocieties(resp.data);
