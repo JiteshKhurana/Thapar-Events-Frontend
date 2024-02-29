@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const CardShimmer = () => {
   return (
-    <div className="flex space-x-5 mb-5">
+    <div className="flex space-x-5 mb-5 justify-center items-center">
       {Array(3)
         .fill(0)
         .map(() => (
