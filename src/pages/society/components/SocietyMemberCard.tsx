@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import profilephoto from "../../../assets/profilephoto.jpg"
+import { BiEnvelope, BiLogoLinkedinSquare } from "react-icons/bi"
 const SocietyMemberCard = () => {
     return (
         <div className="society-event-card flex p-3 pr-6 w-full border-[1px] border-gray-400 rounded-xl justify-between">
@@ -10,8 +11,8 @@ const SocietyMemberCard = () => {
                     <div className="det flex flex-col text-gray-800">
                         <div className="font-bold">General Secretary</div>
                         <div className="member-profiles flex items-center gap-6">
-                            <span className="email flex items-center"><box-icon name='envelope'></box-icon>lipsum_be21@thapar.edu</span>
-                            <span className="linkedIn flex items-center"><box-icon name='linkedin-square' type='logo' ></box-icon>linkedin.com/lorem-ipsum</span>
+                            <span className="email flex items-center"><BiEnvelope className="text-xl"/>lipsum_be21@thapar.edu</span>
+                            <span className="linkedIn flex items-center"><BiLogoLinkedinSquare className="text-xl"/>linkedin.com/lorem-ipsum</span>
                         </div>
                     </div>
 

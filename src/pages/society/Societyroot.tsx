@@ -5,6 +5,9 @@ import {
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
 
+import { MdDashboard, MdEdit } from "react-icons/md";
+import { BiLogOut, BiCalendar } from "react-icons/bi";
+
 import 'boxicons';
 
 import { NavLink, Outlet } from "react-router-dom"
@@ -28,25 +31,25 @@ const Societyroot = () => {
                                 <NavLink to={'dashboard'}>
                                     <li className="flex items-center gap-2">
 
-                                        <box-icon type='solid' name='dashboard'></box-icon>
+                                    <MdDashboard className="text-2xl" />
                                         Dashboard
                                     </li>
                                 </NavLink>
                                 <NavLink to={'societyevents'}>
                                     <li className="flex items-center gap-2">
-                                        <box-icon name='calendar-event'></box-icon>
+                                    <BiCalendar className="text-2xl" />
                                         Events
                                     </li>
                                 </NavLink>
                                 <NavLink to={'/editsocietyprofile'}>
                                     <li className="flex items-center gap-2">
-                                        <box-icon name='edit' ></box-icon>
+                                    <MdEdit className="text-2xl" />
                                         Edit Profile
                                     </li>
                                 </NavLink>
                                 <NavLink to={'/'}>
                                     <li className="flex items-center gap-2">
-                                        <box-icon name='log-out' ></box-icon>
+                                    <BiLogOut className="text-2xl" />
                                         Logout
                                     </li>
                                 </NavLink>

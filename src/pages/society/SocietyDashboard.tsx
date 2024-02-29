@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import ActiveEventCard from "./components/ActiveEventCard"
-
+import { BiPlus } from "react-icons/bi";
 
 const SocietyDashboard = () => {
     return (
@@ -9,7 +9,7 @@ const SocietyDashboard = () => {
                 <div className="society-greeting">
                     <span className="font-light text-xl text-gray-600">Welcome Back,</span> <br /> <span className="text-3xl font-semibold">Creative Computing Society</span>
                 </div>
-                <Button className="bg-[#265073] p-6 mr-8"><box-icon name='plus' color="#ffffff" className='text-white'></box-icon>Create New Event</Button>
+                <Button className="bg-[#265073] p-6 mr-8"><BiPlus className="text-xl"/>Create New Event</Button>
 
             </div>
             <div className="stats px-[30px] mt-7 text-[20px] font-semibold flex-col">

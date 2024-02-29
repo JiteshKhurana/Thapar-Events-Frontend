@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import SocietyMemberCard from "./components/SocietyMemberCard"
+import { BiEdit, BiPencil, BiPlus } from "react-icons/bi"
 
 const EditSocietyProfile = () => {
     return (
@@ -14,16 +15,16 @@ const EditSocietyProfile = () => {
                 backgroundSize: 'cover',
             }} className="coverimg w-full h-[350px] flex flex-col justify-between">
                 <div className="editcoverimg flex justify-end w-full text-white p-3 pr-10 ">
-                    <span className="flex items-center hover:text-gray-300">Edit Cover Image<box-icon name='edit-alt' color="#ffffff"></box-icon></span>
+                    <span className="flex items-center hover:text-gray-300 gap-1">Edit Cover Image<BiEdit className="text-2xl"/></span>
                 </div>
                 <div className="societynameandimg flex items-center gap-5 ml-10 mb-5">
                     <div style={{
                         backgroundImage: 'url(\'https://avatars.githubusercontent.com/u/34922904?s=280&v=4\')',
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
-                    }} className="societyimg w-[150px] h-[150px] bg-black rounded-full border-2 border-white flex justify-center items-center"><box-icon name='pencil' color="#ffffff" size="lg"></box-icon>
+                    }} className="societyimg w-[150px] h-[150px] bg-black rounded-full border-2 border-white flex justify-center items-center"><BiPencil className="text-5xl text-white"/>
                     </div>
-                    <span className="society-name-heading font-medium text-3xl text-white">Creative Computing Society</span>
+                    <span className="society-name-heading font-semibold text-5xl text-white">Creative Computing Society</span>
                 </div>
 
             
@@ -45,7 +46,7 @@ const EditSocietyProfile = () => {
                     <SocietyMemberCard/>
                     <SocietyMemberCard/>
                 </div>
-                <Button className="bg-[#265073] p-5">Add Member <box-icon name='plus' color="#ffffff"></box-icon></Button>
+                <Button className="bg-[#265073] p-5 hover:bg-slate-900">Add Member <BiPlus className="text-xl"/> </Button>
 
 
             </div>

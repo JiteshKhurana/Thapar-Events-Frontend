@@ -1,4 +1,7 @@
 import { Button } from '@/components/ui/button'
+
+import { BiCalendarEvent } from "react-icons/bi";
+
 const SocietyEventCard = () => {
     return (
         <div>
@@ -13,7 +16,7 @@ const SocietyEventCard = () => {
                         <div className="event-name font-semibold text-2xl">CodeStrike</div>
                         <div className="det flex flex-col text-gray-800">
                             <span className="">Coding Competition</span>
-                            <span className="flex items-center"><box-icon name='calendar-event'></box-icon> 12-02-2024 : 14-02-2024</span>
+                            <span className="flex items-center"><BiCalendarEvent className="text-xl" /> 12-02-2024 : 14-02-2024</span>
                         </div>
 
                     </div>

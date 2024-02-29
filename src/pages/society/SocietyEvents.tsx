@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import SocietyEventCard from "./components/SocietyEventCard"
+import { BiPlus } from "react-icons/bi";
+
 
 const SocietyEvents = () => {
   return (
@@ -10,7 +12,7 @@ const SocietyEvents = () => {
                 <div className="your-events">
                     <span className="text-2xl font-semibold">Your Events</span>
                 </div>
-                <Button className="bg-[#265073] p-5 ml-8"><box-icon name='plus' color="#ffffff" className='text-white'></box-icon>Create New Event</Button>
+                <Button className="bg-[#265073] p-5 ml-8"><BiPlus className="text-xl"/>Create New Event</Button>
 
             </div>
 
