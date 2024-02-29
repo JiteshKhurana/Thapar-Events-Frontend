@@ -15,6 +15,8 @@ import SocietyEvents from "./pages/society/SocietyEvents";
 import SocietyDashboard from "./pages/society/SocietyDashboard";
 import EditSocietyProfile from "./pages/society/EditSocietyProfile";
 
+import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot";
+
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -32,17 +34,21 @@ function App() {
             <Route path="dashboard" element={<SocietyDashboard />}></Route>
             <Route path="societyevents" element={<SocietyEvents />}></Route>
           </Route>
-          <Route
-            path="editsocietyprofile"
-            element={<EditSocietyProfile />}
-          ></Route>
+          <Route path="editsocietyprofile" element={<EditSocietyProfile/>}></Route> 
+          <Route path="/eventdashboard" element={<EventDashboardRoot/>}>
+            <Route path="registrations" ></Route>
+            <Route path="marketingmails"></Route>
+            <Route path="reviews"></Route>
+            <Route path="editevent"></Route>
+            <Route path="registrationform"></Route>
+          </Route>
+
         </Routes>
         <Toaster />
         <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );
-  // >>>>>>> main
 }
 
 export default App;
