@@ -1,13 +1,10 @@
-import { Button } from "@/components/ui/button"
-
-
+import { Button } from "@/components/ui/button";
 import { BiCalendarEvent } from "react-icons/bi";
 
-
-
-const ActiveEventCard = () => {
+const ActiveEventCard: React.FC = () => {
   return (
     <div>
+
         <div className="active-event-card my-2 flex p-3 pr-6 w-[80%] border-[1px] border-gray-400 rounded-xl justify-between">
                         <div className="left-data flex">
                             <div className="active-event-img w-[100px] h-[100px] rounded-md " style={{
@@ -30,8 +27,9 @@ const ActiveEventCard = () => {
                             <div className="flex gap-1"><span>Status: </span><span className="text-green-700 font-semibold">Active</span></div>
                         </div>
                     </div>
-    </div>
-  )
-}
 
-export default ActiveEventCard
+    </div>
+  );
+};
+
+export default ActiveEventCard;

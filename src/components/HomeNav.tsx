@@ -23,9 +23,19 @@ const HomeNav: React.FC = () => {
           }
         )
         .then((resp) => {
-          localStorage.setItem("token", resp.data.token);
-          localStorage.setItem("name", resp.data.user.name);
-          localStorage.setItem("user_id", resp.data.user._id);
+          console.log(resp.data);
+          if (resp.data.user) {
+            localStorage.setItem("token", resp.data.token);
+            localStorage.setItem("name", resp.data.user.name);
+            localStorage.setItem("user_id", resp.data.user._id);
+            localStorage.setItem("role", resp.data.user.role);
+          } else {
+            localStorage.setItem("token", resp.data.token);
+            localStorage.setItem("name", resp.data.society.name);
+            localStorage.setItem("id", resp.data.society._Uid);
+            localStorage.setItem("role", resp.data.society.role);
+          }
+
           window.location.reload();
         })
         .catch((error) => {
@@ -62,11 +72,20 @@ const HomeNav: React.FC = () => {
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
         {localStorage.getItem("token") ? (
-          <Button
-            onClick={() => navigate("/user/" + localStorage.getItem("user_id"))}
-          >
-            HI {localStorage.getItem("name")?.toUpperCase()}
-          </Button>
+          localStorage.getItem("role") === "admin" &&
+          localStorage.getItem("id") ? (
+            <Button onClick={() => navigate("/society/dashboard")}>
+              HI {localStorage.getItem("name")?.toUpperCase()}
+            </Button>
+          ) : (
+            <Button
+              onClick={() =>
+                navigate("/user/" + localStorage.getItem("user_id"))
+              }
+            >
+              HI {localStorage.getItem("name")?.toUpperCase()}
+            </Button>
+          )
         ) : (
           <Button onClick={() => googleLogin()}>Sign in</Button>
         )}
