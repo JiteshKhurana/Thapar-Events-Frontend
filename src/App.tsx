@@ -22,6 +22,7 @@ import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistra
 // import EventReviews from "./pages/eventdashboard/EventReviews";
 import EditEvent from "./pages/eventdashboard/EditEvent";
 import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm";
+import EventsDetail from "./pages/EventsDetail";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/events" element={<Events />} />
+          <Route path="/events/:name" element={<EventsDetail />} />
           <Route path="/societies" element={<Society />} />
           <Route path="/societies/:name" element={<SocietyDetail />} />
           <Route path="/contact-us" element={<ContactUs />} />
@@ -39,17 +41,22 @@ function App() {
           <Route path="/society/" element={<Societyroot />}>
             <Route path="dashboard" element={<SocietyDashboard />}></Route>
             <Route path="societyevents" element={<SocietyEvents />}></Route>
-            <Route path="editprofile" element={<EditSocietyProfile/>}></Route> 
+            <Route path="editprofile" element={<EditSocietyProfile />}></Route>
           </Route>
-          <Route path="/eventdashboard" element={<EventDashboardRoot/>}>
-            <Route path="" element={<EventDashboard/>} ></Route>
-            <Route path="registrations" element={<ManageEventRegistrations/>} ></Route>
+          <Route path="/eventdashboard" element={<EventDashboardRoot />}>
+            <Route path="" element={<EventDashboard />}></Route>
+            <Route
+              path="registrations"
+              element={<ManageEventRegistrations />}
+            ></Route>
             {/* <Route path="marketingmails" element={<EventMarketingMails/>} ></Route> */}
             {/* <Route path="reviews" element={<EventReviews/>} ></Route> */}
-            <Route path="editevent" element={<EditEvent/>} ></Route>
-            <Route path="editregistrationform" element={<EditRegistrationForm/>} ></Route>
+            <Route path="editevent" element={<EditEvent />}></Route>
+            <Route
+              path="editregistrationform"
+              element={<EditRegistrationForm />}
+            ></Route>
           </Route>
-
         </Routes>
         <Toaster />
         <Footer />

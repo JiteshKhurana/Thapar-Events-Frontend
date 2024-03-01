@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardShimmer from "@/components/CardShimmer";
+import { useNavigate } from "react-router-dom";
 
 interface Event {
   description: string;
@@ -37,6 +38,7 @@ const Events: React.FC = () => {
       )
       .then((res) => setEvents(res.data));
   }, []);
+  const navigate = useNavigate();
   return (
     <div>
       <div className="m-10">
@@ -70,11 +72,13 @@ const Events: React.FC = () => {
                         <Badge variant="outline">#Coffee</Badge>
                         <Badge variant="outline">#Coding</Badge>
                       </CardContent>
-                      <CardFooter className="justify-between">
-                        <Button variant={"outline"} className="w-2/5">
+                      <CardFooter>
+                        <Button
+                          onClick={() => navigate(`creative-computing-society`)}
+                          className="w-full"
+                        >
                           Preview
                         </Button>
-                        <Button className="w-2/5">Apply</Button>
                       </CardFooter>
                     </Card>
                   ))}
