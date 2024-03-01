@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import CardShimmer from "@/components/CardShimmer";
+import Cookies from "universal-cookie";
 
 const User: React.FC = () => {
   interface IUser {
@@ -21,7 +22,9 @@ const User: React.FC = () => {
     role: string;
     image: string;
   }
-  const token = localStorage.getItem("token");
+  const cookies = new Cookies(null, { path: "/" });
+
+  const token = cookies.get("token");
   const [user, setUser] = useState<IUser>({
     _id: "",
     email: "",
@@ -69,7 +72,7 @@ const User: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            localStorage.clear();
+            cookies.remove("token");
             navigate("/");
             toast("Logout successful", {
               description: "You have successfully logged out.",

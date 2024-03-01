@@ -15,6 +15,7 @@ import {
 
 const Home: React.FC = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
+
   return (
     <div>
       <div className="relative">

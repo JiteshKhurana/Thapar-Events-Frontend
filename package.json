@@ -28,6 +28,7 @@
     "date-fns": "^3.3.1",
     "embla-carousel-autoplay": "^8.0.0-rc22",
     "embla-carousel-react": "^8.0.0-rc22",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^0.323.0",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
@@ -38,7 +39,8 @@
     "react-router-dom": "^6.22.0",
     "sonner": "^1.4.1",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "universal-cookie": "^7.1.0"
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.2.1",
