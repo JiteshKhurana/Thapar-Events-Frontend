@@ -6,7 +6,7 @@ import { toast } from "sonner";
 const Societyroot: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="dark:text-white grid grid-cols-12 gap-10 border-t-[1px]">
+    <div className="dark:text-white grid grid-cols-12 gap-0 border-t-[1px]">
       <div className="h-full w-full flex flex-col flex-wrap justify-start items-center col-span-3 border-r-[1px]">
         <div>
           <div className="society-photo bg-black rounded-full w-full mt-[10%]">
@@ -29,7 +29,7 @@ const Societyroot: React.FC = () => {
                   Events
                 </li>
               </NavLink>
-              <NavLink to={"/editsocietyprofile"}>
+              <NavLink to={"editprofile"}>
                 <li className="flex items-center gap-2">
                   <MdEdit className="text-2xl" />
                   Edit Profile

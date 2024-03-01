@@ -1,5 +1,5 @@
-import { BiEdit, BiEnvelope, BiSolidDashboard, BiSolidUserRectangle } from "react-icons/bi"
-import { MdEditNote, MdGroup, MdOutlineReviews, MdPeopleAlt, MdReviews } from "react-icons/md"
+import { BiEdit, BiSolidDashboard } from "react-icons/bi"
+import { MdEditNote, MdGroup } from "react-icons/md"
 import { NavLink, Outlet } from "react-router-dom"
 
 const EventDashboardRoot = () => {
@@ -13,12 +13,12 @@ const EventDashboardRoot = () => {
                 <NavLink to={'registrations'}>
                     <li className="navlink flex items-center gap-1"><MdGroup className="text-2xl"/>Manage Registrations</li>
                 </NavLink>
-                <NavLink to={'marketingmails'}>
+                {/* <NavLink to={'marketingmails'}>
                     <li className="navlink flex items-center gap-1"><BiEnvelope className="text-2xl"/> Marketing Mails</li>
                 </NavLink>
                 <NavLink to={'reviews'}>
                     <li className="navlink flex items-center gap-1"><MdReviews className="text-2xl"/>Reviews and Ratings</li>
-                </NavLink>
+                </NavLink> */}
                 <NavLink to={'editevent'}>
                     <li className="navlink flex items-center gap-1"><BiEdit className="text-2xl"/>Edit Event</li>
                 </NavLink>

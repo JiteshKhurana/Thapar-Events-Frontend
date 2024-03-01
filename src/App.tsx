@@ -18,8 +18,8 @@ import EditSocietyProfile from "./pages/society/EditSocietyProfile";
 import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot";
 import EventDashboard from "./pages/eventdashboard/EventDashboard";
 import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistrations";
-import EventMarketingMails from "./pages/eventdashboard/EventMarketingMails";
-import EventReviews from "./pages/eventdashboard/EventReviews";
+// import EventMarketingMails from "./pages/eventdashboard/EventMarketingMails";
+// import EventReviews from "./pages/eventdashboard/EventReviews";
 import EditEvent from "./pages/eventdashboard/EditEvent";
 import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm";
 
@@ -39,13 +39,13 @@ function App() {
           <Route path="/society/" element={<Societyroot />}>
             <Route path="dashboard" element={<SocietyDashboard />}></Route>
             <Route path="societyevents" element={<SocietyEvents />}></Route>
+            <Route path="editprofile" element={<EditSocietyProfile/>}></Route> 
           </Route>
-          <Route path="editsocietyprofile" element={<EditSocietyProfile/>}></Route> 
           <Route path="/eventdashboard" element={<EventDashboardRoot/>}>
             <Route path="" element={<EventDashboard/>} ></Route>
             <Route path="registrations" element={<ManageEventRegistrations/>} ></Route>
-            <Route path="marketingmails" element={<EventMarketingMails/>} ></Route>
-            <Route path="reviews" element={<EventReviews/>} ></Route>
+            {/* <Route path="marketingmails" element={<EventMarketingMails/>} ></Route> */}
+            {/* <Route path="reviews" element={<EventReviews/>} ></Route> */}
             <Route path="editevent" element={<EditEvent/>} ></Route>
             <Route path="editregistrationform" element={<EditRegistrationForm/>} ></Route>
           </Route>
