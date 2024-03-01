@@ -6,10 +6,10 @@ import { toast } from "sonner";
 const Societyroot: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-12 mx-10 gap-10">
-      <div className="h-full w-full flex flex-col flex-wrap justify-start items-center col-span-3">
+    <div className="dark:text-white grid grid-cols-12 gap-10 border-t-[1px]">
+      <div className="h-full w-full flex flex-col flex-wrap justify-start items-center col-span-3 border-r-[1px]">
         <div>
-          <div className="society-photo bg-black rounded-full w-[200px] mt-[10%]">
+          <div className="society-photo bg-black rounded-full w-full mt-[10%]">
             <img src="https://avatars.githubusercontent.com/u/34922904?s=280&v=4"></img>
           </div>
           <div className="w-[full] mt-4 font-semibold text-xl">
