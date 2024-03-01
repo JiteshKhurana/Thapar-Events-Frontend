@@ -23,32 +23,32 @@ const SocietyDashboard: React.FC = () => {
       </div>
       <div className="stats px-[30px] mt-7 text-[20px] font-semibold flex-col">
         <span className="text-xl">Your Stats</span>
-        <div className="flex w-full mt-4">
-          <div className="statsBox mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
+        <div className="flex flex-wrap gap-3 w-full mt-4">
+          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
             <span className="font-light text-lg text-gray-600">
               Total Events
             </span>
             <span className="font-semibold text-3xl">3</span>
           </div>
-          <div className="statsBox mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
+          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
             <span className="font-light text-lg text-gray-600">
               Total Participation
             </span>
             <span className="font-semibold text-3xl">672</span>
           </div>
-          <div className="statsBox mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
+          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
             <span className="font-light text-lg text-gray-600">
               Upcoming Events
             </span>
             <span className="font-semibold text-3xl">3</span>
           </div>
-          <div className="statsBox mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
+          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
             <span className="font-light text-lg text-gray-600">
               Team Members
             </span>
             <span className="font-semibold text-3xl">3</span>
           </div>
-          <div className="statsBox mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
+          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl w-[200px] h-[100px] justify-center items-center">
             <span className="font-light text-lg text-gray-600">
               Total Events
             </span>

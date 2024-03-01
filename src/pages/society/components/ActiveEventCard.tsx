@@ -14,7 +14,7 @@ const ActiveEventCard: React.FC = () => {
                             }}></div>
                             <div className="info flex flex-col justify-between mx-4">
                                 <div className="event-name font-semibold text-2xl">CodeStrike</div>
-                                <div className="det flex flex-col text-gray-800">
+                                <div className="det flex flex-col text-gray-800 dark:text-gray-300">
                                     <span className="">Coding Competition</span>
                                     <div className="flex justify-center items-center"><BiCalendarEvent className="text-xl" /> 12-02-2024 : 14-02-2024</div>
                                 </div>
