@@ -1,7 +1,9 @@
 
 const ManageEventRegistrations = () => {
   return (
-    <div>ManageEventRegistrations</div>
+    <div>
+        
+    </div>
   )
 }
 
