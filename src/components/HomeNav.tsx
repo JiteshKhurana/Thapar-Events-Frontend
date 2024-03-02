@@ -5,8 +5,12 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
 import { ModeToggle } from "./mode-toggle.tsx";
 import { toast } from "sonner";
+import Cookies from "universal-cookie";
+import { jwtDecode } from "jwt-decode";
 
 const HomeNav: React.FC = () => {
+  const cookies = new Cookies(null, { path: "/" });
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const userInfo = await axios.get(
@@ -23,14 +27,15 @@ const HomeNav: React.FC = () => {
           }
         )
         .then((resp) => {
-          console.log(resp.data);
+          const decoded = jwtDecode(resp.data.token);
+          cookies.set("token", resp.data.token, {
+            expires: decoded.exp ? new Date(decoded.exp * 1000) : undefined,
+          });
           if (resp.data.user) {
-            localStorage.setItem("token", resp.data.token);
             localStorage.setItem("name", resp.data.user.name);
             localStorage.setItem("user_id", resp.data.user._id);
             localStorage.setItem("role", resp.data.user.role);
           } else {
-            localStorage.setItem("token", resp.data.token);
             localStorage.setItem("name", resp.data.society.name);
             localStorage.setItem("id", resp.data.society._Uid);
             localStorage.setItem("role", resp.data.society.role);
@@ -71,7 +76,7 @@ const HomeNav: React.FC = () => {
         </ul>
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
-        {localStorage.getItem("token") ? (
+        {cookies.get("token") ? (
           localStorage.getItem("role") === "admin" &&
           localStorage.getItem("id") ? (
             <Button onClick={() => navigate("/society/dashboard")}>
@@ -117,7 +122,7 @@ const HomeNav: React.FC = () => {
         </ul>
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
-        {localStorage.getItem("token") ? (
+        {cookies.get("token") ? (
           <Button
             onClick={() => navigate("/user/" + localStorage.getItem("user_id"))}
           >

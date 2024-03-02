@@ -32,12 +32,14 @@ const Society: React.FC = () => {
         "https://thapar-event-management-system-production.up.railway.app/soc/get"
       )
       .then((resp) => {
+        console.log(resp);
+
         setSocieties(resp.data);
       })
       .catch((error) => {
         toast(error);
       });
-  });
+  }, []);
   return (
     <div>
       <div className="m-10">
