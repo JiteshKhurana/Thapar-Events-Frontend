@@ -39,9 +39,9 @@ const EventComponent: React.FC<{ event: Event }> = ({ event }) => (
 const MyEventWrapper: React.FC = ({ children }: any) => (
     // <div className={`bg-${getRandomColorClass}`}>
     <div className="p-1">
-        
-            {children}
-        
+
+        {children}
+
     </div >
 );
 
@@ -113,48 +113,52 @@ const Home: React.FC = () => {
 
     return (
         <div>
-            <div className="relative">
-                <div className="overflow-hidden brightness-50">
-                    <iframe
-                        className="w-full aspect-video pointer-events-none -mt-14"
-                        src={
-                            "https://www.youtube.com/embed/LOWbKBodXFg?si=yqu9x7AaH7arwj5Y&amp;start=0&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=LOWbKBodXFg"
-                        }
-                        title="YouTube video player"
-                        allow=" encrypted-media; gyroscope; picture-in-picture; web-share"
-                    ></iframe>
+            <div className="w-full h-[100vh]">
+                {/* <div className=" brightness-50 overflow-clip -z-10"> */}
+                    <video
+                        // className="absolute  w-full h-[100vh] object-cover pointer-events-none"
+                        className="w-full h-[100vh] bg-black object-cover brightness-50"
+                        src="https://res.cloudinary.com/dhrfyg57t/video/upload/v1712088206/cccjkkspxzx1hqwyfn9e.mp4"
+                        loop
+                        autoPlay
+                        muted
+                        controls={false}
+                    ></video>
+                {/* </div> */}
+                <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-center pl-20 gap-10">
+                    <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-8xl text-white font-semibold">
+                        Competitions,
+                        <br />
+                        Workshops,
+                        <br />
+                        Fests &<br /> more!
+                    </h1>
+                    <p className="text-xl text-gray-300 font-light">
+                        Make the most of every opportunity to learn, enjoy
+                        <br /> and level up your skills.
+                    </p>
+                    <div className="flex flex-wrap gap-5 ">
+                        <Link to={"/societies"}>
+                            <Button className="text-xl w-[300px]" size="lg">
+                                Explore Now
+                            </Button>
+                        </Link>
+                        <Link to={"/events"}>
+                            <Button
+                                className="text-xl w-[300px]"
+                                size="lg"
+                                variant={"secondary"}
+                            >
+                                View Past Events
+                            </Button>
+                        </Link>
+                    </div>
+
                 </div>
 
-                <h1 className="absolute bottom-1/3 left-16 text-8xl text-white font-semibold">
-                    Competitions,
-                    <br />
-                    Workshops,
-                    <br />
-                    Fests &<br /> more!
-                </h1>
-                <p className="absolute bottom-1/4 left-16 text-xl text-gray-300 font-light">
-                    Make the most of every opportunity to learn, enjoy
-                    <br /> and level up your skills.
-                </p>
-                <div>
-                    <Link to={"/societies"}>
-                        <Button className="absolute bottom-28 left-16" size="lg">
-                            Explore Now
-                        </Button>
-                    </Link>
-                    <Link to={"/events"}>
-                        <Button
-                            className="absolute bottom-28 left-72"
-                            size="lg"
-                            variant={"secondary"}
-                        >
-                            View Past Events
-                        </Button>
-                    </Link>
-                </div>
             </div>
             <div className="mx-96 my-5">
-                <h2 className="text-3xl text-center my-5">Upcoming Events</h2>
+                <h2 className="text-3xl font-bold text-center my-5">Upcoming Events</h2>
                 <Carousel
                     plugins={[
                         Autoplay({
@@ -183,7 +187,7 @@ const Home: React.FC = () => {
             </div>
             <Separator />
             <div>
-                <h2 className="text-3xl text-center my-5">2024 Events Calender</h2>
+                <h2 className="text-3xl font-bold text-center my-5">Events Calender</h2>
                 <p className="text-center my-3">
                     Easily navigate between all the past and upcoming events !
                 </p>

@@ -52,12 +52,12 @@ const HomeNav: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   return location.pathname === "/" ? (
-    <div className="absolute z-10 flex items-center p-2 mt-2 justify-between w-full">
+    <div className="absolute z-20 flex items-center p-2 mt-2 justify-between w-full">
       <div className="flex space-x-5 items-center ml-16">
-        <a href="/">
+        <a className="flex items-center justify-center gap-3" href="/">
           <img src={Logo} alt="logo" className="w-10" />
+        <h1 className="text-white text-3xl">ConnectHub</h1>
         </a>
-        <h1 className="text-white text-3xl">Invincible</h1>
       </div>
       <div>
         <ul className="flex space-x-9 text-white">
@@ -100,7 +100,7 @@ const HomeNav: React.FC = () => {
         <a href="/">
           <img src={Logo} alt="logo" className="w-10" />
         </a>
-        <h1 className="text-3xl">Invincible</h1>
+        <h1 className="text-3xl">ConnectHub</h1>
       </div>
       <div>
         <ul className="flex space-x-9">
