@@ -70,9 +70,6 @@ const HomeNav: React.FC = () => {
           <Link to="/societies">
             <li className="hover:text-blue-600">Societies</li>
           </Link>
-          <Link to="/contact-us">
-            <li className="hover:text-blue-600">Contact Us</li>
-          </Link>
         </ul>
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
@@ -115,9 +112,6 @@ const HomeNav: React.FC = () => {
           </Link>
           <Link to="/societies">
             <li className="hover:text-blue-600">Societies</li>
-          </Link>
-          <Link to="/contact-us">
-            <li className="hover:text-blue-600">Contact Us</li>
           </Link>
         </ul>
       </div>
