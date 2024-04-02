@@ -4,7 +4,7 @@ const EventDashboard = () => {
     const [copied, setCopied] = useState<boolean>(false);
 
     const copyToClipboard = () => {
-      const linkToCopy = 'https://example.com'; // Replace this with your actual link
+      const linkToCopy = 'http://event.thapar.edu/events/creative-computing-society'; // Replace this with your actual link
       navigator.clipboard.writeText(linkToCopy)
         .then(() => {
           console.log('Link copied to clipboard:', linkToCopy);
