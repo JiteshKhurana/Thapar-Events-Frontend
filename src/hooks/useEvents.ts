@@ -5,17 +5,18 @@ import { addEvents } from "../store/eventSlice";
 import { RootState } from "@/store/store";
 
 const useEvents = () => {
+  console.log("hi");
   const dispatch = useDispatch();
-  const events = useSelector((store: RootState) => store.events);
+  const events = useSelector((store: RootState) => store.events.eventsList);
   async function getEvents() {
     axios
       .get(
         "https://thapar-event-management-system-production.up.railway.app/event/get"
       )
-      .then((res) => dispatch(addEvents(res)));
+      .then((res) => dispatch(addEvents(res.data)));
   }
   useEffect(() => {
-    !events && getEvents();
+    events.length == 0 && getEvents();
   }, []);
 };
 

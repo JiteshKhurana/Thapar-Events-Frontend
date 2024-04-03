@@ -1,18 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// interface Event {
-//   description: string;
-//   email: string;
-//   team: false;
-//   title: string;
-//   visibility: boolean;
-//   _Eid: string;
-//   _Sid: string;
-//   _Uid: string;
-// }
+interface Event {
+  description: string;
+  email: string;
+  team: false;
+  title: string;
+  visibility: boolean;
+  _Eid: string;
+  _Sid: string;
+  _Uid: string;
+}
+interface EventState {
+  eventsList: Event[];
+}
 
-const initialState = {
-  events: null,
+const initialState: EventState = {
+  eventsList: [],
 };
 
 const eventSlice = createSlice({
@@ -20,7 +23,7 @@ const eventSlice = createSlice({
   initialState,
   reducers: {
     addEvents: (state, action) => {
-      state.events = action.payload;
+      state.eventsList = action.payload;
     },
   },
 });

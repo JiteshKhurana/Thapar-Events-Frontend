@@ -29,7 +29,6 @@ const EditUser: React.FC = () => {
       rollNo: "",
     },
   });
-
   const {
     handleSubmit,
     setError,

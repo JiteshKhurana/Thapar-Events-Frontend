@@ -13,10 +13,11 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import CardShimmer from "@/components/CardShimmer";
 import { useNavigate } from "react-router-dom";
+import useEvents from "@/hooks/useEvents";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface Event {
   description: string;
@@ -30,14 +31,8 @@ interface Event {
 }
 
 const Events: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
-  useEffect(() => {
-    axios
-      .get(
-        "https://thapar-event-management-system-production.up.railway.app/event/get"
-      )
-      .then((res) => setEvents(res.data));
-  }, []);
+  useEvents();
+  const events = useSelector((store: RootState) => store.events.eventsList);
   const navigate = useNavigate();
   return (
     <div>
