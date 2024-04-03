@@ -1,5 +1,5 @@
 import Logo from "../assets/tietlogo.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "./ui/button.tsx";
@@ -61,15 +61,30 @@ const HomeNav: React.FC = () => {
       </div>
       <div>
         <ul className="flex space-x-9 text-white">
-          <Link to="/">
-            <li className="hover:text-blue-600">Home</li>
-          </Link>
-          <Link to="/events">
-            <li className="hover:text-blue-600">Events</li>
-          </Link>
-          <Link to="/societies">
-            <li className="hover:text-blue-600">Societies</li>
-          </Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) => {
+              return isActive ? "text-blue-500" : "";
+            }}
+          >
+            <li className="hover:text-blue-500">Home</li>
+          </NavLink>
+          <NavLink
+            to="/events"
+            className={({ isActive }) => {
+              return isActive ? "text-blue-500" : "";
+            }}
+          >
+            <li className="hover:text-blue-500">Events</li>
+          </NavLink>
+          <NavLink
+            to="/societies"
+            className={({ isActive }) => {
+              return isActive ? "text-blue-500" : "";
+            }}
+          >
+            <li className="hover:text-blue-500">Societies</li>
+          </NavLink>
         </ul>
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
@@ -100,15 +115,30 @@ const HomeNav: React.FC = () => {
       </div>
       <div>
         <ul className="flex space-x-9">
-          <Link to="/">
-            <li className="hover:text-blue-600">Home</li>
-          </Link>
-          <Link to="/events">
-            <li className="hover:text-blue-600">Events</li>
-          </Link>
-          <Link to="/societies">
-            <li className="hover:text-blue-600">Societies</li>
-          </Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) => {
+              return isActive ? "text-blue-500" : "";
+            }}
+          >
+            <li className="hover:text-blue-500">Home</li>
+          </NavLink>
+          <NavLink
+            to="/events"
+            className={({ isActive }) => {
+              return isActive ? "text-blue-500" : "";
+            }}
+          >
+            <li className="hover:text-blue-500">Events</li>
+          </NavLink>
+          <NavLink
+            to="/societies"
+            className={({ isActive }) => {
+              return isActive ? "text-blue-500" : "";
+            }}
+          >
+            <li className="hover:text-blue-500">Societies</li>
+          </NavLink>
         </ul>
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
