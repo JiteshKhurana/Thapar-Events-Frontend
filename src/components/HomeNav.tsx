@@ -56,7 +56,7 @@ const HomeNav: React.FC = () => {
       <div className="flex space-x-5 items-center ml-16">
         <a className="flex items-center justify-center gap-3" href="/">
           <img src={Logo} alt="logo" className="w-10" />
-        <h1 className="text-white text-3xl">ConnectHub</h1>
+          <h1 className="text-white text-3xl">ConnectHub</h1>
         </a>
       </div>
       <div>
@@ -80,11 +80,7 @@ const HomeNav: React.FC = () => {
               HI {localStorage.getItem("name")?.toUpperCase()}
             </Button>
           ) : (
-            <Button
-              onClick={() =>
-                navigate("/user/" + localStorage.getItem("user_id"))
-              }
-            >
+            <Button onClick={() => navigate("/profile")}>
               HI {localStorage.getItem("name")?.toUpperCase()}
             </Button>
           )
@@ -117,9 +113,7 @@ const HomeNav: React.FC = () => {
       </div>
       <div className="flex space-x-5 mr-16 justify-center">
         {cookies.get("token") ? (
-          <Button
-            onClick={() => navigate("/user/" + localStorage.getItem("user_id"))}
-          >
+          <Button onClick={() => navigate("/profile")}>
             HI {localStorage.getItem("name")?.toUpperCase()}
           </Button>
         ) : (

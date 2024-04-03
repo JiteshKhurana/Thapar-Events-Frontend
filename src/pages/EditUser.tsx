@@ -47,8 +47,8 @@ const EditUser: React.FC = () => {
     }
   };
   return (
-    <div className="mx-96">
-      <h1 className="my-10">Edit Your Profile</h1>
+    <div className="col-span-9 mx-40">
+      <h1 className="text-3xl my-5">Edit Your Profile</h1>
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           <div className="grid w-full max-w-sm items-center gap-1.5">
