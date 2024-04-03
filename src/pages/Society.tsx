@@ -29,41 +29,38 @@ const Society: React.FC = () => {
   const societies = useSelector(
     (store: RootState) => store.societies.societiesList
   );
+  if (!societies) return <CardShimmer />;
   return (
     <div>
       <div className="m-10">
         <h1 className="my-5 text-3xl font-semibold text-center">
           Explore Societies
         </h1>
-        {societies.length === 0 ? (
-          <CardShimmer />
-        ) : (
-          <div className="flex flex-wrap justify-center">
-            {societies.map((society) => (
-              <Card
-                key={society._Uid}
-                className="w-1/4 bg-gradient-to-r from-sky-500 to-indigo-500 m-5"
-              >
-                <CardHeader>
-                  <CardTitle>
-                    <img src={Creative} className="w-1/2 h-1/2 mx-auto " />
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-center">{society.name}</p>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    onClick={() => navigate(`creative-computing-society`)}
-                    className="w-full"
-                  >
-                    Preview
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        )}
+        <div className="flex flex-wrap justify-center">
+          {societies.map((society) => (
+            <Card
+              key={society._Uid}
+              className="w-1/4 bg-gradient-to-r from-sky-500 to-indigo-500 m-5"
+            >
+              <CardHeader>
+                <CardTitle>
+                  <img src={Creative} className="w-1/2 h-1/2 mx-auto " />
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-center">{society.name}</p>
+              </CardContent>
+              <CardFooter>
+                <Button
+                  onClick={() => navigate(`creative-computing-society`)}
+                  className="w-full"
+                >
+                  Preview
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

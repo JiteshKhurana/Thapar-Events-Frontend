@@ -11,11 +11,11 @@ interface Event {
   _Uid: string;
 }
 interface EventState {
-  eventsList: Event[];
+  eventsList: Event[] | null;
 }
 
 const initialState: EventState = {
-  eventsList: [],
+  eventsList: null,
 };
 
 const eventSlice = createSlice({

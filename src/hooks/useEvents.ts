@@ -15,7 +15,7 @@ const useEvents = () => {
       .then((res) => dispatch(addEvents(res.data)));
   }
   useEffect(() => {
-    events.length == 0 && getEvents();
+    !events && getEvents();
   }, []);
 };
 

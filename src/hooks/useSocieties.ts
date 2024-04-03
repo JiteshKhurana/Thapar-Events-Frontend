@@ -23,7 +23,7 @@ const useSocieties = () => {
   }
 
   useEffect(() => {
-    societies.length == 0 && getSocieties();
+    !societies && getSocieties();
   }, []);
 };
 

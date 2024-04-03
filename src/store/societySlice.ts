@@ -11,11 +11,11 @@ interface Society {
 }
 
 interface SocietyState {
-  societiesList: Society[];
+  societiesList: Society[] | null;
 }
 
 const initialState: SocietyState = {
-  societiesList: [],
+  societiesList: null,
 };
 
 const societySlice = createSlice({
