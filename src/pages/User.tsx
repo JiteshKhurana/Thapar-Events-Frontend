@@ -1,53 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import useUser from "@/hooks/useUser";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 
 const User: React.FC = () => {
-  interface IUser {
-    _id: string;
-    email: string;
-    name: string;
-    phone: number;
-    rollno: number;
-    branch: string;
-    batch: number;
-    role: string;
-    image: string;
-  }
+  useUser();
+  const user = useSelector((store: RootState) => store.user.currentUser);
   const cookies = new Cookies(null, { path: "/" });
-
-  const token = cookies.get("token");
-  const [user, setUser] = useState<IUser>({
-    _id: "",
-    email: "",
-    name: "",
-    phone: 0,
-    rollno: 0,
-    branch: "",
-    batch: 0,
-    role: "",
-    image: "",
-  });
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://thapar-event-management-system-production.up.railway.app/users/get",
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((resp) => setUser(resp.data))
-      .catch((error) => {
-        toast(error);
-      });
-  }, []);
-  console.log(user);
-
   const navigate = useNavigate();
+  if (!user) return <h1>Loading</h1>;
   return (
     <div className="grid grid-cols-12 m-16 gap-x-5">
       <div className="flex flex-col col-span-3 space-y-3 items-center rounded-xl p-5 border-white border max-h-96">
@@ -74,7 +40,7 @@ const User: React.FC = () => {
         <NavLink
           className={({ isActive }) => {
             return isActive
-              ? "w-full bg-slate-300 text-black p-2 m-1 rounded-lg text-center"
+              ? "w-full bg-gray-400 text-black p-2 m-1 rounded-lg text-center"
               : "w-full bg-white text-black p-2 m-1 rounded-lg text-center";
           }}
           to={"/profile/editprofile"}
@@ -90,7 +56,7 @@ const User: React.FC = () => {
               description: "You have successfully logged out.",
             });
           }}
-          className="w-full bg-red-600 text-white"
+          className="w-full bg-red-600 text-white hover:bg-red-700"
         >
           Logout
         </Button>

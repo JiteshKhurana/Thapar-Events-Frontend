@@ -13,10 +13,10 @@ interface User {
 }
 
 interface UserState {
-  user: User | null;
+  currentUser: User | null;
 }
 const initialState: UserState = {
-  user: null,
+  currentUser: null,
 };
 
 const userSlice = createSlice({
@@ -24,7 +24,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      state.user = action.payload;
+      state.currentUser = action.payload;
     },
   },
 });
