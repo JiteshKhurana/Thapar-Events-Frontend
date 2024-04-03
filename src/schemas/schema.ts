@@ -8,7 +8,7 @@ const RollRegExp = /^\d{9}$/;
 // exactly 9 digits
 
 export const editUserSchema = z.object({
-  phoneNo: z
+  phone: z
     .string()
     .regex(phoneRegExp, { message: "Phone number is not valid" })
     .min(10, "Phone number is not valid")

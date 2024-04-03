@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { v4 as uuidv4 } from "uuid";
 
 const CardShimmer = () => {
   return (
@@ -6,7 +7,7 @@ const CardShimmer = () => {
       {Array(3)
         .fill(0)
         .map(() => (
-          <div>
+          <div key={uuidv4()}>
             <div className="flex flex-col space-y-3">
               <Skeleton className="h-[225px] w-[300px] rounded-xl" />
               <div className="space-y-2">

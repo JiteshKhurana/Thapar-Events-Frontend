@@ -7,16 +7,17 @@ import useUser from "@/hooks/useUser";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
+import CardShimmer from "@/components/CardShimmer";
 
 const User: React.FC = () => {
   useUser();
   const user = useSelector((store: RootState) => store.user.currentUser);
   const cookies = new Cookies(null, { path: "/" });
   const navigate = useNavigate();
-  if (!user) return <h1>Loading</h1>;
+  if (!user) return <CardShimmer />;
   return (
     <div className="grid grid-cols-12 m-16 gap-x-5">
-      <div className="flex flex-col col-span-3 space-y-3 items-center rounded-xl p-5 border-white border max-h-96">
+      <div className="flex flex-col col-span-3 space-y-3 items-center rounded-xl p-5 border-black border max-h-96 dark:border-white">
         <Avatar className="h-24 w-24">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
@@ -30,8 +31,8 @@ const User: React.FC = () => {
           to={"/profile"}
           className={({ isActive }) => {
             return isActive
-              ? "w-full bg-slate-300 text-black p-2 m-1 rounded-lg text-center"
-              : "w-full bg-white text-black p-2 m-1 rounded-lg text-center";
+              ? "w-full bg-gray-400 text-black p-2 m-1 rounded-lg text-center"
+              : "w-full bg-black text-white p-2 m-1 rounded-lg text-center dark:bg-white dark:text-black";
           }}
           end
         >
@@ -41,7 +42,7 @@ const User: React.FC = () => {
           className={({ isActive }) => {
             return isActive
               ? "w-full bg-gray-400 text-black p-2 m-1 rounded-lg text-center"
-              : "w-full bg-white text-black p-2 m-1 rounded-lg text-center";
+              : "w-full bg-black text-white p-2 m-1 rounded-lg text-center dark:bg-white dark:text-black";
           }}
           to={"/profile/editprofile"}
         >
