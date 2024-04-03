@@ -5,7 +5,6 @@ import { addEvents } from "../store/eventSlice";
 import { RootState } from "@/store/store";
 
 const useEvents = () => {
-  console.log("hi");
   const dispatch = useDispatch();
   const events = useSelector((store: RootState) => store.events.eventsList);
   async function getEvents() {

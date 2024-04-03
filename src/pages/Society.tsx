@@ -8,10 +8,10 @@ import {
 import { Button } from "@/components/ui/button";
 import Creative from "../assets/creative.png";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "sonner";
 import CardShimmer from "@/components/CardShimmer";
+import useSocieties from "@/hooks/useSocieties";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface Society {
   about: string;
@@ -24,22 +24,11 @@ interface Society {
 }
 
 const Society: React.FC = () => {
+  useSocieties();
   const navigate = useNavigate();
-  const [societies, setSocieties] = useState<Society[]>([]);
-  useEffect(() => {
-    axios
-      .get(
-        "https://thapar-event-management-system-production.up.railway.app/soc/get"
-      )
-      .then((resp) => {
-        console.log(resp);
-
-        setSocieties(resp.data);
-      })
-      .catch((error) => {
-        toast(error);
-      });
-  }, []);
+  const societies = useSelector(
+    (store: RootState) => store.societies.societiesList
+  );
   return (
     <div>
       <div className="m-10">
