@@ -15,7 +15,8 @@ const useUser = () => {
   async function getUser() {
     axios
       .get(
-        "https://thapar-event-management-system-production.up.railway.app/users/get",
+        "https://thapar-event-management-system-production.up.railway.app/users/get?email=" +
+          currentUser?.email,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((res) => dispatch(addUser(res.data)))

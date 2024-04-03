@@ -22,7 +22,7 @@ const User: React.FC = () => {
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        {user._id.length === 0 ? (
+        {!user ? (
           <Skeleton className="h-4 w-[100px]" />
         ) : (
           <h3 className="text-xl">@{user.name}</h3>
