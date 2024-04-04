@@ -7,28 +7,24 @@ import { ModeToggle } from "./mode-toggle.tsx";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
+import { API_ENDPOINT, GOOGLE_API_LOGIN } from "@/lib/constants.ts";
 
 const HomeNav: React.FC = () => {
   const cookies = new Cookies(null, { path: "/" });
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      const userInfo = await axios.get(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
-      );
+      const userInfo = await axios.get(GOOGLE_API_LOGIN, {
+        headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+      });
       axios
-        .post(
-          "https://thapar-event-management-system-production.up.railway.app/create",
-          {
-            email: userInfo.data.email,
-            name: userInfo.data.name,
-            token: tokenResponse.access_token,
-          }
-        )
+        .post(API_ENDPOINT + "create", {
+          email: userInfo.data.email,
+          name: userInfo.data.name,
+          token: tokenResponse.access_token,
+        })
         .then((resp) => {
           const decoded = jwtDecode(resp.data.token);
-          // dispatch(resp.data.user);
           cookies.set("token", resp.data.token, {
             expires: decoded.exp ? new Date(decoded.exp * 1000) : undefined,
           });
@@ -41,8 +37,7 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("id", resp.data.society._Uid);
             localStorage.setItem("role", resp.data.society.role);
           }
-
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           toast(error);

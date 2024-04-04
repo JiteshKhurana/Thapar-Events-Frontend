@@ -16,6 +16,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { VIDEO_CDN_URL } from "@/lib/constants";
 // import axios from "axios";
 
 const localizer = momentLocalizer(moment);
@@ -109,7 +110,7 @@ const Home: React.FC = () => {
         <video
           // className="absolute  w-full h-[100vh] object-cover pointer-events-none"
           className="w-full h-[100vh] bg-black object-cover brightness-50"
-          src="https://res.cloudinary.com/dhrfyg57t/video/upload/v1712088206/cccjkkspxzx1hqwyfn9e.mp4"
+          src={VIDEO_CDN_URL}
           loop
           autoPlay
           muted

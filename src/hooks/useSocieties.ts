@@ -1,3 +1,4 @@
+import { API_ENDPOINT } from "@/lib/constants";
 import { addSocieties } from "@/store/societySlice";
 import { RootState } from "@/store/store";
 import axios from "axios";
@@ -13,9 +14,7 @@ const useSocieties = () => {
 
   async function getSocieties() {
     axios
-      .get(
-        "https://thapar-event-management-system-production.up.railway.app/soc/get"
-      )
+      .get(API_ENDPOINT + "soc/get")
       .then((res) => dispatch(addSocieties(res.data)))
       .catch((error) => {
         toast(error);

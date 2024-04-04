@@ -1,3 +1,4 @@
+import { API_ENDPOINT } from "@/lib/constants";
 import { RootState } from "@/store/store";
 import { addUser } from "@/store/UserSlice";
 import axios from "axios";
@@ -14,11 +15,9 @@ const useUser = () => {
   const token = cookies.get("token");
   async function getUser() {
     axios
-      .get(
-        "https://thapar-event-management-system-production.up.railway.app/users/get?email=" +
-          userEmail,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      .get(API_ENDPOINT + "users/get?email=" + userEmail, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => dispatch(addUser(res.data)))
       .catch((error) => {
         toast(error);

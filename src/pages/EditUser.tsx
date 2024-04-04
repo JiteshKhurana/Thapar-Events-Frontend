@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 import { editUser } from "@/store/UserSlice";
+import { API_ENDPOINT } from "@/lib/constants";
 
 const EditUser: React.FC = () => {
   const dispatch = useDispatch();
@@ -50,12 +51,9 @@ const EditUser: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data: FormFields) => {
     await axios
-      .post(
-        "https://thapar-event-management-system-production.up.railway.app/users/update/" +
-          user?.email,
-        data,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      .post(API_ENDPOINT + "users/update/" + user?.email, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setSuccess(true);
         dispatch(editUser(res.data.user));
