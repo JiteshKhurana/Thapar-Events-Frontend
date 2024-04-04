@@ -26,6 +26,7 @@ import { createBrowserRouter } from "react-router-dom";
 // import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm";
 import EventsDetail from "./pages/EventsDetail";
 import UserDashBoard from "./pages/UserDashBoard.tsx";
+import Page404 from "./pages/Page404.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -68,7 +69,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "*",
-        element: <p>404 Error Nothing Here</p>,
+        element: <Page404 />,
       },
     ],
   },
