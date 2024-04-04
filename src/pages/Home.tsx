@@ -182,13 +182,13 @@ const Home: React.FC = () => {
       </div>
       <Separator />
       <div className="flex flex-col ">
-        <h2 className="text-3xl font-bold text-center my-5">Events Calender</h2>
+        <h2 className="text-3xl font-bold text-center my-5">Events Calendar</h2>
         <p className="text-center my-3">
           Easily navigate between all the past and upcoming events !
         </p>
 
         <Calendar
-          className="shadow-2xl bg-white m-5 mx-20 border p-5 rounded-md min-h-[700px]"
+          className="shadow-2xl bg-white m-5  mx-3 lg:mx-20 border p-5 rounded-md min-h-[700px]"
           localizer={localizer}
           events={calEvents}
           startAccessor="start"
