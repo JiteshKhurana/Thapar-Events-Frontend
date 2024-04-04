@@ -67,7 +67,11 @@ const Events: React.FC = () => {
                     </CardContent>
                     <CardFooter>
                       <Button
-                        onClick={() => navigate(`creative-computing-society`)}
+                        onClick={() =>
+                          navigate(
+                            event.title.split(" ").join("-").toLowerCase()
+                          )
+                        }
                         className="w-full"
                       >
                         Preview

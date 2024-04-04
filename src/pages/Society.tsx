@@ -52,7 +52,9 @@ const Society: React.FC = () => {
               </CardContent>
               <CardFooter>
                 <Button
-                  onClick={() => navigate(`creative-computing-society`)}
+                  onClick={() =>
+                    navigate(society.name.split(` `).join("-").toLowerCase())
+                  }
                   className="w-full"
                 >
                   Preview

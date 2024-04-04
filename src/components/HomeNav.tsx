@@ -28,12 +28,13 @@ const HomeNav: React.FC = () => {
         )
         .then((resp) => {
           const decoded = jwtDecode(resp.data.token);
+          // dispatch(resp.data.user);
           cookies.set("token", resp.data.token, {
             expires: decoded.exp ? new Date(decoded.exp * 1000) : undefined,
           });
           if (resp.data.user) {
             localStorage.setItem("name", resp.data.user.name);
-            localStorage.setItem("user_id", resp.data.user._id);
+            localStorage.setItem("email", resp.data.user.email);
             localStorage.setItem("role", resp.data.user.role);
           } else {
             localStorage.setItem("name", resp.data.society.name);
@@ -41,7 +42,7 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("role", resp.data.society.role);
           }
 
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
           toast(error);

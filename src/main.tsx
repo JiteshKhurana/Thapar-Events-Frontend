@@ -49,7 +49,7 @@ const appRouter = createBrowserRouter([
         element: <Society />,
       },
       {
-        path: "/societies/:name",
+        path: "/societies/:societyName",
         element: <SocietyDetail />,
       },
       {

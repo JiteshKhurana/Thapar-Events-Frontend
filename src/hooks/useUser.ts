@@ -10,13 +10,13 @@ const useUser = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((store: RootState) => store.user.currentUser);
   const cookies = new Cookies(null, { path: "/" });
-
+  const userEmail = localStorage.getItem("email");
   const token = cookies.get("token");
   async function getUser() {
     axios
       .get(
         "https://thapar-event-management-system-production.up.railway.app/users/get?email=" +
-          currentUser?.email,
+          userEmail,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((res) => dispatch(addUser(res.data)))

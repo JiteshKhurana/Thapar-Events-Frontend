@@ -4,12 +4,14 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import useUser from "@/hooks/useUser";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 import CardShimmer from "@/components/CardShimmer";
+import { deleteUser } from "@/store/UserSlice";
 
 const User: React.FC = () => {
+  const dispatch = useDispatch();
   useUser();
   const user = useSelector((store: RootState) => store.user.currentUser);
   const cookies = new Cookies(null, { path: "/" });
@@ -52,6 +54,7 @@ const User: React.FC = () => {
         <Button
           onClick={() => {
             cookies.remove("token");
+            dispatch(deleteUser());
             navigate("/");
             toast("Logout successful", {
               description: "You have successfully logged out.",
