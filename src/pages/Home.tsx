@@ -7,6 +7,9 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { Separator } from "@/components/ui/separator";
+
+
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -30,19 +33,18 @@ interface Event {
 }
 
 const EventComponent: React.FC<{ event: Event }> = ({ event }) => (
-  <a
-    className="p-3 w-full h-full"
-    href={event.url}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
+  <a className="p-3 w-full h-full" href={event.url} target="_blank" rel="noopener noreferrer">
     {event.title}
   </a>
 );
 
 const MyEventWrapper: React.FC = ({ children }: any) => (
   // <div className={`bg-${getRandomColorClass}`}>
-  <div className="p-1">{children}</div>
+  <div className="p-1">
+
+    {children}
+
+  </div >
 );
 
 const Home: React.FC = () => {
@@ -187,8 +189,8 @@ const Home: React.FC = () => {
           events={calEvents}
           startAccessor="start"
           endAccessor="end"
-          className="m-5 mx-20 border p-5 rounded-md h-[700px]"
-          views={["month", "week", "day"]}
+          className="m-5 mx-20 border p-5 rounded-md min-h-[700px]"
+          views={['month', 'week', 'day']}
           components={{
             event: EventComponent, // Use custom event component
             eventWrapper: MyEventWrapper,
