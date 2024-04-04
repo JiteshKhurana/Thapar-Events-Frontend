@@ -102,10 +102,16 @@ const Events: React.FC = () => {
                       <Badge variant="outline">#Coding</Badge>
                     </CardContent>
                     <CardFooter className="justify-between">
-                      <Button variant={"outline"} className="w-2/5">
+                      <Button
+                        className="w-full"
+                        onClick={() =>
+                          navigate(
+                            event.title.split(" ").join("-").toLowerCase()
+                          )
+                        }
+                      >
                         Preview
                       </Button>
-                      <Button className="w-2/5">Apply</Button>
                     </CardFooter>
                   </Card>
                 ))}

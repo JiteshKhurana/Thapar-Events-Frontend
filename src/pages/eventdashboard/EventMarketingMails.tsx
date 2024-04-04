@@ -1,8 +1,5 @@
-
 const EventMarketingMails = () => {
-  return (
-    <div>EventMarketingMails</div>
-  )
-}
+  return <div>EventMarketingMails</div>;
+};
 
-export default EventMarketingMails
+export default EventMarketingMails;

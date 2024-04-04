@@ -20,7 +20,7 @@ type Props = {
   editor: Editor | null;
 };
 
-const Toolbar = ({ editor}: Props) => {
+const Toolbar = ({ editor }: Props) => {
   if (!editor) {
     return null;
   }
@@ -175,7 +175,6 @@ const Toolbar = ({ editor}: Props) => {
           <Redo className="w-5 h-5" />
         </button>
       </div>
-      
     </div>
   );
 };

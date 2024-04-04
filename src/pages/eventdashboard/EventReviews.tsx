@@ -1,8 +1,5 @@
-
 const EventReviews = () => {
-  return (
-    <div>EventReviews</div>
-  )
-}
+  return <div>EventReviews</div>;
+};
 
-export default EventReviews
+export default EventReviews;
