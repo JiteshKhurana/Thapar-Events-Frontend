@@ -21,11 +21,13 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
+import { editUser } from "@/store/UserSlice";
 
 const EditUser: React.FC = () => {
+  const dispatch = useDispatch();
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
   const user = useSelector((store: RootState) => store.user.currentUser);
@@ -54,7 +56,10 @@ const EditUser: React.FC = () => {
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       )
-      .then(() => setSuccess(true))
+      .then((res) => {
+        setSuccess(true);
+        dispatch(editUser(res.data.user));
+      })
       .catch((error) =>
         setError("root", {
           message: error.message,
