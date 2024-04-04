@@ -1,4 +1,4 @@
-import { Separator } from "@radix-ui/react-dropdown-menu";
+// import { Separator } from "@radix-ui/react-dropdown-menu";
 import Logo from "../assets/tietlogo.png";
 // import { FaFacebook } from "react-icons/fa";
 // import { FaInstagram } from "react-icons/fa";
