@@ -120,7 +120,7 @@ const Home: React.FC = () => {
         ></video>
         {/* </div> */}
         <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-center pl-20 gap-10">
-          <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-8xl text-white font-semibold">
+          <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl text-white font-semibold">
             Competitions,
             <br />
             Workshops,
