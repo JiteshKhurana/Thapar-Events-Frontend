@@ -69,11 +69,11 @@ const HomeNav: React.FC = () => {
       <Disclosure as="nav" className="">
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-[90%l px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 font-bold text-white hover:bg-white hover:bg-opacity-30 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
@@ -83,11 +83,11 @@ const HomeNav: React.FC = () => {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                <div className="flex flex-1 items-center justify-start ml-10 sm:ml-0 sm:items-stretch sm:justify-between">
                   <div className="flex flex-shrink-0 items-center">
                     <NavLink className="flex items-center justify-center gap-3" to="/">
                       <img src={Logo} alt="logo" className="w-8" />
-                      <h1 className="text-white text-2xl font-bold">ConnectHub</h1>
+                      <h1 className="text-white text-2xl font-bold hidden md:block">ConnectHub</h1>
                     </NavLink>
                   </div>
                   <div className="hidden sm:mx-6 sm:block">
@@ -95,7 +95,7 @@ const HomeNav: React.FC = () => {
                       {navigation.map((item) => (
                         <NavLink
                         to={item.href}
-                        className=' text-white hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                        className=' text-white hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md px-3 py-2 font-medium'
                       >
                         {item.name}
                       </NavLink>
@@ -124,13 +124,13 @@ const HomeNav: React.FC = () => {
             </div>
 
             <Disclosure.Panel className="sm:hidden">
-              <div className="border m-3 space-y-1 p-3 rounded-md">
+              <div className=" bg-white bg-opacity-10 m-3 space-y-1 p-3 rounded-md">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className='flex justify-center hover:bg-gray-300 hover:text-black  rounded-md px-3 py-2 text-base font-medium'
+                    className='flex justify-center text-white hover:bg-white hover:bg-opacity-10  rounded-md px-3 py-2 text-base font-medium'
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
@@ -147,11 +147,12 @@ const HomeNav: React.FC = () => {
       <Disclosure as="nav" className="">
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="mx-auto px-10">
               <div className="relative flex h-16 items-center justify-between">
+                
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-700  hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
@@ -161,11 +162,13 @@ const HomeNav: React.FC = () => {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                <div className="flex flex-1 items-center justify-start ml-10 sm:ml-0 sm:items-center sm:justify-between">
+
                   <div className="flex flex-shrink-0 items-center">
                     <NavLink className="flex items-center justify-center gap-3" to="/">
                       <img src={Logo} alt="logo" className="w-8" />
-                      <h1 className="text-white text-2xl font-bold">ConnectHub</h1>
+                      <h1 className="text-2xl font-bold hidden md:block">ConnectHub</h1>
+
                     </NavLink>
                   </div>
                   <div className="hidden sm:mx-6 sm:block">
@@ -173,7 +176,7 @@ const HomeNav: React.FC = () => {
                       {navigation.map((item) => (
                         <NavLink
                           to={item.href}
-                          className='  hover:bg-gray-800 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                          className='  hover:bg-gray-800 hover:text-white rounded-md px-3 py-2 font-medium'
                         >
                           {item.name}
                         </NavLink>
@@ -208,7 +211,7 @@ const HomeNav: React.FC = () => {
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className='flex justify-center hover:bg-gray-300 hover:text-black  rounded-md px-3 py-2 text-base font-medium'
+                    className='flex justify-center hover:bg-gray-100 hover:text-black  rounded-md px-3 py-2 text-base font-medium'
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
