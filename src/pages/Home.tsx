@@ -149,47 +149,50 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mx-96 my-5">
-        <h2 className="text-3xl font-bold text-center my-5">Upcoming Events</h2>
-        <Carousel
-          plugins={[
-            Autoplay({
-              delay: 3000,
-            }),
-          ]}
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-        >
-          <CarouselContent>
-            <CarouselItem>
-              <img src={Slider1} />
-            </CarouselItem>
-            <CarouselItem>
-              <img src={Slider1} />
-            </CarouselItem>
-            <CarouselItem>
-              <img src={Slider1} />
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+      <div className="flex justify-center items-center">
+        <div className=" flex justify-between items-center flex-col w-full my-5">
+          <h2 className="text-3xl font-bold text-center my-5">Upcoming Events</h2>
+          <Carousel
+             className="w-[70%]"
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent>
+              <CarouselItem>
+                <img src={Slider1} />
+              </CarouselItem>
+              <CarouselItem>
+                <img src={Slider1} />
+              </CarouselItem>
+              <CarouselItem>
+                <img src={Slider1} />
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
       </div>
       <Separator />
-      <div>
+      <div className="flex flex-col ">
         <h2 className="text-3xl font-bold text-center my-5">Events Calender</h2>
         <p className="text-center my-3">
           Easily navigate between all the past and upcoming events !
         </p>
 
         <Calendar
+          className="shadow-2xl bg-white m-5 mx-20 border p-5 rounded-md min-h-[700px]"
           localizer={localizer}
           events={calEvents}
           startAccessor="start"
           endAccessor="end"
-          className="m-5 mx-20 border p-5 rounded-md min-h-[700px]"
           views={['month', 'week', 'day']}
           components={{
             event: EventComponent, // Use custom event component
