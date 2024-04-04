@@ -1,50 +1,20 @@
+import { Separator } from "@radix-ui/react-dropdown-menu";
 import Logo from "../assets/tietlogo.png";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { Separator } from "./ui/separator";
+// import { FaFacebook } from "react-icons/fa";
+// import { FaInstagram } from "react-icons/fa";
+// import { FaTwitter } from "react-icons/fa";
+// import { FaLinkedin } from "react-icons/fa";
+// import { Separator } from "./ui/separator";
 
 const Footer: React.FC = () => {
   return (
-    <div className="my-8 pt-8 mx-16">
-      <div className="grid grid-cols-12">
-        <div className="col-span-4">
-          <img src={Logo} alt="logo" className="h-10" />
-          <div className="flex space-x-2 mt-3">
-            <FaFacebook />
-            <FaTwitter />
-            <FaInstagram />
-            <FaLinkedin />
-          </div>
-        </div>
-        <div className="col-span-8 flex text-xs text-[#7C7C7C] space-x-10">
-          <div className="space-y-4">
-            <p>About Us</p>
-            <p>Sitemap</p>
-            <p>Credits</p>
-            <p>Help Center</p>
-            <p>Community Guidelines</p>
-          </div>
-          <div className="space-y-4">
-            <p>Accessibility</p>
-            <p>Mobile</p>
-            <p>Marketing</p>
-            <p>Advertising</p>
-            <p>Report Issue</p>
-          </div>
-          <div className="space-y-4">
-            <p>Privacy Policy</p>
-            <p>Terms & Conditions</p>
-            <p>Trust & Safety</p>
-          </div>
-        </div>
+    <div className="bg-[#265073] w-full flex flex-col items-center py-10 text-white">
+      <div className="conatainer flex flex-col items-center">
+        <img src={Logo} className="w-12 mb-3"/>
+        <span className="college=heading text-xl pb-3 border-b-2">Thapar Institute of Engineering and Technology</span>
+        {/* <Separator className=""/> */}
+        <a href="https://github.com//kunalarora0930" className="hover:scale-125 transition-all "><span className="AJAK ">Made with ❤️ <span className="font-bold text-2xl">AJAK</span></span></a>
       </div>
-      <Separator className="my-2" />
-      <p className="text-xs text-[#7C7C7C] text-center">
-        All trademarks are the property of their respective owners
-        <br /> All rights reserved © 2024 Invincible
-      </p>
     </div>
   );
 };
