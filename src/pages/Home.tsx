@@ -119,7 +119,7 @@ const Home: React.FC = () => {
           controls={false}
         ></video>
         {/* </div> */}
-        <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-center pl-20 gap-10">
+        <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-center pl-2 sm:pl-10 gap-10">
           <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl text-white font-semibold">
             Competitions,
             <br />
@@ -127,13 +127,16 @@ const Home: React.FC = () => {
             <br />
             Fests &<br /> more!
           </h1>
-          <p className="text-xl text-gray-300 font-light">
-            Make the most of every opportunity to learn, enjoy
-            <br /> and level up your skills.
+          <p className="flex flex-row sm:flex-col flex-wrap text-xl text-gray-300 font-light self-center sm:self-start">
+            <span>Make the most of every opportunity to learn, enjoy</span>
+            <span>and level up your skills.</span>
           </p>
-          <div className="flex flex-wrap gap-5 ">
-            <Link to={"/societies"}>
-              <Button className="text-xl w-[300px]" size="lg">
+          <div className="mt-24 md:mt-5 flex flex-col sm:flex-row flex-wrap gap-5 self-center sm:self-start">
+            <Link to={"/events"}>
+              <Button 
+              className="text-xl w-[300px]" size="lg"
+              variant={"secondary"}
+              >
                 Explore Now
               </Button>
             </Link>
@@ -141,7 +144,6 @@ const Home: React.FC = () => {
               <Button
                 className="text-xl w-[300px]"
                 size="lg"
-                variant={"secondary"}
               >
                 View Past Events
               </Button>
