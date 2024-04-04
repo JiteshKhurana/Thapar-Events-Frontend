@@ -8,12 +8,13 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const EventsDetail = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <img src={Banner} />
@@ -183,7 +184,7 @@ const EventsDetail = () => {
           <div className="border rounded-lg p-5 space-y-3">
             <div className="flex justify-between">
               <p className="font-medium text-2xl">FREE</p>
-              <Button>Register Now</Button>
+              <Button onClick={() => navigate("register")}>Register Now</Button>
             </div>
             <Separator />
             <div>

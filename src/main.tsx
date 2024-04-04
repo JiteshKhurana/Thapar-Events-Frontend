@@ -27,6 +27,7 @@ import { createBrowserRouter } from "react-router-dom";
 import EventsDetail from "./pages/EventsDetail";
 import UserDashBoard from "./pages/UserDashBoard.tsx";
 import Page404 from "./pages/Page404.tsx";
+import UserEventRegister from "./pages/eventdashboard/UserEventRegister.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/events/:name",
         element: <EventsDetail />,
+      },
+      {
+        path: "/events/:name/register",
+        element: <UserEventRegister />,
       },
       {
         path: "/societies",

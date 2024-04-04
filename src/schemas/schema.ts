@@ -22,4 +22,16 @@ export const editUserSchema = z.object({
   }),
 });
 
+export const userEventRegisterSchemas = z.object({
+  name: z.string().min(2, "Too short").max(30, "Too long"),
+  email: z.string().email(),
+  rollno: z.string().regex(RollRegExp, { message: "Roll number is not valid" }),
+  phoneno: z
+    .string()
+    .regex(phoneRegExp, { message: "Phone number is not valid" })
+    .min(10, "Phone number is not valid")
+    .max(10, "Phone number is not valid"),
+});
+
 export type FormFields = z.infer<typeof editUserSchema>;
+export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
