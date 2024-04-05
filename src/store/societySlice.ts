@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface Society {
-  about: string;
-  email: string;
-  name: string;
-  role: string;
-  year_of_formation: string;
   _Sid: string;
   _Uid: string;
+  email: string;
+  name: string;
+  year_of_formation: string;
+  role: string;
+  about: string;
 }
 
 interface SocietyState {

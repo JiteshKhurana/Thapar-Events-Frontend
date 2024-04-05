@@ -5,8 +5,37 @@ import { Button } from "@/components/ui/button";
 import Gallery from "../assets/gallery.png";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import CardSlider from "@/components/CardSlider";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_ENDPOINT } from "@/lib/constants";
+import { toast } from "sonner";
+import CardShimmer from "@/components/CardShimmer";
+
+interface Society {
+  _Sid: string;
+  _Uid: string;
+  email: string;
+  name: string;
+  year_of_formation: string;
+  role: string;
+  about: string;
+}
 
 const SocietyDetail: React.FC = () => {
+  const { societyId } = useParams();
+  const [society, setSociety] = useState<Society | null>(null);
+  async function getEvents() {
+    axios
+      .get(API_ENDPOINT + "/soc/get?societyId=" + societyId)
+      .then((res) => setSociety(res.data))
+      .catch((error) => toast(error));
+  }
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  if (!society) return <CardShimmer />;
   return (
     <div>
       <div className="relative">
@@ -16,24 +45,13 @@ const SocietyDetail: React.FC = () => {
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <h1 className="text-4xl">Creative Computing Society</h1>
+          <h1 className="text-4xl">{society.name}</h1>
         </div>
       </div>
       <Separator />
       <div className="mx-10">
         <h2 className="text-3xl font-medium my-8">About Us</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam efficitur
-          felis ac mauris scelerisque placerat. Curabitur congue eros non lorem
-          cursus cursus. Donec quam ipsum, sodales et magna id, tincidunt auctor
-          dolor. Praesent ac ornare diam. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Curabitur est felis, semper quis sem sit
-          amet, scelerisque semper elit. Maecenas suscipit condimentum purus nec
-          posuere. Sed id nulla justo. Interdum et malesuada fames ac ante ipsum
-          primis in faucibus. Nulla gravida turpis metus, eu placerat tortor
-          tempor vitae. Suspendisse vel lacus quis nisl sagittis ultricies quis
-          nec enim. Aliquam pharetra at mi vel sollicitudin.
-        </p>
+        <p>{society.about}</p>
         <Separator className="mt-3" />
         <CardSlider title="Events" apply={true} />
         <div className="flex items-center justify-between">

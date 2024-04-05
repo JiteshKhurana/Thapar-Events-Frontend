@@ -53,7 +53,11 @@ const Society: React.FC = () => {
               <CardFooter>
                 <Button
                   onClick={() =>
-                    navigate(society.name.split(` `).join("-").toLowerCase())
+                    navigate(
+                      society.name.split(` `).join("-").toLowerCase() +
+                        "/" +
+                        society._Sid
+                    )
                   }
                   className="w-full"
                 >
