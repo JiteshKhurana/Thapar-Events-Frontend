@@ -1,11 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface Event {
+  date: number;
   description: string;
+  eligibility: string;
   email: string;
-  team: false;
+  event_mode: string;
+  event_type: string;
+  hashtags: string[];
+  prizes: string[];
+  soc_name: string;
+  team: boolean;
   title: string;
   visibility: boolean;
+  social_media: string[];
   _Eid: string;
   _Sid: string;
   _Uid: string;

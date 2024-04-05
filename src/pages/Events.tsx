@@ -19,17 +19,6 @@ import useEvents from "@/hooks/useEvents";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-// interface Event {
-//   description: string;
-//   email: string;
-//   team: false;
-//   title: string;
-//   visibility: boolean;
-//   _Eid: string;
-//   _Sid: string;
-//   _Uid: string;
-// }
-
 const Events: React.FC = () => {
   useEvents();
   const events = useSelector((store: RootState) => store.events.eventsList);
@@ -58,9 +47,7 @@ const Events: React.FC = () => {
                     key={uuidv4()}
                     className="w-[400px] m-5 overflow-hidden shadow-2xl"
                   >
-                    <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]">
-                      {" "}
-                    </div>
+                    <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
 
                     <CardHeader className="flex flex-row space-x-5 ">
                       <Avatar className="h-16 w-16">
@@ -72,29 +59,23 @@ const Events: React.FC = () => {
                       </Avatar>
                       <div>
                         <CardTitle>{event.title}</CardTitle>
-                        <CardDescription>{event.email}</CardDescription>
+                        <CardDescription>{event.soc_name}</CardDescription>
                       </div>
                     </CardHeader>
-                    <CardContent className="flex gap-2">
-                      <Badge
-                        variant="outline"
-                        className="rounded border font-medium"
-                      >
-                        #Engineering
-                      </Badge>
-                      <Badge
-                        variant="outline"
-                        className="rounded border font-medium"
-                      >
-                        #Coffee
-                      </Badge>
-                      <Badge
-                        variant="outline"
-                        className="rounded border font-medium"
-                      >
-                        #Coding
-                      </Badge>
-                    </CardContent>
+
+                    {event.hashtags && (
+                      <CardContent className="flex gap-2">
+                        {event.hashtags.map((hashtag) => (
+                          <Badge
+                            key={uuidv4()}
+                            className="p-2"
+                            variant="outline"
+                          >
+                            #{hashtag}
+                          </Badge>
+                        ))}
+                      </CardContent>
+                    )}
                     <CardFooter>
                       <Button
                         onClick={() =>
@@ -116,11 +97,13 @@ const Events: React.FC = () => {
             <TabsContent value="past">
               <div className="flex flex-wrap justify-center">
                 {events.map((event) => (
-                  <Card className="w-[400px] m-5 overflow-hidden shadow-2xl">
-                    <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]">
-                      {" "}
-                    </div>
-                    <CardHeader className="flex flex-row space-x-5">
+                  <Card
+                    key={uuidv4()}
+                    className="w-[400px] m-5 overflow-hidden shadow-2xl"
+                  >
+                    <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
+
+                    <CardHeader className="flex flex-row space-x-5 ">
                       <Avatar className="h-16 w-16">
                         <AvatarImage
                           className=""
@@ -130,32 +113,25 @@ const Events: React.FC = () => {
                       </Avatar>
                       <div>
                         <CardTitle>{event.title}</CardTitle>
-                        <CardDescription>{event.email}</CardDescription>
+                        <CardDescription>{event.soc_name}</CardDescription>
                       </div>
                     </CardHeader>
-                    <CardContent className="flex gap-2">
-                      <Badge
-                        variant="outline"
-                        className="rounded border font-medium"
-                      >
-                        #Engineering
-                      </Badge>
-                      <Badge
-                        variant="outline"
-                        className="rounded border font-medium"
-                      >
-                        #Coffee
-                      </Badge>
-                      <Badge
-                        variant="outline"
-                        className="rounded border font-medium"
-                      >
-                        #Coding
-                      </Badge>
-                    </CardContent>
-                    <CardFooter className="justify-between">
+
+                    {event.hashtags && (
+                      <CardContent className="flex gap-2">
+                        {event.hashtags.map((hashtag) => (
+                          <Badge
+                            key={uuidv4()}
+                            className="p-2"
+                            variant="outline"
+                          >
+                            #{hashtag}
+                          </Badge>
+                        ))}
+                      </CardContent>
+                    )}
+                    <CardFooter>
                       <Button
-                        className="w-full"
                         onClick={() =>
                           navigate(
                             event.title.split(" ").join("-").toLowerCase() +
@@ -163,6 +139,7 @@ const Events: React.FC = () => {
                               event._Eid
                           )
                         }
+                        className="w-full"
                       >
                         Preview
                       </Button>
