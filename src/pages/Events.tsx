@@ -42,8 +42,8 @@ const Events: React.FC = () => {
           <Tabs defaultValue="upcoming" className="w-full">
             <div className="filters-container flex items-center justify-center">
               <TabsList className="mt-5 mx-5 shadow-xl py-3 m-3">
-                <TabsTrigger className="" value="upcoming">Upcoming</TabsTrigger>
-                <TabsTrigger className="" value="past">Past</TabsTrigger>
+                <TabsTrigger className="w-[150px]" value="upcoming">Upcoming</TabsTrigger>
+                <TabsTrigger className="w-[150px]" value="past">Past</TabsTrigger>
               </TabsList>
             </div>
             {/* <ComboBox /> */}
@@ -54,7 +54,7 @@ const Events: React.FC = () => {
                     <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"> </div>
 
                     <CardHeader className="flex flex-row space-x-5 ">
-                      <Avatar>
+                      <Avatar className="h-16 w-16">
                         <AvatarImage className="" src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg" />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
@@ -90,7 +90,7 @@ const Events: React.FC = () => {
                   <Card className="w-[400px] m-5 overflow-hidden shadow-2xl">
                     <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"> </div>
                     <CardHeader className="flex flex-row space-x-5">
-                      <Avatar>
+                      <Avatar className="h-16 w-16">
                         <AvatarImage className="" src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg" />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
