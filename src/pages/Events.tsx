@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import useEvents from "@/hooks/useEvents";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { BiCalendar } from "react-icons/bi";
 
 const Events: React.FC = () => {
   useEvents();
@@ -26,7 +27,8 @@ const Events: React.FC = () => {
   if (!events) return <CardShimmer />;
   return (
     <div>
-      <div className="m-10">
+      <div className="min-h-[90vh] m-10 flex flex-col justify-start items-center bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover dark:bg-opacity-10">
+        <span className="font-semibold text-2xl mb-5 ">Explore Events at TIET</span>
         <div>
           <Tabs defaultValue="upcoming" className="w-full">
             <div className="filters-container flex items-center justify-center">
@@ -45,7 +47,7 @@ const Events: React.FC = () => {
                 {events.map((event) => (
                   <Card
                     key={uuidv4()}
-                    className="w-[400px] m-5 overflow-hidden shadow-2xl"
+                    className="w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
                   >
                     <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
 
@@ -60,10 +62,12 @@ const Events: React.FC = () => {
                       <div>
                         <CardTitle>{event.title}</CardTitle>
                         <CardDescription>{event.soc_name}</CardDescription>
+                        <CardDescription className="flex items-center gap-1"><BiCalendar className="text-black dark:text-white"/>24-04-2024</CardDescription>
+
                       </div>
                     </CardHeader>
 
-                    {event.hashtags && (
+                    {/* {event.hashtags && (
                       <CardContent className="flex gap-2">
                         {event.hashtags.map((hashtag) => (
                           <Badge
@@ -75,7 +79,7 @@ const Events: React.FC = () => {
                           </Badge>
                         ))}
                       </CardContent>
-                    )}
+                    )} */}
                     <CardFooter>
                       <Button
                         onClick={() =>
@@ -99,7 +103,7 @@ const Events: React.FC = () => {
                 {events.map((event) => (
                   <Card
                     key={uuidv4()}
-                    className="w-[400px] m-5 overflow-hidden shadow-2xl"
+                    className="w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
                   >
                     <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
 
