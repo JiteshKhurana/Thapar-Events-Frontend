@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ComboBox } from "@/components/ui/ComboBox";
 import { Badge } from "@/components/ui/badge";
+import { v4 as uuidv4 } from "uuid";
 import Event from "../assets/event.png";
 
 import {
@@ -69,7 +70,9 @@ const Events: React.FC = () => {
                       <Button
                         onClick={() =>
                           navigate(
-                            event.title.split(" ").join("-").toLowerCase()
+                            event.title.split(" ").join("-").toLowerCase() +
+                              "/" +
+                              event._Eid
                           )
                         }
                         className="w-full"
@@ -84,7 +87,7 @@ const Events: React.FC = () => {
             <TabsContent value="past">
               <div className="flex flex-wrap justify-center">
                 {events.map((event) => (
-                  <Card className="w-1/4 m-5">
+                  <Card key={uuidv4()} className="w-1/4 m-5">
                     <img src={Event} className="w-full" />
                     <CardHeader className="flex flex-row space-x-5">
                       <Avatar>
@@ -106,7 +109,9 @@ const Events: React.FC = () => {
                         className="w-full"
                         onClick={() =>
                           navigate(
-                            event.title.split(" ").join("-").toLowerCase()
+                            event.title.split(" ").join("-").toLowerCase() +
+                              "/" +
+                              event._Eid
                           )
                         }
                       >

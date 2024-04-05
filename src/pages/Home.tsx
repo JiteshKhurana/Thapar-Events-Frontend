@@ -8,8 +8,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { Separator } from "@/components/ui/separator";
 
-
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -20,6 +18,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { VIDEO_CDN_URL } from "@/lib/constants";
+import Footer from "@/components/Footer";
 // import axios from "axios";
 
 const localizer = momentLocalizer(moment);
@@ -33,18 +32,19 @@ interface Event {
 }
 
 const EventComponent: React.FC<{ event: Event }> = ({ event }) => (
-  <a className="p-3 w-full h-full" href={event.url} target="_blank" rel="noopener noreferrer">
+  <a
+    className="p-3 w-full h-full"
+    href={event.url}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     {event.title}
   </a>
 );
 
 const MyEventWrapper: React.FC = ({ children }: any) => (
   // <div className={`bg-${getRandomColorClass}`}>
-  <div className="p-1">
-
-    {children}
-
-  </div >
+  <div className="p-1">{children}</div>
 );
 
 const Home: React.FC = () => {
@@ -133,18 +133,16 @@ const Home: React.FC = () => {
           </p>
           <div className="mt-24 md:mt-5 flex flex-col sm:flex-row flex-wrap gap-5 self-center sm:self-start">
             <Link to={"/events"}>
-              <Button 
-              className="text-xl w-[300px]" size="lg"
-              variant={"secondary"}
+              <Button
+                className="text-xl w-[300px]"
+                size="lg"
+                variant={"secondary"}
               >
                 Explore Now
               </Button>
             </Link>
             <Link to={"/events"}>
-              <Button
-                className="text-xl w-[300px]"
-                size="lg"
-              >
+              <Button className="text-xl w-[300px]" size="lg">
                 View Past Events
               </Button>
             </Link>
@@ -153,9 +151,11 @@ const Home: React.FC = () => {
       </div>
       <div className="flex justify-center items-center">
         <div className=" flex justify-between items-center flex-col w-full my-5">
-          <h2 className="text-3xl font-bold text-center my-5">Upcoming Events</h2>
+          <h2 className="text-3xl font-bold text-center my-5">
+            Upcoming Events
+          </h2>
           <Carousel
-             className="w-[70%]"
+            className="w-[70%]"
             plugins={[
               Autoplay({
                 delay: 3000,
@@ -195,13 +195,14 @@ const Home: React.FC = () => {
           events={calEvents}
           startAccessor="start"
           endAccessor="end"
-          views={['month', 'week', 'day']}
+          views={["month", "week", "day"]}
           components={{
             event: EventComponent, // Use custom event component
             eventWrapper: MyEventWrapper,
           }}
         />
       </div>
+      <Footer />
     </div>
   );
 };

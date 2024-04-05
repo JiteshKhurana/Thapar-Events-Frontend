@@ -8,13 +8,57 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { API_ENDPOINT } from "@/lib/constants";
+import CardShimmer from "@/components/CardShimmer";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "sonner";
 
-const EventsDetail = () => {
+interface Event {
+  date: number;
+  description: string;
+  eligibility: string;
+  email: string;
+  event_mode: string;
+  event_type: string;
+  hashtags: string[];
+  prizes: string[];
+  soc_name: string;
+  team: boolean;
+  title: string;
+  visibility: boolean;
+  social_media: string[];
+  _Eid: string;
+  _Sid: string;
+  _Uid: string;
+}
+
+const EventsDetail: React.FC = () => {
+  const { eventId } = useParams();
   const navigate = useNavigate();
+  const [event, setEvent] = useState<Event | null>(null);
+  async function getEvents() {
+    axios
+      .get(API_ENDPOINT + "/event/get?eventId=" + eventId)
+      .then((res) => setEvent(res.data))
+      .catch((error) => toast(error));
+  }
+  useEffect(() => {
+    getEvents();
+  }, []);
+  const [copySuccess, setCopySuccess] = useState("SHARE THE EVENT");
+  async function copyUrl() {
+    await navigator.clipboard.writeText(location.href);
+    setCopySuccess("Link Copied To Clipboard");
+    setTimeout(() => setCopySuccess("SHARE"), 3000);
+  }
+
+  if (!event) return <CardShimmer />;
+
   return (
     <div>
       <img src={Banner} />
@@ -26,96 +70,58 @@ const EventsDetail = () => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="flex flex-col space-y-2">
-              <h1 className="text-4xl">Creative Computing Society</h1>
-              <p>Microsoft Learn Student Chapter</p>
+              <h1 className="text-4xl">{event.title}</h1>
+              <p>{event.soc_name}</p>
               <div className="flex gap-10">
-                <p>Offline</p>
-                <p>27-02-2024</p>
+                <p>{event.event_mode}</p>
+                <p>{event.date}</p>
                 <p>9 Days Left </p>
               </div>
-              <div className="flex gap-5">
-                <Badge className="p-2" variant="outline">
-                  #Engineering
-                </Badge>
-                <Badge className="p-2" variant="outline">
-                  #Coffee
-                </Badge>
-                <Badge className="p-2" variant="outline">
-                  #Coding
-                </Badge>
-              </div>
+              {event.hashtags && (
+                <div className="flex gap-5">
+                  {event.hashtags.map((hashtag) => (
+                    <Badge key={uuidv4()} className="p-2" variant="outline">
+                      #{hashtag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <NavigationMenu className="border rounded-lg">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link to="/docs">
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Details
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink
+                  href="/docs"
+                  className={navigationMenuTriggerStyle()}
+                >
+                  Details
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/docs">
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Dates & Deadlines
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink
+                  href="/docs"
+                  className={navigationMenuTriggerStyle()}
+                >
+                  Dates & Deadlines
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/docs">
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Rewards & Prizes
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink
+                  href="/docs"
+                  className={navigationMenuTriggerStyle()}
+                >
+                  Rewards & Prizes
+                </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <div className="border rounded-lg p-5 space-y-5">
             <div>
               <h2 className="font-semibold text-2xl">
-                All that you need to know about MAKE4THON
+                All that you need to know about {event.title}
               </h2>
-              <h3 className="font-medium text-lg">Guidelines</h3>
-              <ul className="list-disc font-light">
-                <li>
-                  This event applies only to the students of TIET irrespective
-                  of their programs.
-                </li>
-                <li>
-                  Inter-specialization & inter-batch teams across batches are
-                  allowed.
-                </li>
-                <li>There will be a total of 3 rounds for this event.</li>
-                <li>
-                  The event is scheduled for 5th February's evening and all the
-                  rounds will be held offline only in 1 sitting.
-                </li>
-                <li>
-                  The venue and time details will be communicated at a later
-                  stage.
-                </li>
-                <li>
-                  It is a cryptic hunt that requires you to navigate through 3
-                  different rounds.
-                </li>
-                <li>
-                  Rounds require you to mine bitcoins followed by choosing
-                  alternatives and executing a chase strategy
-                </li>
-              </ul>
-              <h3 className="font-medium text-lg">Event Rules:</h3>
-              <ul className="list-disc font-light">
-                <li>
-                  All the assets can be used in developing the game make sure
-                  you have the rights to use the assets.
-                </li>
-                <li>Your game should be made within the stipulated time.</li>
-                <li>
-                  Relevance to the theme is preferred and has points if the
-                  theme is shown in the gam.
-                </li>
-              </ul>
+              <p>{event.description}</p>
               <h3 className="font-medium my-3">
                 Note: The organizers reserve the right to change the opportunity
                 details.
@@ -146,37 +152,31 @@ const EventsDetail = () => {
               </div>
             </div>
             <Separator />
-            <div>
-              <h2 className="font-medium text-xl mb-2">Rewards & Prizes:</h2>
-              <p className="mb-2">Prize pool worth INR 100,000 </p>
-              <div className="flex flex-col space-y-3">
-                <div>
-                  <h4 className="font-medium text-lg">First Prize</h4>
-                  <p>Cash Prize of INR 10000</p>
-                  <p>GFG Voucher worth INR 2000 </p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-lg">Second Prize</h4>
-                  <p>Cash Prize of INR 10000</p>
-                  <p>GFG Voucher worth INR 2000 </p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-lg">Third Prize</h4>
-                  <p>Cash Prize of INR 10000</p>
-                  <p>GFG Voucher worth INR 2000 </p>
-                </div>
+            {event.prizes && (
+              <div>
+                <h2 className="font-medium text-xl mb-2">Rewards & Prizes:</h2>
+                {Object.entries(event.prizes).map((prize) => (
+                  <div key={uuidv4()}>
+                    <h4 className="font-medium text-lg">{prize[0]}</h4>
+                    <p>{prize[1]}</p>
+                  </div>
+                ))}
               </div>
-            </div>
+            )}
             <Separator />
             <div>
               <h2 className="font-medium text-xl mb-2">
                 Follow on Social Media
               </h2>
-              <div className="flex space-x-5">
-                <FaInstagram />
-                <FaTwitter />
-                <FaFacebook />
-              </div>
+              {event.social_media && (
+                <div className="flex flex-row space-x-5">
+                  {Object.entries(event.social_media).map((link) => (
+                    <a target="_blank" href={link[1]}>
+                      {link[0]}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -205,10 +205,16 @@ const EventsDetail = () => {
           <div className="border rounded-lg p-5 space-y-3">
             <h3 className="font-medium">Eligibility</h3>
             <Separator />
-            <p>All the students of TIET</p>
+            {event.eligibility === "" ? (
+              <p>All the students of TIET</p>
+            ) : (
+              <p>{event.eligibility}</p>
+            )}
           </div>
           <div className="border rounded-lg p-5 space-y-3">
-            <Button className="w-full">SHARE</Button>
+            <Button onClick={copyUrl} className="w-full">
+              {copySuccess}
+            </Button>
           </div>
         </div>
       </div>
