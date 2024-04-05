@@ -190,7 +190,7 @@ const Home: React.FC = () => {
         </p>
 
         <Calendar
-          className="shadow-2xl bg-white m-5  mx-3 lg:mx-20 border p-5 rounded-md min-h-[700px]"
+          className="dark:text-black shadow-2xl bg-white dark:bg m-5  mx-3 lg:mx-20 border p-5 rounded-md min-h-[700px]"
           localizer={localizer}
           events={calEvents}
           startAccessor="start"

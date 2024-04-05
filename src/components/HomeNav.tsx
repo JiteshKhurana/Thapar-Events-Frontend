@@ -128,15 +128,15 @@ const HomeNav: React.FC = () => {
             </div>
 
             <Disclosure.Panel className="sm:hidden">
-              <div className=" bg-white bg-opacity-10 m-3 space-y-1 p-3 rounded-md">
+              <div className="transition-all bg-black bg-opacity-90 text-black m-3 space-y-1 p-3 rounded-md">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className="flex justify-center text-white hover:bg-white hover:bg-opacity-10  rounded-md px-3 py-2 text-base font-medium"
-                    aria-current={item.current ? "page" : undefined}
-                  >
+                    className='flex justify-center font-semibold text-white hover:bg-black hover:bg-opacity-100  rounded-md px-3 py-2 text-base '
+                    aria-current={item.current ? 'page' : undefined}>
+                  
                     {item.name}
                   </Disclosure.Button>
                 ))}

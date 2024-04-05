@@ -1,8 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ComboBox } from "@/components/ui/ComboBox";
+// import { ComboBox } from "@/components/ui/ComboBox";
 import { Badge } from "@/components/ui/badge";
 import { v4 as uuidv4 } from "uuid";
-import Event from "../assets/event.png";
 
 import {
   Card,
@@ -20,16 +19,16 @@ import useEvents from "@/hooks/useEvents";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-interface Event {
-  description: string;
-  email: string;
-  team: false;
-  title: string;
-  visibility: boolean;
-  _Eid: string;
-  _Sid: string;
-  _Uid: string;
-}
+// interface Event {
+//   description: string;
+//   email: string;
+//   team: false;
+//   title: string;
+//   visibility: boolean;
+//   _Eid: string;
+//   _Sid: string;
+//   _Uid: string;
+// }
 
 const Events: React.FC = () => {
   useEvents();
@@ -41,19 +40,34 @@ const Events: React.FC = () => {
       <div className="m-10">
         <div>
           <Tabs defaultValue="upcoming" className="w-full">
-            <TabsList className="mt-5 mx-5">
-              <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-              <TabsTrigger value="past">Past</TabsTrigger>
-            </TabsList>
-            <ComboBox />
+            <div className="filters-container flex items-center justify-center">
+              <TabsList className="mt-5 mx-5 shadow-xl py-3 m-3">
+                <TabsTrigger className="w-[150px]" value="upcoming">
+                  Upcoming
+                </TabsTrigger>
+                <TabsTrigger className="w-[150px]" value="past">
+                  Past
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            {/* <ComboBox /> */}
             <TabsContent value="upcoming">
               <div className="flex flex-wrap justify-center">
                 {events.map((event) => (
-                  <Card className="w-1/4 m-5">
-                    <img src={Event} className="w-full" />
-                    <CardHeader className="flex flex-row space-x-5">
-                      <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                  <Card
+                    key={uuidv4()}
+                    className="w-[400px] m-5 overflow-hidden shadow-2xl"
+                  >
+                    <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]">
+                      {" "}
+                    </div>
+
+                    <CardHeader className="flex flex-row space-x-5 ">
+                      <Avatar className="h-16 w-16">
+                        <AvatarImage
+                          className=""
+                          src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg"
+                        />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <div>
@@ -61,10 +75,25 @@ const Events: React.FC = () => {
                         <CardDescription>{event.email}</CardDescription>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <Badge variant="outline">#Engineering</Badge>
-                      <Badge variant="outline">#Coffee</Badge>
-                      <Badge variant="outline">#Coding</Badge>
+                    <CardContent className="flex gap-2">
+                      <Badge
+                        variant="outline"
+                        className="rounded border font-medium"
+                      >
+                        #Engineering
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className="rounded border font-medium"
+                      >
+                        #Coffee
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className="rounded border font-medium"
+                      >
+                        #Coding
+                      </Badge>
                     </CardContent>
                     <CardFooter>
                       <Button
@@ -87,11 +116,16 @@ const Events: React.FC = () => {
             <TabsContent value="past">
               <div className="flex flex-wrap justify-center">
                 {events.map((event) => (
-                  <Card key={uuidv4()} className="w-1/4 m-5">
-                    <img src={Event} className="w-full" />
+                  <Card className="w-[400px] m-5 overflow-hidden shadow-2xl">
+                    <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]">
+                      {" "}
+                    </div>
                     <CardHeader className="flex flex-row space-x-5">
-                      <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                      <Avatar className="h-16 w-16">
+                        <AvatarImage
+                          className=""
+                          src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg"
+                        />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <div>
@@ -99,10 +133,25 @@ const Events: React.FC = () => {
                         <CardDescription>{event.email}</CardDescription>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <Badge variant="outline">#Engineering</Badge>
-                      <Badge variant="outline">#Coffee</Badge>
-                      <Badge variant="outline">#Coding</Badge>
+                    <CardContent className="flex gap-2">
+                      <Badge
+                        variant="outline"
+                        className="rounded border font-medium"
+                      >
+                        #Engineering
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className="rounded border font-medium"
+                      >
+                        #Coffee
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className="rounded border font-medium"
+                      >
+                        #Coding
+                      </Badge>
                     </CardContent>
                     <CardFooter className="justify-between">
                       <Button
