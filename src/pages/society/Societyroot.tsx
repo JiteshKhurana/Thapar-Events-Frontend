@@ -2,8 +2,11 @@ import { MdDashboard, MdEdit } from "react-icons/md";
 import { BiLogOut, BiCalendar } from "react-icons/bi";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Cookies from "universal-cookie";
+import { Button } from "@/components/ui/button";
 
 const Societyroot: React.FC = () => {
+  const cookies = new Cookies(null, { path: "/" });
   const navigate = useNavigate();
   return (
     <div className="dark:text-white grid grid-cols-12 gap-0 border-t-[1px]">
@@ -35,21 +38,20 @@ const Societyroot: React.FC = () => {
                   Edit Profile
                 </li>
               </NavLink>
-              <NavLink
+              <Button
                 onClick={() => {
-                  localStorage.clear();
+                  cookies.remove("token");
                   navigate("/");
                   toast("Logout successful", {
                     description: "You have successfully logged out.",
                   });
                 }}
-                to={"/"}
               >
                 <li className="flex items-center gap-2">
                   <BiLogOut className="text-2xl" />
                   Logout
                 </li>
-              </NavLink>
+              </Button>
             </ul>
           </div>
         </div>

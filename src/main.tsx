@@ -10,24 +10,21 @@ import Society from "./pages/Society";
 import SocietyDetail from "./pages/SocietyDetail";
 import User from "./pages/User";
 import EditUser from "./pages/EditUser";
-// import Societyroot from "./pages/society/Societyroot";
-// import SocietyEvents from "./pages/society/SocietyEvents";
-// import SocietyDashboard from "./pages/society/SocietyDashboard";
-// import EditSocietyProfile from "./pages/society/EditSocietyProfile";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
-
-// import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot";
-// import EventDashboard from "./pages/eventdashboard/EventDashboard";
-// import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistrations";
-// import EventMarketingMails from "./pages/eventdashboard/EventMarketingMails";
-// import EventReviews from "./pages/eventdashboard/EventReviews";
-// import EditEvent from "./pages/eventdashboard/EditEvent";
-// import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm";
 import EventsDetail from "./pages/EventsDetail";
 import UserDashBoard from "./pages/UserDashBoard.tsx";
 import Page404 from "./pages/Page404.tsx";
 import UserEventRegister from "./pages/eventdashboard/UserEventRegister.tsx";
+import ProtectedRoute from "./protectedRoutes/ProtectedRoute.tsx";
+import Societyroot from "./pages/society/Societyroot.tsx";
+import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
+import SocietyEvents from "./pages/society/SocietyEvents.tsx";
+import EditSocietyProfile from "./pages/society/EditSocietyProfile.tsx";
+import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
+import EditEvent from "./pages/eventdashboard/EditEvent.tsx";
+import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistrations.tsx";
+import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -60,18 +57,75 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <User />,
+        element: <ProtectedRoute />,
         children: [
           {
             path: "/profile",
-            element: <UserDashBoard />,
-          },
-          {
-            path: "/profile/editprofile",
-            element: <EditUser />,
+            element: <User />,
+            children: [
+              {
+                path: "",
+                element: <UserDashBoard />,
+              },
+              {
+                path: "/profile/editprofile",
+                element: <EditUser />,
+              },
+            ],
           },
         ],
       },
+      // Society Routes (Protected)
+      {
+        path: "/society",
+        element: <ProtectedRoute adminRoute={true} />,
+        children: [
+          {
+            path: "/society",
+            element: <Societyroot />,
+            children: [
+              {
+                path: "dashboard",
+                element: <SocietyDashboard />,
+              },
+              {
+                path: "societyevents",
+                element: <SocietyEvents />,
+              },
+
+              {
+                path: "editprofile",
+                element: <EditSocietyProfile />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "/eventdashboard",
+        element: <ProtectedRoute adminRoute={true} />,
+        children: [
+          {
+            path: "/eventdashboard",
+            element: <EventDashboardRoot />,
+            children: [
+              {
+                path: "registrations",
+                element: <ManageEventRegistrations />,
+              },
+              {
+                path: "editevent",
+                element: <EditEvent />,
+              },
+              {
+                path: "editregistrationform",
+                element: <EditRegistrationForm />,
+              },
+            ],
+          },
+        ],
+      },
+
       {
         path: "*",
         element: <Page404 />,
@@ -79,25 +133,6 @@ const appRouter = createBrowserRouter([
     ],
   },
 ]);
-
-//       <Route path="/society/" element={<Societyroot />}>
-//         <Route path="dashboard" element={<SocietyDashboard />}></Route>
-//         <Route path="societyevents" element={<SocietyEvents />}></Route>
-//         <Route path="editprofile" element={<EditSocietyProfile />}></Route>
-//       </Route>
-//       <Route path="/eventdashboard" element={<EventDashboardRoot />}>
-//         <Route path="" element={<EventDashboard />}></Route>
-//         <Route
-//           path="registrations"
-//           element={<ManageEventRegistrations />}
-//         ></Route>
-// {/* <Route path="marketingmails" element={<EventMarketingMails/>} ></Route> */}
-//         {/* <Route path="reviews" element={<EventReviews/>} ></Route> */}
-//         <Route path="editevent" element={<EditEvent />}></Route>
-//         <Route
-//           path="editregistrationform"
-//           element={<EditRegistrationForm />}
-//         ></Route>
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
