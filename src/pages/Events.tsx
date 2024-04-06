@@ -28,7 +28,9 @@ const Events: React.FC = () => {
   return (
     <div>
       <div className="min-h-[90vh] m-10 flex flex-col justify-start items-center bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover dark:bg-opacity-10">
-        <span className="font-semibold text-2xl mb-5 ">Explore Events at TIET</span>
+        <span className="font-semibold text-4xl mb-5 ">
+          Explore Events at TIET
+        </span>
         <div>
           <Tabs defaultValue="upcoming" className="w-full">
             <div className="filters-container flex items-center justify-center">
@@ -62,13 +64,15 @@ const Events: React.FC = () => {
                       <div>
                         <CardTitle>{event.title}</CardTitle>
                         <CardDescription>{event.soc_name}</CardDescription>
-                        <CardDescription className="flex items-center gap-1"><BiCalendar className="text-black dark:text-white"/>24-04-2024</CardDescription>
-
+                        <CardDescription className="flex items-center gap-1">
+                          <BiCalendar className="text-black dark:text-white" />
+                          24-04-2024
+                        </CardDescription>
                       </div>
                     </CardHeader>
 
-                    {/* {event.hashtags && (
-                      <CardContent className="flex gap-2">
+                    {event.hashtags && (
+                      <CardContent className="flex gap-2 justify-center">
                         {event.hashtags.map((hashtag) => (
                           <Badge
                             key={uuidv4()}
@@ -79,7 +83,7 @@ const Events: React.FC = () => {
                           </Badge>
                         ))}
                       </CardContent>
-                    )} */}
+                    )}
                     <CardFooter>
                       <Button
                         onClick={() =>

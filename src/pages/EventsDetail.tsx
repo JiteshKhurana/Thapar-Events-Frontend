@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import Banner from "../assets/banner.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   NavigationMenu,
@@ -61,7 +60,6 @@ const EventsDetail: React.FC = () => {
 
   return (
     <div>
-      <img src={Banner} />
       <div className="grid grid-cols-12 gap-10 mx-32 my-8">
         <div className="col-span-8 space-y-5">
           <div className="flex gap-5 p-5 border rounded-lg">
