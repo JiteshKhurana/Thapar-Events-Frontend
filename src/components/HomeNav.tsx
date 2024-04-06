@@ -52,7 +52,7 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("id", resp.data.society._Uid);
             localStorage.setItem("role", resp.data.society.role);
           }
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           toast(error);

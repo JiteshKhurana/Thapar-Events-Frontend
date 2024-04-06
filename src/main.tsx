@@ -28,6 +28,7 @@ import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistra
 import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm.tsx";
 import SuperAdminDashboard from "./pages/superadmin/SuperAdminDashboard.tsx";
 import SuperAdminRoot from "./pages/superadmin/SuperAdminRoot.tsx";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const appRouter = createBrowserRouter([
   {
@@ -151,6 +152,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <GoogleOAuthProvider clientId="401427703030-n1bmmd93k7ag77sneqgmrujc99429t7l.apps.googleusercontent.com">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Analytics />
+        <SpeedInsights />
         <RouterProvider router={appRouter} />
       </ThemeProvider>
     </GoogleOAuthProvider>
