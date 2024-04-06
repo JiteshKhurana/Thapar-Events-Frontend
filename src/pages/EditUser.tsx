@@ -65,10 +65,10 @@ const EditUser: React.FC = () => {
       );
   };
   return (
-    <div className="col-span-9 mx-40">
-      <h1 className="text-3xl my-5">Edit Your Profile</h1>
+    <div className="border shadow-2xl flex flex-col w-full md:w-[70%]  rounded-xl pt-5 px-6 mt-5">
+      <span className="text-3xl my-5 font-semibold">Edit Your Profile</span>
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 mx-5">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="name">Name</Label>
             <Input value={user?.name} disabled type="text" placeholder="Name" />
@@ -176,10 +176,10 @@ const EditUser: React.FC = () => {
             />
           </div>
 
-          <Button disabled={isSubmitting} type="submit">
+          <Button disabled={isSubmitting} type="submit" className="mt-5">
             {isSubmitting ? "Loading" : "Submit"}
           </Button>
-          {success && <p className="text-green-500">Sucessfully Updated 🥳</p>}
+          {success && <p className="text-green-500 font-semibold text-xl">Sucessfully Updated!! 🥳</p>}
           {errors.root && <p className="text-red-500">{errors.root.message}</p>}
         </form>
       </Form>
