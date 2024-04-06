@@ -14,10 +14,10 @@ const UserDashBoard = () => {
     </div>
   ) : (
     
-    <div className="border shadow-2xl flex flex-col w-full md:w-[70%]  rounded-xl pt-5 px-6 mt-5">
+    <div className="border shadow-2xl flex flex-col w-[90%] px-6 md:w-[70%]  rounded-xl pt-5 mt-5">
       <div className="welcome flex flex-col">
       <span className="text text-gray-500 font-semibold dark:text-gray-200 text-md">February 20, 2024</span>
-      <span className="text text-gray-700 dark:text-gray-400 text-2xl">Welcome back, <span className="text-black dark:text-white text-4xl font-semibold">{user.name}! ♥️</span></span>
+      <span className="flex flex-wrap text text-gray-700 dark:text-gray-400 text-2xl">Welcome back, <span className="text-black dark:text-white text-4xl font-semibold">{user.name}! ♥️</span></span>
       
 
       </div>

@@ -21,7 +21,7 @@ const CardSlider: React.FC<FCProps> = ({ title, apply }) => {
         <h2 className="text-xl font-semibold">{title}</h2>
         <Button>See All</Button>
       </div>
-      <div className="flex overflow-x-scroll gap-3">
+      <div className="flex overflow-x-scroll no-scrollbar gap-3">
         {Array(12)
           .fill(0)
           .map(() => (

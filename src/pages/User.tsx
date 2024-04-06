@@ -19,7 +19,7 @@ const User: React.FC = () => {
   if (!user) return <CardShimmer />;
   return (
     <div className="flex flex-wrap justify-center ">
-      <div className="flex flex-col mx-5 mt-5 gap-3 w-full md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
+      <div className="flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
         <Avatar className="h-24 w-24">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
@@ -33,8 +33,8 @@ const User: React.FC = () => {
           to={"/profile"}
           className={({ isActive }) => {
             return isActive
-              ? "w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
-              : "w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
           }}
           end
         >
@@ -43,8 +43,8 @@ const User: React.FC = () => {
         <NavLink
           className={({ isActive }) => {
             return isActive
-              ? "w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
-              : "w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
           }}
           to={"/profile/editprofile"}
         >
@@ -61,7 +61,7 @@ const User: React.FC = () => {
               description: "You have successfully logged out.",
             });
           }}
-          className="text-sm w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white"
+          className="text-sm  min-w-[80%] max-w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300"
         >
           Logout
         </Button>
