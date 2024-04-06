@@ -54,6 +54,7 @@ const User: React.FC = () => {
         <Button
           onClick={() => {
             cookies.remove("token");
+            localStorage.clear();
             dispatch(deleteUser());
             navigate("/");
             toast("Logout successful", {

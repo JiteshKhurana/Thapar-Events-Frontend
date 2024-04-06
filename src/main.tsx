@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Home from "./pages/Home";
@@ -138,6 +139,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId="401427703030-n1bmmd93k7ag77sneqgmrujc99429t7l.apps.googleusercontent.com">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Analytics />
         <RouterProvider router={appRouter} />
       </ThemeProvider>
     </GoogleOAuthProvider>
