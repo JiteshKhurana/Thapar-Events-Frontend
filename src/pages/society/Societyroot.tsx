@@ -41,6 +41,7 @@ const Societyroot: React.FC = () => {
               <Button
                 onClick={() => {
                   cookies.remove("token");
+                  localStorage.clear();
                   navigate("/");
                   toast("Logout successful", {
                     description: "You have successfully logged out.",
