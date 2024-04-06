@@ -35,6 +35,7 @@ const HomeNav: React.FC = () => {
         .post(API_ENDPOINT + "create", {
           email: userInfo.data.email,
           name: userInfo.data.name,
+          image: userInfo.data.picture,
           token: tokenResponse.access_token,
         })
         .then((resp) => {
@@ -43,7 +44,6 @@ const HomeNav: React.FC = () => {
             expires: decoded.exp ? new Date(decoded.exp * 1000) : undefined,
           });
           if (resp.data.user) {
-            console.log(resp.data.user);
             localStorage.setItem("name", resp.data.user.name);
             localStorage.setItem("email", resp.data.user.email);
             localStorage.setItem("role", resp.data.user.role);
@@ -52,7 +52,7 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("id", resp.data.society._Uid);
             localStorage.setItem("role", resp.data.society.role);
           }
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
           toast(error);
@@ -134,9 +134,9 @@ const HomeNav: React.FC = () => {
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className='flex justify-center font-semibold text-white hover:bg-black hover:bg-opacity-100  rounded-md px-3 py-2 text-base '
-                    aria-current={item.current ? 'page' : undefined}>
-                  
+                    className="flex justify-center font-semibold text-white hover:bg-black hover:bg-opacity-100  rounded-md px-3 py-2 text-base "
+                    aria-current={item.current ? "page" : undefined}
+                  >
                     {item.name}
                   </Disclosure.Button>
                 ))}

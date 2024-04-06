@@ -21,13 +21,17 @@ const User: React.FC = () => {
     <div className="flex flex-wrap justify-center ">
       <div className="flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
         <Avatar className="h-24 w-24">
-          <AvatarImage src="https://github.com/shadcn.png" />
+          {user.image ? (
+            <AvatarImage src={user.image} />
+          ) : (
+            <AvatarImage src="https://github.com/shadcn.png" />
+          )}
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         {!user ? (
           <Skeleton className="h-4 w-[100px]" />
         ) : (
-          <h3 className="text-xl">@karora_be21</h3>
+          <h3 className="text-xl">@{user.name.split(" ").join("_")}</h3>
         )}
         <NavLink
           to={"/profile"}

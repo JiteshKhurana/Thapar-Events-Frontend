@@ -1,10 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-// import { Badge } from "@/components/ui/badge";
-// import Event from "../assets/event.png";
+import { v4 as uuidv4 } from "uuid";
 import {
-  // Card,
-  // CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -25,18 +22,24 @@ const CardSlider: React.FC<FCProps> = ({ title, apply }) => {
         {Array(12)
           .fill(0)
           .map(() => (
-            <div className="min-w-[350px] flex flex-col  mb-3 overflow-hidden border rounded-md">
+            <div
+              key={uuidv4()}
+              className="min-w-[350px] flex flex-col  mb-3 overflow-hidden border rounded-md"
+            >
               {/* <img src={Event} className="h-44" /> */}
               <div className="event-img w-[350px] h-[175px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-cover"></div>
               <CardHeader className="flex flex-row gap-5">
                 <Avatar className="w-16 h-16">
-                  <AvatarImage src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg"/>
+                  <AvatarImage src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div>
                   <CardTitle>Escalade</CardTitle>
                   <CardDescription>Creative Computing Society</CardDescription>
-                  <CardDescription className="flex items-center gap-2"><BiCalendar className="text-black dark:text-white"/>24-04-2024</CardDescription>
+                  <CardDescription className="flex items-center gap-2">
+                    <BiCalendar className="text-black dark:text-white" />
+                    24-04-2024
+                  </CardDescription>
                 </div>
               </CardHeader>
               {/* <CardContent>

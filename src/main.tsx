@@ -26,6 +26,8 @@ import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
 import EditEvent from "./pages/eventdashboard/EditEvent.tsx";
 import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistrations.tsx";
 import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm.tsx";
+import SuperAdminDashboard from "./pages/superadmin/SuperAdminDashboard.tsx";
+import SuperAdminRoot from "./pages/superadmin/SuperAdminRoot.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -126,7 +128,16 @@ const appRouter = createBrowserRouter([
           },
         ],
       },
-
+      {
+        path: "/superadmin",
+        element: <SuperAdminRoot />,
+        children: [
+          {
+            path: "/superadmin",
+            element: <SuperAdminDashboard />,
+          },
+        ],
+      },
       {
         path: "*",
         element: <Page404 />,
