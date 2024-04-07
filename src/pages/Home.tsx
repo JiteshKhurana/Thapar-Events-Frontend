@@ -119,7 +119,7 @@ const Home: React.FC = () => {
           controls={false}
         ></video>
         {/* </div> */}
-        <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-center pl-2 sm:pl-10 gap-10">
+        <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-end sm:justify-center pl-2 sm:pl-10 gap-10">
           {/* <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl text-white font-semibold"> */}
           <h1 className="text-5xl sm:text-6xl  md:text-[11vh] text-white font-semibold">
             Competitions,
@@ -132,18 +132,17 @@ const Home: React.FC = () => {
             <span>Make the most of every opportunity to learn, enjoy</span>
             <span>and level up your skills.</span>
           </p>
-          <div className="mt-24 md:mt-5 flex flex-col sm:flex-row flex-wrap gap-5 self-center sm:self-start">
+          <div className="mb-8 sm:mb-0 mt-24 md:mt-5 flex flex-col sm:flex-row flex-wrap gap-5 self-center sm:self-start">
             <Link to={"/events"}>
               <Button
-                className="text-xl w-[300px]"
-                size="lg"
+                className="text-lg w-[250px] p-6"
                 variant={"secondary"}
               >
                 Explore Now
               </Button>
             </Link>
             <Link to={"/events"}>
-              <Button className="text-xl w-[300px]" size="lg">
+              <Button className="text-lg w-[250px] p-6">
                 View Past Events
               </Button>
             </Link>
