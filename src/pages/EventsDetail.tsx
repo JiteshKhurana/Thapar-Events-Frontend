@@ -17,6 +17,18 @@ import CardShimmer from "@/components/CardShimmer";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
 import { timeConverter } from "@/lib/helper";
+import {
+  EmailIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "react-share";
+import {
+  EmailShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
 
 interface Event {
   date: number;
@@ -214,6 +226,56 @@ const EventsDetail: React.FC = () => {
             <Button onClick={copyUrl} className="w-full">
               {copySuccess}
             </Button>
+            <div className="flex flex-row gap-2 justify-around">
+              <WhatsappShareButton
+                separator=".Register on ConnectHub ASAP "
+                url={location.href}
+                title={
+                  "Hey! You know there is " +
+                  event.title +
+                  " happening on " +
+                  timeConverter(event.date)
+                }
+              >
+                <WhatsappIcon size={32} round={true} />
+              </WhatsappShareButton>
+              <TelegramShareButton
+                url={location.href}
+                title={
+                  "Hey! You know there is " +
+                  event.title +
+                  " happening on " +
+                  timeConverter(event.date)
+                }
+              >
+                <TelegramIcon size={32} round={true} />
+              </TelegramShareButton>
+              <TwitterShareButton
+                url={location.href}
+                title={
+                  "Hey! You know there is " +
+                  event.title +
+                  " happening on " +
+                  timeConverter(event.date)
+                }
+                hashtags={event.hashtags}
+              >
+                <TwitterIcon size={32} round={true} />
+              </TwitterShareButton>
+              <EmailShareButton
+                url={location.href}
+                subject={
+                  "Hey! You know there is " +
+                  event.title +
+                  " happening on " +
+                  timeConverter(event.date)
+                }
+                body={event.description}
+                separator=".Register on ConnectHub ASAP "
+              >
+                <EmailIcon size={32} round={true} />
+              </EmailShareButton>
+            </div>
           </div>
         </div>
       </div>
