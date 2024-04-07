@@ -9,7 +9,7 @@ const useEvents = () => {
   const dispatch = useDispatch();
   const events = useSelector((store: RootState) => store.events.eventsList);
   async function getEvents() {
-    axios
+    await axios
       .get(API_ENDPOINT + "event/get")
       .then((res) => dispatch(addEvents(res.data)));
   }

@@ -18,7 +18,7 @@ interface Event {
   _Sid: string;
   _Uid: string;
 }
-interface EventState {
+export interface EventState {
   eventsList: Event[] | null;
 }
 
