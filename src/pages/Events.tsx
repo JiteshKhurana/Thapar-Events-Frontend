@@ -28,7 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { timeConverter } from "@/lib/helper";
 import { Input } from "@/components/ui/input";
 
@@ -59,8 +59,10 @@ const Events: React.FC = () => {
   const [isLoading, setisLoading] = useState(true);
   const [filteredEvents, setFilteredEvents] = useState<Event[] | null>(null);
   const [searchText, setSearchText] = useState("");
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
     if (events) {
       setFilteredEvents(events);
       setisLoading(false);
@@ -69,7 +71,25 @@ const Events: React.FC = () => {
       filterEvents();
       setisLoading(false);
     }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [events, searchText]);
+
+  const handleKeyDown = (event: {
+    key: string;
+    preventDefault: () => void;
+  }) => {
+    // Check if the pressed key is "/"
+    if (event.key === "/") {
+      // Prevent the default action to avoid typing "/" in the input
+      event.preventDefault();
+      // Focus the search input element
+      if (searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
+    }
+  };
 
   function setFilter(typeofEvent: string) {
     console.log(typeofEvent);
@@ -126,9 +146,10 @@ const Events: React.FC = () => {
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   value={searchText}
+                  ref={searchInputRef}
                   onChange={(e) => setSearchText(e.target.value)}
                   type="search"
-                  placeholder="Search an event..."
+                  placeholder="Search an event (Press /)...."
                   className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
                 />
               </div>
