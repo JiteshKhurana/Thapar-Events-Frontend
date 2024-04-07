@@ -16,6 +16,7 @@ import { API_ENDPOINT } from "@/lib/constants";
 import CardShimmer from "@/components/CardShimmer";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
+import { timeConverter } from "@/lib/helper";
 
 interface Event {
   date: number;
@@ -72,7 +73,7 @@ const EventsDetail: React.FC = () => {
               <p>{event.soc_name}</p>
               <div className="flex gap-10">
                 <p>{event.event_mode}</p>
-                <p>{event.date}</p>
+                <p>{timeConverter(event.date)}</p>
                 <p>9 Days Left </p>
               </div>
               {event.hashtags && (
