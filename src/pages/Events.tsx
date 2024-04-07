@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-// import { ComboBox } from "@/components/ui/ComboBox";
+import { Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { v4 as uuidv4 } from "uuid";
 
@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { timeConverter } from "@/lib/helper";
+import { Input } from "@/components/ui/input";
 
 interface Event {
   date: number;
@@ -57,13 +58,18 @@ const Events: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(true);
   const [filteredEvents, setFilteredEvents] = useState<Event[] | null>(null);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     if (events) {
       setFilteredEvents(events);
       setisLoading(false);
     }
-  }, [events]);
+    if (searchText && events) {
+      filterEvents();
+      setisLoading(false);
+    }
+  }, [events, searchText]);
 
   function setFilter(typeofEvent: string) {
     console.log(typeofEvent);
@@ -72,6 +78,13 @@ const Events: React.FC = () => {
       const data = events?.filter((event) => event.event_type === typeofEvent);
       setFilteredEvents(data || null);
     }
+  }
+
+  function filterEvents() {
+    const filteredData = filteredEvents?.filter((event) =>
+      event.title.toUpperCase().includes(searchText.toUpperCase())
+    );
+    setFilteredEvents(filteredData || null);
   }
 
   if (isLoading) {
@@ -109,6 +122,16 @@ const Events: React.FC = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+              <div className="relative flex-1 md:grow-0">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  type="search"
+                  placeholder="Search an event..."
+                  className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+                />
+              </div>
             </div>
 
             <TabsContent value="upcoming">
