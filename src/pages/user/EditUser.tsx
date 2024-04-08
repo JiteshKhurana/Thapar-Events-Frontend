@@ -26,6 +26,7 @@ import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 import { editUser } from "@/store/UserSlice";
 import { API_ENDPOINT } from "@/lib/constants";
+import { toast } from "sonner";
 
 const EditUser: React.FC = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ const EditUser: React.FC = () => {
   } = form;
 
   const [success, setSuccess] = useState(false);
+  if (success) {
+    toast("Sucessfully Updated!! 🥳");
+    setSuccess(false);
+  }
 
   const onSubmit: SubmitHandler<FormFields> = async (data: FormFields) => {
     await axios
@@ -177,16 +182,10 @@ const EditUser: React.FC = () => {
                 </FormItem>
               )}
             />
+            <Button disabled={isSubmitting} type="submit" className="mt-5">
+              {isSubmitting ? "Loading" : "Submit"}
+            </Button>
           </div>
-
-          <Button disabled={isSubmitting} type="submit" className="mt-5">
-            {isSubmitting ? "Loading" : "Submit"}
-          </Button>
-          {success && (
-            <p className="text-green-500 font-semibold text-xl">
-              Sucessfully Updated!! 🥳
-            </p>
-          )}
           {errors.root && <p className="text-red-500">{errors.root.message}</p>}
         </form>
       </Form>
