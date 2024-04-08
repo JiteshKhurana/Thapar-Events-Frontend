@@ -134,10 +134,7 @@ const Home: React.FC = () => {
           </p>
           <div className="mb-8 sm:mb-0 mt-24 md:mt-5 flex flex-col sm:flex-row flex-wrap gap-5 self-center sm:self-start">
             <Link to={"/events"}>
-              <Button
-                className="text-lg w-[250px] p-6"
-                variant={"secondary"}
-              >
+              <Button className="text-lg w-[250px] p-6" variant={"secondary"}>
                 Explore Now
               </Button>
             </Link>

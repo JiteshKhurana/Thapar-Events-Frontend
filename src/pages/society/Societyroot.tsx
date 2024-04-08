@@ -1,65 +1,73 @@
-import { MdDashboard, MdEdit } from "react-icons/md";
-import { BiLogOut, BiCalendar } from "react-icons/bi";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Societyroot: React.FC = () => {
   const cookies = new Cookies(null, { path: "/" });
   const navigate = useNavigate();
   return (
-    <div className="dark:text-white grid grid-cols-12 gap-0 border-t-[1px]">
-      <div className="h-full w-full flex flex-col flex-wrap justify-start items-center col-span-3 border-r-[1px]">
-        <div>
-          <div className="society-photo bg-black rounded-full w-full mt-[10%]">
-            <img src="https://avatars.githubusercontent.com/u/34922904?s=280&v=4"></img>
-          </div>
-          <div className="w-[full] mt-4 font-semibold text-xl">
-            Creative Computing Society
-          </div>
-          <div className="nav-list flex w-full justify-center mt-9">
-            <ul className="flex justify-center flex-col gap-5">
-              <NavLink to={"dashboard"}>
-                <li className="flex items-center gap-2">
-                  <MdDashboard className="text-2xl" />
-                  Dashboard
-                </li>
-              </NavLink>
-              <NavLink to={"societyevents"}>
-                <li className="flex items-center gap-2">
-                  <BiCalendar className="text-2xl" />
-                  Events
-                </li>
-              </NavLink>
-              <NavLink to={"editprofile"}>
-                <li className="flex items-center gap-2">
-                  <MdEdit className="text-2xl" />
-                  Edit Profile
-                </li>
-              </NavLink>
-              <Button
-                onClick={() => {
-                  cookies.remove("token");
-                  localStorage.clear();
-                  navigate("/");
-                  toast("Logout successful", {
-                    description: "You have successfully logged out.",
-                  });
-                }}
-              >
-                <li className="flex items-center gap-2">
-                  <BiLogOut className="text-2xl" />
-                  Logout
-                </li>
-              </Button>
-            </ul>
-          </div>
-        </div>
+    <div className="flex flex-wrap justify-center">
+      <div className="flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
+        <Avatar className="h-24 w-24">
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>Profile Pic</AvatarFallback>
+        </Avatar>
+        {/* {!user ? (
+          <Skeleton className="h-4 w-[100px]" />
+        ) : (
+          <h3 className="text-xl">@{user.name.split(" ").join("_")}</h3>
+        )} */}
+        <NavLink
+          to={"/society"}
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          end
+        >
+          Dashboard
+        </NavLink>
+        <NavLink
+          to={"/society/societyevents"}
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          end
+        >
+          Events
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          to={"/society/editprofile"}
+        >
+          Edit Profile
+        </NavLink>
+
+        <Button
+          onClick={() => {
+            cookies.remove("token");
+            localStorage.clear();
+            // dispatch(deleteUser());
+            navigate("/");
+            toast("Logout successful", {
+              description: "You have successfully logged out.",
+            });
+          }}
+          className="text-sm  min-w-[80%] max-w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300"
+        >
+          Logout
+        </Button>
       </div>
-      <div className="col-span-9">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };

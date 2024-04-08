@@ -88,16 +88,16 @@ const appRouter = createBrowserRouter([
             element: <Societyroot />,
             children: [
               {
-                path: "dashboard",
+                path: "",
                 element: <SocietyDashboard />,
               },
               {
-                path: "societyevents",
+                path: "/society/societyevents",
                 element: <SocietyEvents />,
               },
 
               {
-                path: "editprofile",
+                path: "/society/editprofile",
                 element: <EditSocietyProfile />,
               },
             ],

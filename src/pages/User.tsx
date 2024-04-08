@@ -26,7 +26,7 @@ const User: React.FC = () => {
           ) : (
             <AvatarImage src="https://github.com/shadcn.png" />
           )}
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>Profile Pic</AvatarFallback>
         </Avatar>
         {!user ? (
           <Skeleton className="h-4 w-[100px]" />

@@ -14,7 +14,7 @@ const UserDashBoard = () => {
       <CardShimmer />
     </div>
   ) : (
-    <div className="border shadow-2xl flex flex-col w-[90%] px-6 md:w-[70%]  rounded-xl pt-5 mt-5">
+    <div className="border shadow-2xl flex flex-col w-[90%] px-6 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="welcome flex flex-col">
         <span className="text text-gray-500 font-semibold dark:text-gray-200 text-md">
           {currentDate}

@@ -12,7 +12,7 @@ const SocietyMemberCard: React.FC = () => {
         ></img>
         <div className="info flex flex-col justify-between mx-4">
           <div className="event-name font-semibold text-2xl">Lorem Ipsum</div>
-          <div className="det flex flex-col text-gray-800">
+          <div className="det flex flex-col ">
             <div className="font-bold">General Secretary</div>
             <div className="member-profiles flex items-center gap-6">
               <span className="email flex items-center">
@@ -28,8 +28,8 @@ const SocietyMemberCard: React.FC = () => {
         </div>
       </div>
       <div className="right-data flex flex-col min-h-full items-center justify-around">
-        <Button className="bg-[#265073] w-[200px]">Remove Member</Button>
-        <Button className="bg-[#265073] w-[200px]">Edit Member Details</Button>
+        <Button className="w-[200px]">Remove Member</Button>
+        <Button className="w-[200px]">Edit Member Details</Button>
       </div>
     </div>
   );
