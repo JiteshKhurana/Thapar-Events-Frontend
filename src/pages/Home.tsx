@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Slider1 from "../assets/slider.png";
 import Autoplay from "embla-carousel-autoplay";
-
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-
 import { Separator } from "@/components/ui/separator";
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -19,8 +16,9 @@ import {
 } from "@/components/ui/carousel";
 import { VIDEO_CDN_URL } from "@/lib/constants";
 import Footer from "@/components/Footer";
-// import axios from "axios";
-
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Event from "@/store/eventSlice";
 const localizer = momentLocalizer(moment);
 
 // Define the type for your event objects
@@ -31,15 +29,31 @@ interface Event {
   url: string; // Add a URL field to your event interface
 }
 
-const EventComponent: React.FC<{ event: Event }> = ({ event }) => (
-  <a
-    className="p-3 w-full h-full"
-    href={event.url}
-    target="_blank"
-    rel="noopener noreferrer"
+// const EventComponent: React.FC<{ event: Event }> = ({ event }) => (
+const EventComponent: React.FC<{ event: Event }> = () => (
+  <Card
+    // onClick={() =>
+    // navigate(
+    //   event.title.split(" ").join("-").toLowerCase() + "/" + event._Eid
+    // )
+    // }
+    className="w-[150px] hover:scale-105 transition-all duration-300"
   >
-    {event.title}
-  </a>
+    <CardHeader className="flex flex-col space-x-5 ">
+      <CardTitle>Makethon</CardTitle>
+      <Avatar className="h-16 w-16">
+        <AvatarImage
+          className=""
+          src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg"
+        />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <div>
+        {/* <CardTitle>{event.title}</CardTitle> */}
+        {/* <CardDescription>{event.soc_name}</CardDescription> */}
+      </div>
+    </CardHeader>
+  </Card>
 );
 
 const MyEventWrapper: React.FC = ({ children }: any) => (
@@ -50,10 +64,10 @@ const MyEventWrapper: React.FC = ({ children }: any) => (
 const Home: React.FC = () => {
   const [calEvents] = useState<Event[]>([
     {
-      title: "Meeting",
+      title: "Makethon",
       start: new Date(2024, 3, 1, 10, 0),
       end: new Date(2024, 3, 5, 12, 0),
-      url: "https://www.example.com",
+      url: "https://github.com/JiteshKhurana",
     },
     {
       title: "Conference",
@@ -187,7 +201,7 @@ const Home: React.FC = () => {
         </p>
 
         <Calendar
-          className="dark:text-black shadow-2xl bg-white dark:bg m-5  mx-3 lg:mx-20 border p-5 rounded-md min-h-[700px]"
+          className="dark:text-black shadow-2xl bg-white dark:bg m-5  mx-3 lg:mx-20 border p-5 rounded-md min-h-[2000px]"
           localizer={localizer}
           events={calEvents}
           startAccessor="start"

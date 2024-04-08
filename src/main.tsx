@@ -7,7 +7,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
-import Society from "./pages/society/Societyroot.tsx";
 import SocietyDetail from "./pages/SocietyDetail";
 import User from "./pages/user/User.tsx";
 import EditUser from "./pages/user/EditUser.tsx";
@@ -30,6 +29,7 @@ import SuperAdminDashboard from "./pages/superadmin/SuperAdminDashboard.tsx";
 import SuperAdminRoot from "./pages/superadmin/SuperAdminRoot.tsx";
 import CreateNewEvent from "./pages/society/CreateNewEvent.tsx";
 import EventDashboard from "./pages/eventdashboard/EventDashboard.tsx";
+import Society from "./pages/Society.tsx";
 
 const appRouter = createBrowserRouter([
   {
