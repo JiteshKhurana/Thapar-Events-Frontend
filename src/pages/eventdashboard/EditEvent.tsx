@@ -5,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 const EditEvent = () => {
-  var defaultDescription = "<b>Give a detailed description of your event</b>";
+  const defaultDescription = "<b>Give a detailed description of your event</b>";
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -26,12 +26,12 @@ const EditEvent = () => {
     }));
   };
 
-  const handleDescriptionChange = (value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      description: value,
-    }));
-  };
+  // const handleDescriptionChange = (value: string) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     description: value,
+  //   }));
+  // };
 
   const handleSwitch = (value: boolean) => {
     setFormData({
