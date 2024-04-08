@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const SocietyEvents: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col w-[90%] px-6 md:w-[70%]">
+    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="welcome flex justify-start items-center pt-5 px-[30px]">
         <div className="your-events">
           <span className="text-2xl font-semibold">Your Events</span>

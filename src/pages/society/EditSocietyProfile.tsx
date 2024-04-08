@@ -8,7 +8,7 @@ import Gallery from "@/assets/gallery.png";
 const EditSocietyProfile = () => {
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
-      <div className="heading flex items-center gap-4 py-4">
+      <div className="heading flex items-center gap-4 py-2">
         <span className="text-3xl font-semibold">Edit your public profile</span>
       </div>
       <div

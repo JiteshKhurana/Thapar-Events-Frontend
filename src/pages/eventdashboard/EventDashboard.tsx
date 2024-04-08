@@ -1,10 +1,14 @@
 import {
-  BiCalendarEvent,
-  BiCopy,
-  BiMoney,
-  BiSolidUserBadge,
-} from "react-icons/bi";
+  LuCalendar,
+  LuClipboardList,
+  LuHash,
+  LuIndianRupee,
+  LuMapPin,
+  LuUser,
+} from "react-icons/lu";
 import { useState } from "react";
+import SocietyDashBoardCard from "../society/components/SocietyDashBoardCard";
+import { Badge } from "@/components/ui/badge";
 const EventDashboard = () => {
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -26,47 +30,27 @@ const EventDashboard = () => {
   };
 
   return (
-    <div className="w-full min-h-[100vh] ">
+    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="event-cover-image bg-[url('https://www.ccstiet.com/static/home/images/01.jpeg')] h-[300px] flex justify-start items-end">
         <div className="event-name text-white p-9 font-semibold text-5xl">
           Escalade
         </div>
       </div>
-      <div className="stats p-5  text-xl font-semibold flex-col">
-        <span className="text-xl">Event Stats</span>
-        <div className="flex flex-wrap gap-3 w-full mt-4">
-          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl min-w-[200px] min-h-[100px] p-5 justify-center items-center">
-            <span className="font-light text-lg text-gray-600">Views</span>
-            <span className="font-semibold text-3xl">669</span>
-          </div>
-          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl min-w-[200px] min-h-[100px] p-5 justify-center items-center">
-            <span className="font-light text-lg text-gray-600">
-              Registrations
-            </span>
-            <span className="font-semibold text-3xl">369</span>
-          </div>
-          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl min-w-[200px] min-h-[100px] p-5 justify-center items-center">
-            <span className="font-light text-lg text-gray-600">
-              Teams Registered
-            </span>
-            <span className="font-semibold text-3xl">45</span>
-          </div>
-          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl min-w-[200px] min-h-[100px] p-5 justify-center items-center">
-            <span className="font-light text-lg text-gray-600">Status</span>
-            <span className="font-semibold text-3xl text-green-600">
-              Active
-            </span>
-          </div>
-          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl min-w-[200px] min-h-[100px] p-5 justify-center items-center">
-            <span className="font-light text-lg text-gray-600">Visibility</span>
-            <span className="font-semibold text-3xl">Public</span>
-          </div>
-          <div className="statsBox dark:bg-slate-900 mx-5 flex flex-col shadow-2xl bg-white rounded-2xl min-w-[200px] min-h-[100px] p-5 justify-center items-center">
-            <span className="font-light text-lg text-gray-600">
-              User Rating
-            </span>
-            <span className="font-semibold text-3xl text-green-600">4.8</span>
-          </div>
+      <div className="px-[30px] flex flex-col mt-5">
+        <span className="text-2xl">Event Stats</span>
+        <div className="flex flex-wrap w-full mt-4 justify-between">
+          <SocietyDashBoardCard title={"Registrations"} value={369} />
+          <SocietyDashBoardCard title={"Teams Registered"} value={672} />
+          <SocietyDashBoardCard
+            title={"Status"}
+            value={"Active"}
+            color="text-green-500"
+          />
+          <SocietyDashBoardCard
+            title={"Visibility"}
+            value={"Public"}
+            color="text-green-500"
+          />
         </div>
       </div>
 
@@ -75,28 +59,28 @@ const EventDashboard = () => {
         <div className="flex justify-start gap-5 flex-wrap items-start">
           <div className="basic-info-and-details flex flex-col min-h-[400px] rounded-lg shadow-xl border-2 mt-3">
             <div className="detail flex items-center gap-2 m-4">
-              <BiMoney className="text-2xl" />
+              <LuIndianRupee className="text-2xl" />
               <div className="flex flex-col">
                 <span className="text-sm">Registration Fees</span>
                 <span className="font-semibold text-xl">Free</span>
               </div>
             </div>
             <div className="detail flex items-center gap-2 m-4">
-              <BiCalendarEvent className="text-2xl" />
+              <LuCalendar className="text-2xl" />
               <div className="flex flex-col">
                 <span className="text-sm">Registration Deadline</span>
                 <span className="font-semibold text-xl">10-1-2024</span>
               </div>
             </div>
             <div className="detail flex items-center gap-2 m-4">
-              <BiSolidUserBadge className="text-2xl" />
+              <LuUser className="text-2xl" />
               <div className="flex flex-col">
                 <span className="text-sm">Eligibility</span>
                 <span className="font-semibold text-xl">Free</span>
               </div>
             </div>
             <div className="detail flex items-center gap-2 m-4">
-              <BiMoney className="text-2xl" />
+              <LuMapPin className="text-2xl" />
               <div className="flex flex-col">
                 <span className="text-sm">Venue</span>
                 <span className="font-semibold text-xl">
@@ -105,22 +89,19 @@ const EventDashboard = () => {
               </div>
             </div>
             <div className="detail flex items-center gap-2 m-4">
-              <BiMoney className="text-transparent" />
+              <LuHash className="text-2xl" />
               <div className="flex flex-col">
                 <span className="text-sm mb-2">Tags</span>
                 <div className="tags-container flex flex-wrap gap-3">
-                  <span className="tag font-bold text-[#265073] text-sm border-[1px] py-3 px-3 rounded-sm">
+                  <Badge className="p-2" variant="outline">
                     #CodingCompetition
-                  </span>
-                  <span className="tag font-bold text-[#265073] text-sm border-[1px] py-3 px-3 rounded-sm">
-                    #Coffee
-                  </span>
-                  <span className="tag font-bold text-[#265073] text-sm border-[1px] py-3 px-3 rounded-sm">
+                  </Badge>
+                  <Badge className="p-2" variant="outline">
                     #Hackathon
-                  </span>
-                  <span className="tag font-bold text-[#265073] text-sm border-[1px] py-3 px-3 rounded-sm">
-                    #WomenInTech
-                  </span>
+                  </Badge>
+                  <Badge className="p-2" variant="outline">
+                    #Coffee
+                  </Badge>
                 </div>
               </div>
             </div>
@@ -137,16 +118,11 @@ const EventDashboard = () => {
 
             <div className="copy-link flex items-center gap-3">
               <span>https://bit.ly/47lchl</span>
-              <span
-                onClick={copyToClipboard}
-                className="bg-gray-300 p-2 rounded-sm"
-              >
-                <BiCopy className="text-xl" />
+              <span onClick={copyToClipboard} className=" p-2 rounded-sm">
+                <LuClipboardList className="text-xl" />
               </span>
             </div>
-            {copied && (
-              <span className="text-gray-600">Link copied to clipboard</span>
-            )}
+            {copied && <span>Link copied to clipboard</span>}
           </div>
         </div>
       </div>

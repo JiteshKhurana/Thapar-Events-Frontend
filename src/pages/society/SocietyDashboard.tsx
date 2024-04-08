@@ -11,12 +11,10 @@ const SocietyDashboard: React.FC = () => {
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="welcome flex justify-between items-center pt-5 px-[30px]">
         <div className="welcome flex flex-col">
-          <span className="text text-gray-500 font-semibold dark:text-gray-200 text-md">
-            {currentDate}
-          </span>
-          <span className="flex flex-wrap gap-2 text text-gray-700 dark:text-gray-400 text-2xl">
+          <span className="text  font-semibold  text-md">{currentDate}</span>
+          <span className="flex flex-wrap gap-2 text  text-2xl">
             Welcome back
-            <span className="text-black dark:text-white text-4xl font-semibold">
+            <span className="text-4xl font-semibold">
               Creative Computing Society! ♥️
             </span>
           </span>

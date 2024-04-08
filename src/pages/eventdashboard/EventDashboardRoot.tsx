@@ -1,43 +1,69 @@
-import { BiEdit, BiSolidDashboard } from "react-icons/bi";
-import { MdEditNote, MdGroup } from "react-icons/md";
-import { NavLink, Outlet } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 const EventDashboardRoot = () => {
+  const navigate = useNavigate();
   return (
-    <div className="flex w-full min-h-[100vh] border-t-[1px]">
-      <div className="nav flex flex-col justify-start items-center w-[20%]  border-r-[1px]">
-        <ul className="mt-[40px] text-xl navlist gap-6 flex flex-col">
-          <NavLink to={"/eventdashboard"}>
-            <li className="navlink flex items-center gap-1">
-              <BiSolidDashboard className="text-2xl" />
-              DashBoard
-            </li>
-          </NavLink>
-          <NavLink to={"registrations"}>
-            <li className="navlink flex items-center gap-1">
-              <MdGroup className="text-2xl" />
-              Manage Registrations
-            </li>
-          </NavLink>
-          {/* <NavLink to={'marketingmails'}>
-                    <li className="navlink flex items-center gap-1"><BiEnvelope className="text-2xl"/> Marketing Mails</li>
-                </NavLink>
-                <NavLink to={'reviews'}>
-                    <li className="navlink flex items-center gap-1"><MdReviews className="text-2xl"/>Reviews and Ratings</li>
-                </NavLink> */}
-          <NavLink to={"editevent"}>
-            <li className="navlink flex items-center gap-1">
-              <BiEdit className="text-2xl" />
-              Edit Event
-            </li>
-          </NavLink>
-          <NavLink to={"editregistrationform"}>
-            <li className="navlink flex items-center gap-1">
-              <MdEditNote className="text-2xl" />
-              Registration Form
-            </li>
-          </NavLink>
-        </ul>
+    <div className="flex flex-wrap justify-center">
+      <div className="relative flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
+        <Button
+          onClick={() => navigate("/society/societyevents")}
+          className="absolute left-2 top-2 text-sm text-white hover:text-black border bg-transparent transition-all duration-300"
+        >
+          Go Back
+        </Button>
+        <Avatar className="h-24 w-24 mt-10">
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>Event Pic</AvatarFallback>
+        </Avatar>
+        {/* {!user ? (
+        <Skeleton className="h-4 w-[100px]" />
+      ) : (
+        <h3 className="text-xl">@{user.name.split(" ").join("_")}</h3>
+      )} */}
+        <NavLink
+          to={"/eventdashboard"}
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          end
+        >
+          Dashboard
+        </NavLink>
+        <NavLink
+          to={"registrations"}
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          end
+        >
+          Manage Registrations
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          to={"editevent"}
+        >
+          Edit Event
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
+          to={"editregistrationform"}
+        >
+          Registration Form
+        </NavLink>
       </div>
       <Outlet />
     </div>

@@ -1,21 +1,8 @@
-// import {
-//     Form,
-//     FormControl,
-//     FormField,
-//     FormItem,
-//     FormLabel,
-//     FormMessage,
-// } from "@/components/ui/form"
-// import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "@/components/ui/input";
-// import { useForm } from "react-hook-form"
-// import * as z from "zod"
 import { Button } from "@/components/ui/button";
-import Tiptap from "./components/Tiptap";
 import { useState } from "react";
-// import { Checkbox } from "@/components/ui/checkbox"
 import { Switch } from "@/components/ui/switch";
-// import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
 
 const EditEvent = () => {
   var defaultDescription = "<b>Give a detailed description of your event</b>";
@@ -71,7 +58,7 @@ const EditEvent = () => {
   };
 
   return (
-    <div className="p-5 min-h-[100vh] w-full">
+    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div className="">
           <span className="font-semibold">Event Name:</span>
@@ -84,8 +71,6 @@ const EditEvent = () => {
             onChange={handleChange}
           />
         </div>
-        {/* <div className="">
-                </div> */}
         <div className="">
           <span className="font-semibold flex mb-2">Event Dates:</span>
           <div className="ml-3">
@@ -160,10 +145,7 @@ const EditEvent = () => {
         </div>
         <div className="">
           <span className="font-semibold">Description:</span>
-          <Tiptap
-            content={formData.description}
-            onChange={handleDescriptionChange}
-          />
+          <Textarea />
         </div>
         <Button type="submit">Submit</Button>
       </form>
