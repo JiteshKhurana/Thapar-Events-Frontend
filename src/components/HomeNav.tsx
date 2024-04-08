@@ -110,7 +110,7 @@ const HomeNav: React.FC = () => {
                     {cookies.get("token") ? (
                       localStorage.getItem("role") === "admin" &&
                       localStorage.getItem("id") ? (
-                        <Button onClick={() => navigate("/society/dashboard")}>
+                        <Button onClick={() => navigate("/society")}>
                           HI {localStorage.getItem("name")?.toUpperCase()}
                         </Button>
                       ) : (

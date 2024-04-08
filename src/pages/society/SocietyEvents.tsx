@@ -2,15 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SocietyEventCard from "./components/SocietyEventCard";
 import { BiPlus } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const SocietyEvents: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col w-[90%] px-6 md:w-[70%]">
       <div className="welcome flex justify-start items-center pt-5 px-[30px]">
         <div className="your-events">
           <span className="text-2xl font-semibold">Your Events</span>
         </div>
-        <Button className="p-5 ml-8">
+        <Button
+          className="p-5 ml-8"
+          onClick={() => navigate("/society/createevent")}
+        >
           <BiPlus className="text-xl" />
           Create New Event
         </Button>

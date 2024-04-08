@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import ActiveEventCard from "./components/ActiveEventCard";
 import { BiPlus } from "react-icons/bi";
-import SocietyDashBoardCard from "@/components/SocietyDashBoardCard";
+import SocietyDashBoardCard from "@/pages/society/components/SocietyDashBoardCard";
+import { useNavigate } from "react-router-dom";
 
 const SocietyDashboard: React.FC = () => {
   const currentDate = new Date().toDateString();
-
+  const navigate = useNavigate();
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="welcome flex justify-between items-center pt-5 px-[30px]">
@@ -20,7 +21,10 @@ const SocietyDashboard: React.FC = () => {
             </span>
           </span>
         </div>
-        <Button className="mr-8">
+        <Button
+          onClick={() => navigate("/society/createevent")}
+          className="mr-8"
+        >
           <BiPlus className="text-xl" />
           Create New Event
         </Button>

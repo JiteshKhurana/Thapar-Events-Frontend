@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
-import { editUserSchema, FormFields } from "../schemas/schema";
+import { editUserSchema, FormFields } from "../../schemas/schema";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -68,7 +68,10 @@ const EditUser: React.FC = () => {
     <div className="border shadow-2xl flex flex-col w-full md:w-[70%]  rounded-xl pt-5 px-6 mt-5">
       <span className="text-3xl my-5 font-semibold">Edit Your Profile</span>
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 mx-5">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-5 mx-5"
+        >
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="name">Name</Label>
             <Input value={user?.name} disabled type="text" placeholder="Name" />
@@ -179,7 +182,11 @@ const EditUser: React.FC = () => {
           <Button disabled={isSubmitting} type="submit" className="mt-5">
             {isSubmitting ? "Loading" : "Submit"}
           </Button>
-          {success && <p className="text-green-500 font-semibold text-xl">Sucessfully Updated!! 🥳</p>}
+          {success && (
+            <p className="text-green-500 font-semibold text-xl">
+              Sucessfully Updated!! 🥳
+            </p>
+          )}
           {errors.root && <p className="text-red-500">{errors.root.message}</p>}
         </form>
       </Form>

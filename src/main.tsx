@@ -9,12 +9,12 @@ import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Society from "./pages/Society";
 import SocietyDetail from "./pages/SocietyDetail";
-import User from "./pages/User";
-import EditUser from "./pages/EditUser";
+import User from "./pages/user/User.tsx";
+import EditUser from "./pages/user/EditUser.tsx";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 import EventsDetail from "./pages/EventsDetail";
-import UserDashBoard from "./pages/UserDashBoard.tsx";
+import UserDashBoard from "./pages/user/UserDashBoard.tsx";
 import Page404 from "./pages/Page404.tsx";
 import UserEventRegister from "./pages/eventdashboard/UserEventRegister.tsx";
 import ProtectedRoute from "./protectedRoutes/ProtectedRoute.tsx";
@@ -28,6 +28,7 @@ import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistra
 import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm.tsx";
 import SuperAdminDashboard from "./pages/superadmin/SuperAdminDashboard.tsx";
 import SuperAdminRoot from "./pages/superadmin/SuperAdminRoot.tsx";
+import CreateNewEvent from "./pages/society/CreateNewEvent.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -99,6 +100,11 @@ const appRouter = createBrowserRouter([
               {
                 path: "/society/editprofile",
                 element: <EditSocietyProfile />,
+              },
+
+              {
+                path: "/society/createevent",
+                element: <CreateNewEvent />,
               },
             ],
           },
