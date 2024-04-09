@@ -33,7 +33,8 @@ import { timeConverter } from "@/lib/helper";
 import { Input } from "@/components/ui/input";
 
 interface Event {
-  date: number;
+  start_date: number;
+  end_date: number;
   description: string;
   eligibility: string;
   email: string;
@@ -182,7 +183,7 @@ const Events: React.FC = () => {
                           <CardDescription>{event.soc_name}</CardDescription>
                           <CardDescription className="flex items-center gap-1">
                             <BiCalendar className="text-black dark:text-white" />
-                            {timeConverter(event.date)}
+                            {timeConverter(event.start_date)}
                           </CardDescription>
                         </div>
                       </CardHeader>
@@ -246,7 +247,7 @@ const Events: React.FC = () => {
                           <CardDescription>{event.soc_name}</CardDescription>
                           <CardDescription className="flex items-center gap-1">
                             <BiCalendar className="text-black dark:text-white" />
-                            {timeConverter(event.date)}
+                            {timeConverter(event.start_date)}
                           </CardDescription>
                         </div>
                       </CardHeader>

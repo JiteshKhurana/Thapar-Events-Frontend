@@ -50,7 +50,6 @@ const UserEventRegister = () => {
         }
       )
       .then((res) => {
-        console.log(res);
         setSuccess(true);
       })
       .catch((error) =>
@@ -58,7 +57,6 @@ const UserEventRegister = () => {
           message: error.message,
         })
       );
-    console.log(data);
   };
   if (!token) return <h1>You Need to Login First</h1>;
   return (

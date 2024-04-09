@@ -43,7 +43,6 @@ const EditEvent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     // You can perform form submission handling here, such as sending data to a server
-    console.log(formData);
     // Reset form fields
     // setFormData({
     //     eventName: '',

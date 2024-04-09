@@ -35,7 +35,6 @@ const Home: React.FC = () => {
     end: new Date(timeConverter(event.end_date)),
     data: { event },
   }));
-  console.log(EVENTS);
 
   return (
     <div>

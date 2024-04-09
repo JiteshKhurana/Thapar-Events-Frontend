@@ -9,7 +9,6 @@ import { Event } from "@/store/eventSlice";
 
 const EventComponent = ({ event }: { event: Event }) => {
   const navigate = useNavigate();
-  console.log(event);
   return (
     <Card
       onClick={() =>
