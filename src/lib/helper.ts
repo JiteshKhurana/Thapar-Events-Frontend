@@ -44,3 +44,17 @@ export const timeConverter = (UNIX_timestamp: number, timeNeeded: boolean) => {
 
   return time;
 };
+
+export const findDifferenceTwoDates = (
+  UNIX_timestamp1: number,
+  UNIX_timestamp2: number
+) => {
+  const diff = (UNIX_timestamp1 - UNIX_timestamp2) * 1000;
+  return Math.round(diff / (24 * 60 * 60 * 1000));
+};
+
+export const upcomingOrPast = (start_date: number) => {
+  const diffdates = findDifferenceTwoDates(Date.now() / 1000, start_date);
+  if (diffdates >= 0) return 0;
+  return 1;
+};
