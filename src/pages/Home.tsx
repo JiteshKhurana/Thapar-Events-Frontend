@@ -114,7 +114,7 @@ const Home: React.FC = () => {
         </p>
         <div className="h-[1000px] my-5">
           <Calendar
-            className="shadow-2xl m-5 mx-3 lg:mx-20 border p-5 rounded-md dark:text-white min-h-[1000px]"
+            className="shadow-2xl m-5 mx-3 lg:mx-20 border p-5 rounded-md dark:text-white max-h-[95vh]"
             localizer={localizer}
             events={EVENTS}
             views={["month", "week", "day"]}

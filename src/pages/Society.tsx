@@ -32,7 +32,7 @@ const Society: React.FC = () => {
   if (!societies) return <CardShimmer />;
   return (
     <div>
-      <div className=" flex flex-col items-center justify-start">
+      <div className=" flex flex-col items-center justify-start bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover">
         <h1 className="my-10 text-4xl font-semibold text-center ">
           Explore Societies, Student Chapters and Clubs at TIET
         </h1>
@@ -40,7 +40,7 @@ const Society: React.FC = () => {
           {societies.map((society) => (
             <Card
               key={society._Uid}
-              className="w-[400px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-no-repeat bg-cover shadow-xl overflow-hidden hover:scale-105 transition-all duration-300"
+              className="w-[400px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-no-repeat bg-cover shadow-2xl overflow-hidden hover:scale-105 transition-all duration-300"
             >
               <div className="bg-black bg-opacity-30">
                 <CardHeader>

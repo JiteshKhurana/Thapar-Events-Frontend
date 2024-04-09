@@ -1,5 +1,5 @@
 import {
-  Card,
+  // Card,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -10,7 +10,7 @@ import { Event } from "@/store/eventSlice";
 const EventComponent = ({ event }: { event: Event }) => {
   const navigate = useNavigate();
   return (
-    <Card
+    <div
       onClick={() =>
         navigate(
           "/events/" +
@@ -19,15 +19,15 @@ const EventComponent = ({ event }: { event: Event }) => {
             event._Eid
         )
       }
-      className="w-full hover:scale-105 transition-all duration-300 rounded-none bg-red-500"
+      className="w-full hover:scale-105 transition-all duration-300 rounded-lg"
     >
-      <CardHeader className="flex flex-col space-x-5 ">
-        <CardTitle className="text-center text-2xl">{event.title}</CardTitle>
-        <CardDescription className="text-black text-center">
+      <CardHeader className="flex flex-col ">
+        <CardTitle className="flex justify-center items-center overflow-scroll no-scrollbar font-semibold text-xl">{event.title}</CardTitle>
+        <CardDescription className="text-sm text-black text-center">
           {event.soc_name}
         </CardDescription>
       </CardHeader>
-    </Card>
+    </div>
   );
 };
 
