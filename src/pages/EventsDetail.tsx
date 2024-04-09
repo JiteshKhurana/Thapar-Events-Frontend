@@ -29,25 +29,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
-
-interface Event {
-  date: number;
-  description: string;
-  eligibility: string;
-  email: string;
-  event_mode: string;
-  event_type: string;
-  hashtags: string[];
-  prizes: string[];
-  soc_name: string;
-  team: boolean;
-  title: string;
-  visibility: boolean;
-  social_media: string[];
-  _Eid: string;
-  _Sid: string;
-  _Uid: string;
-}
+import { Event } from "@/store/eventSlice";
 
 const EventsDetail: React.FC = () => {
   const { eventId } = useParams();
@@ -85,7 +67,10 @@ const EventsDetail: React.FC = () => {
               <p>{event.soc_name}</p>
               <div className="flex gap-10">
                 <p>{event.event_mode}</p>
-                <p>{timeConverter(event.date)}</p>
+                <p>
+                  {timeConverter(event.start_date, false) + "to "}
+                  {timeConverter(event.end_date, false)}
+                </p>
                 <p>9 Days Left </p>
               </div>
               {event.hashtags && (
@@ -233,8 +218,10 @@ const EventsDetail: React.FC = () => {
                 title={
                   "Hey! You know there is " +
                   event.title +
-                  " happening on " +
-                  timeConverter(event.date)
+                  " happening from " +
+                  timeConverter(event.start_date, false) +
+                  " to " +
+                  timeConverter(event.end_date, false)
                 }
               >
                 <WhatsappIcon size={32} round={true} />
@@ -244,8 +231,10 @@ const EventsDetail: React.FC = () => {
                 title={
                   "Hey! You know there is " +
                   event.title +
-                  " happening on " +
-                  timeConverter(event.date)
+                  " happening from " +
+                  timeConverter(event.start_date, false) +
+                  " to " +
+                  timeConverter(event.end_date, false)
                 }
               >
                 <TelegramIcon size={32} round={true} />
@@ -255,8 +244,10 @@ const EventsDetail: React.FC = () => {
                 title={
                   "Hey! You know there is " +
                   event.title +
-                  " happening on " +
-                  timeConverter(event.date)
+                  " happening from " +
+                  timeConverter(event.start_date, false) +
+                  " to " +
+                  timeConverter(event.end_date, false)
                 }
                 hashtags={event.hashtags}
               >
@@ -267,8 +258,10 @@ const EventsDetail: React.FC = () => {
                 subject={
                   "Hey! You know there is " +
                   event.title +
-                  " happening on " +
-                  timeConverter(event.date)
+                  " happening from " +
+                  timeConverter(event.start_date, false) +
+                  " to " +
+                  timeConverter(event.end_date, false)
                 }
                 body={event.description}
                 separator=".Register on ConnectHub ASAP "

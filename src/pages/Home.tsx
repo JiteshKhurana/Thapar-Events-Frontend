@@ -31,8 +31,8 @@ const Home: React.FC = () => {
   const events = useSelector((store: RootState) => store.events.eventsList);
 
   const EVENTS = events?.map((event) => ({
-    start: new Date(timeConverter(event.start_date)),
-    end: new Date(timeConverter(event.end_date)),
+    start: new Date(timeConverter(event.start_date, true)),
+    end: new Date(timeConverter(event.end_date, true)),
     data: { event },
   }));
 

@@ -14,7 +14,7 @@ export const isAdmin = () => {
   else return false;
 };
 
-export const timeConverter = (UNIX_timestamp: number) => {
+export const timeConverter = (UNIX_timestamp: number, timeNeeded: boolean) => {
   const a = new Date(UNIX_timestamp * 1000);
   const months = [
     "Jan",
@@ -36,7 +36,11 @@ export const timeConverter = (UNIX_timestamp: number) => {
   const hour = a.getHours();
   const min = a.getMinutes();
   const sec = a.getSeconds();
-  const time =
-    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+  let time = "";
+  timeNeeded
+    ? (time =
+        date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec)
+    : (time = date + " " + month + " " + year + " ");
+
   return time;
 };
