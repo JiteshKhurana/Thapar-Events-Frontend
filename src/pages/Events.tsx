@@ -183,7 +183,8 @@ const Events: React.FC = () => {
                           <CardDescription>{event.soc_name}</CardDescription>
                           <CardDescription className="flex items-center gap-1">
                             <BiCalendar className="text-black dark:text-white" />
-                            {timeConverter(event.start_date)}
+                            {timeConverter(event.start_date, false) + "to "}
+                            {timeConverter(event.end_date, false)}
                           </CardDescription>
                         </div>
                       </CardHeader>
@@ -247,7 +248,8 @@ const Events: React.FC = () => {
                           <CardDescription>{event.soc_name}</CardDescription>
                           <CardDescription className="flex items-center gap-1">
                             <BiCalendar className="text-black dark:text-white" />
-                            {timeConverter(event.start_date)}
+                            {timeConverter(event.start_date, false) + "to "}
+                            {timeConverter(event.end_date, false)}
                           </CardDescription>
                         </div>
                       </CardHeader>
