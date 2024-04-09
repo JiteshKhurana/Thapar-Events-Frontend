@@ -50,6 +50,7 @@ const UserEventRegister = () => {
         }
       )
       .then((res) => {
+        console.log(res);
         setSuccess(true);
       })
       .catch((error) =>
