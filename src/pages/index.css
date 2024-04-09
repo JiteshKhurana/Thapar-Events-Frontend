@@ -1,57 +1,80 @@
-.rbc-header {
+/* Base calendar styling */
+.rbc-calendar {
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+/* Toolbar styling */
+.rbc-toolbar {
+  background-color: #f1473b;
   color: white;
-  font-size: 14px !important;
+  padding: 10px;
+  border-radius: 4px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px !important;
-  background: #cf483f;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.rbc-allday-cell {
-  display: none;
+.rbc-toolbar button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.rbc-time-header-cell .rbc-today {
-  background-color: #04aa6d !important;
+.rbc-toolbar button:hover,
+.rbc-toolbar button:active {
+  background-color: white;
+  color: #f1473b;
 }
 
-.rbc-time-slot {
-  color: #cf483f;
-  z-index: 1;
-}
-
-.rbc-time-slot:not(.rbc-today .rbc-time-slot) {
-  background-color: #eff4f7;
-}
-
-/*Event Styles*/
+/* Event styling */
 .rbc-event,
 .rbc-background-event {
   z-index: 2;
   padding: 0px !important;
   border: none !important;
+  background-color: #f1473b;
+  color: white;
+  border-radius: 4px;
+  transition: transform 0.2s ease-in-out;
 }
 
-.rbc-event-label {
-  display: none !important;
+.rbc-event:hover {
+  transform: scale(1.03);
 }
 
-.rbc-events-container {
-  width: 100% !important;
+/* Today's date styling */
+.rbc-today {
+  background-color: #ffeadb;
+  color: #f1473b;
 }
 
-/*Timeslots Customization*/
-.rbc-day-slot .rbc-time-slot:after {
-  content: "";
-  width: 100%;
-  display: block;
-}
-.rbc-event-content {
-  background-color: mediumslateblue;
+/* Active and selected state styling */
+.rbc-day-slot .rbc-selected-cell,
+.rbc-event:active {
+  background-color: darken(#f1473b, 10%);
 }
 
-rbc-day-bg,
-rbc-today {
-  background-color: red !important;
+/* Customizing the time gutter (time column on the left) */
+.rbc-time-gutter,
+.rbc-time-header-gutter {
+  background-color: #f8f8f8;
+  color: #f1473b;
+}
+
+/* Customizing the time slots */
+.rbc-timeslot-group {
+  border-bottom: 1px solid #f1473b;
+}
+
+/* Header styling */
+.rbc-header {
+  background-color: #f1473b;
+  color: white;
+  padding: 5px 0;
+  border-radius: 4px;
 }

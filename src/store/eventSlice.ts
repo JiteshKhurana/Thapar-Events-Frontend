@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Event {
+export interface Event {
   start_date: number;
   end_date: number;
   description: string;

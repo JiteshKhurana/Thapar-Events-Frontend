@@ -24,18 +24,18 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import EventComponent from "./EventComponent";
 import { timeConverter } from "@/lib/helper";
+import CardShimmer from "@/components/CardShimmer";
 
 const Home: React.FC = () => {
   useEvents();
   const events = useSelector((store: RootState) => store.events.eventsList);
 
-  const calEvents = events?.map((event) => ({
+  const EVENTS = events?.map((event) => ({
     start: new Date(timeConverter(event.start_date)),
     end: new Date(timeConverter(event.end_date)),
     data: { event },
   }));
-
-  console.log(calEvents);
+  console.log(EVENTS);
 
   return (
     <div>
@@ -113,20 +113,17 @@ const Home: React.FC = () => {
         <p className="text-center my-3">
           Easily navigate between all the past and upcoming events !
         </p>
-        <div className="h-[2000px]">
+        <div className="h-[1000px] my-5">
           <Calendar
-            className="shadow-2xl m-5  mx-3 lg:mx-20 border p-5 rounded-md dark:text-white"
+            className="shadow-2xl m-5 mx-3 lg:mx-20 border p-5 rounded-md dark:text-white min-h-[1000px]"
             localizer={localizer}
-            events={calEvents}
-            startAccessor="start"
-            endAccessor="end"
+            events={EVENTS}
             views={["month", "week", "day"]}
             components={{
-              event: ({ event }: { event: any }) => {
+              event: ({ event }) => {
                 const data = event?.data;
                 if (data?.event) return <EventComponent event={data?.event} />;
-
-                return null;
+                return <CardShimmer />;
               },
             }}
           />
