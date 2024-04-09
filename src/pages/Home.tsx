@@ -5,7 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Separator } from "@/components/ui/separator";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   Carousel,
@@ -16,115 +16,31 @@ import {
 } from "@/components/ui/carousel";
 import { VIDEO_CDN_URL } from "@/lib/constants";
 import Footer from "@/components/Footer";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Event from "@/store/eventSlice";
+
 const localizer = momentLocalizer(moment);
-
-// Define the type for your event objects
-interface Event {
-  title: string;
-  start: Date;
-  end: Date;
-  url: string; // Add a URL field to your event interface
-}
-
-// const EventComponent: React.FC<{ event: Event }> = ({ event }) => (
-const EventComponent: React.FC<{ event: Event }> = () => (
-  <Card
-    // onClick={() =>
-    // navigate(
-    //   event.title.split(" ").join("-").toLowerCase() + "/" + event._Eid
-    // )
-    // }
-    className="w-[150px] hover:scale-105 transition-all duration-300"
-  >
-    <CardHeader className="flex flex-col space-x-5 ">
-      <CardTitle>Makethon</CardTitle>
-      <Avatar className="h-16 w-16">
-        <AvatarImage
-          className=""
-          src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg"
-        />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <div>
-        {/* <CardTitle>{event.title}</CardTitle> */}
-        {/* <CardDescription>{event.soc_name}</CardDescription> */}
-      </div>
-    </CardHeader>
-  </Card>
-);
-
-const MyEventWrapper: React.FC = ({ children }: any) => (
-  // <div className={`bg-${getRandomColorClass}`}>
-  <div className="p-1">{children}</div>
-);
+import "./index.css";
+import useEvents from "@/hooks/useEvents";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import EventComponent from "./EventComponent";
+import { timeConverter } from "@/lib/helper";
 
 const Home: React.FC = () => {
-  const [calEvents] = useState<Event[]>([
-    {
-      title: "Makethon",
-      start: new Date(2024, 3, 1, 10, 0),
-      end: new Date(2024, 3, 5, 12, 0),
-      url: "https://github.com/JiteshKhurana",
-    },
-    {
-      title: "Conference",
-      start: new Date(2024, 3, 3, 13, 0),
-      end: new Date(2024, 3, 3, 17, 0),
-      url: "https://www.example.com",
-    },
-    {
-      title: "Appointment",
-      start: new Date(2024, 3, 7, 9, 0),
-      end: new Date(2024, 3, 7, 10, 0),
-      url: "https://www.example.com",
-    },
-    {
-      title: "Appointment1",
-      start: new Date(2024, 3, 7, 9, 0),
-      end: new Date(2024, 3, 7, 10, 0),
-      url: "https://www.example.com",
-    },
-    {
-      title: "Appointment2",
-      start: new Date(2024, 3, 7, 9, 0),
-      end: new Date(2024, 3, 7, 10, 0),
-      url: "https://www.example.com",
-    },
-    {
-      title: "Appointment3",
-      start: new Date(2024, 3, 7, 9, 0),
-      end: new Date(2024, 3, 7, 10, 0),
-      url: "https://www.example.com",
-    },
-  ]);
+  useEvents();
+  const events = useSelector((store: RootState) => store.events.eventsList);
 
-  //---------------Function to Fetch Events from API------------------
-  // useEffect(() => {
-  //     axios
-  //         .get('http://localhost:3001/events')
-  //         .then((response) => {
-  //             console.log(response.data);
-  //             const appointments: Event[] = response.data.map((appointment: any) => ({
-  //                 ...appointment,
-  //                 start: convertDate(appointment.start),
-  //                 end: convertDate(appointment.end),
-  //             }));
-  //             setCalEvents(appointments);
-  //         })
-  //         .catch((error) => {
-  //             console.log(error);
-  //         });
-  // }, []);
+  const calEvents = events?.map((event) => ({
+    start: new Date(timeConverter(event.start_date)),
+    end: new Date(timeConverter(event.end_date)),
+    data: { event },
+  }));
+
+  console.log(calEvents);
 
   return (
     <div>
       <div className="w-full h-[100vh]">
-        {/* <div className=" brightness-50 overflow-clip -z-10"> */}
         <video
-          // className="absolute  w-full h-[100vh] object-cover pointer-events-none"
           className="w-full h-[100vh] bg-black object-cover brightness-50"
           src={VIDEO_CDN_URL}
           loop
@@ -132,9 +48,7 @@ const Home: React.FC = () => {
           muted
           controls={false}
         ></video>
-        {/* </div> */}
         <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-end sm:justify-center pl-2 sm:pl-10 gap-10">
-          {/* <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl text-white font-semibold"> */}
           <h1 className="text-5xl sm:text-6xl  md:text-[11vh] text-white font-semibold">
             Competitions,
             <br />
@@ -199,19 +113,24 @@ const Home: React.FC = () => {
         <p className="text-center my-3">
           Easily navigate between all the past and upcoming events !
         </p>
+        <div className="h-[2000px]">
+          <Calendar
+            className="shadow-2xl m-5  mx-3 lg:mx-20 border p-5 rounded-md dark:text-white"
+            localizer={localizer}
+            events={calEvents}
+            startAccessor="start"
+            endAccessor="end"
+            views={["month", "week", "day"]}
+            components={{
+              event: ({ event }: { event: any }) => {
+                const data = event?.data;
+                if (data?.event) return <EventComponent event={data?.event} />;
 
-        <Calendar
-          className="dark:text-black shadow-2xl bg-white dark:bg m-5  mx-3 lg:mx-20 border p-5 rounded-md min-h-[2000px]"
-          localizer={localizer}
-          events={calEvents}
-          startAccessor="start"
-          endAccessor="end"
-          views={["month", "week", "day"]}
-          components={{
-            event: EventComponent, // Use custom event component
-            eventWrapper: MyEventWrapper,
-          }}
-        />
+                return null;
+              },
+            }}
+          />
+        </div>
       </div>
       <Footer />
     </div>

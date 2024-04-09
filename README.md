@@ -11,3 +11,6 @@
 - Zod - Form Validation
 - React Router DOM - Routing
 - Vite - Bundler
+- Axios
+- React Query
+- React Big Calender

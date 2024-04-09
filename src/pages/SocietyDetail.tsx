@@ -2,7 +2,6 @@ import { Separator } from "@/components/ui/separator";
 import Banner from "../assets/banner.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import Gallery from "../assets/gallery.png";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import CardSlider from "@/components/CardSlider";
 import { useParams } from "react-router-dom";
@@ -54,17 +53,6 @@ const SocietyDetail: React.FC = () => {
         <p>{society.about}</p>
         <Separator className="mt-3" />
         <CardSlider title="Events" apply={true} />
-        <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-medium my-8">Photo Gallery</h2>
-          <Button>See All</Button>
-        </div>
-        <div className="flex overflow-x-scroll no-scrollbar space-x-5">
-          {Array(12)
-            .fill(0)
-            .map(() => (
-              <img src={Gallery} className="h-1/6 w-1/6 rounded-xl" />
-            ))}
-        </div>
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-medium my-8">Our Team</h2>
           <Button>See All</Button>
