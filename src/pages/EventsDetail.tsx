@@ -16,7 +16,7 @@ import { API_ENDPOINT } from "@/lib/constants";
 import CardShimmer from "@/components/CardShimmer";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
-import { timeConverter } from "@/lib/helper";
+import { timeConverter, findDifferenceTwoDates } from "@/lib/helper";
 import {
   EmailIcon,
   TelegramIcon,
@@ -52,7 +52,7 @@ const EventsDetail: React.FC = () => {
   }
 
   if (!event) return <CardShimmer />;
-
+  const diffdates = findDifferenceTwoDates(Date.now() / 1000, event.start_date);
   return (
     <div>
       <div className="grid grid-cols-12 gap-10 mx-32 my-8">
@@ -60,7 +60,7 @@ const EventsDetail: React.FC = () => {
           <div className="flex gap-5 p-5 border rounded-lg">
             <Avatar className="h-28 w-28">
               <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>Event Pic</AvatarFallback>
             </Avatar>
             <div className="flex flex-col space-y-2">
               <h1 className="text-4xl">{event.title}</h1>
@@ -71,7 +71,11 @@ const EventsDetail: React.FC = () => {
                   {timeConverter(event.start_date, false) + "to "}
                   {timeConverter(event.end_date, false)}
                 </p>
-                <p>9 Days Left </p>
+                <p>
+                  {diffdates >= 0
+                    ? diffdates + " days ago"
+                    : -diffdates + " days left"}
+                </p>
               </div>
               {event.hashtags && (
                 <div className="flex gap-5">

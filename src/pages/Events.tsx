@@ -29,28 +29,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useRef, useState } from "react";
-import { timeConverter } from "@/lib/helper";
+import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { Input } from "@/components/ui/input";
-
-interface Event {
-  start_date: number;
-  end_date: number;
-  description: string;
-  eligibility: string;
-  email: string;
-  event_mode: string;
-  event_type: string;
-  hashtags: string[];
-  prizes: string[];
-  soc_name: string;
-  team: boolean;
-  title: string;
-  visibility: boolean;
-  social_media: string[];
-  _Eid: string;
-  _Sid: string;
-  _Uid: string;
-}
+import { Event } from "@/store/eventSlice";
 
 const Events: React.FC = () => {
   useEvents();
@@ -65,7 +46,10 @@ const Events: React.FC = () => {
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     if (events) {
-      setFilteredEvents(events);
+      const upcomingEvents = events?.filter((event) =>
+        upcomingOrPast(event.start_date)
+      );
+      setFilteredEvents(upcomingEvents);
       setisLoading(false);
     }
     if (searchText && events) {
@@ -108,6 +92,20 @@ const Events: React.FC = () => {
     setFilteredEvents(filteredData || null);
   }
 
+  function handleChange(value: string) {
+    if (value === "past") {
+      const filteredData = events?.filter(
+        (event) => !upcomingOrPast(event.start_date)
+      );
+      setFilteredEvents(filteredData || null);
+    } else {
+      const filteredData = events?.filter((event) =>
+        upcomingOrPast(event.start_date)
+      );
+      setFilteredEvents(filteredData || null);
+    }
+  }
+
   if (isLoading) {
     return <CardShimmer />;
   }
@@ -117,7 +115,11 @@ const Events: React.FC = () => {
       <div className="min-h-[90vh] m-10 flex flex-col justify-start items-center bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover dark:bg-opacity-10">
         <h1 className="font-semibold text-4xl mb-5 ">Explore Events at TIET</h1>
         <div>
-          <Tabs defaultValue="upcoming" className="w-full">
+          <Tabs
+            defaultValue="upcoming"
+            className="w-full"
+            onValueChange={handleChange}
+          >
             <div className="filters-container flex items-center justify-center gap-10">
               <TabsList className="mt-5 mx-5 shadow-xl py-3 m-3">
                 <TabsTrigger className="w-[150px]" value="upcoming">
