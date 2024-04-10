@@ -48,7 +48,7 @@ const Home: React.FC = () => {
           controls={false}
         ></video>
         <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-end sm:justify-center pl-2 sm:pl-10 gap-10">
-          <h1 className="text-5xl sm:text-6xl  md:text-[11vh] text-white font-semibold">
+          <h1 className="text-4xl sm:text-6xl  md:text-8xl lg:text-[11vh] text-white font-semibold">
             Competitions,
             <br />
             Workshops,
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
         <p className="text-center my-3">
           Easily navigate between all the past and upcoming events !
         </p>
-        <div className="h-[1000px] my-5">
+        <div className="h-[95vh] my-5">
           <Calendar
             className="shadow-2xl m-5 mx-3 lg:mx-20 border p-5 rounded-md dark:text-white max-h-[95vh]"
             localizer={localizer}
