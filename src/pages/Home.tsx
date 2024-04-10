@@ -117,7 +117,7 @@ const Home: React.FC = () => {
             className="shadow-2xl m-5 mx-3 lg:mx-20 border p-5 rounded-md dark:text-white max-h-[95vh]"
             localizer={localizer}
             events={EVENTS}
-            views={["month", "week", "day"]}
+            views={["month"]}
             components={{
               event: ({ event }) => {
                 const data = event?.data;
