@@ -160,7 +160,7 @@ const appRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="401427703030-n1bmmd93k7ag77sneqgmrujc99429t7l.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="734380741568-09et4s023th23tfd25npl2m19sdbi17n.apps.googleusercontent.com">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         {/* <Analytics /> */}
         <RouterProvider router={appRouter} />

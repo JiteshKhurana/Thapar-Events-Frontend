@@ -16,11 +16,34 @@ const Footer: React.FC = () => {
         </span>
         <span className="AJAK mt-2">Made with ❤️</span>
         <div className="names-container flex flex-wrap gap-3 font-semibold text-lg ">
-        <a href="https://linkedin.com" target="blank" className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300">Akshay</a>
-        <a href="https://linkedin.com" target="blank" className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300">Jitesh</a>
-        <a href="https://linkedin.com" target="blank" className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300">Ashish</a>
-        <a href="https://linkedin.com" target="blank" className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300">Kunal</a>
-
+          <a
+            href="https://www.linkedin.com/in/akshay-garg-63aa00237/"
+            target="blank"
+            className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300"
+          >
+            Akshay
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jitesh-khurana/"
+            target="blank"
+            className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300"
+          >
+            Jitesh
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ashish-simon-rattan/"
+            target="blank"
+            className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300"
+          >
+            Ashish
+          </a>
+          <a
+            href="https://www.linkedin.com/in/kunal-arora-39b914216/"
+            target="blank"
+            className="AJAK hover:scale-110 hover:border-b-2 hover:border-b-black transition-all duration-300"
+          >
+            Kunal
+          </a>
         </div>
       </div>
     </div>

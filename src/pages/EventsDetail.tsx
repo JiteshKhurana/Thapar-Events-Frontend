@@ -32,6 +32,7 @@ import {
 import { Event } from "@/store/eventSlice";
 
 const EventsDetail: React.FC = () => {
+  const token = localStorage.getItem("token");
   const { eventId } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState<Event | null>(null);
@@ -52,6 +53,59 @@ const EventsDetail: React.FC = () => {
   }
 
   if (!event) return <CardShimmer />;
+
+  async function createCalendarEvent() {
+    console.log("creating calendar event");
+    if (!event?.start_date || !event?.end_date) {
+      // Handle the case when start_date or end_date is undefined
+      return;
+    }
+    const calEvent = {
+      summary: event?.title,
+      description: event?.description,
+      start: {
+        dateTime: new Date(
+          timeConverter(event?.start_date, true)
+        ).toISOString(),
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      },
+      end: {
+        dateTime: new Date(timeConverter(event?.end_date, true)).toISOString(),
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      },
+    };
+    // await axios
+    //   .post(
+    //     "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+    //     JSON.stringify(calEvent),
+    //     {
+    //       headers: { Authorization: `Bearer ${token}` },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     toast("Event Created, Check Your Google Calender");
+    //   });
+    await fetch(
+      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token, // Access token for google
+        },
+        body: JSON.stringify(calEvent),
+      }
+    )
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        console.log(data);
+        alert("Event created, check your Google Calendar!");
+      })
+      .catch((error) => console.log(error.message));
+  }
+
   const diffdates = findDifferenceTwoDates(Date.now() / 1000, event.start_date);
   return (
     <div>
@@ -212,6 +266,9 @@ const EventsDetail: React.FC = () => {
             )}
           </div>
           <div className="border rounded-lg p-5 space-y-3">
+            <Button onClick={createCalendarEvent} className="w-full">
+              Add to Google Calendar
+            </Button>
             <Button onClick={copyUrl} className="w-full">
               {copySuccess}
             </Button>

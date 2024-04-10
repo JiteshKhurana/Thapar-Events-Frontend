@@ -37,6 +37,7 @@ const HomeNav: React.FC = () => {
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse);
       setIsLoading(true);
       const userInfo = await axios.get(GOOGLE_API_LOGIN, {
         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
@@ -57,10 +58,12 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("name", resp.data.user.name);
             localStorage.setItem("email", resp.data.user.email);
             localStorage.setItem("role", resp.data.user.role);
+            localStorage.setItem("token", tokenResponse.access_token);
           } else {
             localStorage.setItem("name", resp.data.society.name);
             localStorage.setItem("id", resp.data.society._Uid);
             localStorage.setItem("role", resp.data.society.role);
+            localStorage.setItem("token", tokenResponse.access_token);
           }
           setIsLoading(false);
           window.location.reload();
