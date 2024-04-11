@@ -1,8 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-// import Banner from "../assets/banner.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-// import { Button } from "@/components/ui/button";
-// import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import CardSlider from "@/components/CardSlider";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -10,7 +7,6 @@ import axios from "axios";
 import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import CardShimmer from "@/components/CardShimmer";
-// import SocietyMemberCard from "./society/components/SocietyMemberCard";
 import { BiEnvelope, BiLogoLinkedinSquare } from "react-icons/bi";
 
 interface Society {
@@ -46,24 +42,22 @@ const SocietyDetail: React.FC = () => {
               <AvatarImage src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <span className="text-2xl text-white font-semibold">{society.name}</span>
+            <span className="text-2xl text-white font-semibold">
+              {society.name}
+            </span>
           </div>
         </div>
       </div>
-      {/* <Separator /> */}
 
       <div className="flex justify-center items-center px-5">
-
-
         <div className="society-detail mt-5 w-full md:w-[80%] max-w-[1920px]">
-
           <div className=""></div>
-          <h2 className="text-xl sm:text-3xl my-3 font-semibold ">About Society</h2>
+          <h2 className="text-xl sm:text-3xl my-3 font-semibold ">
+            About Society
+          </h2>
           <p>{society.about}</p>
           <Separator className="mt-3" />
 
-
-          
           <CardSlider title="Events" apply={true} />
 
           {/* <div className="team-container">
@@ -97,8 +91,9 @@ const SocietyDetail: React.FC = () => {
           </div> */}
 
           <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
-
-            <span className="flex font-semibold text-xl sm:text-3xl my-3">Our Team</span>
+            <span className="flex font-semibold text-xl sm:text-3xl my-3">
+              Our Team
+            </span>
             <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
               <div className="flex flex-col gap-3">
                 {Array(5)
@@ -111,7 +106,9 @@ const SocietyDetail: React.FC = () => {
                           src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712689058/profilephoto_txeeke.jpg"
                         ></img>
                         <div className="info flex flex-col justify-between mx-4">
-                          <div className="event-name font-semibold text-2xl">Lorem Ipsum</div>
+                          <div className="event-name font-semibold text-2xl">
+                            Lorem Ipsum
+                          </div>
                           <div className="det flex flex-col ">
                             <div className="font-bold">General Secretary</div>
                             <div className="member-profiles flex flex-wrap items-center">
@@ -127,9 +124,7 @@ const SocietyDetail: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="right-data flex flex-col min-h-full items-center justify-around">
-                        
-                      </div>
+                      <div className="right-data flex flex-col min-h-full items-center justify-around"></div>
                     </div>
                   ))}
               </div>
@@ -137,7 +132,6 @@ const SocietyDetail: React.FC = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

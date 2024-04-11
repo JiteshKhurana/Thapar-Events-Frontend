@@ -4,6 +4,17 @@ import SocietyMemberCard from "./components/SocietyMemberCard";
 import { BiImageAdd, BiPlus } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import Gallery from "@/assets/gallery.png";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const EditSocietyProfile = () => {
   return (
@@ -78,11 +89,29 @@ const EditSocietyProfile = () => {
       </div>
 
       <div className="savechanges w-full border-y-2 flex justify-between items-center px-10 py-5">
-        <NavLink to={"/society/dashboard"}>
-          <Button className="rounded-sm p-6 border-2 hover:bg-gray-300">
-            Cancel
-          </Button>
-        </NavLink>
+        {/* <NavLink to={"/society/dashboard"}>
+          
+        </NavLink> */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button className="rounded-sm p-6 border-2 hover:bg-gray-300">
+              Cancel
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
 
         <NavLink to={"/society/dashboard"}>
           <Button className="rounded-sm p-6">Save Changes</Button>
