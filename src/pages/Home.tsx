@@ -108,8 +108,8 @@ const Home: React.FC = () => {
       </div>
       <Separator />
       <div className="flex flex-col ">
-        <h2 className="text-3xl font-bold text-center my-5">Events Calendar</h2>
-        <p className="text-center my-3">
+        <h2 className="text-3xl font-bold text-center mt-5">Events Calendar</h2>
+        <p className="text-center mt-3">
           Easily navigate between all the past and upcoming events !
         </p>
         <div className="h-[95vh] my-5">
