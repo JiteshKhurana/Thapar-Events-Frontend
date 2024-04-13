@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import SocietyMemberCard from "./components/SocietyMemberCard";
 import { BiImageAdd, BiPlus } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Gallery from "@/assets/gallery.png";
 import {
   AlertDialog,
@@ -15,8 +15,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 const EditSocietyProfile = () => {
+  const navigate = useNavigate();
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="heading flex items-center gap-4 py-2">
@@ -103,19 +105,27 @@ const EditSocietyProfile = () => {
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
                 This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                changes that you may have done.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Continue</AlertDialogAction>
+              <AlertDialogAction onClick={() => navigate("/society")}>
+                Continue
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
 
-        <NavLink to={"/society/dashboard"}>
-          <Button className="rounded-sm p-6">Save Changes</Button>
-        </NavLink>
+        <Button
+          onClick={() => {
+            toast("Changes Saved Successfully");
+            navigate("/society");
+          }}
+          className="rounded-sm p-6 "
+        >
+          Save Changes
+        </Button>
       </div>
     </div>
   );

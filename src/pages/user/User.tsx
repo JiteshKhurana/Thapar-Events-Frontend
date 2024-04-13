@@ -9,6 +9,17 @@ import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 import CardShimmer from "@/components/CardShimmer";
 import { deleteUser } from "@/store/UserSlice";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const User: React.FC = () => {
   const dispatch = useDispatch();
@@ -55,21 +66,40 @@ const User: React.FC = () => {
           Edit Profile
         </NavLink>
 
-        <Button
-          onClick={() => {
-            cookies.remove("token");
-            localStorage.clear();
-            dispatch(deleteUser());
-            navigate("/");
-            toast("Logout successful", {
-              description: "You have successfully logged out.",
-            });
-          }}
-          className="text-sm  min-w-[80%] max-w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300"
-        >
-          Logout
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger className="min-w-[80%] max-w-[300px]">
+            <Button className="text-sm  min-w-[80%] max-w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300">
+              Logout
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. You will be logged out of
+                ConnectHub.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  cookies.remove("token");
+                  localStorage.clear();
+                  dispatch(deleteUser());
+                  navigate("/");
+                  toast("Logout successful", {
+                    description: "You have successfully logged out.",
+                  });
+                }}
+              >
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
+
       <Outlet />
     </div>
   );
