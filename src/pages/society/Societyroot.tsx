@@ -15,10 +15,11 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import useSocietyProfile from "@/hooks/useSocietyProfile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { Skeleton } from "@/components/ui/skeleton";
 import CardShimmer from "@/components/CardShimmer";
+import { deletecurrentSociety } from "@/store/societyProfileSlice";
 
 const Societyroot: React.FC = () => {
   useSocietyProfile();
@@ -27,6 +28,7 @@ const Societyroot: React.FC = () => {
   const society = useSelector(
     (store: RootState) => store.society.currentSociety
   );
+  const dispatch = useDispatch();
   if (!society) return <CardShimmer />;
   return (
     <div className="flex flex-wrap justify-center">
@@ -97,7 +99,7 @@ const Societyroot: React.FC = () => {
                 onClick={() => {
                   cookies.remove("token");
                   localStorage.clear();
-                  // dispatch(deleteUser());
+                  dispatch(deletecurrentSociety());
                   navigate("/");
                   toast("Logout successful", {
                     description: "You have successfully logged out.",

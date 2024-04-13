@@ -26,7 +26,7 @@ const useUser = () => {
 
   useEffect(() => {
     !currentUser && getUser();
-  });
+  }, []);
 };
 
 export default useUser;

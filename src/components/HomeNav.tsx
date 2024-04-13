@@ -61,6 +61,7 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("token", tokenResponse.access_token);
           } else {
             localStorage.setItem("name", resp.data.society.name);
+            localStorage.setItem("email", resp.data.society.email);
             localStorage.setItem("id", resp.data.society._Sid);
             localStorage.setItem("role", resp.data.society.role);
             localStorage.setItem("token", tokenResponse.access_token);

@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface SocietyDashBoardCardProps {
   title: string;
-  value: number | string;
+  value: number | undefined;
   color?: string;
 }
 
@@ -12,7 +12,7 @@ const SocietyDashBoardCard: React.FC<SocietyDashBoardCardProps> = ({
   color,
 }) => {
   return (
-    <Card className="w-1/5">
+    <Card className="w-1/4">
       <CardHeader>
         <CardTitle className="text-xl font-medium text-center">
           {title}

@@ -1,17 +1,24 @@
 import { API_ENDPOINT } from "@/lib/constants";
-import { addSociety } from "@/store/societyProfileSlice";
+import { addSociety, addSocietyMetrics } from "@/store/societyProfileSlice";
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import Cookies from "universal-cookie";
 
 const useSocietyProfile = () => {
   const dispatch = useDispatch();
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
   const currentSociety = useSelector(
     (store: RootState) => store.society.currentSociety
   );
+  const currentSocietyMetrics = useSelector(
+    (store: RootState) => store.society.currentSocietyMetrics
+  );
   const societyID = localStorage.getItem("id");
+  const societyEmail = localStorage.getItem("email");
   async function getSociety() {
     axios
       .get(API_ENDPOINT + "soc/get?societyId=" + societyID)
@@ -20,10 +27,20 @@ const useSocietyProfile = () => {
         toast(error);
       });
   }
+  async function getSocietyMetrics() {
+    await axios
+      .get(API_ENDPOINT + "soc/dashboard/" + societyEmail, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => dispatch(addSocietyMetrics(res.data)));
+  }
 
   useEffect(() => {
     !currentSociety && getSociety();
-  });
+    !currentSocietyMetrics && getSocietyMetrics();
+  }, []);
 };
 
 export default useSocietyProfile;

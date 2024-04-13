@@ -1,11 +1,19 @@
 import { Society } from "../store/societySlice";
 import { createSlice } from "@reduxjs/toolkit";
 
+interface currentSocietyMetrics {
+  teamMembers: number;
+  totalEvents: number;
+  upcomingEvents: number;
+}
+
 interface SocietyState {
   currentSociety: Society | null;
+  currentSocietyMetrics: currentSocietyMetrics | null;
 }
 const initialState: SocietyState = {
   currentSociety: null,
+  currentSocietyMetrics: null,
 };
 
 const societyProfileSlice = createSlice({
@@ -14,6 +22,9 @@ const societyProfileSlice = createSlice({
   reducers: {
     addSociety: (state, action) => {
       state.currentSociety = action.payload;
+    },
+    addSocietyMetrics: (state, action) => {
+      state.currentSocietyMetrics = action.payload;
     },
     editSociety: (state, action) => {
       state.currentSociety = action.payload;
@@ -24,6 +35,10 @@ const societyProfileSlice = createSlice({
   },
 });
 
-export const { addSociety, editSociety, deletecurrentSociety } =
-  societyProfileSlice.actions;
+export const {
+  addSociety,
+  editSociety,
+  deletecurrentSociety,
+  addSocietyMetrics,
+} = societyProfileSlice.actions;
 export default societyProfileSlice.reducer;
