@@ -61,7 +61,8 @@ const Society: React.FC = () => {
                         }
                       )
                     }
-                    className="w-full py-5 text-sm font-light hover:font-medium transition-all rounded-sm bg-black text-white bg-opacity-60 hover:bg-opacity-70 "
+                    className="w-full py-5 text-sm transition-all bg-opacity-70"
+                    variant={"outline"}
                   >
                     Learn More
                   </Button>

@@ -15,7 +15,6 @@ import { upcomingOrPast } from "@/lib/helper";
 
 const SocietyDetail: React.FC = () => {
   const { state } = useLocation();
-  console.log(state);
   const [society, setSociety] = useState<Society | null>(null);
   const [societyEvents, setSocietyEvents] = useState<Event[] | null>(null);
   async function getSocietyDetails() {

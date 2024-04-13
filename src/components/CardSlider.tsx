@@ -12,6 +12,7 @@ import { BiCalendar } from "react-icons/bi";
 import { Badge } from "./ui/badge";
 import { Event } from "@/store/eventSlice";
 import { timeConverter } from "@/lib/helper";
+import { useNavigate } from "react-router-dom";
 
 type FCProps = {
   title: string;
@@ -20,6 +21,7 @@ type FCProps = {
 };
 
 const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
+  const navigate = useNavigate();
   return (
     <div className="my-5">
       <div className="flex items-center justify-between my-2">
@@ -63,7 +65,18 @@ const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
               </CardFooter>
             ) : (
               <CardFooter className="justify-between">
-                <Button variant={"outline"} className="w-full">
+                <Button
+                  onClick={() =>
+                    navigate(
+                      "/events/" +
+                        event.title.split(" ").join("-").toLowerCase() +
+                        "/" +
+                        event._Eid
+                    )
+                  }
+                  variant={"outline"}
+                  className="w-full"
+                >
                   Preview
                 </Button>
               </CardFooter>
