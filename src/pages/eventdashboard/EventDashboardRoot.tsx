@@ -9,7 +9,7 @@ const EventDashboardRoot = () => {
       <div className="relative flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
         <Button
           onClick={() => navigate("/society/societyevents")}
-          className="absolute left-2 top-2 text-sm text-white hover:text-black border bg-transparent transition-all duration-300"
+          className="absolute left-2 top-2 bg-transparent text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  "
         >
           Go Back
         </Button>

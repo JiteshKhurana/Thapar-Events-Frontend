@@ -62,7 +62,7 @@ const EditEvent = () => {
         <div className="">
           <span className="font-semibold">Event Name:</span>
           <Input
-            placeholder="Enter a title for your Event"
+            placeholder="Enter Event Title"
             className="border w-[400px]"
             type="text"
             name="eventName"
