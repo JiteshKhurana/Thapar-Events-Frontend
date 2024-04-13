@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import SocietyMemberCard from "./components/SocietyMemberCard";
-import { BiImageAdd, BiPlus } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
-import Gallery from "@/assets/gallery.png";
+import { BiEnvelope, BiLogoLinkedinSquare, BiPlus } from "react-icons/bi";
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,12 +13,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { toast } from "sonner";
-// import SocietyMemberCard from "./components/SocietyMemberCard";
-import { BiEnvelope, BiLogoLinkedinSquare, BiPlus } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
-// import Gallery from "@/assets/gallery.png";
-import { useState } from "react";
 
 interface Member {
   id: number;
@@ -31,8 +23,6 @@ interface Member {
 }
 
 const EditSocietyProfile = () => {
-  const navigate = useNavigate();
-
   // State to hold the list of objects
   const [socMembers, setMembers] = useState<Member[]>([]);
 
@@ -132,22 +122,6 @@ const EditSocietyProfile = () => {
           className="my-3 h-[300px] text-lg"
           placeholder="Write about your society"
         ></Textarea>
-        {/* <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-medium my-8">Photo Gallery</h2>
-          <Button>See All</Button>
-        </div>
-        <div className="flex overflow-x-scroll no-scrollbar space-x-5">
-          {Array(12)
-            .fill(0)
-            .map(() => (
-              <img src={Gallery} className="h-1/3 w-1/3 rounded-xl" />
-            ))}
-        </div> 
-        <Button className="p-5 flex items-center gap-1 my-5">
-          Add Image
-          <BiImageAdd className="text-xl" />
-        </Button>*/}
-
         <span className="flex font-semibold text-xl my-3 ">Members</span>
         <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
           {socMembers.map((member, index) => (
@@ -252,9 +226,6 @@ const EditSocietyProfile = () => {
       </div>
 
       <div className="savechanges w-full border-y-2 flex justify-between items-center px-10 py-5">
-        {/* <NavLink to={"/society/dashboard"}>
-          
-        </NavLink> */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button className="rounded-sm p-6 border-2 hover:bg-gray-300">
@@ -266,30 +237,15 @@ const EditSocietyProfile = () => {
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
                 This action cannot be undone. This will permanently delete your
-                changes that you may have done.
+                account and remove your data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() => navigate("/society")}>
-                Continue
-              </AlertDialogAction>
+              <AlertDialogAction>Continue</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-
-        <Button
-          onClick={() => {
-            toast("Changes Saved Successfully");
-            navigate("/society");
-          }}
-          className="rounded-sm p-6 "
-        >
-          Save Changes
-        </Button>
-        <NavLink to={"/society/"}>
-          <Button className="rounded-sm p-6 border-2 ">Cancel</Button>
-        </NavLink>
 
         <Button
           className="rounded-sm p-6"
