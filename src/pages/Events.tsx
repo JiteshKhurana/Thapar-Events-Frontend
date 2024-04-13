@@ -47,7 +47,7 @@ const Events: React.FC = () => {
     document.addEventListener("keydown", handleKeyDown);
     if (events) {
       const upcomingEvents = events?.filter((event) =>
-        upcomingOrPast(event.start_date)
+        upcomingOrPast(event.end_date)
       );
       setFilteredEvents(upcomingEvents);
       setisLoading(false);
@@ -95,12 +95,12 @@ const Events: React.FC = () => {
   function handleChange(value: string) {
     if (value === "past") {
       const filteredData = events?.filter(
-        (event) => !upcomingOrPast(event.start_date)
+        (event) => !upcomingOrPast(event.end_date)
       );
       setFilteredEvents(filteredData || null);
     } else {
       const filteredData = events?.filter((event) =>
-        upcomingOrPast(event.start_date)
+        upcomingOrPast(event.end_date)
       );
       setFilteredEvents(filteredData || null);
     }

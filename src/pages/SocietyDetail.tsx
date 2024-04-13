@@ -35,10 +35,10 @@ const SocietyDetail: React.FC = () => {
   }, []);
 
   const upcomingEvents = societyEvents?.filter((event) =>
-    upcomingOrPast(event.start_date)
+    upcomingOrPast(event.end_date)
   );
   const pastEvents = societyEvents?.filter(
-    (event) => !upcomingOrPast(event.start_date)
+    (event) => !upcomingOrPast(event.end_date)
   );
 
   if (!society) return <CardShimmer />;

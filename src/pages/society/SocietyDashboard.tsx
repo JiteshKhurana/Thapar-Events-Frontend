@@ -49,7 +49,7 @@ const SocietyDashboard: React.FC = () => {
         <span className="active text-xl font-semibold">Upcoming Events</span>
         <div className="active-event-list flex flex-col py-3">
           {societyEvents
-            ?.filter((event) => upcomingOrPast(event.start_date))
+            ?.filter((event) => upcomingOrPast(event.end_date))
             .map((event) => (
               <SocietyEventCard event={event} />
             ))}

@@ -53,8 +53,8 @@ export const findDifferenceTwoDates = (
   return Math.floor(diff / (24 * 60 * 60 * 1000));
 };
 
-export const upcomingOrPast = (start_date: number) => {
-  const diffdates = findDifferenceTwoDates(Date.now() / 1000, start_date);
+export const upcomingOrPast = (end_date: number) => {
+  const diffdates = findDifferenceTwoDates(Date.now() / 1000, end_date);
   if (diffdates >= 0) return 0;
   return 1;
 };

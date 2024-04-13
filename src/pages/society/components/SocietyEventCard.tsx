@@ -41,12 +41,20 @@ const SocietyEventCard = ({ event }: { event: Event }) => {
           </div>
         </div>
         <div className="right-data flex flex-col min-h-full items-center justify-around">
-          <Button onClick={() => navigate("/eventdashboard")}>
+          <Button
+            onClick={() =>
+              navigate("/eventdashboard", {
+                state: {
+                  eventId: event._Eid,
+                },
+              })
+            }
+          >
             Event Dashboard
           </Button>
           <div className="flex">
             <span>Status: </span>
-            {upcomingOrPast(event.start_date) ? (
+            {upcomingOrPast(event.end_date) ? (
               <span className="text-green-500 font-bold ml-1">Upcoming</span>
             ) : (
               <span className="text-red-500 font-bold ml-1">Past</span>
