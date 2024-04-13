@@ -36,11 +36,11 @@ const Society: React.FC = () => {
         <h1 className="my-10 text-4xl font-semibold text-center ">
           Explore Societies, Student Chapters and Clubs at TIET
         </h1>
-        <div className="flex flex-wrap gap-10 justify-center max-w-[1900px]">
+        <div className="flex flex-wrap gap-5 sm:gap-10 justify-center max-w-[1900px]">
           {societies.map((society) => (
             <Card
               key={society._Uid}
-              className="w-[400px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-no-repeat bg-cover shadow-2xl overflow-hidden hover:scale-105 transition-all duration-300"
+              className="w-[93vw] sm:w-[400px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-no-repeat bg-cover shadow-2xl overflow-hidden hover:scale-105 transition-all duration-300"
             >
               <div className="bg-black bg-opacity-30">
                 <CardHeader>

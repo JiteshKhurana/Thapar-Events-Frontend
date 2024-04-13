@@ -120,7 +120,7 @@ const Events: React.FC = () => {
             className="w-full"
             onValueChange={handleChange}
           >
-            <div className="filters-container flex items-center justify-center gap-10">
+            <div className="filters-container flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10">
               <TabsList className="mt-5 mx-5 shadow-xl py-3 m-3">
                 <TabsTrigger className="w-[150px]" value="upcoming">
                   Upcoming
@@ -168,7 +168,7 @@ const Events: React.FC = () => {
                   filteredEvents?.map((event) => (
                     <Card
                       key={uuidv4()}
-                      className="w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
+                      className="w-[93vw] max-w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
                     >
                       <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
 
@@ -233,7 +233,7 @@ const Events: React.FC = () => {
                   filteredEvents?.map((event) => (
                     <Card
                       key={uuidv4()}
-                      className="w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
+                      className="w-[93vw] max-w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
                     >
                       <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
 
