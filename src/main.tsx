@@ -58,7 +58,7 @@ const appRouter = createBrowserRouter([
         element: <Society />,
       },
       {
-        path: "/societies/:societyName/:societyId",
+        path: "/societies/:societyName",
         element: <SocietyDetail />,
       },
       {

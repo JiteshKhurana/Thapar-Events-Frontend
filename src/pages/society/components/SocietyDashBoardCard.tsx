@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface SocietyDashBoardCardProps {
   title: string;
-  value: number | undefined;
+  value: number | string | undefined;
   color?: string;
 }
 

@@ -50,7 +50,7 @@ export const findDifferenceTwoDates = (
   UNIX_timestamp2: number
 ) => {
   const diff = (UNIX_timestamp1 - UNIX_timestamp2) * 1000;
-  return Math.round(diff / (24 * 60 * 60 * 1000));
+  return Math.floor(diff / (24 * 60 * 60 * 1000));
 };
 
 export const upcomingOrPast = (start_date: number) => {

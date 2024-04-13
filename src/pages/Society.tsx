@@ -29,7 +29,7 @@ const Society: React.FC = () => {
         <div className="flex flex-wrap gap-5 sm:gap-10 justify-center max-w-[1900px]">
           {societies.map((society) => (
             <Card
-              key={society._Uid}
+              key={society._Sid}
               className="w-[93vw] sm:w-[400px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-no-repeat bg-cover shadow-2xl overflow-hidden hover:scale-105 transition-all duration-300"
             >
               <div className="bg-black bg-opacity-30">
@@ -52,9 +52,13 @@ const Society: React.FC = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        society.name.split(` `).join("-").toLowerCase() +
-                          "/" +
-                          society._Sid
+                        society.name.split(` `).join("-").toLowerCase(),
+                        {
+                          state: {
+                            societyEmail: society.email,
+                            societyId: society._Sid,
+                          },
+                        }
                       )
                     }
                     className="w-full py-5 text-sm font-light hover:font-medium transition-all rounded-sm bg-black text-white bg-opacity-60 hover:bg-opacity-70 "
