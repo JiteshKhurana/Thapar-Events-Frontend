@@ -16,7 +16,7 @@ import { timeConverter } from "@/lib/helper";
 type FCProps = {
   title: string;
   apply: boolean;
-  itemsToMap: Event[] | undefined;
+  itemsToMap: Event[];
 };
 
 const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {

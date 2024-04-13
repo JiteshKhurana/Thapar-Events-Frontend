@@ -1,5 +1,9 @@
 import { API_ENDPOINT } from "@/lib/constants";
-import { addSociety, addSocietyMetrics } from "@/store/societyProfileSlice";
+import {
+  addSociety,
+  addSocietyEvents,
+  addSocietyMetrics,
+} from "@/store/societyProfileSlice";
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useEffect } from "react";
@@ -16,6 +20,9 @@ const useSocietyProfile = () => {
   );
   const currentSocietyMetrics = useSelector(
     (store: RootState) => store.society.currentSocietyMetrics
+  );
+  const currentSocietyEvents = useSelector(
+    (store: RootState) => store.society.currentSocietyEvents
   );
   const societyID = localStorage.getItem("id");
   const societyEmail = localStorage.getItem("email");
@@ -37,9 +44,20 @@ const useSocietyProfile = () => {
       .then((res) => dispatch(addSocietyMetrics(res.data)));
   }
 
+  async function getSocietyEvents() {
+    await axios
+      .get(API_ENDPOINT + "soc/get/events?soc_email=" + societyEmail, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => dispatch(addSocietyEvents(res.data)));
+  }
+
   useEffect(() => {
     !currentSociety && getSociety();
     !currentSocietyMetrics && getSocietyMetrics();
+    !currentSocietyEvents && getSocietyEvents();
   }, []);
 };
 

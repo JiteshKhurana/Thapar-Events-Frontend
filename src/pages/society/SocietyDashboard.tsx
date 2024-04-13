@@ -1,7 +1,8 @@
-import ActiveEventCard from "./components/ActiveEventCard";
 import SocietyDashBoardCard from "@/pages/society/components/SocietyDashBoardCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { upcomingOrPast } from "@/lib/helper";
+import SocietyEventCard from "./components/SocietyEventCard";
 
 const SocietyDashboard: React.FC = () => {
   const currentDate = new Date().toDateString();
@@ -12,6 +13,10 @@ const SocietyDashboard: React.FC = () => {
   const societyMetrics = useSelector(
     (store: RootState) => store.society.currentSocietyMetrics
   );
+  const societyEvents = useSelector(
+    (store: RootState) => store.society.currentSocietyEvents
+  );
+  if (!societyEvents) return <h1>No Events to display</h1>;
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="welcome flex justify-between items-center pt-5 px-[30px]">
@@ -41,13 +46,13 @@ const SocietyDashboard: React.FC = () => {
         </div>
       </div>
       <div className="active px-[30px] mt-[30px]">
-        <span className="active text-xl font-semibold">
-          Active and Upcoming Events
-        </span>
+        <span className="active text-xl font-semibold">Upcoming Events</span>
         <div className="active-event-list flex flex-col py-3">
-          <ActiveEventCard />
-          <ActiveEventCard />
-          <ActiveEventCard />
+          {societyEvents
+            ?.filter((event) => upcomingOrPast(event.start_date))
+            .map((event) => (
+              <SocietyEventCard event={event} />
+            ))}
         </div>
       </div>
     </div>
