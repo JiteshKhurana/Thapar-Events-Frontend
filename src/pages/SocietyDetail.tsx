@@ -30,7 +30,7 @@ const SocietyDetail: React.FC = () => {
         <div className="w-full h-[25vh] flex  items-end justify-start gap-5 p-5 bg-black bg-opacity-40">
           <div className="heading-container flex items-center justify-start gap-5">
             <Avatar className="h-16 w-16 md:h-24 md:w-24 border">
-              <AvatarImage src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg" />
+              <AvatarImage src={society.image} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <span className="text-2xl text-white font-semibold">

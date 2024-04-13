@@ -13,17 +13,6 @@ import useSocieties from "@/hooks/useSocieties";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-interface Society {
-  about: string;
-  email: string;
-  name: string;
-  role: string;
-  year_of_formation: string;
-  _Sid: string;
-  _Uid: string;
-  image: string;
-}
-
 const Society: React.FC = () => {
   useSocieties();
   const navigate = useNavigate();
@@ -47,8 +36,8 @@ const Society: React.FC = () => {
                 <CardHeader>
                   <CardTitle>
                     <img
-                      src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg"
-                      className="w-40  mx-auto "
+                      src={society.image}
+                      className="w-32 mx-auto rounded-full"
                     />
                   </CardTitle>
                 </CardHeader>
