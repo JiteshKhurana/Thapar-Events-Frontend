@@ -1,14 +1,5 @@
+import { Society } from "../store/societySlice";
 import { createSlice } from "@reduxjs/toolkit";
-
-interface Society {
-  _Sid: string;
-  _Uid: string;
-  email: string;
-  name: string;
-  year_of_formation: string;
-  role: string;
-  about: string;
-}
 
 interface SocietyState {
   currentSociety: Society | null;

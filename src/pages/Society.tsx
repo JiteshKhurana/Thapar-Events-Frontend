@@ -21,6 +21,7 @@ interface Society {
   year_of_formation: string;
   _Sid: string;
   _Uid: string;
+  image: string;
 }
 
 const Society: React.FC = () => {

@@ -8,16 +8,7 @@ import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import CardShimmer from "@/components/CardShimmer";
 import { BiEnvelope, BiLogoLinkedinSquare } from "react-icons/bi";
-
-interface Society {
-  _Sid: string;
-  _Uid: string;
-  email: string;
-  name: string;
-  year_of_formation: string;
-  role: string;
-  about: string;
-}
+import { Society } from "../store/societySlice";
 
 const SocietyDetail: React.FC = () => {
   const { societyId } = useParams();
