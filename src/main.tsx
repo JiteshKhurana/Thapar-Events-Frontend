@@ -113,11 +113,11 @@ const appRouter = createBrowserRouter([
         ],
       },
       {
-        path: "/eventdashboard",
+        path: "/eventdashboard/:eventId",
         element: <ProtectedRoute adminRoute={true} />,
         children: [
           {
-            path: "/eventdashboard",
+            path: "/eventdashboard/:eventId",
             element: <EventDashboardRoot />,
             children: [
               {

@@ -32,75 +32,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-// const data: Registrations[] = [
-//   {
-//     id: 1,
-//     name: "Lorem Ipsum",
-//     email: "l_ipsum_be21@thapar.edu",
-//     teamname: "Insomniacs",
-//   },
-//   {
-//     id: 1,
-//     name: "Madhu Yadav",
-//     email: "myadav_be21@thapar.edu",
-//     teamname: "Insomniacs",
-//   },
-//   {
-//     id: 1,
-//     name: "Akshay Garg",
-//     email: "agarg_be21@thapar.edu",
-//     teamname: "Insomniacs",
-//   },
-//   {
-//     id: 1,
-//     name: "Jitesh Khurana",
-//     email: "j_khurana_be21@thapar.edu",
-//     teamname: "Insomniacs",
-//   },
-//   {
-//     id: 1,
-//     name: "Ashish Simon Rattan",
-//     email: "a_rattan_be21@thapar.edu",
-//     teamname: "Soch Bhi Kaise Sakte Ho?",
-//   },
-//   {
-//     id: 1,
-//     name: "Sanya Mahajan",
-//     email: "s_mahajan_be21@thapar.edu",
-//     teamname: "Soch Bhi Kaise Sakte Ho?",
-//   },
-//   {
-//     id: 1,
-//     name: "Asheeeeeesh",
-//     email: "a_rattan_be21@thapar.edu",
-//     teamname: "Soch Bhi Kaise Sakte Ho?",
-//   },
-//   {
-//     id: 1,
-//     name: "Kunal Arora",
-//     email: "k_arora_be21@thapar.edu",
-//     teamname: "Insomniacs",
-//   },
-//   {
-//     id: 1,
-//     name: "Aditya Tomar",
-//     email: "l_ipsum_be21@thapar.edu",
-//     teamname: "AT aur bhaiso ka jhund",
-//   },
-//   {
-//     id: 1,
-//     name: "Chitra Dhir",
-//     email: "l_ipsum_be21@thapar.edu",
-//     teamname: "Randi Club",
-//   },
-//   {
-//     id: 1,
-//     name: "Krish",
-//     email: "l_ipsum_be21@thapar.edu",
-//     teamname: "Randi Club",
-//   },
-// ];
-
 const data: Registrations[] = [
   {
     id: 1,
@@ -176,11 +107,10 @@ const data: Registrations[] = [
   },
   {
     id: 1,
-    name: "Lorem Ipsum",
+    name: "jtiesh Ipsum",
     email: "l_ipsum_be21@thapar.edu",
     teamname: "Insomniacs",
   },
-  
 ];
 
 export type Registrations = {

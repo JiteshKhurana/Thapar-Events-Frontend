@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import SocietyDashBoardCard from "../society/components/SocietyDashBoardCard";
 import { Badge } from "@/components/ui/badge";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import { API_ENDPOINT } from "@/lib/constants";
@@ -28,12 +28,14 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
+import { QRCodeSVG } from "qrcode.react";
+
 const EventDashboard = () => {
-  const { state } = useLocation();
+  const { eventId } = useParams();
   const [event, setEvent] = useState<Event | null>(null);
   async function getEvents() {
     axios
-      .get(API_ENDPOINT + "event/get?eventId=" + state.eventId)
+      .get(API_ENDPOINT + "event/get?eventId=" + eventId)
       .then((res) => setEvent(res.data))
       .catch((error) => toast(error));
   }
@@ -46,11 +48,11 @@ const EventDashboard = () => {
     .join("-")
     .toLowerCase()}
   /${event?._Eid}`;
-  const [copySuccess, setCopySuccess] = useState("SHARE THE EVENT");
+  const [copySuccess, setCopySuccess] = useState("Copy to Clipboard");
   async function copyUrl() {
     await navigator.clipboard.writeText(url);
     setCopySuccess("Link Copied To Clipboard");
-    setTimeout(() => setCopySuccess("SHARE THE EVENT"), 3000);
+    setTimeout(() => setCopySuccess("Copy to Clipboard"), 3000);
   }
 
   if (!event) return <CardShimmer />;
@@ -159,12 +161,7 @@ const EventDashboard = () => {
           </div>
           <div className="share mt-3 flex flex-col items-center min-w-[300px] p-3 min-h-[200px] border-2 rounded-md shadow-xl">
             <span>Share Your Event</span>
-            <img
-              src={
-                "https://res.cloudinary.com/dhrfyg57t/image/upload/v1709374479/bit.ly_47Ichil_nxfuvo.png"
-              }
-              className="w-[200px] h-[200px] m-5"
-            ></img>
+            <QRCodeSVG value={url} includeMargin={true} size={256} />
 
             <Button onClick={copyUrl} className="w-full my-5">
               {copySuccess}

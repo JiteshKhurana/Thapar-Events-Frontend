@@ -41,15 +41,7 @@ const SocietyEventCard = ({ event }: { event: Event }) => {
           </div>
         </div>
         <div className="right-data flex flex-col min-h-full items-center justify-around">
-          <Button
-            onClick={() =>
-              navigate("/eventdashboard", {
-                state: {
-                  eventId: event._Eid,
-                },
-              })
-            }
-          >
+          <Button onClick={() => navigate("/eventdashboard/" + event._Eid)}>
             Event Dashboard
           </Button>
           <div className="flex">
