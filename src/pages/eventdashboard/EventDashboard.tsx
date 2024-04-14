@@ -5,14 +5,9 @@ import {
   LuMapPin,
   LuUser,
 } from "react-icons/lu";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SocietyDashBoardCard from "../society/components/SocietyDashBoardCard";
 import { Badge } from "@/components/ui/badge";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { toast } from "sonner";
-import { API_ENDPOINT } from "@/lib/constants";
-import { Event } from "@/store/eventSlice";
 import CardShimmer from "@/components/CardShimmer";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { Button } from "@/components/ui/button";
@@ -29,19 +24,14 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { QRCodeSVG } from "qrcode.react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const EventDashboard = () => {
-  const { eventId } = useParams();
-  const [event, setEvent] = useState<Event | null>(null);
-  async function getEvents() {
-    axios
-      .get(API_ENDPOINT + "event/get?eventId=" + eventId)
-      .then((res) => setEvent(res.data))
-      .catch((error) => toast(error));
-  }
-  useEffect(() => {
-    getEvents();
-  }, []);
+  const event = useSelector(
+    (store: RootState) => store.eventDashboard.currentEvent
+  );
+
   const baseUrl = window.location.origin;
   const url = `${baseUrl}/events/${event?.title
     .split(" ")

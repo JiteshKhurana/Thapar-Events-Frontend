@@ -19,6 +19,7 @@ export interface Event {
   _Sid: string;
   _Uid: string;
   image: string;
+  venue: string;
 }
 export interface EventState {
   eventsList: Event[] | null;

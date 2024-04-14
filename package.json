@@ -35,7 +35,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.2",
-    "@tanstack/react-table": "^8.13.2",
+    "@tanstack/react-table": "^8.16.0",
     "@tiptap/extension-color": "^2.2.4",
     "@tiptap/extension-heading": "^2.2.4",
     "@tiptap/extension-text-style": "^2.2.4",
