@@ -91,36 +91,6 @@ const SocietyDetail: React.FC = () => {
             />
           )}
 
-          {/* <div className="team-container">
-
-            <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-semibold my-8">Our Team</h2>
-              <Button>See All</Button>
-            </div>
-
-            <div className="flex overflow-x-scroll no-scrollbar space-x-5">
-              {Array(5)
-                .fill(0)
-                .map(() => (
-                  <Card className="w-1/4 min-w-[300px]">
-                    <Avatar className="h-24 w-24 mx-auto my-5">
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <CardContent className="text-center">
-                      <p>Jitesh Khurana</p>
-                      <p>jiteshkhurana59@gmail.com</p>
-                      <p>General Sec</p>
-                    </CardContent>
-                    <CardFooter className="justify-between">
-                      <Button>Instagram</Button>
-                      <Button>Linkedin</Button>
-                    </CardFooter>
-                  </Card>
-                ))}
-            </div>
-          </div> */}
-
           <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
             <span className="flex font-semibold text-xl sm:text-3xl my-3">
               Our Team
