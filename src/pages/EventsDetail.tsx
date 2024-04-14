@@ -225,7 +225,7 @@ const EventsDetail: React.FC = () => {
               {event.social_media && (
                 <div className="flex flex-row space-x-5">
                   {Object.entries(event.social_media).map((link) => (
-                    <a target="_blank" href={link[1]}>
+                    <a target="_blank" href={link[1]} key={uuidv4()}>
                       {link[0]}
                     </a>
                   ))}

@@ -51,7 +51,7 @@ const SocietyDashboard: React.FC = () => {
           {societyEvents
             ?.filter((event) => upcomingOrPast(event.end_date))
             .map((event) => (
-              <SocietyEventCard event={event} />
+              <SocietyEventCard event={event} key={event._Eid} />
             ))}
         </div>
       </div>

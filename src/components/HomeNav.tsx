@@ -126,6 +126,7 @@ const HomeNav: React.FC = () => {
                     <div className="flex h-full items-center space-x-4">
                       {navigation.map((item) => (
                         <NavLink
+                          key={item.name}
                           to={item.href}
                           className=" text-white hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md px-3 py-2 font-medium"
                         >
@@ -210,6 +211,7 @@ const HomeNav: React.FC = () => {
                       {navigation.map((item) => (
                         <NavLink
                           to={item.href}
+                          key={item.name}
                           className="  hover:bg-gray-800 hover:text-white rounded-md px-3 py-2 font-medium"
                         >
                           {item.name}

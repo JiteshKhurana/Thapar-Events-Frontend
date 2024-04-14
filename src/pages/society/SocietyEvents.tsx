@@ -27,7 +27,7 @@ const SocietyEvents: React.FC = () => {
         </div>
         <div className="event-list flex flex-col py-3">
           {societyEvents.map((event) => (
-            <SocietyEventCard event={event} />
+            <SocietyEventCard event={event} key={event._Eid} />
           ))}
         </div>
       </div>

@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import CardShimmer from "@/components/CardShimmer";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { Button } from "@/components/ui/button";
+import { v4 as uuidv4 } from "uuid";
 import {
   EmailIcon,
   TelegramIcon,
@@ -152,7 +153,7 @@ const EventDashboard = () => {
                 <span className="text-sm mb-2">Tags</span>
                 <div className="tags-container flex flex-wrap gap-3">
                   {event.hashtags.map((hashtag) => (
-                    <Badge className="p-2" variant="outline">
+                    <Badge className="p-2" variant="outline" key={uuidv4()}>
                       #{hashtag}
                     </Badge>
                   ))}
