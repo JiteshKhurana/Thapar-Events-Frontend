@@ -6,15 +6,19 @@ import { API_ENDPOINT } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
 const ManageEventRegistrations = () => {
   const { eventId } = useParams();
-  console.log(eventId);
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
   const [eventRegistrations, setEventRegistrations] = useState<
     Registrations[] | null
   >([]);
+  const eventMetrics = useSelector(
+    (store: RootState) => store.eventDashboard.currentEventMetrics
+  );
   async function getData() {
     await axios
       .get(API_ENDPOINT + "event/get/registrations/" + eventId, {
@@ -33,7 +37,10 @@ const ManageEventRegistrations = () => {
         <h1 className="font-semibold text-2xl">Registrations</h1>
         <Button>Export to csv</Button>
       </div>
-      <h2 className="ml-5 text-xl">Total Registrations: 234</h2>
+
+      <h2 className="ml-5 text-xl">
+        Total Registrations: {eventMetrics?.totalregistrations}
+      </h2>
       <div className="px-7">
         {!eventRegistrations ? (
           <h1 className="text-center text-3xl">No Registrations</h1>

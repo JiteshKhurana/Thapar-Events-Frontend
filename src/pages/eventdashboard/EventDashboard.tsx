@@ -31,6 +31,9 @@ const EventDashboard = () => {
   const event = useSelector(
     (store: RootState) => store.eventDashboard.currentEvent
   );
+  const eventMetrics = useSelector(
+    (store: RootState) => store.eventDashboard.currentEventMetrics
+  );
 
   const baseUrl = window.location.origin;
   const url = `${baseUrl}/events/${event?.title
@@ -56,14 +59,22 @@ const EventDashboard = () => {
       <div className="px-[30px] flex flex-col mt-5">
         <span className="text-2xl">Event Stats</span>
         <div className="flex flex-wrap w-full mt-4 justify-between">
-          <SocietyDashBoardCard title={"Registrations"} value={369} />
-          <SocietyDashBoardCard title={"Teams Registered"} value={672} />
+          <SocietyDashBoardCard
+            title={"Registrations"}
+            value={eventMetrics?.totalregistrations}
+          />
+          {/* <SocietyDashBoardCard title={"Teams Registered"} value={672} /> */}
           <SocietyDashBoardCard
             title={"Status"}
             value={upcomingOrPast(event.end_date) ? "Upcoming" : "Past"}
             color={
               upcomingOrPast(event.end_date) ? "text-green-500" : "text-red-500"
             }
+          />
+          <SocietyDashBoardCard
+            title={"Visibility"}
+            value={event.visibility ? "Public" : "Private"}
+            color={event.visibility ? "text-green-500" : "text-red-500"}
           />
         </div>
       </div>
