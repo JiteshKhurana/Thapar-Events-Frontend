@@ -14,7 +14,7 @@ const ManageEventRegistrations = () => {
   const token = cookies.get("token");
   const [eventRegistrations, setEventRegistrations] = useState<
     Registrations[] | null
-  >(null);
+  >([]);
   async function getData() {
     await axios
       .get(API_ENDPOINT + "event/get/registrations/" + eventId, {
@@ -36,7 +36,9 @@ const ManageEventRegistrations = () => {
       <h2 className="ml-5 text-xl">Total Registrations: 234</h2>
       <div className="px-7">
         {!eventRegistrations ? (
-          <h1 className="text-center text-3xl">Loading Registrations</h1>
+          <h1 className="text-center text-3xl">No Registrations</h1>
+        ) : eventRegistrations?.length === 0 ? (
+          <h1 className="text-center text-3xl">Loading...</h1>
         ) : (
           <DataTable columns={columns} data={eventRegistrations} />
         )}
