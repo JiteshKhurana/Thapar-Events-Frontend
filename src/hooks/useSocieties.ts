@@ -13,7 +13,7 @@ const useSocieties = () => {
   );
 
   async function getSocieties() {
-    axios
+    await axios
       .get(API_ENDPOINT + "soc/get")
       .then((res) => dispatch(addSocieties(res.data)))
       .catch((error) => {

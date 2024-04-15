@@ -1,141 +1,167 @@
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-// import SocietyMemberCard from "./components/SocietyMemberCard";
-import { BiEnvelope, BiLogoLinkedinSquare, BiPlus } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
-// import Gallery from "@/assets/gallery.png";
+// import { BiEnvelope, BiLogoLinkedinSquare, BiPlus } from "react-icons/bi";
+// import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { editSocietyFormFields, editSocietySchema } from "@/schemas/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { API_ENDPOINT } from "@/lib/constants";
+import Cookies from "universal-cookie";
 import { useState } from "react";
+import { toast } from "sonner";
+import { editSociety } from "@/store/societyProfileSlice";
 
-interface Member {
-  id: number;
-  name: string;
-  position: string;
-  email: string;
-  linkedin: string;
-}
+// interface Member {
+//   id: number;
+//   name: string;
+//   position: string;
+//   email: string;
+//   linkedin: string;
+// }
 
 const EditSocietyProfile = () => {
-
-
   // State to hold the list of objects
-  const [socMembers, setMembers] = useState<Member[]>([]);
+  // const [socMembers, setMembers] = useState<Member[]>([]);
 
   // Function to add an object to the list
-  const addMember = () => {
-    const newMember: Member = {
-      id: socMembers.length,
-      name: "",
-      position: "",
-      email: "",
-      linkedin: "",
-    };
-    setMembers([...socMembers, newMember]);
-  };
+  // const addMember = () => {
+  //   const newMember: Member = {
+  //     id: socMembers.length,
+  //     name: "",
+  //     position: "",
+  //     email: "",
+  //     linkedin: "",
+  //   };
+  //   setMembers([...socMembers, newMember]);
+  // };
 
-  // Function to edit an object in the list
-  const editMember = (
-    id: number,
-    newName: string,
-    newPosition: string,
-    newEmail: string,
-    newLinkedin: string,
+  // // Function to edit an object in the list
+  // const editMember = (
+  //   id: number,
+  //   newName: string,
+  //   newPosition: string,
+  //   newEmail: string,
+  //   newLinkedin: string
+  // ) => {
+  //   const updatedMembers = socMembers.map((member) => {
+  //     if (member.id === id) {
+  //       return {
+  //         ...member,
+  //         name: newName,
+  //         position: newPosition,
+  //         email: newEmail,
+  //         linkedin: newLinkedin,
+  //       };
+  //     }
+  //     return member;
+  //   });
+
+  //   setMembers(updatedMembers);
+  // };
+
+  // const deleteMember = (id: number) => {
+  //   const updatedMembers = socMembers.filter((Member) => Member.id !== id);
+  //   // Update IDs of remaining socMembers to match their new indices
+  //   const updatedMembersWithNewIds = updatedMembers.map((Member, index) => ({
+  //     ...Member,
+  //     id: index,
+  //   }));
+  //   setMembers(updatedMembersWithNewIds);
+  // };
+
+  // // Function to reorder socMembers in the list
+  // const reorderMembers = (oldIndex: number, newIndex: number) => {
+  //   const updatedMembers = [...socMembers];
+  //   const movedMember = updatedMembers.splice(oldIndex, 1)[0];
+  //   updatedMembers.splice(newIndex, 0, movedMember);
+  //   setMembers(updatedMembers);
+  // };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const society = useSelector(
+    (store: RootState) => store.society.currentSociety
+  );
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
+  const [success, setSuccess] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<editSocietyFormFields>({
+    defaultValues: {
+      name: society?.name,
+      about: society?.about,
+    },
+    resolver: zodResolver(editSocietySchema),
+  });
+
+  if (success) {
+    toast("Sucessfully Updated!! 🥳");
+    setSuccess(false);
+  }
+
+  const onSubmit: SubmitHandler<editSocietyFormFields> = async (
+    data: editSocietyFormFields
   ) => {
-    const updatedMembers = socMembers.map((member) => {
-      if (member.id === id) {
-        return {
-          ...member,
-          name: newName,
-          position: newPosition,
-          email: newEmail,
-          linkedin: newLinkedin,
-        };
-      }
-      return member;
-    });
-
-    setMembers(updatedMembers);
+    await axios
+      .post(API_ENDPOINT + "soc/update/" + society?.email, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setSuccess(true);
+        dispatch(editSociety(res.data));
+      })
+      .catch((error) =>
+        setError("root", {
+          message: error.message,
+        })
+      );
   };
-
-
-  const deleteMember = (id: number) => {
-    const updatedMembers = socMembers.filter((Member) => Member.id !== id);
-    // Update IDs of remaining socMembers to match their new indices
-    const updatedMembersWithNewIds = updatedMembers.map((Member, index) => ({
-      ...Member,
-      id: index,
-    }));
-    setMembers(updatedMembersWithNewIds);
-  };
-
-  // Function to reorder socMembers in the list
-  const reorderMembers = (oldIndex: number, newIndex: number) => {
-    const updatedMembers = [...socMembers];
-    const movedMember = updatedMembers.splice(oldIndex, 1)[0];
-    updatedMembers.splice(newIndex, 0, movedMember);
-    setMembers(updatedMembers);
-  };
-
-
-
-
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="heading flex items-center gap-4 py-2">
         <span className="text-3xl font-semibold">Edit your public profile</span>
       </div>
-      <div
-        style={{
-          backgroundImage:
-            "url('https://www.ccstiet.com/static/home/images/01.jpeg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-        className="coverimg w-full h-[350px] flex flex-col justify-between"
-      >
-        <div className="editcoverimg flex justify-end w-full text-white p-3 pr-10 ">
-          {/* <span className="flex items-center hover:text-gray-300 gap-1">
-            Edit Cover Image
-            <BiEdit className="text-2xl" />
-          </span> */}
-        </div>
-        <div className="societynameandimg flex items-center gap-5 ml-10 mb-5">
-          <div
-            style={{
-              backgroundImage:
-                "url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg')",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-            }}
-            className="societyimg w-[150px] h-[150px] bg-black rounded-full border-2flex justify-center items-center"
-          ></div>
-          <span className="society-name-heading font-semibold text-5xl text-white">
-            Creative Computing Society
-          </span>
-        </div>
-      </div>
 
-      <div className="editorcontainer my-5 min-h-[100vh]rounded-lg px-5 py-3">
-        <span className="font-semibold text-xl">About</span>
-        <Textarea
-          className="my-3 h-[300px] text-lg"
+      <form className="flex flex-col gap-y-3" onSubmit={handleSubmit(onSubmit)}>
+        <label>Name</label>
+        <input
+          {...register("name")}
+          type="text"
+          placeholder="Name"
+          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+        />
+        {errors.name && (
+          <div className="text-red-500">{errors.name.message}</div>
+        )}
+        <label>About</label>
+        <textarea
+          {...register("about")}
+          className="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           placeholder="Write about your society"
-        ></Textarea>
-        {/* <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-medium my-8">Photo Gallery</h2>
-          <Button>See All</Button>
-        </div>
-        <div className="flex overflow-x-scroll no-scrollbar space-x-5">
-          {Array(12)
-            .fill(0)
-            .map(() => (
-              <img src={Gallery} className="h-1/3 w-1/3 rounded-xl" />
-            ))}
-        </div> 
-        <Button className="p-5 flex items-center gap-1 my-5">
-          Add Image
-          <BiImageAdd className="text-xl" />
-        </Button>*/}
+        ></textarea>
+        {errors.about && (
+          <div className="text-red-500">{errors.about.message}</div>
+        )}
 
+        {/* <div className="rounded-lg px-5 py-3">
         <span className="flex font-semibold text-xl my-3 ">Members</span>
         <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
           {socMembers.map((member, index) => (
@@ -156,7 +182,7 @@ const EditSocietyProfile = () => {
                         e.target.value,
                         member.position,
                         member.email,
-                        member.linkedin,
+                        member.linkedin
                       )
                     }
                     placeholder="Member Name"
@@ -172,7 +198,7 @@ const EditSocietyProfile = () => {
                           member.name,
                           e.target.value,
                           member.email,
-                          member.linkedin,
+                          member.linkedin
                         )
                       }
                       placeholder="Member Position"
@@ -190,7 +216,7 @@ const EditSocietyProfile = () => {
                               member.name,
                               member.position,
                               e.target.value,
-                              member.linkedin,
+                              member.linkedin
                             )
                           }
                           placeholder="Email"
@@ -208,7 +234,7 @@ const EditSocietyProfile = () => {
                               member.name,
                               member.position,
                               member.email,
-                              e.target.value,
+                              e.target.value
                             )
                           }
                           placeholder="LinkedIn Profile"
@@ -237,21 +263,44 @@ const EditSocietyProfile = () => {
         <Button className="p-5 flex items-center gap-1" onClick={addMember}>
           Add Member <BiPlus className="text-xl" />{" "}
         </Button>
-      </div>
+      </div> */}
 
-      <div className="savechanges w-full border-y-2 flex justify-between items-center px-10 py-5">
-        <NavLink to={"/society/"}>
-          <Button className="rounded-sm p-6 border-2 ">
-            Cancel
+        <div className="savechanges w-full flex justify-between items-center px-10 py-5">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button className="rounded-sm p-6 border-2 hover:bg-gray-300">
+                Cancel
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. Any changes done will be
+                  discarded.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={() => navigate("/society")}>
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <Button
+            disabled={isSubmitting}
+            type="submit"
+            className="rounded-sm p-6"
+          >
+            {isSubmitting ? "Loading..." : "Save Changes"}
           </Button>
-        </NavLink>
-
-        <Button className="rounded-sm p-6" onClick={() => {
-          console.log(
-            socMembers
-          );
-        }}>Save Changes</Button>
-      </div>
+          {errors.root && (
+            <div className="text-red-500">{errors.root.message}</div>
+          )}
+        </div>
+      </form>
     </div>
   );
 };

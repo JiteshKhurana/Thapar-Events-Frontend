@@ -33,5 +33,11 @@ export const userEventRegisterSchemas = z.object({
     .max(10, "Phone number is not valid"),
 });
 
+export const editSocietySchema = z.object({
+  name: z.string().min(2, "Too Short").max(40, "Too Long"),
+  about: z.string().min(10, "Too Short").max(1000, "Too Long"),
+});
+
 export type FormFields = z.infer<typeof editUserSchema>;
 export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
+export type editSocietyFormFields = z.infer<typeof editSocietySchema>;

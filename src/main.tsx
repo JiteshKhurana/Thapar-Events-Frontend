@@ -58,7 +58,7 @@ const appRouter = createBrowserRouter([
         element: <Society />,
       },
       {
-        path: "/societies/:societyName/:societyId",
+        path: "/societies/:societyName",
         element: <SocietyDetail />,
       },
       {
@@ -113,11 +113,11 @@ const appRouter = createBrowserRouter([
         ],
       },
       {
-        path: "/eventdashboard",
+        path: "/eventdashboard/:eventId",
         element: <ProtectedRoute adminRoute={true} />,
         children: [
           {
-            path: "/eventdashboard",
+            path: "/eventdashboard/:eventId",
             element: <EventDashboardRoot />,
             children: [
               {

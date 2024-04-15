@@ -1,29 +1,28 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import useEventDashboard from "@/hooks/useEventDashboard";
+import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 
 const EventDashboardRoot = () => {
   const navigate = useNavigate();
+  const { eventId } = useParams();
+  const eventDashboardId = eventId ?? "";
+  useEventDashboard(eventDashboardId);
   return (
     <div className="flex flex-wrap justify-center">
       <div className="relative flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
         <Button
-          onClick={() => navigate("/society/societyevents")}
+          onClick={() => navigate("/society")}
           className="absolute left-2 top-2 bg-transparent text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  "
         >
           Go Back
         </Button>
         <Avatar className="h-24 w-24 mt-10">
           <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>Event Pic</AvatarFallback>
+          <AvatarFallback>Society Profile</AvatarFallback>
         </Avatar>
-        {/* {!user ? (
-        <Skeleton className="h-4 w-[100px]" />
-      ) : (
-        <h3 className="text-xl">@{user.name.split(" ").join("_")}</h3>
-      )} */}
         <NavLink
-          to={"/eventdashboard"}
+          to={"/eventdashboard/" + eventId}
           className={({ isActive }) => {
             return isActive
               ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"

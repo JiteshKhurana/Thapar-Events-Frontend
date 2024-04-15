@@ -61,7 +61,8 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("token", tokenResponse.access_token);
           } else {
             localStorage.setItem("name", resp.data.society.name);
-            localStorage.setItem("id", resp.data.society._Uid);
+            localStorage.setItem("email", resp.data.society.email);
+            localStorage.setItem("id", resp.data.society._Sid);
             localStorage.setItem("role", resp.data.society.role);
             localStorage.setItem("token", tokenResponse.access_token);
           }
@@ -125,6 +126,7 @@ const HomeNav: React.FC = () => {
                     <div className="flex h-full items-center space-x-4">
                       {navigation.map((item) => (
                         <NavLink
+                          key={item.name}
                           to={item.href}
                           className=" text-white hover:bg-white hover:bg-opacity-10 hover:text-white rounded-md px-3 py-2 font-medium"
                         >
@@ -209,6 +211,7 @@ const HomeNav: React.FC = () => {
                       {navigation.map((item) => (
                         <NavLink
                           to={item.href}
+                          key={item.name}
                           className="  hover:bg-gray-800 hover:text-white rounded-md px-3 py-2 font-medium"
                         >
                           {item.name}

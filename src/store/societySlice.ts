@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Society {
+export interface Society {
   _Sid: string;
   _Uid: string;
   email: string;
@@ -8,6 +8,7 @@ interface Society {
   year_of_formation: string;
   role: string;
   about: string;
+  image: string;
 }
 
 interface SocietyState {

@@ -26,8 +26,8 @@ const UserDashBoard = () => {
           </span>
         </span>
       </div>
-      <CardSlider title="Your Registrations" apply={false} />
-      <CardSlider title="Past Participations" apply={false} />
+      <CardSlider title="Your Registrations" apply={false} itemsToMap={[]} />
+      <CardSlider title="Past Participations" apply={false} itemsToMap={[]} />
     </div>
   );
 };
