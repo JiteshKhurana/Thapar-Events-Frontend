@@ -119,7 +119,7 @@ const EventDashboard = () => {
               <div className="flex flex-col">
                 <span className="text-sm">Event Mode</span>
                 <span className="font-semibold text-xl">
-                  {event.event_mode}
+                  {event.event_mode ? event.event_mode : "-"}
                 </span>
               </div>
             </div>
@@ -128,7 +128,7 @@ const EventDashboard = () => {
               <div className="flex flex-col">
                 <span className="text-sm">Event Type</span>
                 <span className="font-semibold text-xl">
-                  {event.event_type}
+                  {event.event_type ? event.event_type : "-"}
                 </span>
               </div>
             </div>
@@ -178,7 +178,6 @@ const EventDashboard = () => {
                   " to " +
                   timeConverter(event.end_date, false)
                 }
-                hashtags={event.hashtags}
               >
                 <TwitterIcon size={32} round={true} />
               </TwitterShareButton>
