@@ -16,9 +16,9 @@ const SocietyEventCard = ({ event }: { event: Event }) => {
   if (!society) return <CardShimmer />;
   return (
     <div>
-      <div className="event-card my-2 flex p-3 pr-6 border-[1px] border-gray-400 rounded-xl justify-between">
+      <div className="event-card my-2 flex flex-wrap gap-3 p-3 pr-6  border shadow-md rounded-xl justify-between overflow-hidden">
         <div className="left-data flex">
-          <Avatar className="h-24 w-24">
+          <Avatar className="sm:h-12 sm:w-12 hidden sm:block md:h-24 md:w-24">
             {society.image ? (
               <AvatarImage src={society.image} />
             ) : (
@@ -40,8 +40,9 @@ const SocietyEventCard = ({ event }: { event: Event }) => {
             </div>
           </div>
         </div>
-        <div className="right-data flex flex-col min-h-full items-center justify-around">
-          <Button onClick={() => navigate("/eventdashboard/" + event._Eid)}>
+        <div className="w-full lg:w-auto right-data flex flex-col min-h-full items-center justify-around gap-3">
+          <Button className="border w-full bg-transparent hover:bg-black text-black hover:text-white dark:text-white dark:hover:text-black dark:hover:bg-white " 
+          onClick={() => navigate("/eventdashboard/" + event._Eid)}>
             Event Dashboard
           </Button>
           <div className="flex">

@@ -12,7 +12,7 @@ const SocietyDashBoardCard: React.FC<SocietyDashBoardCardProps> = ({
   color,
 }) => {
   return (
-    <Card className="w-1/4">
+    <Card className="w-[90vw] m-2 sm:w-[250px]">
       <CardHeader>
         <CardTitle className="text-xl font-medium text-center">
           {title}
