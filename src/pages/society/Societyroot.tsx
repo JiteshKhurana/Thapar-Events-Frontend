@@ -33,7 +33,7 @@ const Societyroot: React.FC = () => {
   return (
     <div className="flex flex-wrap justify-center">
       <div className="flex flex-col mx-5 mt-5 gap-3 w-[90%] md:w-[20%] md:h-[90vh] shadow-2xl items-center rounded-xl p-5 border ">
-        <Avatar className="h-24 w-24">
+        <Avatar className="h-24 w-24 my-5">
           {society.image ? (
             <AvatarImage src={society.image} />
           ) : (
@@ -50,8 +50,8 @@ const Societyroot: React.FC = () => {
           to={"/society"}
           className={({ isActive }) => {
             return isActive
-              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
-              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+              ? " w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
           }}
           end
         >
@@ -61,8 +61,8 @@ const Societyroot: React.FC = () => {
           to={"/society/societyevents"}
           className={({ isActive }) => {
             return isActive
-              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
-              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+              ? " w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
           }}
           end
         >
@@ -71,8 +71,8 @@ const Societyroot: React.FC = () => {
         <NavLink
           className={({ isActive }) => {
             return isActive
-              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
-              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+              ? " w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
           }}
           to={"/society/editprofile"}
         >
@@ -80,8 +80,8 @@ const Societyroot: React.FC = () => {
         </NavLink>
 
         <AlertDialog>
-          <AlertDialogTrigger className="min-w-[80%] max-w-[300px]">
-            <Button className="text-sm  min-w-[80%] max-w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300">
+          <AlertDialogTrigger className="w-[80%] max-w-[300px]">
+            <Button className="text-sm  w-full max-w-[300px] border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300">
               Logout
             </Button>
           </AlertDialogTrigger>

@@ -30,6 +30,9 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { Event } from "@/store/eventSlice";
+import { BiCalendarEvent, BiGroup, BiMap, BiMoney, BiTime } from "react-icons/bi";
+import { MdGroups } from "react-icons/md";
+
 
 const EventsDetail: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -108,31 +111,32 @@ const EventsDetail: React.FC = () => {
 
   const diffdates = findDifferenceTwoDates(Date.now() / 1000, event.start_date);
   return (
-    <div>
-      <div className="grid grid-cols-12 gap-10 mx-32 my-8">
-        <div className="col-span-8 space-y-5">
-          <div className="flex gap-5 p-5 border rounded-lg">
+    <div className="flex flex-wrap justify-center bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-cover">
+      <div className="coverimage w-full h-[250px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-cover bg-no-repeat"></div>
+      <div className="w-full max-w-[1800px] grid grid-cols-8 lg:grid-cols-12 gap-6 mx-3 lg:mx-32 my-5">
+        <div className="col-span-8 space-y-2">
+          <div className="flex gap-5 p-5  bg-white dark:bg-black shadow-xl border rounded-lg">
             <Avatar className="h-28 w-28">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>Event Pic</AvatarFallback>
             </Avatar>
-            <div className="flex flex-col space-y-2">
-              <h1 className="text-4xl">{event.title}</h1>
-              <p>{event.soc_name}</p>
-              <div className="flex gap-10">
-                <p>{event.event_mode}</p>
-                <p>
+            <div className="flex flex-col space-y-2 overflow-hidden">
+              <h1 className="text-4xl font-semibold">{event.title}</h1>
+              <span className="text-gray-600 font-semibold">{event.soc_name}</span>
+              <div className="flex gap-2 sm:gap-5  flex-wrap">
+                <span className="flex items-center gap-1"><BiMap />{event.event_mode}</span>
+                <span className="flex items-center gap-1"><BiCalendarEvent />
                   {timeConverter(event.start_date, false) + "to "}
                   {timeConverter(event.end_date, false)}
-                </p>
-                <p>
+                </span>
+                <span className="flex items-center gap-1"><BiTime />
                   {diffdates >= 0
                     ? diffdates + " days ago"
                     : -diffdates + " days left"}
-                </p>
+                </span>
               </div>
               {event.hashtags && (
-                <div className="flex gap-5">
+                <div className="flex gap-1">
                   {event.hashtags.map((hashtag) => (
                     <Badge key={uuidv4()} className="p-2" variant="outline">
                       #{hashtag}
@@ -142,65 +146,69 @@ const EventsDetail: React.FC = () => {
               )}
             </div>
           </div>
-          <NavigationMenu className="border rounded-lg">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  href="/docs"
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Details
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  href="/docs"
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Dates & Deadlines
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  href="/docs"
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Rewards & Prizes
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-          <div className="border rounded-lg p-5 space-y-5">
-            <div>
-              <h2 className="font-semibold text-2xl">
+          <div className=" bg-white dark:bg-black w-full flex shadow-xl border rounded-lg p-3 ">
+
+            <NavigationMenu className="">
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="#"
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    Details
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="#"
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    Dates & Deadlines
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="#"
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    Rewards & Prizes
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+
+          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-5">
+            <div className="flex flex-col gap-3">
+              <h2 className="font-semibold text-xl">
                 All that you need to know about {event.title}
               </h2>
-              <p>{event.description}</p>
-              <h3 className="font-medium my-3">
+              <span className="event-description ">{event.description}</span>
+              <h3 className="font-medium text-gray-500 text-sm">
                 Note: The organizers reserve the right to change the opportunity
                 details.
               </h3>
             </div>
             <Separator />
             <div>
-              <h2 className="font-medium text-xl mb-2">
+              <h2 className="font-semibold text-xl mb-2">
                 Important dates and deadlines:
               </h2>
-              <div className="flex flex-col space-y-3">
-                <div>
-                  <h4 className="font-medium text-lg">Registration Starts</h4>
+              <div className="flex flex-col space-y-2">
+                <div className="flex flex-col">
+                  <span className="font-semibold ">Registration Starts</span>
                   <p className="font-light">04 Feb 24, 11:59 PM IST</p>
                 </div>
-                <div>
-                  <h4 className="font-medium text-lg">Registration deadline</h4>
+                <div className="flex flex-col">
+                  <span className="font-semibold ">Registration deadline</span>
                   <p className="font-light">04 Feb 24, 11:59 PM IST</p>
                 </div>
-                <div>
-                  <h4 className="font-medium text-lg">Round 1</h4>
+                <div className="flex flex-col">
+                  <span className="font-semibold ">Round 1</span>
                   <p className="font-light">04 Feb 24, 11:59 PM IST</p>
                 </div>
-                <div>
-                  <h4 className="font-medium text-lg">Round 2</h4>
+                <div className="flex flex-col">
+                  <span className="font-semibold ">Round 2</span>
                   <p className="font-light">04 Feb 24, 11:59 PM IST</p>
                 </div>
               </div>
@@ -208,18 +216,18 @@ const EventsDetail: React.FC = () => {
             <Separator />
             {event.prizes && (
               <div>
-                <h2 className="font-medium text-xl mb-2">Rewards & Prizes:</h2>
+                <h2 className="font-semibold text-xl mb-2">Rewards & Prizes:</h2>
                 {Object.entries(event.prizes).map((prize) => (
-                  <div key={uuidv4()}>
-                    <h4 className="font-medium text-lg">{prize[0]}</h4>
-                    <p>{prize[1]}</p>
+                  <div key={uuidv4()} className="flex flex-col my-1">
+                    <span className="font-medium text-lg">{prize[0]}</span>
+                    <span className="">{prize[1]}</span>
                   </div>
                 ))}
               </div>
             )}
             <Separator />
             <div>
-              <h2 className="font-medium text-xl mb-2">
+              <h2 className="font-semibold text-xl mb-2">
                 Follow on Social Media
               </h2>
               {event.social_media && (
@@ -234,45 +242,58 @@ const EventsDetail: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 space-y-2">
-          <div className="border rounded-lg p-5 space-y-3">
-            <div className="flex justify-between">
-              <p className="font-medium text-2xl">FREE</p>
+        <div className="col-span-8 md:col-span-4 space-y-3 ">
+          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-3">
+            <div className="flex justify-between items-center ">
+              <span className="flex items-center gap-1 font-semibold text-[1.5rem]"><BiMoney className="text-3xl" />FREE</span>
               <Button onClick={() => navigate("register")}>Register Now</Button>
             </div>
             <Separator />
             <div>
-              <div>
-                <p className="font-medium">Registration deadline</p>
-                <p>14 Hours</p>
+              <div className="flex items-center">
+                <BiTime className="mr-3 font-semibold text-2xl" />
+                <div className="flex flex-col">
+                  <span className="font-semibold text-lg">Registration deadline</span>
+                  <span>14 Hours</span>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Team Size</p>
-                <p>1 - 2 Members</p>
+              <div className="flex items-center">
+                <BiGroup className="mr-3 font-semibold text-2xl" />
+
+                <div className="flex flex-col">
+                  <span className="font-semibold text-lg">Team Size</span>
+                  <span>1 - 2 Members</span>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Total Registrations</p>
-                <p>3422</p>
+              <div className="flex items-center">
+                <MdGroups className="mr-3 font-semibold text-2xl" />
+                <div className="flex flex-col">
+                  <span className="font-semibold text-lg">Total Registrations</span>
+                  <span>3422</span>
+                </div>
               </div>
             </div>
           </div>
-          <div className="border rounded-lg p-5 space-y-3">
-            <h3 className="font-medium">Eligibility</h3>
-            <Separator />
+          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 ">
+            <span className="font-semibold text-lg">Eligibility</span>
+            <Separator className="my-3" />
             {event.eligibility === "" ? (
-              <p>All the students of TIET</p>
+              <span>All the students of TIET</span>
             ) : (
-              <p>{event.eligibility}</p>
+              <span>{event.eligibility}</span>
             )}
           </div>
-          <div className="border rounded-lg p-5 space-y-3">
-            <Button onClick={createCalendarEvent} className="w-full">
-              Add to Google Calendar
-            </Button>
-            <Button onClick={copyUrl} className="w-full">
-              {copySuccess}
-            </Button>
-            <div className="flex flex-row gap-2 justify-around">
+          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 ">
+            <div className="buttons-container flex flex-col gap-2 ">
+
+              <Button onClick={createCalendarEvent} className="w-full">
+                Add to Google Calendar
+              </Button>
+              <Button onClick={copyUrl} className="w-full">
+                {copySuccess}
+              </Button>
+            </div>
+            <div className="mt-5 flex  gap-2 justify-around">
               <WhatsappShareButton
                 separator=".Register on ConnectHub ASAP "
                 url={location.href}

@@ -18,8 +18,8 @@ const SocietyDashboard: React.FC = () => {
   );
   if (!societyEvents) return <h1>No Events to display</h1>;
   return (
-    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
-      <div className="welcome flex justify-between items-center pt-5 px-[30px]">
+    <div className="bg-white dark:bg-black border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
+      <div className="welcome flex justify-between items-center pt-5 px-1 lg:px-5">
         <div className="welcome flex flex-col">
           <span className="text  font-semibold  text-md">{currentDate}</span>
           <span className="flex flex-wrap gap-2 text  text-2xl">
@@ -28,7 +28,7 @@ const SocietyDashboard: React.FC = () => {
           </span>
         </div>
       </div>
-      <div className="px-[30px] flex flex-col mt-5">
+      <div className="px-1 lg:px-5 flex flex-col mt-5">
         <span className="text-2xl">Your Stats</span>
         <div className="flex flex-wrap w-full mt-4 justify-between">
           <SocietyDashBoardCard
@@ -45,7 +45,7 @@ const SocietyDashboard: React.FC = () => {
           />
         </div>
       </div>
-      <div className="active px-[30px] mt-[30px]">
+      <div className="active px-1 lg:px-5 mt-[30px]">
         <span className="active text-xl font-semibold">Upcoming Events</span>
         <div className="active-event-list flex flex-col py-3">
           {societyEvents
