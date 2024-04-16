@@ -1,17 +1,9 @@
-import {
-  LuCalendar,
-  LuHash,
-  LuIndianRupee,
-  LuMapPin,
-  LuUser,
-} from "react-icons/lu";
+import { LuCalendar, LuMapPin, LuUser } from "react-icons/lu";
 import { useState } from "react";
 import SocietyDashBoardCard from "../society/components/SocietyDashBoardCard";
-import { Badge } from "@/components/ui/badge";
 import CardShimmer from "@/components/CardShimmer";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { Button } from "@/components/ui/button";
-import { v4 as uuidv4 } from "uuid";
 import {
   EmailIcon,
   TelegramIcon,
@@ -82,15 +74,8 @@ const EventDashboard = () => {
 
       <div className="details-and-share w-full p-5 flex flex-col ">
         <span className="heading font-semibold text-xl">Event Details</span>
-        <div className="flex gap-5 flex-wrap justify-start">
-          <div className="basic-info-and-details flex flex-col min-h-[400px] rounded-lg shadow-xl border-2 mt-3">
-            <div className="detail flex items-center gap-2 m-4">
-              <LuIndianRupee className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Registration Fees</span>
-                <span className="font-semibold text-xl">Free</span>
-              </div>
-            </div>
+        <div className="flex gap-2 flex-wrap justify-between">
+          <div className="basic-info-and-details flex flex-col min-h-[300px] rounded-lg shadow-xl border-2 mt-3 p-8">
             <div className="detail flex items-center gap-2 m-4">
               <LuCalendar className="text-2xl" />
               <div className="flex flex-col">
@@ -119,7 +104,7 @@ const EventDashboard = () => {
               </div>
             </div>
           </div>
-          <div className="basic-info-and-details flex flex-col min-h-[400px] rounded-lg shadow-xl border-2 mt-3">
+          <div className="basic-info-and-details flex flex-col min-h-[300px] rounded-lg shadow-xl border-2 mt-3 p-8">
             <div className="detail flex items-center gap-2 m-4">
               <LuMapPin className="text-2xl" />
               <div className="flex flex-col">
@@ -147,21 +132,8 @@ const EventDashboard = () => {
                 </span>
               </div>
             </div>
-            <div className="detail flex items-center gap-2 m-4">
-              <LuHash className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm mb-2">Tags</span>
-                <div className="tags-container flex flex-wrap gap-3">
-                  {event.hashtags.map((hashtag) => (
-                    <Badge className="p-2" variant="outline" key={uuidv4()}>
-                      #{hashtag}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
-          <div className="share mt-3 flex flex-col items-center min-w-[300px] p-3 min-h-[200px] border-2 rounded-md shadow-xl">
+          <div className="share mt-3 flex flex-col items-center min-w-[300px] min-h-[200px] border-2 rounded-md shadow-xl p-8">
             <span>Share Your Event</span>
             <QRCodeSVG value={url} includeMargin={true} size={256} />
 

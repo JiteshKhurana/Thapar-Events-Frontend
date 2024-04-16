@@ -50,15 +50,12 @@ const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
               </div>
             </CardHeader>
             <CardContent>
-              {!event.hashtags ? (
-                <h1>No hashtags</h1>
-              ) : (
-                event?.hashtags.map((hashtag) => (
+              {event.hashtags &&
+                event.hashtags.map((hashtag) => (
                   <Badge key={uuidv4()} variant="outline">
                     #{hashtag}
                   </Badge>
-                ))
-              )}
+                ))}
             </CardContent>
             {apply ? (
               <CardFooter className="justify-between">

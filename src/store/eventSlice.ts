@@ -14,7 +14,7 @@ export interface Event {
   team: boolean;
   title: string;
   visibility: boolean;
-  social_media: string[];
+  social_media: object;
   _Eid: string;
   _Sid: string;
   _Uid: string;
