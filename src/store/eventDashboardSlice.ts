@@ -21,12 +21,15 @@ const eventDashboardSlice = createSlice({
     addCurrentEvent: (state, action) => {
       state.currentEvent = action.payload;
     },
+    editCurrentEvent: (state, action) => {
+      state.currentEvent = action.payload;
+    },
     addCurrentEventMetrics: (state, action) => {
       state.currentEventMetrics = action.payload;
     },
   },
 });
 
-export const { addCurrentEvent, addCurrentEventMetrics } =
+export const { addCurrentEvent, editCurrentEvent, addCurrentEventMetrics } =
   eventDashboardSlice.actions;
 export default eventDashboardSlice.reducer;

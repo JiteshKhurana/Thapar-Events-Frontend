@@ -49,16 +49,16 @@ export const editSocietySchema = z.object({
 export const editEventSchema = z.object({
   title: z.string().min(2, "Too Short").max(50, "Too Long"),
   description: z.string().min(2, "Too Short").max(2000, "Too Long"),
-  // start_date: z.date({
-  //   required_error: "start date is required.",
-  // }),
-  // end_date: z.date({
-  //   required_error: "end date is required.",
-  // }),
+  start_date: z.date({
+    required_error: "start date is required.",
+  }),
+  end_date: z.date({
+    required_error: "end date is required.",
+  }),
   eligibility: z.string().min(2, "Too Short").max(50, "Too Long"),
   event_type: z.string({ required_error: "Please Select Event Type" }),
   event_mode: z.string({ required_error: "Please Select Event Mode" }),
-  visibility: z.boolean(),
+  visibility: z.string(),
   venue: z
     .string({ required_error: "Please Enter Venue" })
     .min(2, "Too Short")
@@ -71,118 +71,73 @@ export const editEventSchema = z.object({
   //     "Only .jpg, .jpeg, .png and .webp formats are supported."
   //   )
   //   .optional(),
-  hashtags: z.array(z.string().min(2, "Too Short").max(20, "Too Long")),
-  social_media: z
-    .object({
-      Instagram: z.string().min(2, "Too Short").max(50, "Too Long"),
-      Facebook: z.string().min(2, "Too Short").max(50, "Too Long"),
-      X: z.string().min(2, "Too Short").max(50, "Too Long"),
-      OfficialWebsite: z.string().min(2, "Too Short").max(50, "Too Long"),
-    })
+  hashtags: z.array(z.string().max(20, "Too Long")).optional(),
+  social_media: z.object({
+    Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    X: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    OfficialWebsite: z
+      .string()
+      .min(0)
+      .url("Enter a URL")
+      .max(255)
+      .or(z.literal("")),
+  }),
+  deadlines: z
+    .array(
+      z.object({
+        date: z.date().optional(),
+        title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(200, "Too Long")
+          .optional(),
+      })
+    )
     .optional(),
 
-
-  date1: z
-    .object({
-      Date: z.date().optional(),
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().optional(),
-    })
-    .optional(),
-  date2: z
-    .object({
-      Date: z.date().optional(),
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().optional(),
-    })
-    .optional(),
-  date3: z
-    .object({
-      Date: z.date().optional(),
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().optional(),
-    })
-    .optional(),
-  date4: z
-    .object({
-      Date: z.date().optional(),
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().optional(),
-    })
+  rounds: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(200, "Too Long")
+          .optional(),
+      })
+    )
     .optional(),
 
-
-  round1: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
-    .optional(),
-  round2: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
-    .optional(),
-  round3: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
-    .optional(),
-  round4: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
+  prizes: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(100, "Too Long")
+          .optional(),
+      })
+    )
     .optional(),
 
-  prize1: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
+  parameters: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(100, "Too Long")
+          .optional(),
+      })
+    )
     .optional(),
-  prize2: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
-    .optional(),
-  prize3: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
-    .optional(),
-  prize4: z
-    .object({
-      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
-    })
-    .optional(),
-
 });
 
 export type FormFields = z.infer<typeof editUserSchema>;
 export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
-
-//     "additional":{
-//         "lola":"lola",
-//         "pola":"pol"
-//     },
-//     // "parameters":{
-//     //     "bloodgroup":"enter blood group eg A+",
-//     //     "height":"12345"
-//     // },
-//     "team":false,
-//     //"max_team_members":2,
-//     //"min_team_members":1,
-//     "prizes":{
-//         "1 price":"abc",
-//         "2 price":"def"
-//     },
-//     "start_date":1715619368,//int64
-//     "end_date":1715622968,//int64

@@ -1,106 +1,174 @@
 import { editEventFormFields, editEventSchema } from "@/schemas/schema";
-import { SubmitHandler, useForm } from "react-hook-form";
-
+import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-// import DateTimePicker from "react-datetime-picker";
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-// import { BiCalendar } from "react-icons/bi";
+import { API_ENDPOINT } from "@/lib/constants";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { editCurrentEvent } from "@/store/eventDashboardSlice";
+import { useNavigate } from "react-router-dom";
 
 const EditEvent = () => {
+  const [success, setSuccess] = useState(false);
+  if (success) {
+    toast("Sucessfully Updated!! 🥳");
+    setSuccess(false);
+  }
+  const dispatch = useDispatch();
+  const event = useSelector(
+    (store: RootState) => store.eventDashboard.currentEvent
+  );
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    // setError,
+    control,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<editEventFormFields>({
     defaultValues: {
-      title: "",
-      description: "",
-      eligibility: "",
-      venue: "",
-      event_mode: "offline",
-      event_type: "technical",
-      visibility: true,
+      title: event?.title,
+      description: event?.description,
+      start_date: new Date(),
+      end_date: new Date(),
+      eligibility: event?.eligibility,
+      event_mode: event?.event_mode,
+      event_type: event?.event_type,
+      visibility: event?.visibility,
+      venue: event?.venue,
+      hashtags: [event?.hashtags[0], event?.hashtags[1], event?.hashtags[2]],
       social_media: {
-        Instagram: "",
-        Facebook: "",
-        X: "",
-        OfficialWebsite: "",
+        Instagram: undefined,
+        Facebook: undefined,
+        X: undefined,
+        OfficialWebsite: undefined,
       },
+      deadlines: [
+        {
+          date: new Date(),
+          title: "",
+          description: "",
+        },
+      ],
+      rounds: [
+        {
+          name: "",
+          description: "",
+        },
+      ],
 
-      date1: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
-      date2: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
-      date3: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
-      date4: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
+      prizes: [
+        {
+          name: "",
+          description: "",
+        },
+      ],
 
-      round1: {
-        Title: "",
-        Description: "",
-      },
-      round2: {
-        Title: "",
-        Description: "",
-      },
-      round3: {
-        Title: "",
-        Description: "",
-      },
-      round4: {
-        Title: "",
-        Description: "",
-      },
-
-      prize1: {
-        Title: "",
-        Description: "",
-      },
-      prize2: {
-        Title: "",
-        Description: "",
-      },
-      prize3: {
-        Title: "",
-        Description: "",
-      },
-      prize4: {
-        Title: "",
-        Description: "",
-      },
-
+      parameters: [
+        {
+          name: "",
+          description: "",
+        },
+      ],
     },
     resolver: zodResolver(editEventSchema),
   });
-  const onSubmit: SubmitHandler<editEventFormFields> = (data) => {
-    console.log(data);
+
+  const { fields, append, remove } = useFieldArray({
+    name: "rounds",
+    control,
+  });
+  const fieldArray2 = useFieldArray({
+    name: "prizes",
+    control,
+  });
+  const fieldArray3 = useFieldArray({
+    name: "deadlines",
+    control,
+  });
+  const fieldArray4 = useFieldArray({
+    name: "parameters",
+    control,
+  });
+  useEffect(() => {
+    const unloadCallback = (event: {
+      preventDefault: () => void;
+      returnValue: string;
+    }) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+  if (!event) return <div>Loading Event...</div>;
+
+  const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
+    // Convert start_date and end_date to Unix timestamps
+    const startTimestamp = Math.floor(data.start_date.getTime() / 1000);
+    const endTimestamp = Math.floor(data.end_date.getTime() / 1000);
+
+    // Convert each date in the deadlines array to Unix timestamps
+    const updatedDeadlines = data.deadlines?.map((deadline) => {
+      if (deadline.date) {
+        return {
+          ...deadline,
+          date: Math.floor(deadline.date.getTime() / 1000),
+        };
+      }
+      return deadline;
+    });
+
+    // Update the data object with Unix timestamps
+    const updatedData = {
+      ...data,
+      start_date: startTimestamp,
+      end_date: endTimestamp,
+      deadlines: updatedDeadlines,
+    };
+
+    console.log(updatedData);
+    await axios
+      .post(API_ENDPOINT + "event/update/" + event._Eid, updatedData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setSuccess(true);
+        dispatch(editCurrentEvent(res.data));
+      })
+      .catch((error) =>
+        setError("root", {
+          message: error.message,
+        })
+      );
   };
+
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
-      <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
-        Edit Event
-      </h1>
+      <div className="flex flex-row justify-between">
+        <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
+          Edit Event
+        </h1>
+        <Button
+          onClick={() => {
+            navigate(`/eventdashboard/${event._Eid}/eventposter`);
+          }}
+        >
+          Add Event Poster
+        </Button>
+      </div>
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label htmlFor="title">Event Title</Label>
@@ -118,6 +186,23 @@ const EditEvent = () => {
           {errors.description && (
             <div className="text-red-500">{errors.description.message}</div>
           )}
+        </div>
+        <div className="flex flex-row space-x-5 justify-between">
+          <div className="w-1/2">
+            <Label htmlFor="description">Start Date</Label>
+            <Input
+              {...register("start_date", { valueAsDate: true })}
+              type="datetime-local"
+            />
+          </div>
+
+          <div className="w-1/2">
+            <Label htmlFor="description">End Date</Label>
+            <Input
+              {...register("end_date", { valueAsDate: true })}
+              type="datetime-local"
+            />
+          </div>
         </div>
         <div>
           <Label htmlFor="eligibility">Eligibility</Label>
@@ -141,307 +226,333 @@ const EditEvent = () => {
             <div className="text-red-500">{errors.venue.message}</div>
           )}
         </div>
-        <div>
-          <Label htmlFor="event_mode">Event Mode</Label>
-          <select
-            {...register("event_mode")}
-            className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
-          >
-            <option value="online">Online</option>
-            <option value="offline">Offline</option>
-            <option value="hybrid">Hybrid</option>
-          </select>
-          {errors.event_mode && (
-            <div className="text-red-500">{errors.event_mode.message}</div>
-          )}
+        <div className="flex flex-row space-x-5">
+          <div className="w-1/2">
+            <Label htmlFor="event_mode">Event Mode</Label>
+            <select
+              {...register("event_mode")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="online">Online</option>
+              <option value="offline">Offline</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+            {errors.event_mode && (
+              <div className="text-red-500">{errors.event_mode.message}</div>
+            )}
+          </div>
+          <div className="w-1/2">
+            <Label htmlFor="event_type">Event Type</Label>
+            <select
+              {...register("event_type")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="technical">Technical</option>
+              <option value="cultural">Cultural</option>
+              <option value="sports">Sports</option>
+              <option value="workshop">Workshop</option>
+              <option value="hackathon">Hackathon</option>
+              <option value="other">Other</option>
+            </select>
+            {errors.event_type && (
+              <div className="text-red-500">{errors.event_type.message}</div>
+            )}
+          </div>
+          <div className="w-1/2">
+            <Label htmlFor="visibility">Event Visibility</Label>
+            <select
+              {...register("visibility")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="true">Public</option>
+              <option value="false">Private</option>
+            </select>
+            {errors.visibility && (
+              <div className="text-red-500">{errors.visibility.message}</div>
+            )}
+          </div>
         </div>
-        <div>
-          <Label htmlFor="event_type">Event Type</Label>
-          <select
-            {...register("event_type")}
-            className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
-          >
-            <option value="technical">Technical</option>
-            <option value="cultural">Cultural</option>
-            <option value="sports">Sports</option>
-            <option value="workshop">Workshop</option>
-            <option value="hackathon">Hackathon</option>
-            <option value="other">Other</option>
-          </select>
-          {errors.event_type && (
-            <div className="text-red-500">{errors.event_type.message}</div>
-          )}
-        </div>
-        <div className="flex items-center space-x-2">
-          <Switch id="visibility" />
-          <Label htmlFor="visibility">Visibility</Label>
-          {errors.visibility && (
-            <div className="text-red-500">{errors.visibility.message}</div>
-          )}
-        </div>
+
         <div>
           <Label htmlFor="eligibility">Hashtags</Label>
           <div className="flex flex-row flex-wrap gap-2">
-            <Input className="w-full max-w-[400px]"
+            <Input
+              className="w-full max-w-[400px]"
               type="text"
               {...register("hashtags.0")}
               placeholder="Hashtag #1"
             />
-            <Input className="w-full max-w-[400px]"
+            <Input
+              className="w-full max-w-[400px]"
               type="text"
               {...register("hashtags.1")}
               placeholder="Hashtag #2"
             />
-            <Input className="w-full max-w-[400px]"
+            <Input
+              className="w-full max-w-[400px]"
               type="text"
               {...register("hashtags.2")}
               placeholder="Hashtag #3"
             />
           </div>
-          {errors.hashtags && (
-            <div className="text-red-500">{errors.hashtags.message}</div>
-          )}
         </div>
         <div>
           <Label htmlFor="social_media">Social Media Handles</Label>
           <div className="flex flex-wrap gap-2">
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.Instagram")}
-              placeholder="Instagram"
-            />
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.Facebook")}
-              placeholder="Facebook"
-            />
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.X")}
-              placeholder="X"
-            />
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.OfficialWebsite")}
-              placeholder="Official Website"
-            />
+            <div>
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.Instagram")}
+                placeholder="Instagram"
+              />
+              {errors.social_media?.Instagram && (
+                <div className="text-red-500">
+                  {errors.social_media.Instagram.message}
+                </div>
+              )}
+            </div>
+            <div>
+              {" "}
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.Facebook")}
+                placeholder="Facebook"
+              />
+              {errors.social_media?.Facebook && (
+                <div className="text-red-500">
+                  {errors.social_media.Facebook.message}
+                </div>
+              )}
+            </div>
+            <div>
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.X")}
+                placeholder="X"
+              />
+              {errors.social_media?.X && (
+                <div className="text-red-500">
+                  {errors.social_media.X.message}
+                </div>
+              )}
+            </div>
+            <div>
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.OfficialWebsite")}
+                placeholder="Official Website"
+              />
+              {errors.social_media?.OfficialWebsite && (
+                <div className="text-red-500">
+                  {errors.social_media.OfficialWebsite.message}
+                </div>
+              )}
+            </div>
           </div>
-          {errors.social_media && (
-            <div className="text-red-500">{errors.social_media.message}</div>
+        </div>
+
+        {/* ---------------------Rounds Container ----------------------------------*/}
+        <div>
+          <Label>Rounds</Label>
+          <div className="flex flex-col space-y-5">
+            {fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <span className="font-semibold">Round {index + 1}</span>
+                  <Input
+                    {...register(`rounds.${index}.name` as const)}
+                    type="text"
+                    placeholder={`Round ${index + 1} Name`}
+                  />
+                  <Textarea
+                    {...register(`rounds.${index}.description` as const)}
+                    placeholder={`Description of Round ${index + 1}`}
+                  />
+                </div>
+
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => remove(index)}
+                >
+                  Remove Round
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                append({
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Round
+            </Button>
+          </div>
+          {errors.rounds && (
+            <div className="text-red-500">{errors.rounds.message}</div>
           )}
         </div>
 
+        {/* ---------------------Prizes Container ----------------------------------*/}
+        <div>
+          <Label>Prizes</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray2.fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <Input
+                    {...register(`prizes.${index}.name` as const)}
+                    type="text"
+                    placeholder={`Prize ${index + 1} Name`}
+                  />
+                  <Textarea
+                    {...register(`prizes.${index}.description` as const)}
+                    placeholder={`Description of Prize ${index + 1}`}
+                  />
+                </div>
 
-
-{/* ---------------------Deadlines Container ----------------------------------*/}
-        <div className="datesanddeadlines flex flex-col gap-3">
-          <span className="dates-heading text-xl font-semibold">Important Dates and Deadlines</span>
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Date-1</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("date1.Title")}
-            /></span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Date:</span>
-              <input type="datetime-local" className="p-1 border rounded-md"
-                {...register("date1.Date")}
-              />
-            </span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("date1.Description")}
-              /></span>
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => fieldArray2.remove(index)}
+                >
+                  Remove Prize
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray2.append({
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Prize
+            </Button>
           </div>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Date-2</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("date2.Title")}
-            /></span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Date:</span>
-              <input type="datetime-local" className="p-1 border rounded-md"
-                {...register("date2.Date")}
-              />
-            </span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("date2.Description")}
-              /></span>
-          </div>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Date-3</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("date3.Title")}
-            /></span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Date:</span>
-              <input type="datetime-local" className="p-1 border rounded-md"
-                {...register("date3.Date")}
-              />
-            </span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("date3.Description")}
-              /></span>
-          </div>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Date-4</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("date4.Title")}
-            /></span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Date:</span>
-              <input type="datetime-local" className="p-1 border rounded-md"
-                {...register("date4.Date")}
-              />
-            </span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("date4.Description")}
-              /></span>
-          </div>
-
-          
+          {errors.prizes && (
+            <div className="text-red-500">{errors.prizes.message}</div>
+          )}
         </div>
 
-{/* ---------------------Rounds Container ----------------------------------*/}
-        <div className="rounds flex flex-col gap-3">
-          <span className="rounds-heading text-xl font-semibold">Rounds</span>
+        {/* --------------------- Deadlines Container ----------------------------------*/}
 
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-1</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round1.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round1.Description")}
-            /></span>
+        <div>
+          <Label>Deadlines</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray3.fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <Input
+                    {...register(`deadlines.${index}.date`, {
+                      valueAsDate: true,
+                    })}
+                    type="datetime-local"
+                  />
+                  <Input
+                    {...register(`deadlines.${index}.title` as const)}
+                    type="text"
+                    placeholder={`Deadline ${index + 1} Name`}
+                  />
+                  <Textarea
+                    {...register(`deadlines.${index}.description` as const)}
+                    placeholder={`Description of Deadline ${index + 1}`}
+                  />
+                </div>
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => fieldArray3.remove(index)}
+                >
+                  Remove Deadline
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray3.append({
+                  date: new Date(),
+                  title: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Deadline
+            </Button>
           </div>
-          
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-2</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round2.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round2.Description")}
-            /></span>
-          </div>
-          
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-3</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round3.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round3.Description")}
-            /></span>
-          </div>
-          
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-4</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round4.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round4.Description")}
-            /></span>
-          </div>
-          
+          {errors.deadlines && (
+            <div className="text-red-500">{errors.deadlines.message}</div>
+          )}
         </div>
 
-{/* ---------------------Prizes Container ----------------------------------*/}
-        <div className="prizes flex flex-col gap-3">
+        {/* --------------------- Parameters Container ----------------------------------*/}
 
-          <span className="prizes-heading text-xl font-semibold">Prizes</span>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Prize-1</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize1.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize1.Description")}
-            /></span>
+        <div>
+          <Label>Extra Paramaters</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray4.fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <Input
+                    {...register(`parameters.${index}.name` as const)}
+                    type="text"
+                    placeholder={`Extra Parameter Name e.g-height`}
+                  />
+                  <Textarea
+                    {...register(`parameters.${index}.description` as const)}
+                    placeholder={`Description of Extra Parameter e.g-Height of the participant in cm.`}
+                  />
+                </div>
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => fieldArray4.remove(index)}
+                >
+                  Remove Parameter
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray4.append({
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Parameter
+            </Button>
           </div>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Prize-2</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize2.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize2.Description")}
-            /></span>
-          </div>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Prize-3</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize3.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize3.Description")}
-            /></span>
-          </div>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Prize-4</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize4.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize4.Description")}
-            /></span>
-          </div>
-
-
+          {errors.parameters && (
+            <div className="text-red-500">{errors.parameters.message}</div>
+          )}
         </div>
 
-
-        <Button disabled={isSubmitting} type="submit" className="py-3 px-10 ">
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          className="py-3 px-10 w-full"
+        >
           {isSubmitting ? "Loading..." : "Save Changes"}
         </Button>
         {errors.root && (
           <div className="text-red-500">{errors.root.message}</div>
         )}
-
-
       </form>
     </div>
   );

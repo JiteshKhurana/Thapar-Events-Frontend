@@ -30,9 +30,14 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { Event } from "@/store/eventSlice";
-import { BiCalendarEvent, BiGroup, BiMap, BiMoney, BiTime } from "react-icons/bi";
+import {
+  BiCalendarEvent,
+  BiGroup,
+  BiMap,
+  BiMoney,
+  BiTime,
+} from "react-icons/bi";
 import { MdGroups } from "react-icons/md";
-
 
 const EventsDetail: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -122,14 +127,21 @@ const EventsDetail: React.FC = () => {
             </Avatar>
             <div className="flex flex-col space-y-2 overflow-hidden">
               <h1 className="text-4xl font-semibold">{event.title}</h1>
-              <span className="text-gray-600 font-semibold">{event.soc_name}</span>
+              <span className="text-gray-600 font-semibold">
+                {event.soc_name}
+              </span>
               <div className="flex gap-2 sm:gap-5  flex-wrap">
-                <span className="flex items-center gap-1"><BiMap />{event.event_mode}</span>
-                <span className="flex items-center gap-1"><BiCalendarEvent />
+                <span className="flex items-center gap-1">
+                  <BiMap />
+                  {event.event_mode}
+                </span>
+                <span className="flex items-center gap-1">
+                  <BiCalendarEvent />
                   {timeConverter(event.start_date, false) + "to "}
                   {timeConverter(event.end_date, false)}
                 </span>
-                <span className="flex items-center gap-1"><BiTime />
+                <span className="flex items-center gap-1">
+                  <BiTime />
                   {diffdates >= 0
                     ? diffdates + " days ago"
                     : -diffdates + " days left"}
@@ -147,7 +159,6 @@ const EventsDetail: React.FC = () => {
             </div>
           </div>
           <div className=" bg-white dark:bg-black w-full flex shadow-xl border rounded-lg p-3 ">
-
             <NavigationMenu className="">
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -213,10 +224,12 @@ const EventsDetail: React.FC = () => {
                 </div>
               </div>
             </div>
-            <Separator />
-            {event.prizes && (
+            {/* <Separator /> */}
+            {/* {event.prizes && (
               <div>
-                <h2 className="font-semibold text-xl mb-2">Rewards & Prizes:</h2>
+                <h2 className="font-semibold text-xl mb-2">
+                  Rewards & Prizes:
+                </h2>
                 {Object.entries(event.prizes).map((prize) => (
                   <div key={uuidv4()} className="flex flex-col my-1">
                     <span className="font-medium text-lg">{prize[0]}</span>
@@ -224,7 +237,7 @@ const EventsDetail: React.FC = () => {
                   </div>
                 ))}
               </div>
-            )}
+            )} */}
             <Separator />
             <div>
               <h2 className="font-semibold text-xl mb-2">
@@ -245,7 +258,10 @@ const EventsDetail: React.FC = () => {
         <div className="col-span-8 md:col-span-4 space-y-3 ">
           <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-3">
             <div className="flex justify-between items-center ">
-              <span className="flex items-center gap-1 font-semibold text-[1.5rem]"><BiMoney className="text-3xl" />FREE</span>
+              <span className="flex items-center gap-1 font-semibold text-[1.5rem]">
+                <BiMoney className="text-3xl" />
+                FREE
+              </span>
               <Button onClick={() => navigate("register")}>Register Now</Button>
             </div>
             <Separator />
@@ -253,7 +269,9 @@ const EventsDetail: React.FC = () => {
               <div className="flex items-center">
                 <BiTime className="mr-3 font-semibold text-2xl" />
                 <div className="flex flex-col">
-                  <span className="font-semibold text-lg">Registration deadline</span>
+                  <span className="font-semibold text-lg">
+                    Registration deadline
+                  </span>
                   <span>14 Hours</span>
                 </div>
               </div>
@@ -268,7 +286,9 @@ const EventsDetail: React.FC = () => {
               <div className="flex items-center">
                 <MdGroups className="mr-3 font-semibold text-2xl" />
                 <div className="flex flex-col">
-                  <span className="font-semibold text-lg">Total Registrations</span>
+                  <span className="font-semibold text-lg">
+                    Total Registrations
+                  </span>
                   <span>3422</span>
                 </div>
               </div>
@@ -285,7 +305,6 @@ const EventsDetail: React.FC = () => {
           </div>
           <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 ">
             <div className="buttons-container flex flex-col gap-2 ">
-
               <Button onClick={createCalendarEvent} className="w-full">
                 Add to Google Calendar
               </Button>
