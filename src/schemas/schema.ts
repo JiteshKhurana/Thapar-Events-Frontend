@@ -83,13 +83,20 @@ export const editEventSchema = z.object({
     })
     .optional(),
 
-  // date1: z
-  //   .object({
-  //     Date: z.date().optional(),
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z.string().optional(),
-  //   })
-  //   .optional(),
+  deadlines: z
+    .array(
+      z.object({
+        date: z.date().optional(),
+        title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(200, "Too Long")
+          .optional(),
+      })
+    )
+    .optional(),
+
   rounds: z.array(
     z
       .object({
@@ -120,10 +127,6 @@ export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
 
-//     "additional":{
-//         "lola":"lola",
-//         "pola":"pol"
-//     },
 //     // "parameters":{
 //     //     "bloodgroup":"enter blood group eg A+",
 //     //     "height":"12345"
@@ -131,9 +134,5 @@ export type editEventFormFields = z.infer<typeof editEventSchema>;
 //     "team":false,
 //     //"max_team_members":2,
 //     //"min_team_members":1,
-//     "prizes":{
-//         "1 price":"abc",
-//         "2 price":"def"
-//     },
 //     "start_date":1715619368,//int64
 //     "end_date":1715622968,//int64

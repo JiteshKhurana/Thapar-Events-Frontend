@@ -6,9 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import "react-datetime-picker/dist/DateTimePicker.css";
-import "react-calendar/dist/Calendar.css";
-import "react-clock/dist/Clock.css";
 
 const EditEvent = () => {
   const {
@@ -32,28 +29,6 @@ const EditEvent = () => {
         X: "",
         OfficialWebsite: "",
       },
-
-      // date1: {
-      //   Date: new Date(),
-      //   Title: "",
-      //   Description: "",
-      // },
-      // date2: {
-      //   Date: new Date(),
-      //   Title: "",
-      //   Description: "",
-      // },
-      // date3: {
-      //   Date: new Date(),
-      //   Title: "",
-      //   Description: "",
-      // },
-      // date4: {
-      //   Date: new Date(),
-      //   Title: "",
-      //   Description: "",
-      // },
-
       rounds: [
         {
           name: "",
@@ -64,6 +39,13 @@ const EditEvent = () => {
       prizes: [
         {
           name: "",
+          description: "",
+        },
+      ],
+      deadlines: [
+        {
+          date: new Date(),
+          title: "",
           description: "",
         },
       ],
@@ -79,7 +61,10 @@ const EditEvent = () => {
     name: "prizes",
     control,
   });
-  console.log(fieldArray2.fields);
+  const fieldArray3 = useFieldArray({
+    name: "deadlines",
+    control,
+  });
 
   const onSubmit: SubmitHandler<editEventFormFields> = (data) => {
     console.log(data);
@@ -226,38 +211,6 @@ const EditEvent = () => {
           )}
         </div>
 
-        {/* ---------------------Deadlines Container ----------------------------------*/}
-        {/* <div className="flex flex-col gap-3">
-          <Label className="dates-heading text-xl font-semibold">
-            Important Dates and Deadlines */}
-        {/* </Label> */}
-
-        {/* <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Date-1</span>
-            <span className="title flex items-center gap-1">
-              <span className="font-medium text-sm">Title:</span>
-              <Input
-                className="w-full max-w-[400px]"
-                {...register("date1.Title")}
-              />
-            </span>
-            <span className="title flex items-center gap-1">
-              <span className="font-medium text-sm">Date:</span>
-              <input
-                type="datetime-local"
-                className="p-1 border rounded-md"
-                {...register("date1.Date")}
-              />
-            </span>
-            <span className="title flex flex-wrap items-start gap-1">
-              <span className="font-medium text-sm">Description:</span>
-              <Textarea
-                className="w-full max-w-[800px]"
-                {...register("date1.Description")}
-              />
-            </span>
-          </div> */}
-
         {/* ---------------------Rounds Container ----------------------------------*/}
         <div>
           <Label>Rounds</Label>
@@ -341,6 +294,59 @@ const EditEvent = () => {
               Add New Prize
             </Button>
           </div>
+        </div>
+
+        {/* --------------------- Deadlines Container ----------------------------------*/}
+
+        <div>
+          <Label>Deadlines</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray3.fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <Input
+                    {...register(`deadlines.${index}.date`, {
+                      valueAsDate: true,
+                    })}
+                    type="datetime-local"
+                  />
+                  <Input
+                    {...register(`deadlines.${index}.title` as const)}
+                    type="text"
+                    placeholder={`Deadline ${index + 1} Name`}
+                  />
+                  <Textarea
+                    {...register(`deadlines.${index}.description` as const)}
+                    placeholder={`Description of Deadline ${index + 1}`}
+                  />
+                </div>
+
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => fieldArray3.remove(index)}
+                >
+                  Remove Deadline
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray3.append({
+                  date: new Date(),
+                  title: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Deadline
+            </Button>
+          </div>
+          {errors.deadlines && (
+            <div className="text-red-500">{errors.deadlines.message}</div>
+          )}
         </div>
 
         <Button
