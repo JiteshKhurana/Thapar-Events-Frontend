@@ -92,6 +92,30 @@ const EditEvent = () => {
             <div className="text-red-500">{errors.description.message}</div>
           )}
         </div>
+        <div className="flex flex-row space-x-5 justify-between">
+          <div>
+            <Label htmlFor="description">Start Date</Label>
+            <Input
+              {...register("start_date", { valueAsDate: true })}
+              type="datetime-local"
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="description">End Date</Label>
+            <Input
+              {...register("end_date", { valueAsDate: true })}
+              type="datetime-local"
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Switch id="visibility" />
+            <Label htmlFor="visibility">Visibility</Label>
+            {errors.visibility && (
+              <div className="text-red-500">{errors.visibility.message}</div>
+            )}
+          </div>
+        </div>
         <div>
           <Label htmlFor="eligibility">Eligibility</Label>
           <Input
@@ -145,13 +169,7 @@ const EditEvent = () => {
             <div className="text-red-500">{errors.event_type.message}</div>
           )}
         </div>
-        <div className="flex items-center space-x-2">
-          <Switch id="visibility" />
-          <Label htmlFor="visibility">Visibility</Label>
-          {errors.visibility && (
-            <div className="text-red-500">{errors.visibility.message}</div>
-          )}
-        </div>
+
         <div>
           <Label htmlFor="eligibility">Hashtags</Label>
           <div className="flex flex-row flex-wrap gap-2">
@@ -320,7 +338,6 @@ const EditEvent = () => {
                     placeholder={`Description of Deadline ${index + 1}`}
                   />
                 </div>
-
                 <Button
                   className="col-span-2 my-auto"
                   type="button"

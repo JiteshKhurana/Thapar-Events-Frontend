@@ -49,12 +49,12 @@ export const editSocietySchema = z.object({
 export const editEventSchema = z.object({
   title: z.string().min(2, "Too Short").max(50, "Too Long"),
   description: z.string().min(2, "Too Short").max(2000, "Too Long"),
-  // start_date: z.date({
-  //   required_error: "start date is required.",
-  // }),
-  // end_date: z.date({
-  //   required_error: "end date is required.",
-  // }),
+  start_date: z.date({
+    required_error: "start date is required.",
+  }),
+  end_date: z.date({
+    required_error: "end date is required.",
+  }),
   eligibility: z.string().min(2, "Too Short").max(50, "Too Long"),
   event_type: z.string({ required_error: "Please Select Event Type" }),
   event_mode: z.string({ required_error: "Please Select Event Mode" }),
@@ -127,12 +127,20 @@ export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
 
-//     // "parameters":{
-//     //     "bloodgroup":"enter blood group eg A+",
-//     //     "height":"12345"
-//     // },
+// "parameters":[
+//   {
+//       "name":"blood group",
+//       "description":"eg a+,b-"
+//   },
+//   {
+//       "name":"height",
+//       "description":"in cm"
+//   },
+//   {
+//       "name":"weight",
+//       "description":"in kg"
+//   }
+// ],
 //     "team":false,
 //     //"max_team_members":2,
 //     //"min_team_members":1,
-//     "start_date":1715619368,//int64
-//     "end_date":1715622968,//int64
