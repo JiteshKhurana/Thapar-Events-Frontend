@@ -80,6 +80,88 @@ export const editEventSchema = z.object({
       OfficialWebsite: z.string().min(2, "Too Short").max(50, "Too Long"),
     })
     .optional(),
+
+
+  date1: z
+    .object({
+      Date: z.date().optional(),
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().optional(),
+    })
+    .optional(),
+  date2: z
+    .object({
+      Date: z.date().optional(),
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().optional(),
+    })
+    .optional(),
+  date3: z
+    .object({
+      Date: z.date().optional(),
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().optional(),
+    })
+    .optional(),
+  date4: z
+    .object({
+      Date: z.date().optional(),
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().optional(),
+    })
+    .optional(),
+
+
+  round1: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+  round2: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+  round3: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+  round4: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+
+  prize1: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+  prize2: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+  prize3: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+  prize4: z
+    .object({
+      Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      Description: z.string().min(2, "Too Short").max(200, "Too Long").optional(),
+    })
+    .optional(),
+
 });
 
 export type FormFields = z.infer<typeof editUserSchema>;
