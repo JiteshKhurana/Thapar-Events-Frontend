@@ -71,7 +71,9 @@ export const editEventSchema = z.object({
   //     "Only .jpg, .jpeg, .png and .webp formats are supported."
   //   )
   //   .optional(),
-  hashtags: z.array(z.string().min(2, "Too Short").max(20, "Too Long")),
+  hashtags: z
+    .array(z.string().min(2, "Too Short").max(20, "Too Long"))
+    .optional(),
   social_media: z
     .object({
       Instagram: z.string().min(2, "Too Short").max(50, "Too Long"),
@@ -88,28 +90,6 @@ export const editEventSchema = z.object({
   //     Description: z.string().optional(),
   //   })
   //   .optional(),
-  // date2: z
-  //   .object({
-  //     Date: z.date().optional(),
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z.string().optional(),
-  //   })
-  //   .optional(),
-  // date3: z
-  //   .object({
-  //     Date: z.date().optional(),
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z.string().optional(),
-  //   })
-  //   .optional(),
-  // date4: z
-  //   .object({
-  //     Date: z.date().optional(),
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z.string().optional(),
-  //   })
-  //   .optional(),
-
   rounds: z.array(
     z
       .object({
@@ -123,87 +103,16 @@ export const editEventSchema = z.object({
       .optional()
   ),
 
-  // round1: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-  // round2: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-  // round3: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-  // round4: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-
-  // prize1: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-  // prize2: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-  // prize3: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
-  // prize4: z
-  //   .object({
-  //     Title: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-  //     Description: z
-  //       .string()
-  //       .min(2, "Too Short")
-  //       .max(200, "Too Long")
-  //       .optional(),
-  //   })
-  //   .optional(),
+  prizes: z.array(
+    z.object({
+      name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      description: z
+        .string()
+        .min(2, "Too Short")
+        .max(100, "Too Long")
+        .optional(),
+    })
+  ),
 });
 
 export type FormFields = z.infer<typeof editUserSchema>;
