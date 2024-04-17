@@ -5,7 +5,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -26,6 +26,7 @@ import { timeConverter } from "@/lib/helper";
 import CardShimmer from "@/components/CardShimmer";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   useEvents();
   const events = useSelector((store: RootState) => store.events.eventsList);
 
@@ -81,7 +82,7 @@ const Home: React.FC = () => {
             className="w-[60%]"
             plugins={[
               Autoplay({
-                delay: 3000,
+                delay: 5000,
               }),
             ]}
             opts={{
@@ -93,7 +94,17 @@ const Home: React.FC = () => {
               {events?.map(
                 (event) =>
                   event?.image && (
-                    <CarouselItem>
+                    <CarouselItem
+                      className="cursor-pointer"
+                      onClick={() =>
+                        navigate(
+                          "/events/" +
+                            event.title.split(" ").join("-").toLowerCase() +
+                            "/" +
+                            event._Eid
+                        )
+                      }
+                    >
                       <img src={event.image} />
                     </CarouselItem>
                   )
