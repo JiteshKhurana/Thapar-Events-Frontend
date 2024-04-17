@@ -5,35 +5,61 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { API_ENDPOINT } from "@/lib/constants";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { editCurrentEvent } from "@/store/eventDashboardSlice";
+import { useNavigate } from "react-router-dom";
 
 const EditEvent = () => {
+  const [success, setSuccess] = useState(false);
+  if (success) {
+    toast("Sucessfully Updated!! 🥳");
+    setSuccess(false);
+  }
+  const dispatch = useDispatch();
+  const event = useSelector(
+    (store: RootState) => store.eventDashboard.currentEvent
+  );
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     control,
-    // setError,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<editEventFormFields>({
     defaultValues: {
-      title: "",
-      description: "",
-      eligibility: "",
-      venue: "",
-      event_mode: "offline",
-      event_type: "technical",
-      visibility: "false",
+      title: event?.title,
+      description: event?.description,
+      start_date: new Date(),
+      end_date: new Date(),
+      eligibility: event?.eligibility,
+      event_mode: event?.event_mode,
+      event_type: event?.event_type,
+      visibility: event?.visibility,
+      venue: event?.venue,
+      hashtags: [event?.hashtags[0], event?.hashtags[1], event?.hashtags[2]],
       social_media: {
-        Instagram: "",
-        Facebook: "",
-        X: "",
-        OfficialWebsite: "",
+        Instagram: undefined,
+        Facebook: undefined,
+        X: undefined,
+        OfficialWebsite: undefined,
       },
+      deadlines: [
+        {
+          date: new Date(),
+          title: "",
+          description: "",
+        },
+      ],
       rounds: [
         {
           name: "",
@@ -47,13 +73,7 @@ const EditEvent = () => {
           description: "",
         },
       ],
-      deadlines: [
-        {
-          date: new Date(),
-          title: "",
-          description: "",
-        },
-      ],
+
       parameters: [
         {
           name: "",
@@ -80,13 +100,21 @@ const EditEvent = () => {
     name: "parameters",
     control,
   });
+  useEffect(() => {
+    const unloadCallback = (event: {
+      preventDefault: () => void;
+      returnValue: string;
+    }) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
 
-  const event = useSelector(
-    (store: RootState) => store.eventDashboard.currentEvent
-  );
-  const cookies = new Cookies(null, { path: "/" });
-  const token = cookies.get("token");
-  if (!event) return <div>Loading...</div>;
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+  if (!event) return <div>Loading Event...</div>;
+
   const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
     // Convert start_date and end_date to Unix timestamps
     const startTimestamp = Math.floor(data.start_date.getTime() / 1000);
@@ -117,14 +145,30 @@ const EditEvent = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res.data);
-      });
+        setSuccess(true);
+        dispatch(editCurrentEvent(res.data));
+      })
+      .catch((error) =>
+        setError("root", {
+          message: error.message,
+        })
+      );
   };
+
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
-      <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
-        Edit Event
-      </h1>
+      <div className="flex flex-row justify-between">
+        <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
+          Edit Event
+        </h1>
+        <Button
+          onClick={() => {
+            navigate(`/eventdashboard/${event._Eid}/eventposter`);
+          }}
+        >
+          Add Event Poster
+        </Button>
+      </div>
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label htmlFor="title">Event Title</Label>
@@ -144,7 +188,7 @@ const EditEvent = () => {
           )}
         </div>
         <div className="flex flex-row space-x-5 justify-between">
-          <div>
+          <div className="w-1/2">
             <Label htmlFor="description">Start Date</Label>
             <Input
               {...register("start_date", { valueAsDate: true })}
@@ -152,19 +196,12 @@ const EditEvent = () => {
             />
           </div>
 
-          <div>
+          <div className="w-1/2">
             <Label htmlFor="description">End Date</Label>
             <Input
               {...register("end_date", { valueAsDate: true })}
               type="datetime-local"
             />
-          </div>
-          <div className="flex items-center space-x-2">
-            <Switch id="visibility" />
-            <Label htmlFor="visibility">Visibility</Label>
-            {errors.visibility && (
-              <div className="text-red-500">{errors.visibility.message}</div>
-            )}
           </div>
         </div>
         <div>
@@ -258,41 +295,64 @@ const EditEvent = () => {
               placeholder="Hashtag #3"
             />
           </div>
-          {errors.hashtags && (
-            <div className="text-red-500">{errors.hashtags.message}</div>
-          )}
         </div>
         <div>
           <Label htmlFor="social_media">Social Media Handles</Label>
           <div className="flex flex-wrap gap-2">
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.Instagram")}
-              placeholder="Instagram"
-            />
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.Facebook")}
-              placeholder="Facebook"
-            />
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.X")}
-              placeholder="X"
-            />
-            <Input
-              className="w-full max-w-[400px]"
-              type="text"
-              {...register("social_media.OfficialWebsite")}
-              placeholder="Official Website"
-            />
+            <div>
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.Instagram")}
+                placeholder="Instagram"
+              />
+              {errors.social_media?.Instagram && (
+                <div className="text-red-500">
+                  {errors.social_media.Instagram.message}
+                </div>
+              )}
+            </div>
+            <div>
+              {" "}
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.Facebook")}
+                placeholder="Facebook"
+              />
+              {errors.social_media?.Facebook && (
+                <div className="text-red-500">
+                  {errors.social_media.Facebook.message}
+                </div>
+              )}
+            </div>
+            <div>
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.X")}
+                placeholder="X"
+              />
+              {errors.social_media?.X && (
+                <div className="text-red-500">
+                  {errors.social_media.X.message}
+                </div>
+              )}
+            </div>
+            <div>
+              <Input
+                className="w-full max-w-[400px]"
+                type="text"
+                {...register("social_media.OfficialWebsite")}
+                placeholder="Official Website"
+              />
+              {errors.social_media?.OfficialWebsite && (
+                <div className="text-red-500">
+                  {errors.social_media.OfficialWebsite.message}
+                </div>
+              )}
+            </div>
           </div>
-          {errors.social_media && (
-            <div className="text-red-500">{errors.social_media.message}</div>
-          )}
         </div>
 
         {/* ---------------------Rounds Container ----------------------------------*/}
@@ -336,6 +396,9 @@ const EditEvent = () => {
               Add New Round
             </Button>
           </div>
+          {errors.rounds && (
+            <div className="text-red-500">{errors.rounds.message}</div>
+          )}
         </div>
 
         {/* ---------------------Prizes Container ----------------------------------*/}
@@ -378,6 +441,9 @@ const EditEvent = () => {
               Add New Prize
             </Button>
           </div>
+          {errors.prizes && (
+            <div className="text-red-500">{errors.prizes.message}</div>
+          )}
         </div>
 
         {/* --------------------- Deadlines Container ----------------------------------*/}
@@ -472,8 +538,8 @@ const EditEvent = () => {
               Add New Parameter
             </Button>
           </div>
-          {errors.deadlines && (
-            <div className="text-red-500">{errors.deadlines.message}</div>
+          {errors.parameters && (
+            <div className="text-red-500">{errors.parameters.message}</div>
           )}
         </div>
 

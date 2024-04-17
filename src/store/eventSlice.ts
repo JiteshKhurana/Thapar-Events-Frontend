@@ -11,9 +11,9 @@ export interface Event {
   hashtags: string[];
   prizes: string[];
   soc_name: string;
-  team: boolean;
+  team: string;
   title: string;
-  visibility: boolean;
+  visibility: string;
   social_media: object;
   _Eid: string;
   _Sid: string;

@@ -71,18 +71,18 @@ export const editEventSchema = z.object({
   //     "Only .jpg, .jpeg, .png and .webp formats are supported."
   //   )
   //   .optional(),
-  hashtags: z
-    .array(z.string().min(2, "Too Short").max(20, "Too Long"))
-    .optional(),
-  social_media: z
-    .object({
-      Instagram: z.string().min(2, "Too Short").max(50, "Too Long"),
-      Facebook: z.string().min(2, "Too Short").max(50, "Too Long"),
-      X: z.string().min(2, "Too Short").max(50, "Too Long"),
-      OfficialWebsite: z.string().min(2, "Too Short").max(50, "Too Long"),
-    })
-    .optional(),
-
+  hashtags: z.array(z.string().max(20, "Too Long")).optional(),
+  social_media: z.object({
+    Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    X: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    OfficialWebsite: z
+      .string()
+      .min(0)
+      .url("Enter a URL")
+      .max(255)
+      .or(z.literal("")),
+  }),
   deadlines: z
     .array(
       z.object({
