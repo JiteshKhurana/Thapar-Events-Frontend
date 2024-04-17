@@ -1,5 +1,5 @@
 import { editEventFormFields, editEventSchema } from "@/schemas/schema";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -8,15 +8,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 // import DateTimePicker from "react-datetime-picker";
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
+import "react-datetime-picker/dist/DateTimePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
 // import { BiCalendar } from "react-icons/bi";
 
 const EditEvent = () => {
   const {
     register,
     handleSubmit,
+    control,
     // setError,
     formState: { errors, isSubmitting },
   } = useForm<editEventFormFields>({
@@ -35,64 +36,72 @@ const EditEvent = () => {
         OfficialWebsite: "",
       },
 
-      date1: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
-      date2: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
-      date3: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
-      date4: {
-        Date: new Date(),
-        Title: "",
-        Description: "",
-      },
+      // date1: {
+      //   Date: new Date(),
+      //   Title: "",
+      //   Description: "",
+      // },
+      // date2: {
+      //   Date: new Date(),
+      //   Title: "",
+      //   Description: "",
+      // },
+      // date3: {
+      //   Date: new Date(),
+      //   Title: "",
+      //   Description: "",
+      // },
+      // date4: {
+      //   Date: new Date(),
+      //   Title: "",
+      //   Description: "",
+      // },
 
-      round1: {
-        Title: "",
-        Description: "",
-      },
-      round2: {
-        Title: "",
-        Description: "",
-      },
-      round3: {
-        Title: "",
-        Description: "",
-      },
-      round4: {
-        Title: "",
-        Description: "",
-      },
+      rounds: [
+        {
+          name: "",
+          description: "",
+        },
+      ],
+      // round2: {
+      //   Title: "",
+      //   Description: "",
+      // },
+      // round3: {
+      //   Title: "",
+      //   Description: "",
+      // },
+      // round4: {
+      //   Title: "",
+      //   Description: "",
+      // },
 
-      prize1: {
-        Title: "",
-        Description: "",
-      },
-      prize2: {
-        Title: "",
-        Description: "",
-      },
-      prize3: {
-        Title: "",
-        Description: "",
-      },
-      prize4: {
-        Title: "",
-        Description: "",
-      },
-
+      // prize1: {
+      //   Title: "",
+      //   Description: "",
+      // },
+      // prize2: {
+      //   Title: "",
+      //   Description: "",
+      // },
+      // prize3: {
+      //   Title: "",
+      //   Description: "",
+      // },
+      // prize4: {
+      //   Title: "",
+      //   Description: "",
+      // },
     },
     resolver: zodResolver(editEventSchema),
   });
+
+  const { fields, append, remove } = useFieldArray({
+    name: "rounds",
+    control,
+  });
+  console.log(fields);
+
   const onSubmit: SubmitHandler<editEventFormFields> = (data) => {
     console.log(data);
   };
@@ -182,17 +191,20 @@ const EditEvent = () => {
         <div>
           <Label htmlFor="eligibility">Hashtags</Label>
           <div className="flex flex-row flex-wrap gap-2">
-            <Input className="w-full max-w-[400px]"
+            <Input
+              className="w-full max-w-[400px]"
               type="text"
               {...register("hashtags.0")}
               placeholder="Hashtag #1"
             />
-            <Input className="w-full max-w-[400px]"
+            <Input
+              className="w-full max-w-[400px]"
               type="text"
               {...register("hashtags.1")}
               placeholder="Hashtag #2"
             />
-            <Input className="w-full max-w-[400px]"
+            <Input
+              className="w-full max-w-[400px]"
               type="text"
               {...register("hashtags.2")}
               placeholder="Hashtag #3"
@@ -235,31 +247,39 @@ const EditEvent = () => {
           )}
         </div>
 
+        {/* ---------------------Deadlines Container ----------------------------------*/}
+        {/* <div className="flex flex-col gap-3">
+          <Label className="dates-heading text-xl font-semibold">
+            Important Dates and Deadlines */}
+        {/* </Label> */}
 
-
-{/* ---------------------Deadlines Container ----------------------------------*/}
-        <div className="datesanddeadlines flex flex-col gap-3">
-          <span className="dates-heading text-xl font-semibold">Important Dates and Deadlines</span>
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
+        {/* <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
             <span className="font-semibold">Date-1</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("date1.Title")}
-            /></span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Date:</span>
-              <input type="datetime-local" className="p-1 border rounded-md"
+            <span className="title flex items-center gap-1">
+              <span className="font-medium text-sm">Title:</span>
+              <Input
+                className="w-full max-w-[400px]"
+                {...register("date1.Title")}
+              />
+            </span>
+            <span className="title flex items-center gap-1">
+              <span className="font-medium text-sm">Date:</span>
+              <input
+                type="datetime-local"
+                className="p-1 border rounded-md"
                 {...register("date1.Date")}
               />
             </span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("date1.Description")}
-              /></span>
-          </div>
+            <span className="title flex flex-wrap items-start gap-1">
+              <span className="font-medium text-sm">Description:</span>
+              <Textarea
+                className="w-full max-w-[800px]"
+                {...register("date1.Description")}
+              />
+            </span>
+          </div> */}
 
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
+        {/* <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
             <span className="font-semibold">Date-2</span>
             <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
             <Input className="w-full max-w-[400px]" 
@@ -310,138 +330,139 @@ const EditEvent = () => {
             <Textarea className="w-full max-w-[800px]" 
               {...register("date4.Description")}
               /></span>
-          </div>
+          </div> */}
+        {/* </div> */}
 
-          
+        {/* ---------------------Rounds Container ----------------------------------*/}
+        <div>
+          <Label>Rounds</Label>
+          <div className="flex flex-col space-y-5">
+            {fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <span className="font-semibold">Round {index + 1}</span>
+                  <Input
+                    {...register(`rounds.${index}.name` as const)}
+                    type="text"
+                    placeholder={`Round ${index + 1} Name`}
+                  />
+                  <Textarea
+                    {...register(`rounds.${index}.description` as const)}
+                    placeholder={`Description of Round ${index + 1}`}
+                  />
+                </div>
+
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => remove(index)}
+                >
+                  Remove Round
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                append({
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Round
+            </Button>
+          </div>
         </div>
 
-{/* ---------------------Rounds Container ----------------------------------*/}
-        <div className="rounds flex flex-col gap-3">
-          <span className="rounds-heading text-xl font-semibold">Rounds</span>
-
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-1</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round1.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round1.Description")}
-            /></span>
-          </div>
-          
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-2</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round2.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round2.Description")}
-            /></span>
-          </div>
-          
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-3</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round3.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round3.Description")}
-            /></span>
-          </div>
-          
-
-          <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
-            <span className="font-semibold">Round-4</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-            {...register("round4.Title")}
-            /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-            {...register("round4.Description")}
-            /></span>
-          </div>
-          
-        </div>
-
-{/* ---------------------Prizes Container ----------------------------------*/}
+        {/* ---------------------Prizes Container ----------------------------------
         <div className="prizes flex flex-col gap-3">
-
           <span className="prizes-heading text-xl font-semibold">Prizes</span>
-
 
           <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
             <span className="font-semibold">Prize-1</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize1.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize1.Description")}
-            /></span>
+            <span className="title flex items-center gap-1">
+              <span className="font-medium text-sm">Title:</span>
+              <Input
+                className="w-full max-w-[400px]"
+                {...register("prize1.Title")}
+              />
+            </span>
+            <span className="title flex flex-wrap items-start gap-1">
+              <span className="font-medium text-sm">Description:</span>
+              <Textarea
+                className="w-full max-w-[800px]"
+                {...register("prize1.Description")}
+              />
+            </span>
           </div>
-
 
           <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
             <span className="font-semibold">Prize-2</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize2.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize2.Description")}
-            /></span>
+            <span className="title flex items-center gap-1">
+              <span className="font-medium text-sm">Title:</span>
+              <Input
+                className="w-full max-w-[400px]"
+                {...register("prize2.Title")}
+              />
+            </span>
+            <span className="title flex flex-wrap items-start gap-1">
+              <span className="font-medium text-sm">Description:</span>
+              <Textarea
+                className="w-full max-w-[800px]"
+                {...register("prize2.Description")}
+              />
+            </span>
           </div>
-
 
           <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
             <span className="font-semibold">Prize-3</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize3.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize3.Description")}
-            /></span>
+            <span className="title flex items-center gap-1">
+              <span className="font-medium text-sm">Title:</span>
+              <Input
+                className="w-full max-w-[400px]"
+                {...register("prize3.Title")}
+              />
+            </span>
+            <span className="title flex flex-wrap items-start gap-1">
+              <span className="font-medium text-sm">Description:</span>
+              <Textarea
+                className="w-full max-w-[800px]"
+                {...register("prize3.Description")}
+              />
+            </span>
           </div>
-
 
           <div className="event-round border rounded-md flex flex-col gap-1 p-1 sm:p-3">
             <span className="font-semibold">Prize-4</span>
-            <span className="title flex items-center gap-1"><span className="font-medium text-sm">Title:</span>  
-            <Input className="w-full max-w-[400px]" 
-              {...register("prize4.Title")}
-              /></span>
-            <span className="title flex flex-wrap items-start gap-1"><span className="font-medium text-sm">Description:</span>
-            <Textarea className="w-full max-w-[800px]" 
-              {...register("prize4.Description")}
-            /></span>
+            <span className="title flex items-center gap-1">
+              <span className="font-medium text-sm">Title:</span>
+              <Input
+                className="w-full max-w-[400px]"
+                {...register("prize4.Title")}
+              />
+            </span>
+            <span className="title flex flex-wrap items-start gap-1">
+              <span className="font-medium text-sm">Description:</span>
+              <Textarea
+                className="w-full max-w-[800px]"
+                {...register("prize4.Description")}
+              />
+            </span>
           </div>
+        </div> */}
 
-
-        </div>
-
-
-        <Button disabled={isSubmitting} type="submit" className="py-3 px-10 ">
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          className="py-3 px-10 w-full"
+        >
           {isSubmitting ? "Loading..." : "Save Changes"}
         </Button>
         {errors.root && (
           <div className="text-red-500">{errors.root.message}</div>
         )}
-
-
       </form>
     </div>
   );
