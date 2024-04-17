@@ -58,7 +58,7 @@ export const editEventSchema = z.object({
   eligibility: z.string().min(2, "Too Short").max(50, "Too Long"),
   event_type: z.string({ required_error: "Please Select Event Type" }),
   event_mode: z.string({ required_error: "Please Select Event Mode" }),
-  visibility: z.boolean(),
+  visibility: z.string(),
   venue: z
     .string({ required_error: "Please Enter Venue" })
     .min(2, "Too Short")
@@ -97,9 +97,9 @@ export const editEventSchema = z.object({
     )
     .optional(),
 
-  rounds: z.array(
-    z
-      .object({
+  rounds: z
+    .array(
+      z.object({
         name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
         description: z
           .string()
@@ -107,40 +107,37 @@ export const editEventSchema = z.object({
           .max(200, "Too Long")
           .optional(),
       })
-      .optional()
-  ),
+    )
+    .optional(),
 
-  prizes: z.array(
-    z.object({
-      name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      description: z
-        .string()
-        .min(2, "Too Short")
-        .max(100, "Too Long")
-        .optional(),
-    })
-  ),
+  prizes: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(100, "Too Long")
+          .optional(),
+      })
+    )
+    .optional(),
+
+  parameters: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(100, "Too Long")
+          .optional(),
+      })
+    )
+    .optional(),
 });
 
 export type FormFields = z.infer<typeof editUserSchema>;
 export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
-
-// "parameters":[
-//   {
-//       "name":"blood group",
-//       "description":"eg a+,b-"
-//   },
-//   {
-//       "name":"height",
-//       "description":"in cm"
-//   },
-//   {
-//       "name":"weight",
-//       "description":"in kg"
-//   }
-// ],
-//     "team":false,
-//     //"max_team_members":2,
-//     //"min_team_members":1,

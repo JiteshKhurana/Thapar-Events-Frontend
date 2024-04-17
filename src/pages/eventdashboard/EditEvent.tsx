@@ -22,7 +22,7 @@ const EditEvent = () => {
       venue: "",
       event_mode: "offline",
       event_type: "technical",
-      visibility: true,
+      visibility: "false",
       social_media: {
         Instagram: "",
         Facebook: "",
@@ -49,6 +49,12 @@ const EditEvent = () => {
           description: "",
         },
       ],
+      parameters: [
+        {
+          name: "",
+          description: "",
+        },
+      ],
     },
     resolver: zodResolver(editEventSchema),
   });
@@ -63,6 +69,10 @@ const EditEvent = () => {
   });
   const fieldArray3 = useFieldArray({
     name: "deadlines",
+    control,
+  });
+  const fieldArray4 = useFieldArray({
+    name: "parameters",
     control,
   });
 
@@ -138,36 +148,51 @@ const EditEvent = () => {
             <div className="text-red-500">{errors.venue.message}</div>
           )}
         </div>
-        <div>
-          <Label htmlFor="event_mode">Event Mode</Label>
-          <select
-            {...register("event_mode")}
-            className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
-          >
-            <option value="online">Online</option>
-            <option value="offline">Offline</option>
-            <option value="hybrid">Hybrid</option>
-          </select>
-          {errors.event_mode && (
-            <div className="text-red-500">{errors.event_mode.message}</div>
-          )}
-        </div>
-        <div>
-          <Label htmlFor="event_type">Event Type</Label>
-          <select
-            {...register("event_type")}
-            className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
-          >
-            <option value="technical">Technical</option>
-            <option value="cultural">Cultural</option>
-            <option value="sports">Sports</option>
-            <option value="workshop">Workshop</option>
-            <option value="hackathon">Hackathon</option>
-            <option value="other">Other</option>
-          </select>
-          {errors.event_type && (
-            <div className="text-red-500">{errors.event_type.message}</div>
-          )}
+        <div className="flex flex-row space-x-5">
+          <div className="w-1/2">
+            <Label htmlFor="event_mode">Event Mode</Label>
+            <select
+              {...register("event_mode")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="online">Online</option>
+              <option value="offline">Offline</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+            {errors.event_mode && (
+              <div className="text-red-500">{errors.event_mode.message}</div>
+            )}
+          </div>
+          <div className="w-1/2">
+            <Label htmlFor="event_type">Event Type</Label>
+            <select
+              {...register("event_type")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="technical">Technical</option>
+              <option value="cultural">Cultural</option>
+              <option value="sports">Sports</option>
+              <option value="workshop">Workshop</option>
+              <option value="hackathon">Hackathon</option>
+              <option value="other">Other</option>
+            </select>
+            {errors.event_type && (
+              <div className="text-red-500">{errors.event_type.message}</div>
+            )}
+          </div>
+          <div className="w-1/2">
+            <Label htmlFor="visibility">Event Visibility</Label>
+            <select
+              {...register("visibility")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="true">Public</option>
+              <option value="false">Private</option>
+            </select>
+            {errors.visibility && (
+              <div className="text-red-500">{errors.visibility.message}</div>
+            )}
+          </div>
         </div>
 
         <div>
@@ -359,6 +384,51 @@ const EditEvent = () => {
               }
             >
               Add New Deadline
+            </Button>
+          </div>
+          {errors.deadlines && (
+            <div className="text-red-500">{errors.deadlines.message}</div>
+          )}
+        </div>
+
+        {/* --------------------- Parameters Container ----------------------------------*/}
+
+        <div>
+          <Label>Extra Paramaters</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray4.fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <Input
+                    {...register(`parameters.${index}.name` as const)}
+                    type="text"
+                    placeholder={`Extra Parameter Name e.g-height`}
+                  />
+                  <Textarea
+                    {...register(`parameters.${index}.description` as const)}
+                    placeholder={`Description of Extra Parameter e.g-Height of the participant in cm.`}
+                  />
+                </div>
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => fieldArray4.remove(index)}
+                >
+                  Remove Parameter
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray4.append({
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Parameter
             </Button>
           </div>
           {errors.deadlines && (
