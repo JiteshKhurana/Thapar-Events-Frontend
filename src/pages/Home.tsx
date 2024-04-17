@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Slider1 from "../assets/slider.png";
 import Autoplay from "embla-carousel-autoplay";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -79,7 +78,7 @@ const Home: React.FC = () => {
             Upcoming Events
           </h2>
           <Carousel
-            className="w-[70%]"
+            className="w-[60%]"
             plugins={[
               Autoplay({
                 delay: 3000,
@@ -91,15 +90,14 @@ const Home: React.FC = () => {
             }}
           >
             <CarouselContent>
-              <CarouselItem>
-                <img src={Slider1} />
-              </CarouselItem>
-              <CarouselItem>
-                <img src={Slider1} />
-              </CarouselItem>
-              <CarouselItem>
-                <img src={Slider1} />
-              </CarouselItem>
+              {events?.map(
+                (event) =>
+                  event?.image && (
+                    <CarouselItem>
+                      <img src={event.image} />
+                    </CarouselItem>
+                  )
+              )}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />

@@ -7,10 +7,16 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import { toast } from "sonner";
+import { API_ENDPOINT } from "@/lib/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const AddEventPoster = () => {
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
+  const event = useSelector(
+    (store: RootState) => store.eventDashboard.currentEvent
+  );
   const {
     register,
     handleSubmit,
@@ -28,7 +34,7 @@ const AddEventPoster = () => {
     toast("Sucessfully Updated!! 🥳");
     setSuccess(false);
   }
-
+  if (!event) return <div>Loading...</div>;
   const onSubmit: SubmitHandler<addEventPosterFields> = async (data) => {
     const formData = new FormData();
     if (data.photos) {
@@ -37,13 +43,9 @@ const AddEventPoster = () => {
 
     console.log(formData);
     await axios
-      .post(
-        "https://thapar-event-management-system-production.up.railway.app/event/poster/upload/661fc3dc762f5c3b7b02e89b",
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(API_ENDPOINT + "event/poster/upload/" + event?._Eid, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(() => {
         setSuccess(true);
       })
