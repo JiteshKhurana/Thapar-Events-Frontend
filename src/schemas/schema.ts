@@ -38,13 +38,24 @@ export const editSocietySchema = z.object({
   about: z.string().min(10, "Too Short").max(1000, "Too Long"),
 });
 
-// const MAX_FILE_SIZE = 50000000;
+// const MAX_FILE_SIZE = 500000000000;
 // const ACCEPTED_IMAGE_TYPES = [
 //   "image/jpeg",
 //   "image/jpg",
 //   "image/png",
 //   "image/webp",
 // ];
+
+export const addEventPosterSchema = z.object({
+  photos: z
+    .any()
+    // .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 50MB.`)
+    // .refine(
+    //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    //   "Only .jpg, .jpeg, .png and .webp formats are supported."
+    // )
+    .optional(),
+});
 
 export const editEventSchema = z.object({
   title: z.string().min(2, "Too Short").max(50, "Too Long"),
@@ -63,14 +74,6 @@ export const editEventSchema = z.object({
     .string({ required_error: "Please Enter Venue" })
     .min(2, "Too Short")
     .max(50, "Too Long"),
-  // image: z
-  //   .any()
-  //   .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
-  //   .refine(
-  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-  //     "Only .jpg, .jpeg, .png and .webp formats are supported."
-  //   )
-  //   .optional(),
   hashtags: z.array(z.string().max(20, "Too Long")).optional(),
   social_media: z.object({
     Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
@@ -141,3 +144,4 @@ export type FormFields = z.infer<typeof editUserSchema>;
 export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
+export type addEventPosterFields = z.infer<typeof addEventPosterSchema>;

@@ -122,7 +122,7 @@ const EventsDetail: React.FC = () => {
         <div className="col-span-8 space-y-2">
           <div className="flex gap-5 p-5  bg-white dark:bg-black shadow-xl border rounded-lg">
             <Avatar className="h-28 w-28">
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src={event.image} />
               <AvatarFallback>Event Pic</AvatarFallback>
             </Avatar>
             <div className="flex flex-col space-y-2 overflow-hidden">
