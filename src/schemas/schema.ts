@@ -36,7 +36,55 @@ export const userEventRegisterSchemas = z.object({
 export const editSocietySchema = z.object({
   name: z.string().min(2, "Too Short").max(40, "Too Long"),
   about: z.string().min(10, "Too Short").max(1000, "Too Long"),
+  members: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(40, "Too Long"),
+        email: z.string().email(),
+        position: z.string().min(2, "Too Short").max(40, "Too Long"),
+        instagram: z.string().min(0).url("Enter a URL").max(255),
+        linkedin: z.string().min(0).url("Enter a URL").max(255),
+      })
+    )
+    .optional(),
+  faculty: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(40, "Too Long"),
+        email: z.string().email(),
+        position: z.string().min(2, "Too Short").max(40, "Too Long"),
+        linkedin: z.string().min(0).url("Enter a URL").max(255),
+      })
+    )
+    .optional(),
 });
+
+// "members":[
+//   {   "name":"jitesh",
+//       "email":"jhur@gam",
+//       "position":"gensec",
+//       "instagram":"insta@12",
+//       "linkedin":"linkedin@123"
+//   },
+//   {   "name":"noname",
+//       "email":"noname1@gmail.com",
+//       "position":"financesec",
+//       "instagram":"insta@15634822",
+//       "linkedin":"linkedin@jdsuahjks123"
+//   }
+// ],
+// "faculty":[
+//   {   "name":"dd",
+//       "email":"jhur@gam",
+//       "position":"coordinator",
+//       "linkedin":"linkedin@123"
+//   },
+//   {   "name":"khan sir ",
+//       "email":"noname1@gmail.com",
+//       "position":"coordinator",
+//       "linkedin":"linkedin@jdsuahjks123"
+//   }
+// ]
 
 // const MAX_FILE_SIZE = 500000000000;
 // const ACCEPTED_IMAGE_TYPES = [

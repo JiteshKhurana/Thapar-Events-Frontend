@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { editSocietyFormFields, editSocietySchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -24,73 +24,10 @@ import Cookies from "universal-cookie";
 import { useState } from "react";
 import { toast } from "sonner";
 import { editSociety } from "@/store/societyProfileSlice";
-
-// interface Member {
-//   id: number;
-//   name: string;
-//   position: string;
-//   email: string;
-//   linkedin: string;
-// }
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 const EditSocietyProfile = () => {
-  // State to hold the list of objects
-  // const [socMembers, setMembers] = useState<Member[]>([]);
-
-  // Function to add an object to the list
-  // const addMember = () => {
-  //   const newMember: Member = {
-  //     id: socMembers.length,
-  //     name: "",
-  //     position: "",
-  //     email: "",
-  //     linkedin: "",
-  //   };
-  //   setMembers([...socMembers, newMember]);
-  // };
-
-  // // Function to edit an object in the list
-  // const editMember = (
-  //   id: number,
-  //   newName: string,
-  //   newPosition: string,
-  //   newEmail: string,
-  //   newLinkedin: string
-  // ) => {
-  //   const updatedMembers = socMembers.map((member) => {
-  //     if (member.id === id) {
-  //       return {
-  //         ...member,
-  //         name: newName,
-  //         position: newPosition,
-  //         email: newEmail,
-  //         linkedin: newLinkedin,
-  //       };
-  //     }
-  //     return member;
-  //   });
-
-  //   setMembers(updatedMembers);
-  // };
-
-  // const deleteMember = (id: number) => {
-  //   const updatedMembers = socMembers.filter((Member) => Member.id !== id);
-  //   // Update IDs of remaining socMembers to match their new indices
-  //   const updatedMembersWithNewIds = updatedMembers.map((Member, index) => ({
-  //     ...Member,
-  //     id: index,
-  //   }));
-  //   setMembers(updatedMembersWithNewIds);
-  // };
-
-  // // Function to reorder socMembers in the list
-  // const reorderMembers = (oldIndex: number, newIndex: number) => {
-  //   const updatedMembers = [...socMembers];
-  //   const movedMember = updatedMembers.splice(oldIndex, 1)[0];
-  //   updatedMembers.splice(newIndex, 0, movedMember);
-  //   setMembers(updatedMembers);
-  // };
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const society = useSelector(
@@ -103,11 +40,29 @@ const EditSocietyProfile = () => {
     register,
     handleSubmit,
     setError,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<editSocietyFormFields>({
     defaultValues: {
       name: society?.name,
       about: society?.about,
+      members: [
+        {
+          name: "",
+          email: "",
+          position: "",
+          instagram: "",
+          linkedin: "",
+        },
+      ],
+      faculty: [
+        {
+          name: "",
+          email: "",
+          position: "",
+          linkedin: "",
+        },
+      ],
     },
     resolver: zodResolver(editSocietySchema),
   });
@@ -134,6 +89,14 @@ const EditSocietyProfile = () => {
         })
       );
   };
+  const fieldArray1 = useFieldArray({
+    name: "members",
+    control,
+  });
+  const fieldArray2 = useFieldArray({
+    name: "faculty",
+    control,
+  });
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="heading flex items-center gap-4 py-2">
@@ -161,109 +124,137 @@ const EditSocietyProfile = () => {
           <div className="text-red-500">{errors.about.message}</div>
         )}
 
-        {/* <div className="rounded-lg px-5 py-3">
-        <span className="flex font-semibold text-xl my-3 ">Members</span>
-        <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
-          {socMembers.map((member, index) => (
-            <div className="society-event-card flex flex-wrap p-3 pr-6 w-full border-[1px] border-gray-400 rounded-xl justify-between">
-              <div className="left-data flex">
-                <img
-                  className="active-event-img w-[100px] h-[100px] rounded-md "
-                  src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712689058/profilephoto_txeeke.jpg"
-                ></img>
-                <div className="info flex flex-col justify-between mx-4">
-                  <input
-                    className="dark:bg-black border p-2 rounded-md max-w-[400px] w-full"
-                    type="text"
-                    value={member.name}
-                    onChange={(e) =>
-                      editMember(
-                        member.id,
-                        e.target.value,
-                        member.position,
-                        member.email,
-                        member.linkedin
-                      )
-                    }
-                    placeholder="Member Name"
-                  />
-                  <div className="detail flex flex-col my-1 ">
-                    <input
-                      className="dark:bg-black border p-2 rounded-md max-w-[400px] w-full"
+        {/* Team Members */}
+        <div>
+          <Label>Team Members</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray1.fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="space-y-5 flex flex-row justify-between space-x-5"
+              >
+                <div className="w-full my-3">
+                  <Label>Member {index + 1}</Label>
+                  <div className="space-y-2">
+                    <Input
+                      {...register(`members.${index}.name` as const)}
                       type="text"
-                      value={member.position}
-                      onChange={(e) =>
-                        editMember(
-                          member.id,
-                          member.name,
-                          e.target.value,
-                          member.email,
-                          member.linkedin
-                        )
-                      }
-                      placeholder="Member Position"
+                      placeholder={`Name of Member ${index + 1}`}
                     />
-                    <div className="member-profiles flex items-center gap-6 m-1">
-                      <span className="email flex items-center">
-                        <BiEnvelope className="text-xl m-1" />
-                        <input
-                          className="dark:bg-black border p-2 rounded-md max-w-[400px] w-full"
-                          type="text"
-                          value={member.email}
-                          onChange={(e) =>
-                            editMember(
-                              member.id,
-                              member.name,
-                              member.position,
-                              e.target.value,
-                              member.linkedin
-                            )
-                          }
-                          placeholder="Email"
-                        />
-                      </span>
-                      <span className="linkedIn flex items-center">
-                        <BiLogoLinkedinSquare className="text-xl m-1" />
-                        <input
-                          className="dark:bg-black border p-2 rounded-md max-w-[400px] w-full"
-                          type="text"
-                          value={member.linkedin}
-                          onChange={(e) =>
-                            editMember(
-                              member.id,
-                              member.name,
-                              member.position,
-                              member.email,
-                              e.target.value
-                            )
-                          }
-                          placeholder="LinkedIn Profile"
-                        />
-                      </span>
-                    </div>
+                    <Input
+                      type="email"
+                      {...register(`members.${index}.email` as const)}
+                      placeholder={`Email of Member ${index + 1}`}
+                    />
+                    <Input
+                      {...register(`members.${index}.position` as const)}
+                      type="text"
+                      placeholder={`Position of Member ${index + 1}`}
+                    />
+                    <Input
+                      type="text"
+                      {...register(`members.${index}.instagram` as const)}
+                      placeholder={`Instagram of Member ${index + 1}`}
+                    />
+                    <Input
+                      type="text"
+                      {...register(`members.${index}.linkedin` as const)}
+                      placeholder={`Linkedin of Member ${index + 1}`}
+                    />
                   </div>
                 </div>
+                <Button
+                  className="my-auto"
+                  type="button"
+                  onClick={() => fieldArray1.remove(index)}
+                >
+                  Remove Member
+                </Button>
               </div>
-              <div className="right-data flex flex-wrap min-h-full items-center justify-around gap-1">
-                <Button onClick={() => deleteMember(member.id)}>Delete</Button>
-                {index > 0 && (
-                  <Button onClick={() => reorderMembers(index, index - 1)}>
-                    Move Up
-                  </Button>
-                )}
-                {index < socMembers.length - 1 && (
-                  <Button onClick={() => reorderMembers(index, index + 1)}>
-                    Move Down
-                  </Button>
-                )}
-              </div>
-            </div>
-          ))}
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray1.append({
+                  name: "",
+                  email: "",
+                  position: "",
+                  instagram: "",
+                  linkedin: "",
+                })
+              }
+            >
+              Add New Member
+            </Button>
+          </div>
+          {errors.members && (
+            <div className="text-red-500">{errors.members.message}</div>
+          )}
         </div>
-        <Button className="p-5 flex items-center gap-1" onClick={addMember}>
-          Add Member <BiPlus className="text-xl" />{" "}
-        </Button>
-      </div> */}
+
+        {/* Faculty Members */}
+        <div>
+          <Label>Faculty Members</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray2.fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="space-y-5 flex flex-row justify-between space-x-5"
+              >
+                <div className="w-full my-3">
+                  <Label>Faculty {index + 1}</Label>
+                  <div className="space-y-2">
+                    <Input
+                      {...register(`faculty.${index}.name` as const)}
+                      type="text"
+                      placeholder={`Name of Faculty ${index + 1}`}
+                    />
+                    <Input
+                      type="email"
+                      {...register(`faculty.${index}.email` as const)}
+                      placeholder={`Email of Faculty ${index + 1}`}
+                    />
+                    <Input
+                      {...register(`faculty.${index}.position` as const)}
+                      type="text"
+                      placeholder={`Position of Faculty ${index + 1}`}
+                    />
+                    <Input
+                      type="text"
+                      {...register(`faculty.${index}.linkedin` as const)}
+                      placeholder={`Linkedin of Faculty ${index + 1}`}
+                    />
+                  </div>
+                </div>
+                <Button
+                  className="my-auto"
+                  type="button"
+                  onClick={() => fieldArray2.remove(index)}
+                >
+                  Remove Faculty
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray2.append({
+                  name: "",
+                  email: "",
+                  position: "",
+                  linkedin: "",
+                })
+              }
+            >
+              Add New Faculty
+            </Button>
+          </div>
+          {errors.faculty && (
+            <div className="text-red-500">{errors.faculty.message}</div>
+          )}
+        </div>
 
         <div className="savechanges w-full flex justify-between items-center px-10 py-5">
           <AlertDialog>
