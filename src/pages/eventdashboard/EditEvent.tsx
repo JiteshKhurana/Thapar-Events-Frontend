@@ -6,6 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { API_ENDPOINT } from "@/lib/constants";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import Cookies from "universal-cookie";
 
 const EditEvent = () => {
   const {
@@ -76,8 +81,44 @@ const EditEvent = () => {
     control,
   });
 
-  const onSubmit: SubmitHandler<editEventFormFields> = (data) => {
-    console.log(data);
+  const event = useSelector(
+    (store: RootState) => store.eventDashboard.currentEvent
+  );
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
+  if (!event) return <div>Loading...</div>;
+  const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
+    // Convert start_date and end_date to Unix timestamps
+    const startTimestamp = Math.floor(data.start_date.getTime() / 1000);
+    const endTimestamp = Math.floor(data.end_date.getTime() / 1000);
+
+    // Convert each date in the deadlines array to Unix timestamps
+    const updatedDeadlines = data.deadlines?.map((deadline) => {
+      if (deadline.date) {
+        return {
+          ...deadline,
+          date: Math.floor(deadline.date.getTime() / 1000),
+        };
+      }
+      return deadline;
+    });
+
+    // Update the data object with Unix timestamps
+    const updatedData = {
+      ...data,
+      start_date: startTimestamp,
+      end_date: endTimestamp,
+      deadlines: updatedDeadlines,
+    };
+
+    console.log(updatedData);
+    await axios
+      .post(API_ENDPOINT + "event/update/" + event._Eid, updatedData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   };
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">

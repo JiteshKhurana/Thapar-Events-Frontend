@@ -59,6 +59,16 @@ const EventDashboardRoot = () => {
               ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
               : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
           }}
+          to={"eventposter"}
+        >
+          Add Event Poster
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => {
+            return isActive
+              ? " min-w-[80%] max-w-[300px] bg-black text-white p-2  rounded-lg text-center text-sm"
+              : " min-w-[80%] max-w-[300px] bg-transparent hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white  transition-all duration-300 border p-2 rounded-md text-sm text-center  ";
+          }}
           to={"editregistrationform"}
         >
           Registration Form
