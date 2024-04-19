@@ -19,11 +19,13 @@ const EventComponent = ({ event }: { event: Event }) => {
             event._Eid
         )
       }
-      className="w-full hover:scale-105 transition-all duration-300 rounded-lg"
+      className="w-full hover:scale-110 transition-all duration-300 rounded-lg"
     >
       <CardHeader className="flex flex-col ">
-        <CardTitle className="flex justify-center items-center overflow-scroll no-scrollbar font-semibold text-xl">{event.title}</CardTitle>
-        <CardDescription className="text-sm text-black text-center">
+        <CardTitle className="flex justify-center items-center overflow-scroll no-scrollbar font-semibold text-2xl">
+          {event.title}
+        </CardTitle>
+        <CardDescription className="text-sm text-white text-center">
           {event.soc_name}
         </CardDescription>
       </CardHeader>

@@ -22,7 +22,7 @@ import useEvents from "@/hooks/useEvents";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import EventComponent from "./EventComponent";
-import { timeConverter } from "@/lib/helper";
+import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import CardShimmer from "@/components/CardShimmer";
 
 const Home: React.FC = () => {
@@ -53,7 +53,8 @@ const Home: React.FC = () => {
             <br />
             Workshops,
             <br />
-            Fests &<br /> more!
+            Fests at
+            <br /> Thapar!
           </h1>
           <p className="flex flex-row sm:flex-col flex-wrap text-xl text-gray-300 font-light self-center sm:self-start">
             <span>Make the most of every opportunity to learn, enjoy</span>
@@ -66,9 +67,7 @@ const Home: React.FC = () => {
               </Button>
             </Link>
             <Link to={"/events"}>
-              <Button className="text-lg w-[250px] p-6">
-                View Past Events
-              </Button>
+              <Button className="text-lg w-[250px] p-6">View Societies</Button>
             </Link>
           </div>
         </div>
@@ -79,7 +78,7 @@ const Home: React.FC = () => {
             Upcoming Events
           </h2>
           <Carousel
-            className="w-[60%]"
+            className="w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
             plugins={[
               Autoplay({
                 delay: 5000,
@@ -91,24 +90,26 @@ const Home: React.FC = () => {
             }}
           >
             <CarouselContent>
-              {events?.map(
-                (event) =>
-                  event?.image && (
-                    <CarouselItem
-                      className="cursor-pointer"
-                      onClick={() =>
-                        navigate(
-                          "/events/" +
-                            event.title.split(" ").join("-").toLowerCase() +
-                            "/" +
-                            event._Eid
-                        )
-                      }
-                    >
-                      <img src={event.image} />
-                    </CarouselItem>
-                  )
-              )}
+              {events
+                ?.filter((event) => upcomingOrPast(event.end_date))
+                .map(
+                  (event) =>
+                    event?.image && (
+                      <CarouselItem
+                        className="cursor-pointer w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
+                        onClick={() =>
+                          navigate(
+                            "/events/" +
+                              event.title.split(" ").join("-").toLowerCase() +
+                              "/" +
+                              event._Eid
+                          )
+                        }
+                      >
+                        <img src={event.image} />
+                      </CarouselItem>
+                    )
+                )}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
