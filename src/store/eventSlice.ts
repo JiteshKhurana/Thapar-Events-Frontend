@@ -1,15 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Deadlines {
+  date: Date;
+  title: string;
+  description: string;
+}
+interface Rounds {
+  name: string;
+  description: string;
+}
+interface Prizes {
+  name: string;
+  description: string;
+}
+interface Parameters {
+  name: string;
+  description: string;
+}
+
 export interface Event {
-  start_date: number;
-  end_date: number;
+  start_date: Date;
+  end_date: Date;
   description: string;
   eligibility: string;
   email: string;
   event_mode: string;
   event_type: string;
   hashtags: string[];
-  prizes: string[];
   soc_name: string;
   team: string;
   title: string;
@@ -20,6 +37,10 @@ export interface Event {
   _Uid: string;
   image: string;
   venue: string;
+  deadlines: Deadlines[];
+  rounds: Rounds[];
+  prizes: Prizes[];
+  parameters: Parameters[];
 }
 export interface EventState {
   eventsList: Event[] | null;

@@ -16,7 +16,6 @@ const SocietyDashboard: React.FC = () => {
   const societyEvents = useSelector(
     (store: RootState) => store.society.currentSocietyEvents
   );
-  if (!societyEvents) return <h1>No Events to display</h1>;
   return (
     <div className="bg-white dark:bg-black border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="welcome flex justify-between items-center pt-5 px-1 lg:px-5">

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { editCurrentEvent } from "@/store/eventDashboardSlice";
 import { useNavigate } from "react-router-dom";
+import CardShimmer from "@/components/CardShimmer";
 
 const EditEvent = () => {
   const [success, setSuccess] = useState(false);
@@ -39,47 +40,22 @@ const EditEvent = () => {
     defaultValues: {
       title: event?.title,
       description: event?.description,
-      start_date: new Date(),
-      end_date: new Date(),
+      start_date: new Date(Number(event?.start_date) * 1000),
+      end_date: new Date(Number(event?.end_date) * 1000),
       eligibility: event?.eligibility,
       event_mode: event?.event_mode,
       event_type: event?.event_type,
       visibility: event?.visibility,
       venue: event?.venue,
       hashtags: [event?.hashtags[0], event?.hashtags[1], event?.hashtags[2]],
-      social_media: {
-        Instagram: undefined,
-        Facebook: undefined,
-        X: undefined,
-        OfficialWebsite: undefined,
-      },
-      deadlines: [
-        {
-          date: new Date(),
-          title: "",
-          description: "",
-        },
-      ],
-      rounds: [
-        {
-          name: "",
-          description: "",
-        },
-      ],
-
-      prizes: [
-        {
-          name: "",
-          description: "",
-        },
-      ],
-
-      parameters: [
-        {
-          name: "",
-          description: "",
-        },
-      ],
+      social_media: event?.social_media,
+      deadlines: event?.deadlines.map((deadline) => ({
+        ...deadline,
+        date: new Date(Number(deadline.date) * 1000), // Convert each deadline date
+      })),
+      rounds: event?.rounds,
+      prizes: event?.prizes,
+      parameters: event?.parameters,
     },
     resolver: zodResolver(editEventSchema),
   });
@@ -113,7 +89,12 @@ const EditEvent = () => {
     window.addEventListener("beforeunload", unloadCallback);
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
-  if (!event) return <div>Loading Event...</div>;
+  if (!event)
+    return (
+      <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
+        <CardShimmer />
+      </div>
+    );
 
   const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
     // Convert start_date and end_date to Unix timestamps

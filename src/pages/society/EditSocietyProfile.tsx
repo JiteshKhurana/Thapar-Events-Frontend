@@ -46,23 +46,8 @@ const EditSocietyProfile = () => {
     defaultValues: {
       name: society?.name,
       about: society?.about,
-      members: [
-        {
-          name: "",
-          email: "",
-          position: "",
-          instagram: "",
-          linkedin: "",
-        },
-      ],
-      faculty: [
-        {
-          name: "",
-          email: "",
-          position: "",
-          linkedin: "",
-        },
-      ],
+      members: society?.members,
+      faculty: society?.faculty,
     },
     resolver: zodResolver(editSocietySchema),
   });

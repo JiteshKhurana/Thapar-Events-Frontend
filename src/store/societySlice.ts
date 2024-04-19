@@ -1,5 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Member {
+  name: string;
+  email: string;
+  position: string;
+  instagram: string;
+  linkedin: string;
+}
+interface Faculty {
+  name: string;
+  email: string;
+  position: string;
+  linkedin: string;
+}
+
 export interface Society {
   _Sid: string;
   _Uid: string;
@@ -9,6 +23,8 @@ export interface Society {
   role: string;
   about: string;
   image: string;
+  members: Member[];
+  faculty: Faculty[];
 }
 
 interface SocietyState {
