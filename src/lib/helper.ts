@@ -35,11 +35,10 @@ export const timeConverter = (UNIX_timestamp: Date, timeNeeded: boolean) => {
   const date = a.getDate();
   const hour = a.getHours();
   const min = a.getMinutes();
-  const sec = a.getSeconds();
+  // const sec = a.getSeconds();
   let time = "";
   timeNeeded
-    ? (time =
-        date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec)
+    ? (time = date + " " + month + " " + year + ", " + hour + ":" + min)
     : (time = date + " " + month + " " + year + " ");
 
   return time;

@@ -24,13 +24,9 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { Event } from "@/store/eventSlice";
-import {
-  BiCalendarEvent,
-  BiGroup,
-  BiMap,
-  BiMoney,
-  BiTime,
-} from "react-icons/bi";
+import { BiCalendarEvent, BiGroup, BiMap, BiTime } from "react-icons/bi";
+import { LuMapPin } from "react-icons/lu";
+
 import { MdGroups } from "react-icons/md";
 
 const EventsDetail: React.FC = () => {
@@ -43,6 +39,7 @@ const EventsDetail: React.FC = () => {
       .then((res) => setEvent(res.data))
       .catch((error) => toast(error));
   }
+  console.log(event);
   useEffect(() => {
     getEvents();
   }, []);
@@ -71,7 +68,7 @@ const EventsDetail: React.FC = () => {
             </Avatar>
             <div className="flex flex-col space-y-2 overflow-hidden">
               <h1 className="text-4xl font-semibold">{event.title}</h1>
-              <span className="text-gray-600 font-semibold">
+              <span className="text-gray-500 font-semibold text-xl">
                 {event.soc_name}
               </span>
               <div className="flex gap-2 sm:gap-5  flex-wrap">
@@ -115,98 +112,102 @@ const EventsDetail: React.FC = () => {
               </h3>
             </div>
             <Separator />
-            <div>
-              <h2 className="font-semibold text-xl mb-2">
-                Important dates and deadlines:
-              </h2>
-              <div className="flex flex-col space-y-2">
-                <div className="flex flex-col">
-                  <span className="font-semibold ">Registration Starts</span>
-                  <p className="font-light">04 Feb 24, 11:59 PM IST</p>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold ">Registration deadline</span>
-                  <p className="font-light">04 Feb 24, 11:59 PM IST</p>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold ">Round 1</span>
-                  <p className="font-light">04 Feb 24, 11:59 PM IST</p>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold ">Round 2</span>
-                  <p className="font-light">04 Feb 24, 11:59 PM IST</p>
-                </div>
+            {event.deadlines && (
+              <div>
+                <h2 className="font-semibold text-xl mb-2">
+                  Important dates and deadlines:
+                </h2>
+                {event.deadlines.map((deadline) => (
+                  <div key={uuidv4()} className="flex flex-col space-y-1">
+                    <span className="font-medium text-lg">
+                      {deadline.title} : {timeConverter(deadline.date, true)}{" "}
+                      IST
+                    </span>
+                    <span className="text-gray-300">
+                      {deadline.description}
+                    </span>
+                  </div>
+                ))}
               </div>
-            </div>
-            {/* <Separator /> */}
-            {/* {event.prizes && (
+            )}
+            <Separator />
+            {event.rounds && (
+              <div>
+                <h2 className="font-semibold text-xl mb-2">Rounds:</h2>
+                {event.rounds.map((round) => (
+                  <div key={uuidv4()} className="flex flex-col my-1">
+                    <span className="font-medium text-lg">{round.name}</span>
+                    <span className="">{round.description}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <Separator />
+            {event.prizes && (
               <div>
                 <h2 className="font-semibold text-xl mb-2">
                   Rewards & Prizes:
                 </h2>
-                {Object.entries(event.prizes).map((prize) => (
+                {event.prizes.map((prize) => (
                   <div key={uuidv4()} className="flex flex-col my-1">
-                    <span className="font-medium text-lg">{prize[0]}</span>
-                    <span className="">{prize[1]}</span>
+                    <span className="font-medium text-lg">{prize.name}</span>
+                    <span className="">{prize.description}</span>
                   </div>
                 ))}
               </div>
-            )} */}
+            )}
             <Separator />
-            <div>
-              <h2 className="font-semibold text-xl mb-2">
-                Follow on Social Media
-              </h2>
-              {event.social_media && (
+            {event.social_media && (
+              <div>
+                <h2 className="font-semibold text-xl mb-2">
+                  Follow on Social Media
+                </h2>
                 <div className="flex flex-row space-x-5">
-                  {Object.entries(event.social_media).map((link) => (
-                    <a target="_blank" href={link[1]} key={uuidv4()}>
-                      {link[0]}
-                    </a>
-                  ))}
+                  {Object.entries(event.social_media).map(
+                    ([key, val]) =>
+                      val !== "" && (
+                        <a href={val} target="_blank">
+                          {key}
+                        </a>
+                      )
+                  )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="col-span-8 md:col-span-4 space-y-3 ">
           <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-3">
-            <div className="flex justify-between items-center ">
-              <span className="flex items-center gap-1 font-semibold text-[1.5rem]">
-                <BiMoney className="text-3xl" />
-                FREE
-              </span>
-              <Button
-                onClick={() =>
-                  navigate("register", {
-                    state: {
-                      event: event,
-                    },
-                  })
-                }
-              >
-                Register Now
-              </Button>
-            </div>
+            <Button
+              className="w-full"
+              onClick={() =>
+                navigate("register", {
+                  state: {
+                    event: event,
+                  },
+                })
+              }
+            >
+              Register Now
+            </Button>
             <Separator />
             <div>
               <div className="flex items-center">
-                <BiTime className="mr-3 font-semibold text-2xl" />
+                <LuMapPin className="mr-3 font-semibold text-2xl" />
                 <div className="flex flex-col">
-                  <span className="font-semibold text-lg">
-                    Registration deadline
-                  </span>
-                  <span>14 Hours</span>
+                  <span className="font-semibold text-lg">Venue</span>
+                  <span>{event.venue}</span>
                 </div>
               </div>
-              <div className="flex items-center">
-                <BiGroup className="mr-3 font-semibold text-2xl" />
-
-                <div className="flex flex-col">
-                  <span className="font-semibold text-lg">Team Size</span>
-                  <span>1 - 2 Members</span>
+              {event.team === "true" && (
+                <div className="flex items-center">
+                  <BiGroup className="mr-3 font-semibold text-2xl" />
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-lg">Team Size</span>
+                    <span>1 - 2 Members</span>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="flex items-center">
                 <MdGroups className="mr-3 font-semibold text-2xl" />
                 <div className="flex flex-col">

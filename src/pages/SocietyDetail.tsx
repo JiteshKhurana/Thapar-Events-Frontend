@@ -8,7 +8,11 @@ import axios from "axios";
 import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import CardShimmer from "@/components/CardShimmer";
-import { BiEnvelope, BiLogoLinkedinSquare } from "react-icons/bi";
+import {
+  BiEnvelope,
+  BiLogoLinkedinSquare,
+  BiLogoInstagram,
+} from "react-icons/bi";
 import { Society } from "../store/societySlice";
 import { Event } from "@/store/eventSlice";
 import { upcomingOrPast } from "@/lib/helper";
@@ -97,9 +101,8 @@ const SocietyDetail: React.FC = () => {
             </span>
             <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
               <div className="flex flex-col gap-3">
-                {Array(5)
-                  .fill(0)
-                  .map(() => (
+                {society.members &&
+                  society.members.map((member) => (
                     <div
                       key={uuidv4()}
                       className="society-event-card flex p-3 pr-6 w-full border-[1px] border-gray-400 rounded-xl justify-between"
@@ -111,19 +114,20 @@ const SocietyDetail: React.FC = () => {
                         ></img>
                         <div className="info flex flex-col justify-between mx-4">
                           <div className="event-name font-semibold text-2xl">
-                            Lorem Ipsum
+                            {member.name}
                           </div>
                           <div className="det flex flex-col ">
-                            <div className="font-bold">General Secretary</div>
-                            <div className="member-profiles flex flex-wrap items-center">
-                              <span className="email flex items-center mr-6">
-                                <BiEnvelope className="text-xl" />
-                                lipsum_be21@thapar.edu
-                              </span>
-                              <span className="linkedIn flex items-center">
-                                <BiLogoLinkedinSquare className="text-xl" />
-                                linkedin.com/lorem-ipsum
-                              </span>
+                            <div className="font-bold">{member.position}</div>
+                            <div className="member-profiles flex flex-wrap items-center space-x-5">
+                              <a href={member.email} target="_blank">
+                                <BiEnvelope className="text-2xl" />
+                              </a>
+                              <a href={member.instagram} target="_blank">
+                                <BiLogoInstagram className="text-2xl" />
+                              </a>
+                              <a href={member.linkedin} target="_blank">
+                                <BiLogoLinkedinSquare className="text-2xl" />
+                              </a>
                             </div>
                           </div>
                         </div>

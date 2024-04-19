@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import CardShimmer from "@/components/CardShimmer";
 import { useLocation, useNavigate } from "react-router-dom";
+import { API_ENDPOINT } from "@/lib/constants";
 
 const UserEventRegister = () => {
   useUser();
@@ -32,7 +33,7 @@ const UserEventRegister = () => {
   });
 
   const navigate = useNavigate();
-
+  console.log(state.event._Eid);
   const onSubmit: SubmitHandler<userEventRegisterFormFields> = async (data) => {
     const updatedData = {
       ...data,
@@ -40,18 +41,13 @@ const UserEventRegister = () => {
       email: user?.email,
       phoneno: user?.phone,
       rollno: user?.rollno,
-      team: false,
+      team: "false",
     };
-    console.log(updatedData);
+    console.log(state.event._Eid);
     await axios
-      .post(
-        "https://thapar-event-management-system-production.up.railway.app/event/register/" +
-          state.event._Eid,
-        data,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(API_ENDPOINT + "event/register/" + state.event._Eid, updatedData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(() => {
         toast("Sucessfully Registered!! 🥳");
         navigate(-1);
