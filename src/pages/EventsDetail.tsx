@@ -33,13 +33,17 @@ const EventsDetail: React.FC = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState<Event | null>(null);
+  const [registrations, setRegistrations] = useState<number>(0);
   async function getEvents() {
     axios
       .get(API_ENDPOINT + "/event/get?eventId=" + eventId)
-      .then((res) => setEvent(res.data))
+      .then((res) => {
+        setEvent(res.data.event);
+        setRegistrations(res.data.registrations);
+      })
       .catch((error) => toast(error));
   }
-  console.log(event);
+
   useEffect(() => {
     getEvents();
   }, []);
@@ -166,7 +170,7 @@ const EventsDetail: React.FC = () => {
                   {Object.entries(event.social_media).map(
                     ([key, val]) =>
                       val !== "" && (
-                        <a href={val} target="_blank">
+                        <a key={uuidv4()} href={val} target="_blank">
                           {key}
                         </a>
                       )
@@ -214,7 +218,7 @@ const EventsDetail: React.FC = () => {
                   <span className="font-semibold text-lg">
                     Total Registrations
                   </span>
-                  <span>3422</span>
+                  <span>{registrations}</span>
                 </div>
               </div>
             </div>
