@@ -1,219 +1,150 @@
+import { editEventFormFields, editEventSchema } from "@/schemas/schema";
+import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-// import { BiCalendar, BiListCheck, BiListUl, BiMessageRoundedCheck, BiText, } from "react-icons/bi"
-// import { MdOutlinePin } from "react-icons/md";
-// import { MdOutlineCheckBox } from "react-icons/md";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-
-interface Item {
-  id: number;
-  name: string;
-  type:
-    | "Text"
-    | "Number"
-    | "CheckboxGroup"
-    | "RadioGroup"
-    | "Textarea"
-    | "Date"
-    | "File"
-    | "Select";
-  options?: string[];
-  required: boolean;
-  allowEdit: boolean;
-}
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { API_ENDPOINT } from "@/lib/constants";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { editCurrentEvent } from "@/store/eventDashboardSlice";
+import CardShimmer from "@/components/CardShimmer";
 
 const EditRegistrationForm = () => {
-  // State to hold the list of objects
-  const [items, setItems] = useState<Item[]>([]);
+  const [success, setSuccess] = useState(false);
+  if (success) {
+    toast("Sucessfully Updated!! 🥳");
+    setSuccess(false);
+  }
+  const dispatch = useDispatch();
+  const event = useSelector(
+    (store: RootState) => store.eventDashboard.currentEvent
+  );
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
 
-  // Function to add an object to the list
-  const addItem = () => {
-    const newItem: Item = {
-      id: items.length,
-      name: "",
-      type: "Text",
-      required: false,
-      allowEdit: true,
+  const {
+    register,
+    handleSubmit,
+    control,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<editEventFormFields>({
+    defaultValues: {
+      parameters: event?.parameters,
+    },
+    resolver: zodResolver(editEventSchema),
+  });
+
+  const fieldArray = useFieldArray({
+    name: "parameters",
+    control,
+  });
+
+  useEffect(() => {
+    const unloadCallback = (event: {
+      preventDefault: () => void;
+      returnValue: string;
+    }) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
     };
-    setItems([...items, newItem]);
-  };
 
-  // Function to edit an object in the list
-  const editItem = (
-    id: number,
-    newName: string,
-    type: Item["type"],
-    newOptions: string[] | undefined,
-    required: boolean,
-    allowEdit: boolean
-  ) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          name: newName,
-          type: type,
-          options:
-            type === "CheckboxGroup" ||
-            type === "RadioGroup" ||
-            type === "Select"
-              ? newOptions
-              : undefined,
-          required: required,
-          allowEdit: allowEdit,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+  if (!event)
+    return (
+      <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
+        <CardShimmer />
+      </div>
+    );
 
-  const deleteItem = (id: number) => {
-    const updatedItems = items.filter((item) => item.id !== id);
-    // Update IDs of remaining items to match their new indices
-    const updatedItemsWithNewIds = updatedItems.map((item, index) => ({
-      ...item,
-      id: index,
-    }));
-    setItems(updatedItemsWithNewIds);
-  };
-
-  // Function to reorder items in the list
-  const reorderItems = (oldIndex: number, newIndex: number) => {
-    const updatedItems = [...items];
-    const movedItem = updatedItems.splice(oldIndex, 1)[0];
-    updatedItems.splice(newIndex, 0, movedItem);
-    setItems(updatedItems);
+  const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
+    await axios
+      .post(API_ENDPOINT + "event/update/" + event._Eid, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setSuccess(true);
+        dispatch(editCurrentEvent(res.data));
+      })
+      .catch((error) =>
+        setError("root", {
+          message: error.message,
+        })
+      );
   };
 
   return (
-    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
-      <span className="flex text-xl font-semibold m-5 ">
+    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
+      <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
         Edit Registration Form
-      </span>
+      </h1>
 
-      <div className="form-builder w-full flex flex-col gap-3 p-3">
-        <Button className="w-[200px]" onClick={addItem}>
-          Add Item
-        </Button>
-        <div className="fields-container flex flex-col gap-5">
-          {items.map((item, index) => (
-            <div
-              className="flex flex-col gap-3 field border p-3 rounded-md items-center"
-              key={item.id}
-            >
-              <div className="input-container w-full flex justify-start gap-3">
-                <input
-                  className="dark:bg-black border p-2 rounded-md"
-                  type="text"
-                  value={item.name}
-                  onChange={(e) =>
-                    editItem(
-                      item.id,
-                      e.target.value,
-                      item.type,
-                      item.options,
-                      item.required,
-                      item.allowEdit
-                    )
-                  }
-                  placeholder="Name"
-                />
-                <select
-                  className="dark:bg-black border p-2 rounded-md"
-                  value={item.type}
-                  onChange={(e) =>
-                    editItem(
-                      item.id,
-                      item.name,
-                      e.target.value as Item["type"],
-                      item.options,
-                      item.required,
-                      item.allowEdit
-                    )
-                  }
-                >
-                  <option value="Text">Text</option>
-                  <option value="Number">Number</option>
-                  <option value="CheckboxGroup">Checkbox Group</option>
-                  <option value="RadioGroup">Radio Group</option>
-                  <option value="Textarea">Textarea</option>
-                  <option value="Date">Date</option>
-                  <option value="File">File</option>
-                  <option value="Select">Select</option>
-                </select>
-                {item.type === "CheckboxGroup" ||
-                item.type === "RadioGroup" ||
-                item.type === "Select" ? (
-                  <input
-                    className="dark:bg-black border p-2 rounded-md min-w-[400px]"
+      <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <Label>Extra Parameters</Label>
+          <div className="flex flex-col space-y-5">
+            {fieldArray.fields.map((field, index) => (
+              <div key={field.id} className="grid grid-cols-12 space-x-5">
+                <div className="col-span-10 space-y-2">
+                  <Input
+                    {...register(`parameters.${index}.name` as const)}
                     type="text"
-                    value={item.options?.join(",")}
-                    onChange={(e) =>
-                      editItem(
-                        item.id,
-                        item.name,
-                        item.type,
-                        e.target.value.split(","),
-                        item.required,
-                        item.allowEdit
-                      )
-                    }
-                    placeholder="Options (separate options with a comma , )"
+                    placeholder={`Parameters ${index + 1} Name e.g height`}
                   />
-                ) : null}
-                <label className="flex justify-center items-center">
-                  Required:
-                  <input
-                    className="dark:bg-black m-2"
-                    type="checkbox"
-                    checked={item.required}
-                    onChange={(e) =>
-                      editItem(
-                        item.id,
-                        item.name,
-                        item.type,
-                        item.options,
-                        e.target.checked,
-                        item.allowEdit
-                      )
-                    }
+                  <Textarea
+                    {...register(`parameters.${index}.description` as const)}
+                    placeholder={`Description of Parameter ${
+                      index + 1
+                    } e.g height of the student in cm`}
                   />
-                </label>
-                {/* <label>
-                                    Allow Edit:
-                                    <input className="border p-2 rounded"
-                                    type="checkbox"
-                                    checked={item.allowEdit}
-                                        onChange={e => editItem(item.id, item.name, item.type, item.options, item.required, e.target.checked)}
-                                    />
-                                </label> */}
+                </div>
+                <Button
+                  className="col-span-2 my-auto"
+                  type="button"
+                  onClick={() => fieldArray.remove(index)}
+                >
+                  Remove Parameter
+                </Button>
               </div>
-
-              <div className="button-container flex gap-3">
-                <Button onClick={() => deleteItem(item.id)}>Delete</Button>
-                {index > 0 && (
-                  <Button onClick={() => reorderItems(index, index - 1)}>
-                    Move Up
-                  </Button>
-                )}
-                {index < items.length - 1 && (
-                  <Button onClick={() => reorderItems(index, index + 1)}>
-                    Move Down
-                  </Button>
-                )}
-              </div>
-            </div>
-          ))}
+            ))}
+            <Button
+              className="w-1/4"
+              type="button"
+              onClick={() =>
+                fieldArray.append({
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Add New Parameter
+            </Button>
+          </div>
+          {errors.parameters && (
+            <div className="text-red-500">{errors.parameters.message}</div>
+          )}
         </div>
-      </div>
 
-      <div className="submit-button-container flex justify-between gap-5 p-5 border">
-        <NavLink to="/eventdashboard">
-          <Button className="rounded">Cancel</Button>{" "}
-        </NavLink>
-        <Button className="rounded">Save Changes</Button>
-      </div>
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          className="py-3 px-10 w-full"
+        >
+          {isSubmitting ? "Loading..." : "Save Changes"}
+        </Button>
+        {errors.root && (
+          <div className="text-red-500">{errors.root.message}</div>
+        )}
+      </form>
     </div>
   );
 };

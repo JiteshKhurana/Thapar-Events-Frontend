@@ -14,8 +14,8 @@ export const isAdmin = () => {
   else return false;
 };
 
-export const timeConverter = (UNIX_timestamp: number, timeNeeded: boolean) => {
-  const a = new Date(UNIX_timestamp * 1000);
+export const timeConverter = (UNIX_timestamp: Date, timeNeeded: boolean) => {
+  const a = new Date(Number(UNIX_timestamp) * 1000);
   const months = [
     "Jan",
     "Feb",
@@ -53,8 +53,8 @@ export const findDifferenceTwoDates = (
   return Math.floor(diff / (24 * 60 * 60 * 1000));
 };
 
-export const upcomingOrPast = (end_date: number) => {
-  const diffdates = findDifferenceTwoDates(Date.now() / 1000, end_date);
+export const upcomingOrPast = (end_date: Date) => {
+  const diffdates = findDifferenceTwoDates(Date.now() / 1000, Number(end_date));
   if (diffdates >= 0) return 0;
   return 1;
 };

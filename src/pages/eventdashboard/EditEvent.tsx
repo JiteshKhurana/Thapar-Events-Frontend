@@ -55,7 +55,6 @@ const EditEvent = () => {
       })),
       rounds: event?.rounds,
       prizes: event?.prizes,
-      parameters: event?.parameters,
     },
     resolver: zodResolver(editEventSchema),
   });
@@ -72,10 +71,7 @@ const EditEvent = () => {
     name: "deadlines",
     control,
   });
-  const fieldArray4 = useFieldArray({
-    name: "parameters",
-    control,
-  });
+
   useEffect(() => {
     const unloadCallback = (event: {
       preventDefault: () => void;
@@ -476,51 +472,6 @@ const EditEvent = () => {
           </div>
           {errors.deadlines && (
             <div className="text-red-500">{errors.deadlines.message}</div>
-          )}
-        </div>
-
-        {/* --------------------- Parameters Container ----------------------------------*/}
-
-        <div>
-          <Label>Extra Paramaters</Label>
-          <div className="flex flex-col space-y-5">
-            {fieldArray4.fields.map((field, index) => (
-              <div key={field.id} className="grid grid-cols-12 space-x-5">
-                <div className="col-span-10 space-y-2">
-                  <Input
-                    {...register(`parameters.${index}.name` as const)}
-                    type="text"
-                    placeholder={`Extra Parameter Name e.g-height`}
-                  />
-                  <Textarea
-                    {...register(`parameters.${index}.description` as const)}
-                    placeholder={`Description of Extra Parameter e.g-Height of the participant in cm.`}
-                  />
-                </div>
-                <Button
-                  className="col-span-2 my-auto"
-                  type="button"
-                  onClick={() => fieldArray4.remove(index)}
-                >
-                  Remove Parameter
-                </Button>
-              </div>
-            ))}
-            <Button
-              className="w-1/4"
-              type="button"
-              onClick={() =>
-                fieldArray4.append({
-                  name: "",
-                  description: "",
-                })
-              }
-            >
-              Add New Parameter
-            </Button>
-          </div>
-          {errors.parameters && (
-            <div className="text-red-500">{errors.parameters.message}</div>
           )}
         </div>
 
