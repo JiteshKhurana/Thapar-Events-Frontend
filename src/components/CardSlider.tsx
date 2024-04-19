@@ -26,7 +26,6 @@ const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
     <div className="my-5">
       <div className="flex items-center justify-between my-2">
         <h2 className="text-xl font-semibold">{title}</h2>
-        <Button>See All</Button>
       </div>
       <div className="flex overflow-x-scroll no-scrollbar gap-3">
         {itemsToMap?.map((event) => (

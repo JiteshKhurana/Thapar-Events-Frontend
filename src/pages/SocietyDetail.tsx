@@ -16,6 +16,7 @@ import {
 import { Society } from "../store/societySlice";
 import { Event } from "@/store/eventSlice";
 import { upcomingOrPast } from "@/lib/helper";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 const SocietyDetail: React.FC = () => {
   const { state } = useLocation();
@@ -94,50 +95,67 @@ const SocietyDetail: React.FC = () => {
               itemsToMap={pastEvents}
             />
           )}
-
-          <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
-            <span className="flex font-semibold text-xl sm:text-3xl my-3">
-              Our Team
-            </span>
-            <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
-              <div className="flex flex-col gap-3">
-                {society.members &&
-                  society.members.map((member) => (
-                    <div
-                      key={uuidv4()}
-                      className="society-event-card flex p-3 pr-6 w-full border-[1px] border-gray-400 rounded-xl justify-between"
-                    >
-                      <div className="left-data flex">
-                        <img
-                          className="active-event-img w-[100px] h-[100px] rounded-md "
-                          src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712689058/profilephoto_txeeke.jpg"
-                        ></img>
-                        <div className="info flex flex-col justify-between mx-4">
-                          <div className="event-name font-semibold text-2xl">
-                            {member.name}
-                          </div>
-                          <div className="det flex flex-col ">
-                            <div className="font-bold">{member.position}</div>
-                            <div className="member-profiles flex flex-wrap items-center space-x-5">
-                              <a href={member.email} target="_blank">
-                                <BiEnvelope className="text-2xl" />
-                              </a>
-                              <a href={member.instagram} target="_blank">
-                                <BiLogoInstagram className="text-2xl" />
-                              </a>
-                              <a href={member.linkedin} target="_blank">
-                                <BiLogoLinkedinSquare className="text-2xl" />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="right-data flex flex-col min-h-full items-center justify-around"></div>
-                    </div>
+          {society.members && (
+            <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
+              <span className="flex font-semibold text-xl sm:text-3xl my-3">
+                Our Team
+              </span>
+              <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
+                <div className="flex overflow-x-scroll no-scrollbar space-x-5">
+                  {society.members.map((member) => (
+                    <Card className="w-1/4 min-w-[300px] p-5" key={uuidv4()}>
+                      <CardContent className="text-center">
+                        <p className="text-xl font-bold">{member.name}</p>
+                        <p className="text-gray-400 text-xl">
+                          {member.position}
+                        </p>
+                      </CardContent>
+                      <CardFooter className="justify-between">
+                        <a href={`mailto:${member.email}`} target="_blank">
+                          <BiEnvelope className="text-3xl" />
+                        </a>
+                        <a href={member.linkedin} target="_blank">
+                          <BiLogoLinkedinSquare className="text-3xl" />
+                        </a>
+                        <a href={member.instagram} target="_blank">
+                          <BiLogoInstagram className="text-3xl" />
+                        </a>
+                      </CardFooter>
+                    </Card>
                   ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
+          {society.faculty && (
+            <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
+              <span className="flex font-semibold text-xl sm:text-3xl my-3">
+                Faculty
+              </span>
+              <div className="member-list-container flex flex-col gap-3 border-[1px] p-[10px] rounded-md my-3">
+                <div className="flex overflow-x-scroll no-scrollbar space-x-5">
+                  {society.faculty.map((facult) => (
+                    <Card className="w-1/4 min-w-[300px] p-5" key={uuidv4()}>
+                      <CardContent className="text-center">
+                        <p className="text-xl font-bold">{facult.name}</p>
+                        <p className="text-gray-400 text-xl">
+                          {facult.position}
+                        </p>
+                      </CardContent>
+                      <CardFooter className="justify-between">
+                        <a href={`mailto:${facult.email}`} target="_blank">
+                          <BiEnvelope className="text-3xl" />
+                        </a>
+                        <a href={facult.linkedin} target="_blank">
+                          <BiLogoLinkedinSquare className="text-3xl" />
+                        </a>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
