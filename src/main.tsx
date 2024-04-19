@@ -16,7 +16,7 @@ import { createBrowserRouter } from "react-router-dom";
 import EventsDetail from "./pages/EventsDetail";
 import UserDashBoard from "./pages/user/UserDashBoard.tsx";
 import Page404 from "./pages/Page404.tsx";
-import UserEventRegister from "./pages/eventdashboard/UserEventRegister.tsx";
+import UserEventRegister from "./pages/user/UserEventRegister.tsx";
 import ProtectedRoute from "./protectedRoutes/ProtectedRoute.tsx";
 import Societyroot from "./pages/society/Societyroot.tsx";
 import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
@@ -168,7 +168,6 @@ const appRouter = createBrowserRouter([
             path: "/superadmin/addsociety",
             element: <SuperAdminDashboardAddSociety />,
           },
-          
         ],
       },
       {

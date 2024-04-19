@@ -23,14 +23,16 @@ export const editUserSchema = z.object({
 });
 
 export const userEventRegisterSchemas = z.object({
-  name: z.string().min(2, "Too short").max(30, "Too long"),
-  email: z.string().email(),
-  rollno: z.string().regex(RollRegExp, { message: "Roll number is not valid" }),
-  phoneno: z
-    .string()
-    .regex(phoneRegExp, { message: "Phone number is not valid" })
-    .min(10, "Phone number is not valid")
-    .max(10, "Phone number is not valid"),
+  parameters: z.array(
+    z.object({
+      name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+      description: z
+        .string()
+        .min(2, "Too Short")
+        .max(100, "Too Long")
+        .optional(),
+    })
+  ),
 });
 
 export const editSocietySchema = z.object({
@@ -58,33 +60,6 @@ export const editSocietySchema = z.object({
     )
     .optional(),
 });
-
-// "members":[
-//   {   "name":"jitesh",
-//       "email":"jhur@gam",
-//       "position":"gensec",
-//       "instagram":"insta@12",
-//       "linkedin":"linkedin@123"
-//   },
-//   {   "name":"noname",
-//       "email":"noname1@gmail.com",
-//       "position":"financesec",
-//       "instagram":"insta@15634822",
-//       "linkedin":"linkedin@jdsuahjks123"
-//   }
-// ],
-// "faculty":[
-//   {   "name":"dd",
-//       "email":"jhur@gam",
-//       "position":"coordinator",
-//       "linkedin":"linkedin@123"
-//   },
-//   {   "name":"khan sir ",
-//       "email":"noname1@gmail.com",
-//       "position":"coordinator",
-//       "linkedin":"linkedin@jdsuahjks123"
-//   }
-// ]
 
 // const MAX_FILE_SIZE = 500000000000;
 // const ACCEPTED_IMAGE_TYPES = [
@@ -189,7 +164,9 @@ export const editEventSchema = z.object({
 });
 
 export type FormFields = z.infer<typeof editUserSchema>;
-export type EventRegisterFormFields = z.infer<typeof userEventRegisterSchemas>;
+export type userEventRegisterFormFields = z.infer<
+  typeof userEventRegisterSchemas
+>;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
 export type addEventPosterFields = z.infer<typeof addEventPosterSchema>;

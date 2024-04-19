@@ -1,12 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -23,6 +16,7 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from "react-share";
+import { LuClipboardCopy } from "react-icons/lu";
 import {
   EmailShareButton,
   TelegramShareButton,
@@ -40,7 +34,6 @@ import {
 import { MdGroups } from "react-icons/md";
 
 const EventsDetail: React.FC = () => {
-  const token = localStorage.getItem("token");
   const { eventId } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState<Event | null>(null);
@@ -57,66 +50,17 @@ const EventsDetail: React.FC = () => {
   async function copyUrl() {
     await navigator.clipboard.writeText(location.href);
     setCopySuccess("Link Copied To Clipboard");
-    setTimeout(() => setCopySuccess("SHARE"), 3000);
+    setTimeout(() => setCopySuccess("SHARE THE EVENT"), 3000);
   }
 
   if (!event) return <CardShimmer />;
 
-  async function createCalendarEvent() {
-    console.log("creating calendar event");
-    if (!event?.start_date || !event?.end_date) {
-      // Handle the case when start_date or end_date is undefined
-      return;
-    }
-    const calEvent = {
-      summary: event?.title,
-      description: event?.description,
-      start: {
-        dateTime: new Date(
-          timeConverter(event?.start_date, true)
-        ).toISOString(),
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      },
-      end: {
-        dateTime: new Date(timeConverter(event?.end_date, true)).toISOString(),
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      },
-    };
-    // await axios
-    //   .post(
-    //     "https://www.googleapis.com/calendar/v3/calendars/primary/events",
-    //     JSON.stringify(calEvent),
-    //     {
-    //       headers: { Authorization: `Bearer ${token}` },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //     toast("Event Created, Check Your Google Calender");
-    //   });
-    await fetch(
-      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token, // Access token for google
-        },
-        body: JSON.stringify(calEvent),
-      }
-    )
-      .then((data) => {
-        return data.json();
-      })
-      .then((data) => {
-        console.log(data);
-        alert("Event created, check your Google Calendar!");
-      })
-      .catch((error) => console.log(error.message));
-  }
-
-  const diffdates = findDifferenceTwoDates(Date.now() / 1000, event.start_date);
+  const diffdates = findDifferenceTwoDates(
+    Date.now() / 1000,
+    Number(event.start_date)
+  );
   return (
-    <div className="flex flex-wrap justify-center bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-cover">
+    <div className="flex flex-wrap justify-center">
       <div className="coverimage w-full h-[250px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-cover bg-no-repeat"></div>
       <div className="w-full max-w-[1800px] grid grid-cols-8 lg:grid-cols-12 gap-6 mx-3 lg:mx-32 my-5">
         <div className="col-span-8 space-y-2">
@@ -157,36 +101,6 @@ const EventsDetail: React.FC = () => {
                 </div>
               )}
             </div>
-          </div>
-          <div className=" bg-white dark:bg-black w-full flex shadow-xl border rounded-lg p-3 ">
-            <NavigationMenu className="">
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="#"
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    Details
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="#"
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    Dates & Deadlines
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="#"
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    Rewards & Prizes
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
           </div>
 
           <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-5">
@@ -262,7 +176,17 @@ const EventsDetail: React.FC = () => {
                 <BiMoney className="text-3xl" />
                 FREE
               </span>
-              <Button onClick={() => navigate("register")}>Register Now</Button>
+              <Button
+                onClick={() =>
+                  navigate("register", {
+                    state: {
+                      event: event,
+                    },
+                  })
+                }
+              >
+                Register Now
+              </Button>
             </div>
             <Separator />
             <div>
@@ -304,14 +228,12 @@ const EventsDetail: React.FC = () => {
             )}
           </div>
           <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 ">
-            <div className="buttons-container flex flex-col gap-2 ">
-              <Button onClick={createCalendarEvent} className="w-full">
-                Add to Google Calendar
-              </Button>
-              <Button onClick={copyUrl} className="w-full">
-                {copySuccess}
-              </Button>
-            </div>
+            <Button onClick={copyUrl} className="w-full">
+              <div className="flex flex-row gap-2 items-center">
+                <p>{copySuccess}</p>
+                <LuClipboardCopy />
+              </div>
+            </Button>
             <div className="mt-5 flex  gap-2 justify-around">
               <WhatsappShareButton
                 separator=".Register on ConnectHub ASAP "
