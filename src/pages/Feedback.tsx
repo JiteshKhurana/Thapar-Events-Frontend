@@ -11,6 +11,8 @@ import { RootState } from "@/store/store";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { toast } from "sonner";
+import { LuGithub, LuInstagram, LuLinkedin, LuMail } from "react-icons/lu";
+import { TEAM } from "@/lib/constants";
 
 const FeedbackForm = () => {
   useUser();
@@ -94,6 +96,66 @@ const FeedbackForm = () => {
             )}
           </form>
         </div>
+      </div>
+      <h2 className="text-3xl font-medium my-8">Our Team</h2>
+      <div className="flex justify-center space-x-5">
+        {TEAM.map((teamMember) => (
+          <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
+            <img
+              src="https://avatars.githubusercontent.com/u/95995545?v=4"
+              alt=""
+              className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
+            />
+            <div className="space-y-4 text-center divide-y dark:divide-gray-300">
+              <div className="my-2 space-y-1">
+                <h2 className="text-xl font-semibold sm:text-2xl">
+                  {teamMember.name}
+                </h2>
+                <p className="px-5 text-xs sm:text-base dark:text-gray-600">
+                  {teamMember.role}
+                </p>
+              </div>
+              <div className="flex justify-center pt-2 space-x-4 align-center">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={teamMember.github}
+                  aria-label="GitHub"
+                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                >
+                  <LuGithub />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={teamMember.instagram}
+                  aria-label="instagram"
+                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                >
+                  <LuInstagram />
+                </a>
+                <a
+                  rel="noopener noreferrer"
+                  href={teamMember.linkedin}
+                  aria-label="linkedin"
+                  target="_blank"
+                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                >
+                  <LuLinkedin />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={"mailto:" + teamMember.email}
+                  aria-label="Email"
+                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                >
+                  <LuMail />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
