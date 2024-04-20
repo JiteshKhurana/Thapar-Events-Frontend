@@ -28,24 +28,48 @@ import { BiCalendarEvent, BiGroup, BiMap, BiTime } from "react-icons/bi";
 import { LuMapPin } from "react-icons/lu";
 
 import { MdGroups } from "react-icons/md";
+import Cookies from "universal-cookie";
 
 const EventsDetail: React.FC = () => {
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
   const { eventId } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState<Event | null>(null);
   const [registrations, setRegistrations] = useState<number>(0);
+  const [userRegistered, setUserRegistered] = useState<boolean>(false);
+
+  async function checkRegistered() {
+    try {
+      const res = await axios.get(
+        API_ENDPOINT + "/event/check/registrations/" + eventId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUserRegistered(res.data.message);
+    } catch (error) {
+      toast(String(error));
+    }
+  }
+
   async function getEvents() {
-    axios
-      .get(API_ENDPOINT + "/event/get?eventId=" + eventId)
-      .then((res) => {
-        setEvent(res.data.event);
-        setRegistrations(res.data.registrations);
-      })
-      .catch((error) => toast(error));
+    try {
+      const res = await axios.get(
+        API_ENDPOINT + "/event/get?eventId=" + eventId
+      );
+      setEvent(res.data.event);
+      setRegistrations(res.data.registrations);
+    } catch (error) {
+      toast(String(error));
+    }
   }
 
   useEffect(() => {
     getEvents();
+    checkRegistered();
   }, []);
   const [copySuccess, setCopySuccess] = useState("SHARE THE EVENT");
   async function copyUrl() {
@@ -182,18 +206,27 @@ const EventsDetail: React.FC = () => {
         </div>
         <div className="col-span-8 md:col-span-4 space-y-3 ">
           <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-3">
-            <Button
-              className="w-full"
-              onClick={() =>
-                navigate("register", {
-                  state: {
-                    event: event,
-                  },
-                })
-              }
-            >
-              Register Now
-            </Button>
+            {userRegistered ? (
+              <div className="bg-white rounded-xl p-2">
+                <h1 className="text-center text-bold text-green-600">
+                  You are Registered
+                </h1>
+              </div>
+            ) : (
+              <Button
+                className="w-full"
+                onClick={() =>
+                  navigate("register", {
+                    state: {
+                      event: event,
+                    },
+                  })
+                }
+              >
+                Register Now
+              </Button>
+            )}
+
             <Separator />
             <div>
               <div className="flex items-center">

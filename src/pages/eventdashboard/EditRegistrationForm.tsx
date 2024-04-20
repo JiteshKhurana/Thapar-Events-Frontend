@@ -1,4 +1,7 @@
-import { editEventFormFields, editEventSchema } from "@/schemas/schema";
+import {
+  userEventRegisterSchemas,
+  userEventRegisterFormFields,
+} from "@/schemas/schema";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -34,17 +37,18 @@ const EditRegistrationForm = () => {
     control,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<editEventFormFields>({
+  } = useForm<userEventRegisterFormFields>({
     defaultValues: {
       parameters: event?.parameters,
     },
-    resolver: zodResolver(editEventSchema),
+    resolver: zodResolver(userEventRegisterSchemas),
   });
 
   const fieldArray = useFieldArray({
     name: "parameters",
     control,
   });
+  console.log(errors);
 
   useEffect(() => {
     const unloadCallback = (event: {
@@ -66,7 +70,7 @@ const EditRegistrationForm = () => {
       </div>
     );
 
-  const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
+  const onSubmit: SubmitHandler<userEventRegisterFormFields> = async (data) => {
     await axios
       .post(API_ENDPOINT + "event/update/" + event._Eid, data, {
         headers: { Authorization: `Bearer ${token}` },

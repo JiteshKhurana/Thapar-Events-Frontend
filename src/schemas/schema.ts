@@ -23,16 +23,18 @@ export const editUserSchema = z.object({
 });
 
 export const userEventRegisterSchemas = z.object({
-  parameters: z.array(
-    z.object({
-      name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
-      description: z
-        .string()
-        .min(2, "Too Short")
-        .max(100, "Too Long")
-        .optional(),
-    })
-  ),
+  parameters: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(50, "Too Long").optional(),
+        description: z
+          .string()
+          .min(2, "Too Short")
+          .max(100, "Too Long")
+          .optional(),
+      })
+    )
+    .optional(),
 });
 
 export const editSocietySchema = z.object({

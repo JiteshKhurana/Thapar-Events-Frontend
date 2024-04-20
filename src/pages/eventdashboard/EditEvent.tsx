@@ -10,18 +10,13 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { editCurrentEvent } from "@/store/eventDashboardSlice";
 import { useNavigate } from "react-router-dom";
 import CardShimmer from "@/components/CardShimmer";
 
 const EditEvent = () => {
-  const [success, setSuccess] = useState(false);
-  if (success) {
-    toast("Sucessfully Updated!! 🥳");
-    setSuccess(false);
-  }
   const dispatch = useDispatch();
   const event = useSelector(
     (store: RootState) => store.eventDashboard.currentEvent
@@ -47,12 +42,18 @@ const EditEvent = () => {
       event_type: event?.event_type,
       visibility: event?.visibility,
       venue: event?.venue,
-      hashtags: [event?.hashtags[0], event?.hashtags[1], event?.hashtags[2]],
+      hashtags: event?.hashtags && [
+        event?.hashtags[0],
+        event?.hashtags[1],
+        event?.hashtags[2],
+      ],
       social_media: event?.social_media,
-      deadlines: event?.deadlines.map((deadline) => ({
-        ...deadline,
-        date: new Date(Number(deadline.date) * 1000), // Convert each deadline date
-      })),
+      deadlines:
+        event?.deadlines &&
+        event?.deadlines.map((deadline) => ({
+          ...deadline,
+          date: new Date(Number(deadline.date) * 1000), // Convert each deadline date
+        })),
       rounds: event?.rounds,
       prizes: event?.prizes,
     },
@@ -116,13 +117,12 @@ const EditEvent = () => {
       deadlines: updatedDeadlines,
     };
 
-    console.log(updatedData);
     await axios
       .post(API_ENDPOINT + "event/update/" + event._Eid, updatedData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setSuccess(true);
+        toast("Sucessfully Updated!! 🥳");
         dispatch(editCurrentEvent(res.data));
       })
       .catch((error) =>

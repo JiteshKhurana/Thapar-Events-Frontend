@@ -4,6 +4,7 @@ import { Event } from "./eventSlice";
 interface cem {
   totalregistrations: number;
 }
+
 interface EventState {
   currentEvent: Event | null;
   currentEventMetrics: cem | null;
@@ -24,12 +25,19 @@ const eventDashboardSlice = createSlice({
     editCurrentEvent: (state, action) => {
       state.currentEvent = action.payload;
     },
+    removeCurrentEvent: (state) => {
+      state.currentEvent = null;
+    },
     addCurrentEventMetrics: (state, action) => {
       state.currentEventMetrics = action.payload;
     },
   },
 });
 
-export const { addCurrentEvent, editCurrentEvent, addCurrentEventMetrics } =
-  eventDashboardSlice.actions;
+export const {
+  addCurrentEvent,
+  editCurrentEvent,
+  addCurrentEventMetrics,
+  removeCurrentEvent,
+} = eventDashboardSlice.actions;
 export default eventDashboardSlice.reducer;

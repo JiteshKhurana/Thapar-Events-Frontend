@@ -31,9 +31,7 @@ const UserEventRegister = () => {
   } = useForm<userEventRegisterFormFields>({
     resolver: zodResolver(userEventRegisterSchemas),
   });
-
   const navigate = useNavigate();
-  console.log(state.event._Eid);
   const onSubmit: SubmitHandler<userEventRegisterFormFields> = async (data) => {
     const updatedData = {
       ...data,
@@ -43,7 +41,6 @@ const UserEventRegister = () => {
       rollno: user?.rollno,
       team: "false",
     };
-    console.log(state.event._Eid);
     await axios
       .post(API_ENDPOINT + "event/register/" + state.event._Eid, updatedData, {
         headers: { Authorization: `Bearer ${token}` },
@@ -58,11 +55,12 @@ const UserEventRegister = () => {
         })
       );
   };
+  console.log(errors.parameters);
   if (!user) return <CardShimmer />;
   if (!token) return <h1>You Need to Login First</h1>;
   return (
     <div className="m-10 flex flex-col justify-center items-center">
-      <h1 className="text-3xl">Registering for Escalde</h1>
+      <h1 className="text-3xl">Registering for {state.event.title}</h1>
       <div className="w-1/2 flex flex-col justify-center">
         <h2 className="text-2xl my-5 text-center">Participant Details</h2>
         <div className="flex flex-col gap-y-3 justify-center">
@@ -97,12 +95,12 @@ const UserEventRegister = () => {
             placeholder="Enter Roll No."
             disabled
           />
-          <form
-            className="flex flex-col gap-y-3"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            {state.event.parameters &&
-              state.event.parameters.map(
+          {state.event.parameters ? (
+            <form
+              className="flex flex-col gap-y-3"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              {state.event.parameters.map(
                 (
                   parameter: { name: string; description: string },
                   index: number
@@ -130,13 +128,23 @@ const UserEventRegister = () => {
                 }
               )}
 
-            <Button disabled={isSubmitting} type="submit">
-              Register
-            </Button>
-            {errors.root && (
-              <div className="text-red-500">{errors.root.message}</div>
-            )}
-          </form>
+              <Button disabled={isSubmitting} type="submit">
+                Register
+              </Button>
+              {errors.root && (
+                <div className="text-red-500">{errors.root.message}</div>
+              )}
+            </form>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Button disabled={isSubmitting} type="submit" className="w-full">
+                Register
+              </Button>
+              {errors.root && (
+                <div className="text-red-500">{errors.root.message}</div>
+              )}
+            </form>
+          )}
         </div>
       </div>
     </div>

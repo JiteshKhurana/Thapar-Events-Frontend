@@ -41,8 +41,12 @@ const SocietyEventCard = ({ event }: { event: Event }) => {
           </div>
         </div>
         <div className="w-full lg:w-auto right-data flex flex-col min-h-full items-center justify-around gap-3">
-          <Button className="border w-full bg-transparent hover:bg-black text-black hover:text-white dark:text-white dark:hover:text-black dark:hover:bg-white " 
-          onClick={() => navigate("/eventdashboard/" + event._Eid)}>
+          <Button
+            className="border w-full bg-transparent hover:bg-black text-black hover:text-white dark:text-white dark:hover:text-black dark:hover:bg-white "
+            onClick={() => {
+              navigate("/eventdashboard/" + event._Eid);
+            }}
+          >
             Event Dashboard
           </Button>
           <div className="flex">
