@@ -63,6 +63,17 @@ export const editSocietySchema = z.object({
     .optional(),
 });
 
+export const addEventGallerySchema = z.object({
+  photos: z
+    .any()
+    // .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 50MB.`)
+    // .refine(
+    //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    //   "Only .jpg, .jpeg, .png and .webp formats are supported."
+    // )
+    .optional(),
+});
+
 // const MAX_FILE_SIZE = 500000000000;
 // const ACCEPTED_IMAGE_TYPES = [
 //   "image/jpeg",
@@ -176,4 +187,5 @@ export type userEventRegisterFormFields = z.infer<
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
 export type addEventPosterFields = z.infer<typeof addEventPosterSchema>;
+export type addEventGalleryFields = z.infer<typeof addEventGallerySchema>;
 export type userFeedbackFields = z.infer<typeof userFeedbackSchema>;

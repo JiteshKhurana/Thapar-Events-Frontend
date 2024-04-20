@@ -15,9 +15,9 @@ import { LuGithub, LuInstagram, LuLinkedin, LuMail } from "react-icons/lu";
 import { TEAM } from "@/lib/constants";
 
 const FeedbackForm = () => {
-  useUser();
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
+  useUser(token);
   const user = useSelector((state: RootState) => state.user.currentUser);
   const {
     register,
@@ -30,13 +30,14 @@ const FeedbackForm = () => {
     },
     resolver: zodResolver(userFeedbackSchema),
   });
-
+  if (!token)
+    return <div className="text-5xl text-center">You need to login first</div>;
   const onSubmit: SubmitHandler<userFeedbackFields> = async (data) => {
     const updatedData = {
       ...data,
       name: user?.name,
       email: user?.email,
-      contact: user?.phone,
+      contact: user?.phone && user.phone,
     };
     console.log(updatedData);
     await axios

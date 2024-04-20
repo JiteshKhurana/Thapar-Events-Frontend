@@ -23,9 +23,11 @@ import {
 
 const User: React.FC = () => {
   const dispatch = useDispatch();
-  useUser();
-  const user = useSelector((store: RootState) => store.user.currentUser);
   const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
+  useUser(token);
+  const user = useSelector((store: RootState) => store.user.currentUser);
+
   const navigate = useNavigate();
   if (!user) return <CardShimmer />;
   return (

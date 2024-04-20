@@ -138,13 +138,22 @@ const EditEvent = () => {
         <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
           Edit Event
         </h1>
-        <Button
-          onClick={() => {
-            navigate(`/eventdashboard/${event._Eid}/eventposter`);
-          }}
-        >
-          Add Event Poster
-        </Button>
+        <div className="space-x-5">
+          <Button
+            onClick={() => {
+              navigate(`/eventdashboard/${event._Eid}/eventposter`);
+            }}
+          >
+            Add Event Poster
+          </Button>
+          <Button
+            onClick={() => {
+              navigate(`/eventdashboard/${event._Eid}/eventgallery`);
+            }}
+          >
+            Add Event Gallery
+          </Button>
+        </div>
       </div>
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         <div>

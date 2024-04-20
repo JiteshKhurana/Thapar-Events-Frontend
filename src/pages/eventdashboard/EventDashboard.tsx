@@ -40,8 +40,8 @@ const EventDashboard = () => {
     setCopySuccess("Link Copied To Clipboard");
     setTimeout(() => setCopySuccess("Copy to Clipboard"), 3000);
   }
-
   if (!event) return <CardShimmer />;
+  console.log(event.visibility);
   return (
     <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
       <div className="event-cover-image bg-[url('https://www.ccstiet.com/static/home/images/01.jpeg')] h-[300px] flex justify-start items-end">
@@ -66,7 +66,7 @@ const EventDashboard = () => {
           />
           <SocietyDashBoardCard
             title={"Visibility"}
-            value={event.visibility ? "Public" : "Private"}
+            value={event.visibility === "true" ? "Public" : "Private"}
             color={event.visibility ? "text-green-500" : "text-red-500"}
           />
         </div>

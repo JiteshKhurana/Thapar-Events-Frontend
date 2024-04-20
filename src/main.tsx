@@ -36,6 +36,8 @@ import SuperAdminDashboardEvents from "./pages/superadmin/SuperAdminDashboardEve
 import SuperAdminDashboardSocieties from "./pages/superadmin/SuperAdminDashboardSocieties.tsx";
 import SuperAdminDashboardAddSociety from "./pages/superadmin/SuperAdminDashboardAddSociety.tsx";
 import Feedback from "./pages/Feedback.tsx";
+import AddPhotoGallery from "./pages/society/AddPhotoGallery.tsx";
+import EventGallery from "./pages/EventGallery.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -53,6 +55,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/events/:name/:eventId",
         element: <EventsDetail />,
+      },
+      {
+        path: "/events/:name/:eventId/eventgallery",
+        element: <EventGallery />,
       },
       {
         path: "/events/:name/:eventId/register",
@@ -144,6 +150,10 @@ const appRouter = createBrowserRouter([
               {
                 path: "eventposter",
                 element: <AddEventPoster />,
+              },
+              {
+                path: "eventgallery",
+                element: <AddPhotoGallery />,
               },
               {
                 path: "editregistrationform",

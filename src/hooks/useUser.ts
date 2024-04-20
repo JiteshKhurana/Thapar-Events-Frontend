@@ -5,17 +5,15 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import Cookies from "universal-cookie";
 
-const useUser = () => {
+const useUser = (token: string) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((store: RootState) => store.user.currentUser);
   const currentUserRegistrations = useSelector(
     (store: RootState) => store.user.currentUserRegistrations
   );
-  const cookies = new Cookies(null, { path: "/" });
   const userEmail = localStorage.getItem("email");
-  const token = cookies.get("token");
+
   async function getUser() {
     axios
       .get(API_ENDPOINT + "users/get?email=" + userEmail, {
@@ -38,9 +36,11 @@ const useUser = () => {
   }
 
   useEffect(() => {
-    !currentUser && getUser();
-    !currentUserRegistrations && getUserRegistrations();
-  }, []);
+    if (token) {
+      !currentUser && getUser();
+      !currentUserRegistrations && getUserRegistrations();
+    }
+  }, [token]);
 };
 
 export default useUser;

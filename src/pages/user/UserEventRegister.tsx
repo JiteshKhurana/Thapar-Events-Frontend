@@ -18,11 +18,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "@/lib/constants";
 
 const UserEventRegister = () => {
-  useUser();
-  const { state } = useLocation();
-  const user = useSelector((store: RootState) => store.user.currentUser);
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
+  useUser(token);
+
+  const { state } = useLocation();
+  const user = useSelector((store: RootState) => store.user.currentUser);
+
   const {
     register,
     handleSubmit,
@@ -56,8 +58,10 @@ const UserEventRegister = () => {
       );
   };
   console.log(errors.parameters);
+  if (!token)
+    return <div className="text-5xl text-center">You need to login first</div>;
   if (!user) return <CardShimmer />;
-  if (!token) return <h1>You Need to Login First</h1>;
+
   return (
     <div className="m-10 flex flex-col justify-center items-center">
       <h1 className="text-3xl">Registering for {state.event.title}</h1>

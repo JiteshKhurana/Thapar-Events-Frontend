@@ -42,6 +42,7 @@ const EventsDetail: React.FC = () => {
   const [event, setEvent] = useState<Event | null>(null);
   const [registrations, setRegistrations] = useState<number>(0);
   const [userRegistered, setUserRegistered] = useState<boolean>(false);
+  const role = localStorage.getItem("role");
 
   async function checkRegistered() {
     try {
@@ -70,10 +71,9 @@ const EventsDetail: React.FC = () => {
       toast(String(error));
     }
   }
-
   useEffect(() => {
     getEvents();
-    checkRegistered();
+    token && role !== "admin" && checkRegistered();
   }, []);
   const [copySuccess, setCopySuccess] = useState("SHARE THE EVENT");
   async function copyUrl() {
@@ -192,6 +192,18 @@ const EventsDetail: React.FC = () => {
               </div>
             )}
             <Separator />
+            <Button
+              onClick={() =>
+                navigate("eventgallery", {
+                  state: {
+                    event: event,
+                  },
+                })
+              }
+            >
+              Event Gallery
+            </Button>
+            <Separator />
             {event.social_media && (
               <div>
                 <h2 className="font-semibold text-xl mb-2">
@@ -223,6 +235,7 @@ const EventsDetail: React.FC = () => {
               ) : (
                 <Button
                   className="w-full"
+                  disabled={role === "admin"}
                   onClick={() =>
                     navigate("register", {
                       state: {
@@ -231,7 +244,7 @@ const EventsDetail: React.FC = () => {
                     })
                   }
                 >
-                  Register Now
+                  {role === "admin" ? "You Can't Register" : "Register Now"}
                 </Button>
               )}
             </div>
