@@ -193,15 +193,18 @@ const Events: React.FC = () => {
 
                       {event.hashtags && (
                         <CardContent className="flex gap-2 justify-center">
-                          {event.hashtags.map((hashtag) => (
-                            <Badge
-                              key={uuidv4()}
-                              className="p-2"
-                              variant="outline"
-                            >
-                              #{hashtag}
-                            </Badge>
-                          ))}
+                          {event.hashtags.map(
+                            (hashtag) =>
+                              hashtag !== "" && (
+                                <Badge
+                                  key={uuidv4()}
+                                  className="p-2"
+                                  variant="outline"
+                                >
+                                  #{hashtag}
+                                </Badge>
+                              )
+                          )}
                         </CardContent>
                       )}
                       <CardFooter>
@@ -258,15 +261,18 @@ const Events: React.FC = () => {
 
                       {event.hashtags && (
                         <CardContent className="flex gap-2 justify-center">
-                          {event.hashtags.map((hashtag) => (
-                            <Badge
-                              key={uuidv4()}
-                              className="p-2"
-                              variant="outline"
-                            >
-                              #{hashtag}
-                            </Badge>
-                          ))}
+                          {event.hashtags.map(
+                            (hashtag) =>
+                              hashtag !== "" && (
+                                <Badge
+                                  key={uuidv4()}
+                                  className="p-2"
+                                  variant="outline"
+                                >
+                                  #{hashtag}
+                                </Badge>
+                              )
+                          )}
                         </CardContent>
                       )}
                       <CardFooter>

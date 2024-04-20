@@ -25,7 +25,7 @@ const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
   return (
     <div className="my-5">
       <div className="flex items-center justify-between my-2">
-        <h2 className="text-xl font-semibold">{title}</h2>
+        <h2 className="text-2xl font-semibold my-2">{title}</h2>
       </div>
       <div className="flex overflow-x-scroll no-scrollbar gap-3">
         {itemsToMap?.map((event) => (
@@ -44,17 +44,21 @@ const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
                 <CardDescription>{event.soc_name}</CardDescription>
                 <CardDescription className="flex items-center gap-2">
                   <BiCalendar className="text-black dark:text-white" />
-                  {timeConverter(event.start_date, false)}
+                  {timeConverter(event.start_date, false)} :{" "}
+                  {timeConverter(event.end_date, false)}
                 </CardDescription>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex gap-2 justify-center">
               {event.hashtags &&
-                event.hashtags.map((hashtag) => (
-                  <Badge key={uuidv4()} variant="outline">
-                    #{hashtag}
-                  </Badge>
-                ))}
+                event.hashtags.map(
+                  (hashtag) =>
+                    hashtag !== "" && (
+                      <Badge key={uuidv4()} variant="outline">
+                        #{hashtag}
+                      </Badge>
+                    )
+                )}
             </CardContent>
             {apply ? (
               <CardFooter className="justify-between">

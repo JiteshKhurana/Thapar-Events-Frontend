@@ -1,12 +1,17 @@
 import CardShimmer from "@/components/CardShimmer";
 import CardSlider from "@/components/CardSlider";
 import { Skeleton } from "@/components/ui/skeleton";
+import { upcomingOrPast } from "@/lib/helper";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 
 const UserDashBoard = () => {
   const currentDate = new Date().toDateString();
   const user = useSelector((store: RootState) => store.user.currentUser);
+  const userRegistrations = useSelector(
+    (store: RootState) => store.user.currentUserRegistrations
+  );
+  console.log(userRegistrations);
   return !user ? (
     <div className="rounded-xl p-5">
       <Skeleton className="h-10 w-[450px] mb-5" />
@@ -26,8 +31,39 @@ const UserDashBoard = () => {
           </span>
         </span>
       </div>
-      <CardSlider title="Your Registrations" apply={false} itemsToMap={[]} />
-      <CardSlider title="Past Participations" apply={false} itemsToMap={[]} />
+
+      {!userRegistrations ? (
+        <div className="my-5">
+          <div className="flex flex-col my-2">
+            <h2 className="text-xl font-semibold">Your Registrations</h2>
+            <p className="text-lg text-red-500">No Registrations</p>
+          </div>
+        </div>
+      ) : (
+        <CardSlider
+          title="Your Registrations"
+          apply={false}
+          itemsToMap={userRegistrations.filter((event) =>
+            upcomingOrPast(event.end_date)
+          )}
+        />
+      )}
+      {!userRegistrations ? (
+        <div className="my-5">
+          <div className="flex flex-col my-2">
+            <h2 className="text-xl font-semibold">Past Participations</h2>
+            <p className="text-lg text-red-500">No Past Participations</p>
+          </div>
+        </div>
+      ) : (
+        <CardSlider
+          title="Past Participations"
+          apply={false}
+          itemsToMap={userRegistrations.filter(
+            (event) => !upcomingOrPast(event.end_date)
+          )}
+        />
+      )}
     </div>
   );
 };

@@ -9,7 +9,11 @@ import { API_ENDPOINT } from "@/lib/constants";
 import CardShimmer from "@/components/CardShimmer";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
-import { timeConverter, findDifferenceTwoDates } from "@/lib/helper";
+import {
+  timeConverter,
+  findDifferenceTwoDates,
+  upcomingOrPast,
+} from "@/lib/helper";
 import {
   EmailIcon,
   TelegramIcon,
@@ -118,11 +122,14 @@ const EventsDetail: React.FC = () => {
               </div>
               {event.hashtags && (
                 <div className="flex gap-1">
-                  {event.hashtags.map((hashtag) => (
-                    <Badge key={uuidv4()} className="p-2" variant="outline">
-                      #{hashtag}
-                    </Badge>
-                  ))}
+                  {event.hashtags.map(
+                    (hashtag) =>
+                      hashtag !== "" && (
+                        <Badge key={uuidv4()} className="p-2" variant="outline">
+                          #{hashtag}
+                        </Badge>
+                      )
+                  )}
                 </div>
               )}
             </div>
@@ -204,59 +211,59 @@ const EventsDetail: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="col-span-8 md:col-span-4 space-y-3 ">
-          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 space-y-3">
-            {userRegistered ? (
-              <div className="bg-white rounded-xl p-2">
-                <h1 className="text-center text-bold text-green-600">
-                  You are Registered
-                </h1>
-              </div>
-            ) : (
-              <Button
-                className="w-full"
-                onClick={() =>
-                  navigate("register", {
-                    state: {
-                      event: event,
-                    },
-                  })
-                }
-              >
-                Register Now
-              </Button>
-            )}
-
-            <Separator />
-            <div>
-              <div className="flex items-center">
-                <LuMapPin className="mr-3 font-semibold text-2xl" />
-                <div className="flex flex-col">
-                  <span className="font-semibold text-lg">Venue</span>
-                  <span>{event.venue}</span>
+        <div className="col-span-8 md:col-span-4 space-y-3">
+          {upcomingOrPast(event.end_date) ? (
+            <div className="shadow-xl border rounded-lg p-5 space-y-3">
+              {userRegistered ? (
+                <div className="bg-white rounded-xl p-2">
+                  <h1 className="text-center text-bold text-green-600">
+                    You are Registered
+                  </h1>
                 </div>
-              </div>
-              {event.team === "true" && (
-                <div className="flex items-center">
-                  <BiGroup className="mr-3 font-semibold text-2xl" />
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-lg">Team Size</span>
-                    <span>1 - 2 Members</span>
-                  </div>
-                </div>
+              ) : (
+                <Button
+                  className="w-full"
+                  onClick={() =>
+                    navigate("register", {
+                      state: {
+                        event: event,
+                      },
+                    })
+                  }
+                >
+                  Register Now
+                </Button>
               )}
+            </div>
+          ) : null}
+          <div className="shadow-xl border rounded-lg p-5 ">
+            <div className="flex items-center">
+              <LuMapPin className="mr-3 font-semibold text-2xl" />
+              <div className="flex flex-col">
+                <span className="font-semibold text-lg">Venue</span>
+                <span>{event.venue}</span>
+              </div>
+            </div>
+            {event.team === "true" && (
               <div className="flex items-center">
-                <MdGroups className="mr-3 font-semibold text-2xl" />
+                <BiGroup className="mr-3 font-semibold text-2xl" />
                 <div className="flex flex-col">
-                  <span className="font-semibold text-lg">
-                    Total Registrations
-                  </span>
-                  <span>{registrations}</span>
+                  <span className="font-semibold text-lg">Team Size</span>
+                  <span>1 - 2 Members</span>
                 </div>
+              </div>
+            )}
+            <div className="flex items-center">
+              <MdGroups className="mr-3 font-semibold text-2xl" />
+              <div className="flex flex-col">
+                <span className="font-semibold text-lg">
+                  Total Registrations
+                </span>
+                <span>{registrations}</span>
               </div>
             </div>
           </div>
-          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 ">
+          <div className=" shadow-xl border rounded-lg p-5 ">
             <span className="font-semibold text-lg">Eligibility</span>
             <Separator className="my-3" />
             {event.eligibility === "" ? (
@@ -265,7 +272,7 @@ const EventsDetail: React.FC = () => {
               <span>{event.eligibility}</span>
             )}
           </div>
-          <div className=" bg-white dark:bg-black shadow-xl border rounded-lg p-5 ">
+          <div className=" shadow-xl border rounded-lg p-5 ">
             <Button onClick={copyUrl} className="w-full">
               <div className="flex flex-row gap-2 items-center">
                 <p>{copySuccess}</p>
