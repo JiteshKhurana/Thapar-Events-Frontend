@@ -165,6 +165,10 @@ export const editEventSchema = z.object({
     .optional(),
 });
 
+export const userFeedbackSchema = z.object({
+  message: z.string().min(2, "Write a Bigger Message").max(5000, "Too Long"),
+});
+
 export type FormFields = z.infer<typeof editUserSchema>;
 export type userEventRegisterFormFields = z.infer<
   typeof userEventRegisterSchemas
@@ -172,3 +176,4 @@ export type userEventRegisterFormFields = z.infer<
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
 export type addEventPosterFields = z.infer<typeof addEventPosterSchema>;
+export type userFeedbackFields = z.infer<typeof userFeedbackSchema>;

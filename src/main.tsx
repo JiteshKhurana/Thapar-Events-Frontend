@@ -35,6 +35,7 @@ import AddEventPoster from "./pages/eventdashboard/AddEventPoster.tsx";
 import SuperAdminDashboardEvents from "./pages/superadmin/SuperAdminDashboardEvents.tsx";
 import SuperAdminDashboardSocieties from "./pages/superadmin/SuperAdminDashboardSocieties.tsx";
 import SuperAdminDashboardAddSociety from "./pages/superadmin/SuperAdminDashboardAddSociety.tsx";
+import Feedback from "./pages/Feedback.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/societies/:societyName",
         element: <SocietyDetail />,
+      },
+      {
+        path: "/feedback",
+        element: <Feedback />,
       },
       {
         path: "/profile",
