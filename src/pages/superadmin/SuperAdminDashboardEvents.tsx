@@ -1,4 +1,6 @@
+import CardShimmer from "@/components/CardShimmer";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 import {
   Card,
@@ -17,71 +19,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useEvents from "@/hooks/useEvents";
+import { timeConverter } from "@/lib/helper";
+import { RootState } from "@/store/store";
 import { Search } from "lucide-react";
 import { BiLinkExternal } from "react-icons/bi";
-
-const Events = [
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    visibility: "Public",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    visibility: "Public",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    visibility: "Public",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    visibility: "Not Visible",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    visibility: "Not Visible",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    status: "Upcoming",
-    visibility: "Public",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Kuch Bhi",
-    status: "Past",
-    visibility: "Public",
-    date: "12:4:2024",
-    registrations: "69",
-    created_at: "10-3-2024",
-  },
-];
+import { useSelector } from "react-redux";
 
 const SuperAdminDashboardEvents = () => {
+  useEvents();
+
+  const Events = useSelector((store: RootState) => store.events.eventsList);
+  if (!Events) return <CardShimmer />;
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -120,18 +69,14 @@ const SuperAdminDashboardEvents = () => {
                           <span className="hidden">Image</span>
                         </TableHead>
                         <TableHead>Event Name</TableHead>
-                        <TableHead>Status</TableHead>
+                        <TableHead>Society Name</TableHead>
                         <TableHead>Visibility</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead className="hidden md:table-cell">
-                          Registrations
-                        </TableHead>
-                        <TableHead className="hidden md:table-cell">
-                          Created at
-                        </TableHead>
-                        <TableHead>
-                          <span className="sr-only">Actions</span>
-                        </TableHead>
+                        <TableHead>Start Date</TableHead>
+                        <TableHead>End Date</TableHead>
+                        <TableHead>Event Type</TableHead>
+                        <TableHead>Event Mode</TableHead>
+                        <TableHead>Venue</TableHead>
+                        <TableHead>Event Dashboard</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -140,7 +85,7 @@ const SuperAdminDashboardEvents = () => {
                           <TableRow>
                             <TableCell className="hidden sm:table-cell">
                               <img
-                                src={event.img}
+                                src={event.image}
                                 alt="Event image"
                                 className="aspect-square rounded-md object-cover"
                                 height="64"
@@ -148,23 +93,49 @@ const SuperAdminDashboardEvents = () => {
                               />
                             </TableCell>
                             <TableCell className="font-medium">
-                              {event.name}
+                              {event.title}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                              {event.soc_name}
                             </TableCell>
                             <TableCell>
-                              <Badge variant="outline">{event.status}</Badge>
+                              <Badge
+                                className={`${
+                                  event.visibility === "true"
+                                    ? "text-green-500"
+                                    : "text-red-500"
+                                }`}
+                                variant="outline"
+                              >
+                                {event.visibility === "true"
+                                  ? "Public"
+                                  : "Private"}
+                              </Badge>
                             </TableCell>
-                            <TableCell>{event.visibility}</TableCell>
-                            <TableCell>{event.date}</TableCell>
                             <TableCell className="hidden md:table-cell">
-                              {event.registrations}
+                              {timeConverter(event.start_date, true)}
                             </TableCell>
                             <TableCell className="hidden md:table-cell">
-                              {event.created_at}
+                              {timeConverter(event.end_date, true)}
                             </TableCell>
                             <TableCell>
-                              <div className="event-dashboard_link flex items-center gap-1">
-                                <BiLinkExternal /> Event Dashboard
-                              </div>
+                              <Badge variant="outline">
+                                {event.event_type}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Badge variant="outline">
+                                {event.event_mode}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>{event.venue}</TableCell>
+                            <TableCell>
+                              <Button
+                                onClick={() => {}}
+                                className="flex items-center gap-1"
+                              >
+                                <BiLinkExternal /> Society Dashboard
+                              </Button>
                             </TableCell>
                           </TableRow>
                         );

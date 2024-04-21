@@ -36,7 +36,6 @@ import { Event } from "@/store/eventSlice";
 const Events: React.FC = () => {
   useEvents();
   const events = useSelector((store: RootState) => store.events.eventsList);
-
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(true);
   const [filteredEvents, setFilteredEvents] = useState<Event[] | null>(null);
