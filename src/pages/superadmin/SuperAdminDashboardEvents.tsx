@@ -1,4 +1,3 @@
-import CardShimmer from "@/components/CardShimmer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -20,17 +19,47 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useEvents from "@/hooks/useEvents";
-import { timeConverter } from "@/lib/helper";
+import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { RootState } from "@/store/store";
 import { Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import { Event } from "@/store/eventSlice";
 
 const SuperAdminDashboardEvents = () => {
   useEvents();
 
   const Events = useSelector((store: RootState) => store.events.eventsList);
-  if (!Events) return <CardShimmer />;
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[] | null>(null);
+  const [pastEvents, setPastEvents] = useState<Event[] | null>(null);
+  useEffect(() => {
+    if (Events) {
+      const { upcomingEvents, pastEvents } = Events.reduce(
+        (
+          acc: { upcomingEvents: Event[]; pastEvents: Event[] },
+          event: Event
+        ) => {
+          if (upcomingOrPast(event.end_date)) {
+            acc.upcomingEvents.push(event);
+          } else {
+            acc.pastEvents.push(event);
+          }
+          return acc;
+        },
+        { upcomingEvents: [], pastEvents: [] }
+      );
+
+      setUpcomingEvents(upcomingEvents);
+      setPastEvents(pastEvents);
+    }
+  }, [Events]);
+  if (!Events)
+    return (
+      <div className="mx-5 flex min-h-screen w-full flex-col sm:gap-4 sm:py-4 sm:pl-14">
+        Loading Events
+      </div>
+    );
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -44,10 +73,8 @@ const SuperAdminDashboardEvents = () => {
               <div className="flex flex-wrap gap-3">
                 <TabsList>
                   <TabsTrigger value="all">All</TabsTrigger>
-                  <TabsTrigger value="draft">Upcoming</TabsTrigger>
-                  <TabsTrigger value="archived" className="hidden sm:flex">
-                    Past
-                  </TabsTrigger>
+                  <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
+                  <TabsTrigger value="past">Past</TabsTrigger>
                 </TabsList>
                 <div className="relative ml-auto flex-1 md:grow-0">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -140,6 +167,180 @@ const SuperAdminDashboardEvents = () => {
                           </TableRow>
                         );
                       })}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="upcoming">
+              <Card x-chunk="dashboard-06-chunk-1">
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="hidden w-[100px] sm:table-cell">
+                          <span className="hidden">Image</span>
+                        </TableHead>
+                        <TableHead>Event Name</TableHead>
+                        <TableHead>Society Name</TableHead>
+                        <TableHead>Visibility</TableHead>
+                        <TableHead>Start Date</TableHead>
+                        <TableHead>End Date</TableHead>
+                        <TableHead>Event Type</TableHead>
+                        <TableHead>Event Mode</TableHead>
+                        <TableHead>Venue</TableHead>
+                        <TableHead>Event Dashboard</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {upcomingEvents &&
+                        upcomingEvents.map((event) => {
+                          return (
+                            <TableRow>
+                              <TableCell className="hidden sm:table-cell">
+                                <img
+                                  src={event.image}
+                                  alt="Event image"
+                                  className="aspect-square rounded-md object-cover"
+                                  height="64"
+                                  width="64"
+                                />
+                              </TableCell>
+                              <TableCell className="font-medium">
+                                {event.title}
+                              </TableCell>
+                              <TableCell className="font-medium">
+                                {event.soc_name}
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  className={`${
+                                    event.visibility === "true"
+                                      ? "text-green-500"
+                                      : "text-red-500"
+                                  }`}
+                                  variant="outline"
+                                >
+                                  {event.visibility === "true"
+                                    ? "Public"
+                                    : "Private"}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell">
+                                {timeConverter(event.start_date, true)}
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell">
+                                {timeConverter(event.end_date, true)}
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">
+                                  {event.event_type}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">
+                                  {event.event_mode}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>{event.venue}</TableCell>
+                              <TableCell>
+                                <Button
+                                  onClick={() => {}}
+                                  className="flex items-center gap-1"
+                                >
+                                  <BiLinkExternal /> Society Dashboard
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="past">
+              <Card x-chunk="dashboard-06-chunk-1">
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="hidden w-[100px] sm:table-cell">
+                          <span className="hidden">Image</span>
+                        </TableHead>
+                        <TableHead>Event Name</TableHead>
+                        <TableHead>Society Name</TableHead>
+                        <TableHead>Visibility</TableHead>
+                        <TableHead>Start Date</TableHead>
+                        <TableHead>End Date</TableHead>
+                        <TableHead>Event Type</TableHead>
+                        <TableHead>Event Mode</TableHead>
+                        <TableHead>Venue</TableHead>
+                        <TableHead>Event Dashboard</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {pastEvents &&
+                        pastEvents.map((event) => {
+                          return (
+                            <TableRow>
+                              <TableCell className="hidden sm:table-cell">
+                                <img
+                                  src={event.image}
+                                  alt="Event image"
+                                  className="aspect-square rounded-md object-cover"
+                                  height="64"
+                                  width="64"
+                                />
+                              </TableCell>
+                              <TableCell className="font-medium">
+                                {event.title}
+                              </TableCell>
+                              <TableCell className="font-medium">
+                                {event.soc_name}
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  className={`${
+                                    event.visibility === "true"
+                                      ? "text-green-500"
+                                      : "text-red-500"
+                                  }`}
+                                  variant="outline"
+                                >
+                                  {event.visibility === "true"
+                                    ? "Public"
+                                    : "Private"}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell">
+                                {timeConverter(event.start_date, true)}
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell">
+                                {timeConverter(event.end_date, true)}
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">
+                                  {event.event_type}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">
+                                  {event.event_mode}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>{event.venue}</TableCell>
+                              <TableCell>
+                                <Button
+                                  onClick={() => {}}
+                                  className="flex items-center gap-1"
+                                >
+                                  <BiLinkExternal /> Society Dashboard
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
                     </TableBody>
                   </Table>
                 </CardContent>

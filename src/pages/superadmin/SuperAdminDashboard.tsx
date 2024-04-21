@@ -1,4 +1,3 @@
-import CardShimmer from "@/components/CardShimmer";
 import {
   Card,
   CardContent,
@@ -31,7 +30,6 @@ const SuperAdminDashboard = () => {
   const societies = useSelector(
     (store: RootState) => store.societies.societiesList
   );
-  if (!events || !societies) return <CardShimmer />;
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
@@ -52,7 +50,9 @@ const SuperAdminDashboard = () => {
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{events.length}</div>
+                <div className="text-2xl font-bold">
+                  {events ? events.length : 0}
+                </div>
               </CardContent>
             </Card>
             <Card x-chunk="dashboard-01-chunk-1">
@@ -76,7 +76,7 @@ const SuperAdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {events.length - upcomingEvents}
+                  {events ? events.length - upcomingEvents : 0}
                 </div>
                 <p className="text-xs text-muted-foreground"></p>
               </CardContent>
@@ -89,7 +89,9 @@ const SuperAdminDashboard = () => {
                 <CreditCard className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{societies.length}</div>
+                <div className="text-2xl font-bold">
+                  {societies ? societies.length : 0}
+                </div>
               </CardContent>
             </Card>
           </div>
