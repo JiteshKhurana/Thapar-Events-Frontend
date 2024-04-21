@@ -7,8 +7,12 @@ import {
 import { Home, LogOut, UserPlus2, Users2 } from "lucide-react";
 import { BiCalendar } from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
+import { toast } from "sonner";
+import Cookies from "universal-cookie";
 
 const SuperAdminRoot = () => {
+  const cookies = new Cookies(null, { path: "/" });
+
   return (
     <div className="absolute top-0 bg-background flex justify-center w-full">
       <div className="super-admin-container w-full max-w-[1800px]">
@@ -85,7 +89,14 @@ const SuperAdminRoot = () => {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <NavLink
-                    to="#"
+                    onClick={() => {
+                      cookies.remove("token");
+                      localStorage.clear();
+                      toast("Logout successful", {
+                        description: "You have successfully logged out.",
+                      });
+                    }}
+                    to="/"
                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   >
                     <LogOut className="h-5 w-5" />

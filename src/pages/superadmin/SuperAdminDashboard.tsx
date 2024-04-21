@@ -1,3 +1,4 @@
+import CardShimmer from "@/components/CardShimmer";
 import {
   Card,
   CardContent,
@@ -5,9 +6,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import useEvents from "@/hooks/useEvents";
+import useSocieties from "@/hooks/useSocieties";
+import { upcomingOrPast } from "@/lib/helper";
+import { Event } from "@/store/eventSlice";
+import { RootState } from "@/store/store";
 import { CreditCard, DollarSign, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const SuperAdminDashboard = () => {
+  useEvents();
+  useSocieties();
+  const events = useSelector((store: RootState) => store.events.eventsList);
+  const [upcomingEvents, setUpcomingEvents] = useState<number>(0);
+  useEffect(() => {
+    if (events) {
+      const filteredEvents = events.filter((event: Event) =>
+        upcomingOrPast(event.end_date)
+      );
+      setUpcomingEvents(filteredEvents.length);
+    }
+  }, [events]);
+  const societies = useSelector(
+    (store: RootState) => store.societies.societiesList
+  );
+  if (!events || !societies) return <CardShimmer />;
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
@@ -28,7 +52,7 @@ const SuperAdminDashboard = () => {
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">23</div>
+                <div className="text-2xl font-bold">{events.length}</div>
               </CardContent>
             </Card>
             <Card x-chunk="dashboard-01-chunk-1">
@@ -39,11 +63,25 @@ const SuperAdminDashboard = () => {
                 <Users className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">20</div>
+                <div className="text-2xl font-bold">{upcomingEvents}</div>
                 <p className="text-xs text-muted-foreground"></p>
               </CardContent>
             </Card>
             <Card x-chunk="dashboard-01-chunk-2">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">
+                  Past Events
+                </CardTitle>
+                <Users className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {events.length - upcomingEvents}
+                </div>
+                <p className="text-xs text-muted-foreground"></p>
+              </CardContent>
+            </Card>
+            <Card x-chunk="dashboard-01-chunk-3">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Total Societies
@@ -51,7 +89,7 @@ const SuperAdminDashboard = () => {
                 <CreditCard className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">234</div>
+                <div className="text-2xl font-bold">{societies.length}</div>
               </CardContent>
             </Card>
           </div>
