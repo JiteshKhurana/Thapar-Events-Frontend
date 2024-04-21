@@ -32,13 +32,10 @@ const AddPhotoGallery = () => {
   const onSubmit: SubmitHandler<addEventGalleryFields> = async (data) => {
     const formData = new FormData();
     console.log(data.photos);
-    console.log();
     if (data.photos && data.photos.length) {
-      Object.entries(data.photos).map(
-        (photo: [string, unknown], index: number) => {
-          formData.append(`photos[${index}]`, photo[1] as File);
-        }
-      );
+      for (let x = 0; x < data.photos.length; x++) {
+        formData.append("photos", data.photos[x]);
+      }
     }
     console.log(formData);
     await axios
