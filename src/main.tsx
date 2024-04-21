@@ -165,23 +165,29 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/superadmin",
-        element: <SuperAdminRoot />,
+        element: <ProtectedRoute adminRoute={false} superAdminRoute={true} />,
         children: [
           {
-            path: "/superadmin/",
-            element: <SuperAdminDashboard />,
-          },
-          {
-            path: "/superadmin/events",
-            element: <SuperAdminDashboardEvents />,
-          },
-          {
-            path: "/superadmin/societies",
-            element: <SuperAdminDashboardSocieties />,
-          },
-          {
-            path: "/superadmin/addsociety",
-            element: <SuperAdminDashboardAddSociety />,
+            path: "/superadmin",
+            element: <SuperAdminRoot />,
+            children: [
+              {
+                path: "",
+                element: <SuperAdminDashboard />,
+              },
+              {
+                path: "/superadmin/events",
+                element: <SuperAdminDashboardEvents />,
+              },
+              {
+                path: "/superadmin/societies",
+                element: <SuperAdminDashboardSocieties />,
+              },
+              {
+                path: "/superadmin/addsociety",
+                element: <SuperAdminDashboardAddSociety />,
+              },
+            ],
           },
         ],
       },
