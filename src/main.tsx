@@ -130,7 +130,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/eventdashboard/:eventId",
-        element: <ProtectedRoute adminRoute={true} />,
+        element: <ProtectedRoute adminRoute={true} superAdminRoute={true} />,
         children: [
           {
             path: "/eventdashboard/:eventId",

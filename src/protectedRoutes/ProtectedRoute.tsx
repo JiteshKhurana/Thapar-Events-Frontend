@@ -14,10 +14,9 @@ const checkAccess = (
   superAdminRoute?: boolean
 ) => {
   if (user && (adminRoute || superAdminRoute)) return false;
-  if (admin && superAdminRoute) return false;
-  if (superAdmin && !superAdminRoute) return false;
-  if (superAdmin && superAdminRoute) return true;
-  if ((admin || superAdmin) && !adminRoute) return false;
+  if (admin && superAdminRoute && !adminRoute) return false;
+  if (superAdmin && !superAdminRoute && !adminRoute) return false;
+  if ((admin || superAdmin) && !adminRoute && !superAdminRoute) return false;
   return true;
 };
 

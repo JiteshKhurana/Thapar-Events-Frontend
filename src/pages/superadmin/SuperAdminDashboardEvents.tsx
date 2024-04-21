@@ -28,9 +28,11 @@ import { API_ENDPOINT } from "@/lib/constants";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const SuperAdminDashboardEvents = () => {
   useEvents();
+  const navigate = useNavigate();
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
   const Events = useSelector((store: RootState) => store.events.eventsList);
@@ -168,7 +170,9 @@ const SuperAdminDashboardEvents = () => {
                             <TableCell>{event.venue}</TableCell>
                             <TableCell>
                               <Button
-                                onClick={() => {}}
+                                onClick={() => {
+                                  navigate("/eventdashboard/" + event._Eid);
+                                }}
                                 className="flex items-center gap-1"
                               >
                                 <BiLinkExternal /> Event Dashboard
@@ -255,7 +259,9 @@ const SuperAdminDashboardEvents = () => {
                               <TableCell>{event.venue}</TableCell>
                               <TableCell>
                                 <Button
-                                  onClick={() => {}}
+                                  onClick={() => {
+                                    navigate("/eventdashboard/" + event._Eid);
+                                  }}
                                   className="flex items-center gap-1"
                                 >
                                   <BiLinkExternal /> Event Dashboard
@@ -342,7 +348,9 @@ const SuperAdminDashboardEvents = () => {
                               <TableCell>{event.venue}</TableCell>
                               <TableCell>
                                 <Button
-                                  onClick={() => {}}
+                                  onClick={() => {
+                                    navigate("/eventdashboard/" + event._Eid);
+                                  }}
                                   className="flex items-center gap-1"
                                 >
                                   <BiLinkExternal /> Event Dashboard
@@ -429,7 +437,9 @@ const SuperAdminDashboardEvents = () => {
                               <TableCell>{event.venue}</TableCell>
                               <TableCell>
                                 <Button
-                                  onClick={() => {}}
+                                  onClick={() => {
+                                    navigate("/eventdashboard/" + event._Eid);
+                                  }}
                                   className="flex items-center gap-1"
                                 >
                                   <BiLinkExternal /> Event Dashboard
