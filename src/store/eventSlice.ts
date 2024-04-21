@@ -31,6 +31,7 @@ export interface Event {
   team: string;
   title: string;
   visibility: string;
+  register: string;
   social_media: object;
   _Eid: string;
   _Sid: string;

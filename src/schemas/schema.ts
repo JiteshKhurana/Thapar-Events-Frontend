@@ -106,6 +106,7 @@ export const editEventSchema = z.object({
   event_type: z.string({ required_error: "Please Select Event Type" }),
   event_mode: z.string({ required_error: "Please Select Event Mode" }),
   visibility: z.string(),
+  register: z.string(),
   venue: z
     .string({ required_error: "Please Enter Venue" })
     .min(2, "Too Short")

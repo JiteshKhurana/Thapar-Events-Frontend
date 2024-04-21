@@ -15,6 +15,7 @@ import {
   upcomingOrPast,
   isLoggedIn,
   isAdmin,
+  isSuperAdmin,
 } from "@/lib/helper";
 import {
   EmailIcon,
@@ -228,15 +229,15 @@ const EventsDetail: React.FC = () => {
           {upcomingOrPast(event.end_date) ? (
             <div className="shadow-xl border rounded-lg p-5 space-y-3">
               {userRegistered ? (
-                <div className="bg-white rounded-xl p-2">
-                  <h1 className="text-center text-bold text-green-600">
-                    You are Registered
-                  </h1>
-                </div>
+                <Button className="w-full" disabled>
+                  You are Registered
+                </Button>
               ) : (
                 <Button
                   className="w-full"
-                  disabled={isAdmin()}
+                  disabled={
+                    isAdmin() || isSuperAdmin() || event.register === "false"
+                  }
                   onClick={() =>
                     navigate("register", {
                       state: {
@@ -245,7 +246,11 @@ const EventsDetail: React.FC = () => {
                     })
                   }
                 >
-                  {isAdmin() ? "You Can't Register" : "Register Now"}
+                  {isAdmin() || isSuperAdmin()
+                    ? "You Can't Register"
+                    : event.register === "true"
+                    ? "Register Now"
+                    : "Registrations Closed"}
                 </Button>
               )}
             </div>

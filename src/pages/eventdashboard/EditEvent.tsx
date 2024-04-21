@@ -41,6 +41,7 @@ const EditEvent = () => {
       event_mode: event?.event_mode,
       event_type: event?.event_type,
       visibility: event?.visibility,
+      register: event?.register,
       venue: event?.venue,
       hashtags: event?.hashtags && [
         event?.hashtags[0],
@@ -255,6 +256,19 @@ const EditEvent = () => {
             </select>
             {errors.visibility && (
               <div className="text-red-500">{errors.visibility.message}</div>
+            )}
+          </div>
+          <div className="w-1/2">
+            <Label htmlFor="register">Registrations Opened</Label>
+            <select
+              {...register("register")}
+              className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+            {errors.register && (
+              <div className="text-red-500">{errors.register.message}</div>
             )}
           </div>
         </div>
