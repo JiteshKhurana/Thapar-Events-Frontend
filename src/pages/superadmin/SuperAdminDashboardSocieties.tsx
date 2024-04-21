@@ -1,3 +1,5 @@
+import CardShimmer from "@/components/CardShimmer";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -14,19 +16,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useSocieties from "@/hooks/useSocieties";
+import { RootState } from "@/store/store";
 import { Search } from "lucide-react";
 import { BiLinkExternal } from "react-icons/bi";
-
-const Societies = [
-  {
-    img: "https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg",
-    name: "Creative Computing Society",
-    email: "ccs@thapr.edu",
-    created_at: "10-3-2024",
-  },
-];
+import { useSelector } from "react-redux";
 
 const SuperAdminDashboardSocieties = () => {
+  useSocieties();
+  const Societies = useSelector(
+    (store: RootState) => store.societies.societiesList
+  );
+  if (!Societies) return <CardShimmer />;
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
@@ -56,12 +57,7 @@ const SuperAdminDashboardSocieties = () => {
                   </TableHead>
                   <TableHead className="py-5">Society Name</TableHead>
                   <TableHead className="py-5">Email</TableHead>
-                  <TableHead className="py-5 hidden md:table-cell">
-                    Created at
-                  </TableHead>
-                  <TableHead className="py-5">
-                    <span className="sr-only">Actions</span>
-                  </TableHead>
+                  <TableHead className="py-5">Society DashBoard</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -70,8 +66,8 @@ const SuperAdminDashboardSocieties = () => {
                     <TableRow>
                       <TableCell className="hidden sm:table-cell">
                         <img
-                          src={event.img}
-                          alt="Event image"
+                          src={event.image}
+                          alt="society pic"
                           className="m-1 aspect-square rounded-sm object-cover"
                           height="64"
                           width="64"
@@ -83,13 +79,13 @@ const SuperAdminDashboardSocieties = () => {
                       <TableCell className="font-medium">
                         {event.email}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        {event.created_at}
-                      </TableCell>
                       <TableCell>
-                        <div className="event-dashboard_link flex items-center gap-1">
+                        <Button
+                          onClick={() => {}}
+                          className="flex items-center gap-1"
+                        >
                           <BiLinkExternal /> Society Dashboard
-                        </div>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   );
