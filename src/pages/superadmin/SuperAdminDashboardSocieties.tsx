@@ -81,12 +81,12 @@ const SuperAdminDashboardSocieties = () => {
               </TableHeader>
               <TableBody>
                 {filteredSocieties &&
-                  filteredSocieties.map((event) => {
+                  filteredSocieties.map((society) => {
                     return (
-                      <TableRow>
+                      <TableRow key={society._Sid}>
                         <TableCell className="hidden sm:table-cell">
                           <img
-                            src={event.image}
+                            src={society.image}
                             alt="society pic"
                             className="m-1 aspect-square rounded-sm object-cover"
                             height="64"
@@ -94,10 +94,10 @@ const SuperAdminDashboardSocieties = () => {
                           />
                         </TableCell>
                         <TableCell className="font-medium">
-                          {event.name}
+                          {society.name}
                         </TableCell>
                         <TableCell className="font-medium">
-                          {event.email}
+                          {society.email}
                         </TableCell>
                         <TableCell>
                           <Button

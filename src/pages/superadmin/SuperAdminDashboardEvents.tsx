@@ -99,7 +99,7 @@ const SuperAdminDashboardEvents = () => {
                     <TableBody>
                       {Events.map((event) => {
                         return (
-                          <TableRow>
+                          <TableRow key={event._Eid}>
                             <TableCell className="hidden sm:table-cell">
                               <img
                                 src={event.image}
@@ -186,7 +186,7 @@ const SuperAdminDashboardEvents = () => {
                       {upcomingEvents &&
                         upcomingEvents.map((event) => {
                           return (
-                            <TableRow>
+                            <TableRow key={event._Eid}>
                               <TableCell className="hidden sm:table-cell">
                                 <img
                                   src={event.image}
@@ -273,7 +273,7 @@ const SuperAdminDashboardEvents = () => {
                       {pastEvents &&
                         pastEvents.map((event) => {
                           return (
-                            <TableRow>
+                            <TableRow key={event._Eid}>
                               <TableCell className="hidden sm:table-cell">
                                 <img
                                   src={event.image}

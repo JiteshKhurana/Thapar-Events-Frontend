@@ -41,7 +41,6 @@ const AddEventPoster = () => {
       formData.append("photos", data.photos[0]);
     }
 
-    console.log(formData);
     await axios
       .post(API_ENDPOINT + "event/poster/upload/" + event?._Eid, formData, {
         headers: { Authorization: `Bearer ${token}` },

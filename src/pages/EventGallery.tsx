@@ -4,7 +4,6 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 const EventGallery = () => {
   const { state } = useLocation();
-  console.log(state.event.photo_gallery);
   const images: ReactImageGalleryItem[] = [];
   if (!state.event.photo_gallery)
     return (

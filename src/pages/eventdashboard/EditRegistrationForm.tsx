@@ -48,7 +48,6 @@ const EditRegistrationForm = () => {
     name: "parameters",
     control,
   });
-  console.log(errors);
 
   useEffect(() => {
     const unloadCallback = (event: {

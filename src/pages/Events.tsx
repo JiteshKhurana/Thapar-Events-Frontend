@@ -76,7 +76,6 @@ const Events: React.FC = () => {
   };
 
   function setFilter(typeofEvent: string) {
-    console.log(typeofEvent);
     if (typeofEvent === "all") setFilteredEvents(events);
     else {
       const data = events?.filter((event) => event.event_type === typeofEvent);

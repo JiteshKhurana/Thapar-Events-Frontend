@@ -96,6 +96,7 @@ const Home: React.FC = () => {
                   (event) =>
                     event?.image && (
                       <CarouselItem
+                        key={event._Eid}
                         className="cursor-pointer w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
                         onClick={() =>
                           navigate(

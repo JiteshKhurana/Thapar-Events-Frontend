@@ -10,6 +10,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 import Cookies from "universal-cookie";
 
 const EventDashboardRoot = () => {
@@ -23,7 +24,7 @@ const EventDashboardRoot = () => {
     axios
       .get(API_ENDPOINT + "event/get?eventId=" + eventDashboardId)
       .then((res) => dispatch(addCurrentEvent(res.data.event)))
-      .catch((error) => console.log(error));
+      .catch((error) => toast(error));
   }
   async function getEventMetrics() {
     axios
@@ -33,7 +34,7 @@ const EventDashboardRoot = () => {
         },
       })
       .then((res) => dispatch(addCurrentEventMetrics(res.data)))
-      .catch((error) => console.log(error));
+      .catch((error) => toast(error));
   }
   useEffect(() => {
     dispatch(removeCurrentEvent());

@@ -31,13 +31,11 @@ const AddPhotoGallery = () => {
   if (!event) return <div>Loading...</div>;
   const onSubmit: SubmitHandler<addEventGalleryFields> = async (data) => {
     const formData = new FormData();
-    console.log(data.photos);
     if (data.photos && data.photos.length) {
       for (let x = 0; x < data.photos.length; x++) {
         formData.append("photos", data.photos[x]);
       }
     }
-    console.log(formData);
     await axios
       .post(API_ENDPOINT + "event/upload/" + event?._Eid, formData, {
         headers: { Authorization: `Bearer ${token}` },

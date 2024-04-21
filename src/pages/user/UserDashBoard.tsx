@@ -11,7 +11,6 @@ const UserDashBoard = () => {
   const userRegistrations = useSelector(
     (store: RootState) => store.user.currentUserRegistrations
   );
-  console.log(userRegistrations);
   return !user ? (
     <div className="rounded-xl p-5">
       <Skeleton className="h-10 w-[450px] mb-5" />

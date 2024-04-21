@@ -30,7 +30,6 @@ export const getRole = () => {
   const token = cookies.get("token");
   if (token != null) {
     const decoded = jwtDecode<JwtPayload>(token);
-    console.log(decoded);
     return decoded.User_type;
   }
   return null;

@@ -5,20 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useUser from "@/hooks/useUser";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { toast } from "sonner";
 import { LuGithub, LuInstagram, LuLinkedin, LuMail } from "react-icons/lu";
 import { TEAM } from "@/lib/constants";
+import { v4 as uuidv4 } from "uuid";
 
 const FeedbackForm = () => {
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
-  useUser(token);
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
   const {
     register,
     setError,
@@ -35,10 +33,9 @@ const FeedbackForm = () => {
   const onSubmit: SubmitHandler<userFeedbackFields> = async (data) => {
     const updatedData = {
       ...data,
-      name: user?.name,
-      email: user?.email,
+      name: name,
+      email: email,
     };
-    console.log(updatedData);
     await axios
       .post(
         "https://thapar-event-management-system-production.up.railway.app/feedback",
@@ -64,11 +61,11 @@ const FeedbackForm = () => {
         <div className="flex flex-col gap-y-3 justify-center">
           <div>
             <Label htmlFor="name">Name</Label>
-            <Input type="text" disabled defaultValue={user?.name} />
+            <Input type="text" disabled defaultValue={name ?? ""} />
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input type="email" disabled defaultValue={user?.email} />
+            <Input type="email" disabled defaultValue={email ?? ""} />
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -95,7 +92,10 @@ const FeedbackForm = () => {
       <h2 className="text-3xl font-medium my-8">Our Team</h2>
       <div className="flex justify-center space-x-5">
         {TEAM.map((teamMember) => (
-          <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
+          <div
+            key={uuidv4()}
+            className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800"
+          >
             <img
               src={teamMember.image}
               alt=""

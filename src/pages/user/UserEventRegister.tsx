@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import CardShimmer from "@/components/CardShimmer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "@/lib/constants";
+import { v4 as uuidv4 } from "uuid";
 
 const UserEventRegister = () => {
   const cookies = new Cookies(null, { path: "/" });
@@ -57,7 +58,6 @@ const UserEventRegister = () => {
         })
       );
   };
-  console.log(errors.parameters);
   if (!token)
     return <div className="text-5xl text-center">You need to login first</div>;
   if (!user) return <CardShimmer />;
@@ -110,7 +110,7 @@ const UserEventRegister = () => {
                   index: number
                 ) => {
                   return (
-                    <div className="flex flex-col space-y-2">
+                    <div key={uuidv4()} className="flex flex-col space-y-2">
                       <Label>{parameter.name}</Label>
                       <input
                         type="hidden"

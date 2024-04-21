@@ -31,7 +31,6 @@ const SuperAdminDashboardAddSociety = () => {
       ...data,
       role: "admin",
     };
-    console.log(updatedData);
     await axios
       .post(API_ENDPOINT + "soc/register", updatedData, {
         headers: { Authorization: `Bearer ${token}` },
