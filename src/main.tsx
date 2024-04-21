@@ -36,7 +36,7 @@ import SuperAdminDashboardEvents from "./pages/superadmin/SuperAdminDashboardEve
 import SuperAdminDashboardSocieties from "./pages/superadmin/SuperAdminDashboardSocieties.tsx";
 import SuperAdminDashboardAddSociety from "./pages/superadmin/SuperAdminDashboardAddSociety.tsx";
 import Feedback from "./pages/Feedback.tsx";
-import AddPhotoGallery from "./pages/society/AddPhotoGallery.tsx";
+import AddPhotoGallery from "./pages/eventdashboard/AddPhotoGallery.tsx";
 import EventGallery from "./pages/EventGallery.tsx";
 import SuperAdminDashboardSocietyProfile from "./pages/superadmin/SuperAdminDashboardSocietyProfile.tsx";
 

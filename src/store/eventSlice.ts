@@ -41,6 +41,7 @@ export interface Event {
   rounds: Rounds[];
   prizes: Prizes[];
   parameters: Parameters[];
+  photo_gallery: string[];
 }
 export interface EventState {
   eventsList: Event[] | null;

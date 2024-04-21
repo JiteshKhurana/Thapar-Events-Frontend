@@ -20,6 +20,7 @@ const AddPhotoGallery = () => {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<addEventGalleryFields>({
     defaultValues: {
@@ -27,7 +28,7 @@ const AddPhotoGallery = () => {
     },
     resolver: zodResolver(addEventGallerySchema),
   });
-
+  console.log(event);
   if (!event) return <div>Loading...</div>;
   const onSubmit: SubmitHandler<addEventGalleryFields> = async (data) => {
     const formData = new FormData();
@@ -42,6 +43,7 @@ const AddPhotoGallery = () => {
       })
       .then(() => {
         toast("Sucessfully Updated!! 🥳");
+        reset();
       })
       .catch((error) =>
         setError("root", {
@@ -66,6 +68,46 @@ const AddPhotoGallery = () => {
           <div className="text-red-500">{errors.root.message}</div>
         )}
       </form>
+      <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
+        Delete Photos
+      </h1>
+      {event.photo_gallery &&
+        event.photo_gallery.map((photo, index) => {
+          return (
+            <div key={index} className="flex flex-col space-y-5 items-center">
+              <img
+                src={photo}
+                alt="photo"
+                className="w-1/2 h-1/2 object-cover rounded-lg"
+              />
+              <Button
+                className="w-1/2"
+                onClick={async () => {
+                  await axios
+                    .delete(
+                      API_ENDPOINT + "event/photo/delete/" + event?._Eid,
+                      {
+                        params: {
+                          photoURL: photo,
+                        },
+                        headers: { Authorization: `Bearer ${token}` },
+                      }
+                    )
+                    .then(() => {
+                      toast("Sucessfully Deleted!! 🥳");
+                    })
+                    .catch((error) =>
+                      setError("root", {
+                        message: error.message,
+                      })
+                    );
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          );
+        })}
     </div>
   );
 };
