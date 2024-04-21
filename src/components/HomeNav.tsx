@@ -12,7 +12,8 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState, CSSProperties } from "react";
-import { isAdmin, isLoggedIn } from "@/lib/helper.ts";
+import { isAdmin, isLoggedIn, isSuperAdmin, isUser } from "@/lib/helper.ts";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar.tsx";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -53,9 +54,11 @@ const HomeNav: React.FC = () => {
             localStorage.setItem("name", resp.data.society.name);
             localStorage.setItem("email", resp.data.society.email);
             localStorage.setItem("id", resp.data.society._Sid);
+            localStorage.setItem("image", resp.data.society.image);
           } else {
             localStorage.setItem("name", resp.data.user.name);
             localStorage.setItem("email", resp.data.user.email);
+            localStorage.setItem("image", resp.data.user.image);
           }
           setIsLoading(false);
         })
@@ -67,7 +70,6 @@ const HomeNav: React.FC = () => {
   });
   const location = useLocation();
   const navigate = useNavigate();
-
   if (isLoading)
     return (
       <SyncLoader
@@ -80,7 +82,16 @@ const HomeNav: React.FC = () => {
         data-testid="loader"
       />
     );
-
+  const image = localStorage.getItem("image");
+  let navigateTo = "";
+  const loggedIn = isLoggedIn();
+  if (isAdmin()) {
+    navigateTo = "/society";
+  } else if (isSuperAdmin()) {
+    navigateTo = "/superadmin";
+  } else if (isUser()) {
+    navigateTo = "/profile";
+  }
   return location.pathname === "/" ? (
     <div className="absolute z-20 w-full">
       <Disclosure as="nav" className="">
@@ -126,16 +137,17 @@ const HomeNav: React.FC = () => {
                     </div>
                   </div>
                   <div className="absolute right-0 sm:relative  flex gap-3 items-center h-">
-                    {isLoggedIn() ? (
-                      isAdmin() ? (
-                        <Button onClick={() => navigate("/society")}>
-                          HI {localStorage.getItem("name")?.toUpperCase()}
-                        </Button>
-                      ) : (
-                        <Button onClick={() => navigate("/profile")}>
-                          HI {localStorage.getItem("name")?.toUpperCase()}
-                        </Button>
-                      )
+                    {loggedIn ? (
+                      <Avatar
+                        className="cursor-pointer"
+                        onClick={() => navigate(navigateTo)}
+                      >
+                        <AvatarImage
+                          src={image ? image : "https://github.com/shadcn.png"}
+                          alt="@shadcn"
+                        />
+                        <AvatarFallback>Profile Pic</AvatarFallback>
+                      </Avatar>
                     ) : (
                       <Button onClick={() => googleLogin()}>Sign in</Button>
                     )}
@@ -209,16 +221,17 @@ const HomeNav: React.FC = () => {
                     </div>
                   </div>
                   <div className="absolute right-0 sm:relative  flex gap-3 items-center h-">
-                    {isLoggedIn() ? (
-                      isAdmin() ? (
-                        <Button onClick={() => navigate("/society")}>
-                          HI {localStorage.getItem("name")?.toUpperCase()}
-                        </Button>
-                      ) : (
-                        <Button onClick={() => navigate("/profile")}>
-                          HI {localStorage.getItem("name")?.toUpperCase()}
-                        </Button>
-                      )
+                    {loggedIn ? (
+                      <Avatar
+                        className="cursor-pointer"
+                        onClick={() => navigate(navigateTo)}
+                      >
+                        <AvatarImage
+                          src={image ? image : "https://github.com/shadcn.png"}
+                          alt="@shadcn"
+                        />
+                        <AvatarFallback>Profile Pic</AvatarFallback>
+                      </Avatar>
                     ) : (
                       <Button onClick={() => googleLogin()}>Sign in</Button>
                     )}
