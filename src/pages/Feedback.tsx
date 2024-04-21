@@ -37,7 +37,6 @@ const FeedbackForm = () => {
       ...data,
       name: user?.name,
       email: user?.email,
-      contact: user?.phone && user.phone,
     };
     console.log(updatedData);
     await axios
@@ -71,11 +70,6 @@ const FeedbackForm = () => {
             <Label htmlFor="email">Email</Label>
             <Input type="email" disabled defaultValue={user?.email} />
           </div>
-          <div>
-            <Label htmlFor="phoneNo.">Phone No.</Label>
-            <Input type="number" disabled defaultValue={user?.phone} />
-          </div>
-
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <Label htmlFor="message">Message</Label>
@@ -103,7 +97,7 @@ const FeedbackForm = () => {
         {TEAM.map((teamMember) => (
           <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
             <img
-              src="https://avatars.githubusercontent.com/u/95995545?v=4"
+              src={teamMember.image}
               alt=""
               className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
             />

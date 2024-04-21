@@ -36,8 +36,10 @@ const SuperAdminDashboard = () => {
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-6">
           <div className="">
             <CardHeader className="m-0 px-0">
-              <CardTitle className="text-xl">Societies</CardTitle>
-              <CardDescription>View and Manage all Societies.</CardDescription>
+              <CardTitle className="text-xl">Analytics</CardTitle>
+              <CardDescription>
+                View Socities and Events Analytics
+              </CardDescription>
             </CardHeader>
           </div>
 

@@ -13,6 +13,8 @@ import {
   timeConverter,
   findDifferenceTwoDates,
   upcomingOrPast,
+  isLoggedIn,
+  isAdmin,
 } from "@/lib/helper";
 import {
   EmailIcon,
@@ -42,7 +44,6 @@ const EventsDetail: React.FC = () => {
   const [event, setEvent] = useState<Event | null>(null);
   const [registrations, setRegistrations] = useState<number>(0);
   const [userRegistered, setUserRegistered] = useState<boolean>(false);
-  const role = localStorage.getItem("role");
 
   async function checkRegistered() {
     try {
@@ -73,7 +74,7 @@ const EventsDetail: React.FC = () => {
   }
   useEffect(() => {
     getEvents();
-    token && role !== "admin" && checkRegistered();
+    isLoggedIn() && !isAdmin() && checkRegistered();
   }, []);
   const [copySuccess, setCopySuccess] = useState("SHARE THE EVENT");
   async function copyUrl() {
@@ -235,7 +236,7 @@ const EventsDetail: React.FC = () => {
               ) : (
                 <Button
                   className="w-full"
-                  disabled={role === "admin"}
+                  disabled={isAdmin()}
                   onClick={() =>
                     navigate("register", {
                       state: {
@@ -244,7 +245,7 @@ const EventsDetail: React.FC = () => {
                     })
                   }
                 >
-                  {role === "admin" ? "You Can't Register" : "Register Now"}
+                  {isAdmin() ? "You Can't Register" : "Register Now"}
                 </Button>
               )}
             </div>

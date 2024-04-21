@@ -9,11 +9,10 @@ import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
 import { API_ENDPOINT, GOOGLE_API_LOGIN } from "@/lib/constants.ts";
 import SyncLoader from "react-spinners/SyncLoader";
-
-// import { Fragment } from 'react'
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState, CSSProperties } from "react";
+import { isAdmin, isLoggedIn } from "@/lib/helper.ts";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -21,10 +20,6 @@ const navigation = [
   { name: "Societies", href: "/societies", current: false },
   { name: "Feedback", href: "/Feedback", current: false },
 ];
-
-// function classNames(...classes: any) {
-//   return classes.filter(Boolean).join(' ')
-// }
 
 const HomeNav: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +33,6 @@ const HomeNav: React.FC = () => {
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse);
       setIsLoading(true);
       const userInfo = await axios.get(GOOGLE_API_LOGIN, {
         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
@@ -55,26 +49,21 @@ const HomeNav: React.FC = () => {
           cookies.set("token", resp.data.token, {
             expires: decoded.exp ? new Date(decoded.exp * 1000) : undefined,
           });
-          if (resp.data.user) {
-            localStorage.setItem("name", resp.data.user.name);
-            localStorage.setItem("email", resp.data.user.email);
-            localStorage.setItem("role", resp.data.user.role);
-            localStorage.setItem("token", tokenResponse.access_token);
-          } else {
+          if (isAdmin()) {
             localStorage.setItem("name", resp.data.society.name);
             localStorage.setItem("email", resp.data.society.email);
             localStorage.setItem("id", resp.data.society._Sid);
-            localStorage.setItem("role", resp.data.society.role);
-            localStorage.setItem("token", tokenResponse.access_token);
+          } else {
+            localStorage.setItem("name", resp.data.user.name);
+            localStorage.setItem("email", resp.data.user.email);
           }
           setIsLoading(false);
-          window.location.reload();
         })
         .catch((error) => {
           toast(error);
         });
     },
-    onError: (errorResponse) => console.log(errorResponse),
+    onError: (errorResponse) => toast(errorResponse.error),
   });
   const location = useLocation();
   const navigate = useNavigate();
@@ -137,9 +126,8 @@ const HomeNav: React.FC = () => {
                     </div>
                   </div>
                   <div className="absolute right-0 sm:relative  flex gap-3 items-center h-">
-                    {cookies.get("token") ? (
-                      localStorage.getItem("role") === "admin" &&
-                      localStorage.getItem("id") ? (
+                    {isLoggedIn() ? (
+                      isAdmin() ? (
                         <Button onClick={() => navigate("/society")}>
                           HI {localStorage.getItem("name")?.toUpperCase()}
                         </Button>
@@ -221,9 +209,8 @@ const HomeNav: React.FC = () => {
                     </div>
                   </div>
                   <div className="absolute right-0 sm:relative  flex gap-3 items-center h-">
-                    {cookies.get("token") ? (
-                      localStorage.getItem("role") === "admin" &&
-                      localStorage.getItem("id") ? (
+                    {isLoggedIn() ? (
+                      isAdmin() ? (
                         <Button onClick={() => navigate("/society")}>
                           HI {localStorage.getItem("name")?.toUpperCase()}
                         </Button>
