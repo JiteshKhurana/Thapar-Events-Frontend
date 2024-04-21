@@ -1,15 +1,51 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { addSocietyFields, addSocietySchema } from "@/schemas/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Label } from "@/components/ui/label";
+import axios from "axios";
+import { API_ENDPOINT } from "@/lib/constants";
+import { toast } from "sonner";
+import Cookies from "universal-cookie";
 
 const SuperAdminDashboardAddSociety = () => {
+  const cookies = new Cookies(null, { path: "/" });
+  const token = cookies.get("token");
   const {
     register,
-    formState: { errors },
-  } = useForm();
+    handleSubmit,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<addSocietyFields>({
+    defaultValues: {
+      email: "",
+    },
+    resolver: zodResolver(addSocietySchema),
+  });
 
-  console.log(errors);
+  const onSubmit: SubmitHandler<addSocietyFields> = async (data) => {
+    const updatedData = {
+      ...data,
+      role: "admin",
+    };
+    console.log(updatedData);
+    await axios
+      .post(API_ENDPOINT + "soc/register", updatedData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        toast("Society registered successfully!! 🥳");
+        reset();
+      })
+      .catch((error) =>
+        setError("root", {
+          message: error.message,
+        })
+      );
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col ">
@@ -21,22 +57,23 @@ const SuperAdminDashboardAddSociety = () => {
               <CardDescription>Register a new society</CardDescription>
             </CardHeader>
           </div>
-          <form className="flex flex-col w-1/2 space-y-3">
-            <span className="text-sm font-medium">Society Name</span>
-            <Input
-              type="text"
-              placeholder="Society Name"
-              {...register("Society Name", { required: true })}
-            />
-
-            <span className="text-sm font-medium">Society Email</span>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col w-1/2 space-y-3"
+          >
+            <Label>Society Email</Label>
             <Input
               type="text"
               placeholder="Society Email"
-              {...register("Society Email", { required: true })}
+              {...register("email")}
             />
 
-            <Button>Create Society</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              Create Society
+            </Button>
+            {errors.root && (
+              <div className="text-red-500">{errors.root.message}</div>
+            )}
           </form>
         </main>
       </div>

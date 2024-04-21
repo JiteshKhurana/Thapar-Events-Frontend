@@ -180,6 +180,11 @@ export const userFeedbackSchema = z.object({
   message: z.string().min(2, "Write a Bigger Message").max(5000, "Too Long"),
 });
 
+// Superadmin Schemas
+export const addSocietySchema = z.object({
+  email: z.string().email(),
+});
+
 export type FormFields = z.infer<typeof editUserSchema>;
 export type userEventRegisterFormFields = z.infer<
   typeof userEventRegisterSchemas
@@ -189,3 +194,4 @@ export type editEventFormFields = z.infer<typeof editEventSchema>;
 export type addEventPosterFields = z.infer<typeof addEventPosterSchema>;
 export type addEventGalleryFields = z.infer<typeof addEventGallerySchema>;
 export type userFeedbackFields = z.infer<typeof userFeedbackSchema>;
+export type addSocietyFields = z.infer<typeof addSocietySchema>;
