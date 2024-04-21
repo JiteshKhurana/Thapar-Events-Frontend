@@ -38,6 +38,7 @@ import SuperAdminDashboardAddSociety from "./pages/superadmin/SuperAdminDashboar
 import Feedback from "./pages/Feedback.tsx";
 import AddPhotoGallery from "./pages/society/AddPhotoGallery.tsx";
 import EventGallery from "./pages/EventGallery.tsx";
+import SuperAdminDashboardSocietyProfile from "./pages/superadmin/SuperAdminDashboardSocietyProfile.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -182,6 +183,10 @@ const appRouter = createBrowserRouter([
               {
                 path: "/superadmin/societies",
                 element: <SuperAdminDashboardSocieties />,
+              },
+              {
+                path: "/superadmin/societies/:societyId",
+                element: <SuperAdminDashboardSocietyProfile />,
               },
               {
                 path: "/superadmin/addsociety",

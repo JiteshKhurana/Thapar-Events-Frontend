@@ -23,6 +23,7 @@ import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SuperAdminDashboardSocieties = () => {
   useSocieties();
@@ -40,6 +41,7 @@ const SuperAdminDashboardSocieties = () => {
     );
     setFilteredSocieties(filteredData || null);
   }
+  const navigate = useNavigate();
 
   useEffect(() => {
     filterSocieties();
@@ -101,7 +103,13 @@ const SuperAdminDashboardSocieties = () => {
                         </TableCell>
                         <TableCell>
                           <Button
-                            onClick={() => {}}
+                            onClick={() => {
+                              navigate(society._Sid, {
+                                state: {
+                                  data: society,
+                                },
+                              });
+                            }}
                             className="flex items-center gap-1"
                           >
                             <BiLinkExternal /> Society Dashboard

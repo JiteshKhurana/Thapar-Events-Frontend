@@ -258,7 +258,7 @@ const SuperAdminDashboardEvents = () => {
                                   onClick={() => {}}
                                   className="flex items-center gap-1"
                                 >
-                                  <BiLinkExternal /> Society Dashboard
+                                  <BiLinkExternal /> Event Dashboard
                                 </Button>
                               </TableCell>
                             </TableRow>
@@ -345,7 +345,7 @@ const SuperAdminDashboardEvents = () => {
                                   onClick={() => {}}
                                   className="flex items-center gap-1"
                                 >
-                                  <BiLinkExternal /> Society Dashboard
+                                  <BiLinkExternal /> Event Dashboard
                                 </Button>
                               </TableCell>
                             </TableRow>
@@ -432,7 +432,7 @@ const SuperAdminDashboardEvents = () => {
                                   onClick={() => {}}
                                   className="flex items-center gap-1"
                                 >
-                                  <BiLinkExternal /> Society Dashboard
+                                  <BiLinkExternal /> Event Dashboard
                                 </Button>
                               </TableCell>
                             </TableRow>

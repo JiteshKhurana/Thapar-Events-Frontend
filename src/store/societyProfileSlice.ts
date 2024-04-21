@@ -2,7 +2,7 @@ import { Society } from "../store/societySlice";
 import { Event } from "./eventSlice";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface currentSocietyMetrics {
+export interface currentSocietyMetrics {
   teamMembers: number;
   totalEvents: number;
   upcomingEvents: number;
