@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -21,7 +20,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useEvents from "@/hooks/useEvents";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { RootState } from "@/store/store";
-import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { useSelector } from "react-redux";
@@ -76,14 +74,6 @@ const SuperAdminDashboardEvents = () => {
                   <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
                   <TabsTrigger value="past">Past</TabsTrigger>
                 </TabsList>
-                <div className="relative ml-auto flex-1 md:grow-0">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    type="search"
-                    placeholder="Search..."
-                    className="w-full min-w-[300px] rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-                  />
-                </div>
               </div>
             </div>
             <TabsContent value="all">
