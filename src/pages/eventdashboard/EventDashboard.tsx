@@ -67,7 +67,9 @@ const EventDashboard = () => {
           <SocietyDashBoardCard
             title={"Visibility"}
             value={event.visibility === "true" ? "Public" : "Private"}
-            color={event.visibility ? "text-green-500" : "text-red-500"}
+            color={
+              event.visibility === "true" ? "text-green-500" : "text-red-500"
+            }
           />
         </div>
       </div>

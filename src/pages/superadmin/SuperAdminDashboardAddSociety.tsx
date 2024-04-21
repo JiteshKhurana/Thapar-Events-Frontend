@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const SuperAdminDashboardAddSociety = () => {
   const {
@@ -12,34 +13,32 @@ const SuperAdminDashboardAddSociety = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col ">
-      <div className="flex flex-col p-5 md:p-12">
-        <span className="mt-5 text-xl font-semibold">Add Society</span>
-        <span className="mt-0 text-muted-foreground text-sm">
-          Register a new society
-        </span>
-        <form className="flex flex-col mt-6">
-          <div className="name-input my-1">
+      <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
+        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-6">
+          <div className="">
+            <CardHeader className="m-0 px-0">
+              <CardTitle className="text-xl">Add Society</CardTitle>
+              <CardDescription>Register a new society</CardDescription>
+            </CardHeader>
+          </div>
+          <form className="flex flex-col w-1/2 space-y-3">
             <span className="text-sm font-medium">Society Name</span>
             <Input
-              className="w-full max-w-[500px]"
               type="text"
               placeholder="Society Name"
               {...register("Society Name", { required: true })}
             />
-          </div>
 
-          <div className="email-input my-1">
             <span className="text-sm font-medium">Society Email</span>
             <Input
-              className="w-full max-w-[500px]"
               type="text"
               placeholder="Society Email"
               {...register("Society Email", { required: true })}
             />
-          </div>
 
-          <Button className="my-5 w-full sm:w-[200px]">Create Society</Button>
-        </form>
+            <Button>Create Society</Button>
+          </form>
+        </main>
       </div>
     </div>
   );

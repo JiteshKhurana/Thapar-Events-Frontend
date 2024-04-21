@@ -4,7 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Home, LineChart, LogOut, UserPlus2, Users2 } from "lucide-react";
+import { Home, LogOut, UserPlus2, Users2 } from "lucide-react";
 import { BiCalendar } from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -46,7 +46,7 @@ const SuperAdminRoot = () => {
                 <TooltipTrigger asChild>
                   <NavLink
                     to="/superadmin/events"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   >
                     <BiCalendar className="h-5 w-5" />
                     <span className="sr-only">Events</span>
@@ -58,7 +58,7 @@ const SuperAdminRoot = () => {
                 <TooltipTrigger asChild>
                   <NavLink
                     to="/superadmin/societies"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   >
                     <Users2 className="h-5 w-5" />
                     <span className="sr-only">Societies</span>
@@ -77,19 +77,6 @@ const SuperAdminRoot = () => {
                   </NavLink>
                 </TooltipTrigger>
                 <TooltipContent side="right">Add Society</TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <NavLink
-                    to="#"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  >
-                    <LineChart className="h-5 w-5" />
-                    <span className="sr-only">Analytics</span>
-                  </NavLink>
-                </TooltipTrigger>
-                <TooltipContent side="right">Analytics</TooltipContent>
               </Tooltip>
             </TooltipProvider>
           </nav>
@@ -110,61 +97,6 @@ const SuperAdminRoot = () => {
             </TooltipProvider>
           </nav>
         </div>
-
-        {/* <Sheet>
-          <SheetTrigger asChild className="flex border m-5">
-            <Button size="icon" variant="outline" className="sm:hidden">
-              <PanelLeft className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="sm:max-w-xs">
-            <nav className="grid gap-6 text-lg font-medium">
-              <NavLink
-                to="/"
-                className="mt-8 group flex h-10  shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-              >
-                <img
-                  src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
-                  className="h-5 w-5"
-                />
-                <span className="">ConnectHub</span>
-              </NavLink>
-
-              <NavLink
-                to="/superadmin/events"
-                className="flex items-center gap-4 px-2.5 text-foreground"
-              >
-                <Calendar className="h-5 w-5" />
-                Events
-              </NavLink>
-
-              <NavLink
-                to="/superadmin/societies"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <Users2 className="h-5 w-5" />
-                Societies
-              </NavLink>
-
-              <NavLink
-                to="/superadmin/addsociety"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <UserPlus2 className="h-5 w-5" />
-                Add Society
-              </NavLink>
-
-              <NavLink
-                to="/"
-                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <LogOut className="h-5 w-5" />
-                Log Out
-              </NavLink>
-            </nav>
-          </SheetContent>
-        </Sheet> */}
         <Outlet />
       </div>
     </div>
