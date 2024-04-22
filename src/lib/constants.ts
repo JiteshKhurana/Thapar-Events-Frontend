@@ -33,7 +33,7 @@ export const TEAM = [
     image: "https://media.licdn.com/dms/image/D4D03AQEDD6fs7C6nFA/profile-displayphoto-shrink_800_800/0/1681411976244?e=1719446400&v=beta&t=I3aLa4LVr9GWgMug_iB2VgFCKjF6WYrHwy5z0x-bqmk",
     github: "https://github.com/ashishsimonrattan",
     linkedin: "https://www.linkedin.com/in/ashish-simon-rattan/",
-    instagram: "https://www.instagram.com/rattanashishsimon/",
+    instagram: "https://www.instagram.com/ashish.simon.rattan/",
   },
   {
     name: "Kunal",
