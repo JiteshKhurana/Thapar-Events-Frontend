@@ -8,15 +8,6 @@ export const VIDEO_CDN_URL =
 
 export const TEAM = [
   {
-    name: "Jitesh Khurana",
-    role: "Frontend Developer",
-    email: "jiteshkhurana59@gmail.com",
-    image: "https://avatars.githubusercontent.com/u/95995545?v=4",
-    github: "https://github.com/JiteshKhurana",
-    linkedin: "https://www.linkedin.com/in/jitesh-khurana/",
-    instagram: "https://www.instagram.com/jiteshkhurana_/",
-  },
-  {
     name: "Akshay Garg",
     role: "Backend Developer",
     email: "agarg91_be21@thapar.edu",
@@ -27,13 +18,13 @@ export const TEAM = [
     instagram: "https://www.instagram.com/akshay._.garg/",
   },
   {
-    name: "Kunal",
+    name: "Jitesh Khurana",
     role: "Frontend Developer",
-    email: "karora_be21@gmail.com",
-    image: "https://media.licdn.com/dms/image/D4D03AQFFTHpdmJsCkg/profile-displayphoto-shrink_800_800/0/1676393567798?e=1719446400&v=beta&t=2QUYI3Blq0PFCVDUgtAWHLV6vbva2i1eAKQkLjWKSh0",
-    github: "https://github.com/kunalarora0930",
-    linkedin: "https://www.linkedin.com/in/kunal-arora-39b914216/",
-    instagram: "https://www.instagram.com/kunalarora0930",
+    email: "jiteshkhurana59@gmail.com",
+    image: "https://avatars.githubusercontent.com/u/95995545?v=4",
+    github: "https://github.com/JiteshKhurana",
+    linkedin: "https://www.linkedin.com/in/jitesh-khurana/",
+    instagram: "https://www.instagram.com/jiteshkhurana_/",
   },
   {
     name: "Ashish",
@@ -43,5 +34,14 @@ export const TEAM = [
     github: "https://github.com/ashishsimonrattan",
     linkedin: "https://www.linkedin.com/in/ashish-simon-rattan/",
     instagram: "https://www.instagram.com/rattanashishsimon/",
+  },
+  {
+    name: "Kunal",
+    role: "Frontend Developer",
+    email: "karora_be21@gmail.com",
+    image: "https://media.licdn.com/dms/image/D4D03AQFFTHpdmJsCkg/profile-displayphoto-shrink_800_800/0/1676393567798?e=1719446400&v=beta&t=2QUYI3Blq0PFCVDUgtAWHLV6vbva2i1eAKQkLjWKSh0",
+    github: "https://github.com/kunalarora0930",
+    linkedin: "https://www.linkedin.com/in/kunal-arora-39b914216/",
+    instagram: "https://www.instagram.com/kunalarora0930",
   },
 ];

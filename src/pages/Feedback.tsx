@@ -55,9 +55,9 @@ const FeedbackForm = () => {
   };
 
   return (
-    <div className="m-10 flex flex-col justify-center items-center">
-      <h1 className="text-3xl">Report Bugs/FeedBack</h1>
-      <div className="w-1/2 flex flex-col justify-center">
+    <div className="m-3 sm:m-10 flex flex-col justify-center items-center">
+      <h1 className="text-2xl font-semibold">Report Bugs/FeedBack</h1>
+      <div className="w-full px-5 lg:px-[20vw] flex flex-col justify-center">
         <div className="flex flex-col gap-y-3 justify-center">
           <div>
             <Label htmlFor="name">Name</Label>
@@ -89,12 +89,12 @@ const FeedbackForm = () => {
           </form>
         </div>
       </div>
-      <h2 className="text-3xl font-medium my-8">Our Team</h2>
-      <div className="flex justify-center space-x-5">
+      <h2 className="text-2xl font-semibold my-8">Our Team</h2>
+      <div className="flex flex-wrap justify-center gap-5">
         {TEAM.map((teamMember) => (
           <div
             key={uuidv4()}
-            className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800"
+            className="hover:scale-105 transition-all duration-300 flex flex-col justify-center w-full sm:w-[250px] p-6 shadow-xl border rounded-xl  dark:bg-gray-50 dark:text-gray-800"
           >
             <img
               src={teamMember.image}
