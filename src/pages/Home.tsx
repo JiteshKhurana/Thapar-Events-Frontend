@@ -53,7 +53,7 @@ const Home: React.FC = () => {
             <br />
             Workshops,
             <br />
-            Fests <span className="text-red-600">at</span>
+            Fests at
             <br /> <span className="text-red-600">TIET!</span>
           </h1>
           <p className="flex flex-row sm:flex-col flex-wrap text-xl text-gray-300 font-light self-center sm:self-start">

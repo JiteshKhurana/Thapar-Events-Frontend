@@ -5,7 +5,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Home, LogOut, UserPlus2, Users2 } from "lucide-react";
-import { BiCalendar } from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
@@ -45,18 +44,6 @@ const SuperAdminRoot = () => {
                   </NavLink>
                 </TooltipTrigger>
                 <TooltipContent side="right">Dashboard</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <NavLink
-                    to="/superadmin/events"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  >
-                    <BiCalendar className="h-5 w-5" />
-                    <span className="sr-only">Events</span>
-                  </NavLink>
-                </TooltipTrigger>
-                <TooltipContent side="right">Events</TooltipContent>
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger asChild>
