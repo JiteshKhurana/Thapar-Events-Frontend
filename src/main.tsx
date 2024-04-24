@@ -32,7 +32,6 @@ import CreateNewEvent from "./pages/society/CreateNewEvent.tsx";
 import EventDashboard from "./pages/eventdashboard/EventDashboard.tsx";
 import Society from "./pages/Society.tsx";
 import AddEventPoster from "./pages/eventdashboard/AddEventPoster.tsx";
-import SuperAdminDashboardEvents from "./pages/superadmin/SuperAdminDashboardEvents.tsx";
 import SuperAdminDashboardSocieties from "./pages/superadmin/SuperAdminDashboardSocieties.tsx";
 import SuperAdminDashboardAddSociety from "./pages/superadmin/SuperAdminDashboardAddSociety.tsx";
 import Feedback from "./pages/Feedback.tsx";
@@ -175,10 +174,6 @@ const appRouter = createBrowserRouter([
               {
                 path: "",
                 element: <SuperAdminDashboard />,
-              },
-              {
-                path: "/superadmin/events",
-                element: <SuperAdminDashboardEvents />,
               },
               {
                 path: "/superadmin/societies",

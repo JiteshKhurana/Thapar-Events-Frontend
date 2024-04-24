@@ -5,7 +5,7 @@ import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { addSocietyFields, addSocietySchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
@@ -16,9 +16,8 @@ const SuperAdminDashboardAddSociety = () => {
   const {
     register,
     handleSubmit,
-    setError,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<addSocietyFields>({
     defaultValues: {
       email: "",
@@ -31,21 +30,24 @@ const SuperAdminDashboardAddSociety = () => {
       ...data,
       role: "admin",
     };
-    await axios
-      .post(API_ENDPOINT + "soc/register", updatedData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        toast("Society registered successfully!! 🥳");
-        reset();
-      })
-      .catch((error) =>
-        setError("root", {
-          message: error.message,
-        })
-      );
-  };
 
+    try {
+      await axios
+        .post(API_ENDPOINT + "soc/register", updatedData, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => {
+          toast("Society registered successfully!! 🥳");
+          reset();
+        });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast(error.response?.data);
+      } else {
+        toast("An error occurred");
+      }
+    }
+  };
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
@@ -70,9 +72,6 @@ const SuperAdminDashboardAddSociety = () => {
             <Button type="submit" disabled={isSubmitting}>
               Create Society
             </Button>
-            {errors.root && (
-              <div className="text-red-500">{errors.root.message}</div>
-            )}
           </form>
         </main>
       </div>

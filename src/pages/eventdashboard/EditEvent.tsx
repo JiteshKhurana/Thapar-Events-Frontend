@@ -15,6 +15,17 @@ import { toast } from "sonner";
 import { editCurrentEvent } from "@/store/eventDashboardSlice";
 import { useNavigate } from "react-router-dom";
 import CardShimmer from "@/components/CardShimmer";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const EditEvent = () => {
   const dispatch = useDispatch();
@@ -93,7 +104,17 @@ const EditEvent = () => {
         <CardShimmer />
       </div>
     );
-
+  const deleteEvent = async () => {
+    await axios
+      .delete(API_ENDPOINT + "event/delete/" + event._Eid, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        toast("Event Deleted Successfully");
+        navigate("/society");
+      })
+      .catch((error) => toast(error));
+  };
   const onSubmit: SubmitHandler<editEventFormFields> = async (data) => {
     // Convert start_date and end_date to Unix timestamps
     const startTimestamp = Math.floor(data.start_date.getTime() / 1000);
@@ -139,7 +160,7 @@ const EditEvent = () => {
         <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
           Edit Event
         </h1>
-        <div className="space-x-5">
+        <div className="space-x-5 flex flex-row my-5">
           <Button
             onClick={() => {
               navigate(`/eventdashboard/${event._Eid}/eventposter`);
@@ -154,6 +175,28 @@ const EditEvent = () => {
           >
             Add Event Gallery
           </Button>
+          <AlertDialog>
+            <AlertDialogTrigger>
+              <Button className="border border-red-500 text-red-500 bg-transparent  hover:bg-red-500 hover:text-white transition-all duration-300">
+                Delete Event
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. You will be logged out of
+                  ConnectHub.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={() => deleteEvent()}>
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
