@@ -249,8 +249,8 @@ const EventsDetail: React.FC = () => {
                   {isAdmin() || isSuperAdmin()
                     ? "You Can't Register"
                     : event.register === "true"
-                    ? "Register Now"
-                    : "Registrations Closed"}
+                      ? "Register Now"
+                      : "Registrations Closed"}
                 </Button>
               )}
             </div>

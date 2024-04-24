@@ -126,7 +126,7 @@ const SocietyDetail: React.FC = () => {
             </div>
           )}
           {society.faculty && (
-            
+
             <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
               <span className="flex font-semibold text-2xl  my-3">
                 Faculty
@@ -152,7 +152,7 @@ const SocietyDetail: React.FC = () => {
                 ))}
               </div>
 
-              
+
             </div>
           )}
         </div>
