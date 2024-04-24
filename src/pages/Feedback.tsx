@@ -90,11 +90,11 @@ const FeedbackForm = () => {
         </div>
       </div>
       <h2 className="text-2xl font-semibold my-8">Our Team</h2>
-      <div className="flex flex-wrap justify-center gap-5">
+      <div className="flex flex-wrap justify-center gap-5 dark:text-white">
         {TEAM.map((teamMember) => (
           <div
             key={uuidv4()}
-            className="hover:scale-105 transition-all duration-300 flex flex-col justify-center w-full sm:w-[250px] p-6 shadow-xl border rounded-xl  dark:bg-gray-50 dark:text-gray-800"
+            className="hover:scale-105 transition-all duration-300 flex flex-col justify-center w-full sm:w-[250px] p-6 shadow-xl border rounded-xl  dark:bg-gray-900  "
           >
             <img
               src={teamMember.image}
@@ -106,7 +106,7 @@ const FeedbackForm = () => {
                 <h2 className="text-xl font-semibold sm:text-2xl">
                   {teamMember.name}
                 </h2>
-                <p className="px-5 text-xs sm:text-base dark:text-gray-600">
+                <p className="px-5 text-xs sm:text-base ">
                   {teamMember.role}
                 </p>
               </div>
@@ -116,7 +116,7 @@ const FeedbackForm = () => {
                   rel="noopener noreferrer"
                   href={teamMember.github}
                   aria-label="GitHub"
-                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-violet-600"
                 >
                   <LuGithub />
                 </a>
@@ -125,7 +125,7 @@ const FeedbackForm = () => {
                   rel="noopener noreferrer"
                   href={teamMember.instagram}
                   aria-label="instagram"
-                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-violet-600"
                 >
                   <LuInstagram />
                 </a>
@@ -134,7 +134,7 @@ const FeedbackForm = () => {
                   href={teamMember.linkedin}
                   aria-label="linkedin"
                   target="_blank"
-                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-violet-600"
                 >
                   <LuLinkedin />
                 </a>
@@ -143,7 +143,7 @@ const FeedbackForm = () => {
                   rel="noopener noreferrer"
                   href={"mailto:" + teamMember.email}
                   aria-label="Email"
-                  className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-violet-600"
                 >
                   <LuMail />
                 </a>

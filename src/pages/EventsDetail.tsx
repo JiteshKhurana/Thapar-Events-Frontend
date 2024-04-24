@@ -255,7 +255,7 @@ const EventsDetail: React.FC = () => {
               )}
             </div>
           ) : null}
-          <div className="shadow-xl border rounded-lg p-5 ">
+          <div className="bg-background shadow-xl border rounded-lg p-5 ">
             <div className="flex items-center">
               <LuMapPin className="mr-3 font-semibold text-2xl" />
               <div className="flex flex-col">
@@ -282,7 +282,7 @@ const EventsDetail: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className=" shadow-xl border rounded-lg p-5 ">
+          <div className="bg-background shadow-xl border rounded-lg p-5 ">
             <span className="font-semibold text-lg">Eligibility</span>
             <Separator className="my-3" />
             {event.eligibility === "" ? (
@@ -291,7 +291,7 @@ const EventsDetail: React.FC = () => {
               <span>{event.eligibility}</span>
             )}
           </div>
-          <div className=" shadow-xl border rounded-lg p-5 ">
+          <div className="bg-background shadow-xl border rounded-lg p-5 ">
             <Button onClick={copyUrl} className="w-full">
               <div className="flex flex-row gap-2 items-center">
                 <p>{copySuccess}</p>
