@@ -66,9 +66,7 @@ const SocietyDetail: React.FC = () => {
       <div className="flex justify-center items-center px-5">
         <div className="society-detail mt-5 w-full md:w-[80%] max-w-[1920px]">
           <div className=""></div>
-          <h2 className="text-2xl my-3 font-semibold ">
-            About Society
-          </h2>
+          <h2 className="text-2xl my-3 font-semibold ">About Society</h2>
           <p>{society.about}</p>
           <Separator className="mt-3" />
           {!upcomingEvents ? (
@@ -97,12 +95,13 @@ const SocietyDetail: React.FC = () => {
           )}
           {society.members && (
             <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
-              <span className="flex font-semibold text-2xl my-3">
-                Our Team
-              </span>
+              <span className="flex font-semibold text-2xl my-3">Our Team</span>
               <div className="member-list-container max-h-[90vh] flex flex-col gap-3  rounded-md my-3 overflow-y-scroll no-scrollbar">
                 {society.members.map((member) => (
-                  <div className="flex p-5 justify-between border rounded-md w-full  bg-background" key={uuidv4()}>
+                  <div
+                    className="flex p-5 justify-between border rounded-md w-full  bg-background"
+                    key={uuidv4()}
+                  >
                     <div className="flex flex-col items-start ">
                       <p className="text-lg font-semibold">{member.name}</p>
                       <p className="text-muted-foreground font-semibold">
@@ -126,14 +125,14 @@ const SocietyDetail: React.FC = () => {
             </div>
           )}
           {society.faculty && (
-
             <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
-              <span className="flex font-semibold text-2xl  my-3">
-                Faculty
-              </span>
+              <span className="flex font-semibold text-2xl  my-3">Faculty</span>
               <div className="member-list-container max-h-[90vh] flex flex-col gap-3  rounded-md my-3 overflow-y-scroll no-scrollbar">
                 {society.faculty.map((faculty) => (
-                  <div className="flex p-5 justify-between border rounded-md w-full  bg-background" key={uuidv4()}>
+                  <div
+                    className="flex p-5 justify-between border rounded-md w-full  bg-background"
+                    key={uuidv4()}
+                  >
                     <div className="flex flex-col items-start ">
                       <p className="text-lg font-semibold">{faculty.name}</p>
                       <p className="text-muted-foreground font-semibold">
@@ -151,8 +150,23 @@ const SocietyDetail: React.FC = () => {
                   </div>
                 ))}
               </div>
-
-
+            </div>
+          )}
+          {society.social_media && (
+            <div>
+              <h2 className="font-semibold text-xl mb-2">
+                Follow on Social Media
+              </h2>
+              <div className="flex flex-row space-x-5">
+                {Object.entries(society.social_media).map(
+                  ([key, val]) =>
+                    val !== "" && (
+                      <a key={uuidv4()} href={val} target="_blank">
+                        {key}
+                      </a>
+                    )
+                )}
+              </div>
             </div>
           )}
         </div>

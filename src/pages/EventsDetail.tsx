@@ -206,7 +206,7 @@ const EventsDetail: React.FC = () => {
               Event Gallery
             </Button>
             <Separator />
-            {event.social_media && (
+            {/* {event.social_media && (
               <div>
                 <h2 className="font-semibold text-xl mb-2">
                   Follow on Social Media
@@ -222,7 +222,7 @@ const EventsDetail: React.FC = () => {
                   )}
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div className="col-span-8 md:col-span-4 space-y-3">
@@ -249,8 +249,8 @@ const EventsDetail: React.FC = () => {
                   {isAdmin() || isSuperAdmin()
                     ? "You Can't Register"
                     : event.register === "true"
-                      ? "Register Now"
-                      : "Registrations Closed"}
+                    ? "Register Now"
+                    : "Registrations Closed"}
                 </Button>
               )}
             </div>
