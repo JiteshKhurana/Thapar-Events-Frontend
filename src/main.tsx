@@ -20,7 +20,6 @@ import UserEventRegister from "./pages/user/UserEventRegister.tsx";
 import ProtectedRoute from "./protectedRoutes/ProtectedRoute.tsx";
 import SocietyEvents from "./pages/society/SocietyEvents.tsx";
 import EditSocietyProfile from "./pages/society/EditSocietyProfile.tsx";
-import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
 import EditEvent from "./pages/eventdashboard/EditEvent.tsx";
 import ManageEventRegistrations from "./pages/eventdashboard/ManageEventRegistrations.tsx";
 import EditRegistrationForm from "./pages/eventdashboard/EditRegistrationForm.tsx";
@@ -38,7 +37,7 @@ import EventGallery from "./pages/EventGallery.tsx";
 import SuperAdminDashboardSocietyProfile from "./pages/superadmin/SuperAdminDashboardSocietyProfile.tsx";
 import SocietyRoot from "./pages/society/Societyroot.tsx";
 import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
-import Root from "./pages/eventdashboard/Root.tsx";
+import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -134,7 +133,7 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "/eventdashboard/:eventId",
-            element: <Root />,
+            element: <EventDashboardRoot />,
             children: [
               {
                 path: "",

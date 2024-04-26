@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/carousel";
 import { VIDEO_CDN_URL } from "@/lib/constants";
 import Footer from "@/components/Footer";
-
 const localizer = momentLocalizer(moment);
 import "./index.css";
 import useEvents from "@/hooks/useEvents";
@@ -24,6 +23,7 @@ import { RootState } from "@/store/store";
 import EventComponent from "./EventComponent";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import CardShimmer from "@/components/CardShimmer";
+import Developers from "@/components/Developers";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -139,6 +139,7 @@ const Home: React.FC = () => {
           />
         </div>
       </div>
+      <Developers />
       <Footer />
     </div>
   );

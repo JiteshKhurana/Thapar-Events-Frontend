@@ -104,6 +104,8 @@ const Events: React.FC = () => {
     }
   }
 
+  if (!events)
+    return <h1 className="text-center text-3xl">No events to display</h1>;
   if (isLoading) {
     return <CardShimmer />;
   }

@@ -6,9 +6,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-// import Creative from "../assets/creative.png";
 import { useNavigate } from "react-router-dom";
-import CardShimmer from "@/components/CardShimmer";
+// import CardShimmer from "@/components/CardShimmer";
 import useSocieties from "@/hooks/useSocieties";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -19,7 +18,8 @@ const Society: React.FC = () => {
   const societies = useSelector(
     (store: RootState) => store.societies.societiesList
   );
-  if (!societies) return <CardShimmer />;
+  if (!societies)
+    return <h1 className="text-center text-3xl">No societies to display</h1>;
   return (
     <div>
       <div className=" flex flex-col items-center justify-start bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover">

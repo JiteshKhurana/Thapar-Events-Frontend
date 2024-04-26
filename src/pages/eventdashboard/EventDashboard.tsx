@@ -1,9 +1,24 @@
-import { LuCalendar, LuMapPin, LuUser } from "react-icons/lu";
+import {
+  LuAirplay,
+  LuCalendar,
+  LuCalendarCheck,
+  LuKeyRound,
+  LuMapPin,
+  LuPanelTopOpen,
+  LuUser,
+  LuUsers,
+} from "react-icons/lu";
 import { useState } from "react";
-import SocietyDashBoardCard from "../society/components/SocietyDashBoardCard";
 import CardShimmer from "@/components/CardShimmer";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   EmailIcon,
   TelegramIcon,
@@ -43,158 +58,183 @@ const EventDashboard = () => {
   if (!event) return <CardShimmer />;
   return (
     <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      <div className="event-name text-white p-9 font-semibold text-5xl">
-        {event?.title}
-      </div>
-      <div className="px-[30px] flex flex-col mt-5">
-        <span className="text-2xl">Event Stats</span>
-        <div className="flex flex-wrap w-full mt-4 justify-between">
-          <SocietyDashBoardCard
-            title={"Registrations"}
-            value={eventMetrics?.totalregistrations}
-          />
-          {/* <SocietyDashBoardCard title={"Teams Registered"} value={672} /> */}
-          <SocietyDashBoardCard
-            title={"Status"}
-            value={upcomingOrPast(event.end_date) ? "Upcoming" : "Past"}
-            color={
-              upcomingOrPast(event.end_date) ? "text-green-500" : "text-red-500"
-            }
-          />
-          <SocietyDashBoardCard
-            title={"Visibility"}
-            value={event.visibility === "true" ? "Public" : "Private"}
-            color={
-              event.visibility === "true" ? "text-green-500" : "text-red-500"
-            }
-          />
+      <div className="welcome flex justify-between items-center">
+        <div className="welcome flex flex-col">
+          <span className="flex flex-wrap gap-2 text text-2xl">
+            <span className="font-bold">{event?.title}</span>
+          </span>
         </div>
       </div>
-
-      <div className="details-and-share w-full p-5 flex flex-col ">
-        <span className="heading font-semibold text-xl">Event Details</span>
-        <div className="flex gap-2 flex-wrap justify-between">
-          <div className="basic-info-and-details flex flex-col min-h-[300px] rounded-lg shadow-xl border-2 mt-3 p-8">
-            <div className="detail flex items-center gap-2 m-4">
+      <div>
+        <CardHeader className="m-0 px-0">
+          <CardTitle className="text-xl">Events Analytics</CardTitle>
+          <CardDescription>
+            View and Manage Event and see Analytics.
+          </CardDescription>
+        </CardHeader>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8 lg:grid-cols-3">
+          <Card x-chunk="dashboard-01-chunk-0">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Total Registrations
+              </CardTitle>
+              <LuUsers className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {eventMetrics?.totalregistrations}
+              </div>
+            </CardContent>
+          </Card>
+          <Card x-chunk="dashboard-01-chunk-2">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Status</CardTitle>
+              <LuCalendarCheck className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {upcomingOrPast(event.end_date) ? "Upcoming" : "Past"}
+              </div>
+              <p className="text-xs text-muted-foreground"></p>
+            </CardContent>
+          </Card>
+          <Card x-chunk="dashboard-01-chunk-3">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Visibility</CardTitle>
+              <LuKeyRound className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {event.visibility === "true" ? "Public" : "Private"}
+              </div>
+              <p className="text-xs text-muted-foreground"></p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      <div className="flex flex-row gap-5 justify-between">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Event Details</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-8">
+            <div className="flex items-center gap-4">
               <LuCalendar className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Registration Deadline</span>
-                <span className="font-semibold text-xl">
-                  {timeConverter(event.start_date, false)}
-                </span>
+              <div className="grid gap-1">
+                <p className="text-sm font-medium leading-none">
+                  Registration Deadline
+                </p>
+              </div>
+              <div className="ml-auto font-medium">
+                {event.start_date
+                  ? timeConverter(event.start_date, false)
+                  : "-"}
               </div>
             </div>
-            <div className="detail flex items-center gap-2 m-4">
+            <div className="flex items-center gap-4">
               <LuUser className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Eligibility</span>
-                <span className="font-semibold text-xl">
-                  {event.eligibility}
-                </span>
+              <div className="grid gap-1">
+                <p className="text-sm font-medium leading-none">Eligibility</p>
+              </div>
+              <div className="ml-auto font-medium">
+                {event.eligibility ? event.eligibility : "-"}
               </div>
             </div>
-            <div className="detail flex items-center gap-2 m-4">
+            <div className="flex items-center gap-4">
               <LuMapPin className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Venue</span>
-                <span className="font-semibold text-xl">
-                  PG Activity Space 2
-                </span>
+              <div className="grid gap-1">
+                <p className="text-sm font-medium leading-none">Venue</p>
+              </div>
+              <div className="ml-auto font-medium">
+                {event.venue ? event.venue : "-"}
               </div>
             </div>
-          </div>
-          <div className="basic-info-and-details flex flex-col min-h-[300px] rounded-lg shadow-xl border-2 mt-3 p-8">
-            <div className="detail flex items-center gap-2 m-4">
-              <LuMapPin className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Team Event</span>
-                <span className="font-semibold text-xl">
-                  {event.team ? "Yes" : "No"}
-                </span>
+            <div className="flex items-center gap-4">
+              <LuPanelTopOpen className="text-2xl" />
+              <div className="grid gap-1">
+                <p className="text-sm font-medium leading-none">Event Mode</p>
+              </div>
+              <div className="ml-auto font-medium">
+                {event.event_mode ? event.event_mode : "-"}
               </div>
             </div>
-            <div className="detail flex items-center gap-2 m-4">
-              <LuMapPin className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Event Mode</span>
-                <span className="font-semibold text-xl">
-                  {event.event_mode ? event.event_mode : "-"}
-                </span>
+            <div className="flex items-center gap-4">
+              <LuAirplay className="text-2xl" />
+              <div className="grid gap-1">
+                <p className="text-sm font-medium leading-none">Event Type</p>
+              </div>
+              <div className="ml-auto font-medium">
+                {event.event_type ? event.event_type : "-"}
               </div>
             </div>
-            <div className="detail flex items-center gap-2 m-4">
-              <LuMapPin className="text-2xl" />
-              <div className="flex flex-col">
-                <span className="text-sm">Event Type</span>
-                <span className="font-semibold text-xl">
-                  {event.event_type ? event.event_type : "-"}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="share mt-3 flex flex-col items-center min-w-[300px] min-h-[200px] border-2 rounded-md shadow-xl p-8">
-            <span>Share Your Event</span>
-            <QRCodeSVG value={url} includeMargin={true} size={256} />
+          </CardContent>
+        </Card>
+        <div className="w-full flex flex-col ">
+          <div className="flex gap-2 flex-wrap justify-between">
+            <div className="share flex flex-col items-center border-2 rounded-md shadow-xl p-8">
+              <span className="mb-5">Share Your Event</span>
+              <QRCodeSVG value={url} includeMargin={true} size={256} />
 
-            <Button onClick={copyUrl} className="w-full my-5">
-              {copySuccess}
-            </Button>
-            <div className="flex flex-row gap-5 justify-around">
-              <WhatsappShareButton
-                separator=".Register on ConnectHub ASAP "
-                url={url}
-                title={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
-              >
-                <WhatsappIcon size={32} round={true} />
-              </WhatsappShareButton>
-              <TelegramShareButton
-                url={url}
-                title={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
-              >
-                <TelegramIcon size={32} round={true} />
-              </TelegramShareButton>
-              <TwitterShareButton
-                url={url}
-                title={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
-              >
-                <TwitterIcon size={32} round={true} />
-              </TwitterShareButton>
-              <EmailShareButton
-                url={url}
-                subject={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
-                body={event.description}
-                separator=".Register on ConnectHub ASAP "
-              >
-                <EmailIcon size={32} round={true} />
-              </EmailShareButton>
+              <Button onClick={copyUrl} className="w-full my-5">
+                {copySuccess}
+              </Button>
+              <div className="flex flex-row gap-5 justify-around">
+                <WhatsappShareButton
+                  separator=".Register on ConnectHub ASAP "
+                  url={url}
+                  title={
+                    "Hey! You know there is " +
+                    event.title +
+                    " happening from " +
+                    timeConverter(event.start_date, false) +
+                    " to " +
+                    timeConverter(event.end_date, false)
+                  }
+                >
+                  <WhatsappIcon size={32} round={true} />
+                </WhatsappShareButton>
+                <TelegramShareButton
+                  url={url}
+                  title={
+                    "Hey! You know there is " +
+                    event.title +
+                    " happening from " +
+                    timeConverter(event.start_date, false) +
+                    " to " +
+                    timeConverter(event.end_date, false)
+                  }
+                >
+                  <TelegramIcon size={32} round={true} />
+                </TelegramShareButton>
+                <TwitterShareButton
+                  url={url}
+                  title={
+                    "Hey! You know there is " +
+                    event.title +
+                    " happening from " +
+                    timeConverter(event.start_date, false) +
+                    " to " +
+                    timeConverter(event.end_date, false)
+                  }
+                >
+                  <TwitterIcon size={32} round={true} />
+                </TwitterShareButton>
+                <EmailShareButton
+                  url={url}
+                  subject={
+                    "Hey! You know there is " +
+                    event.title +
+                    " happening from " +
+                    timeConverter(event.start_date, false) +
+                    " to " +
+                    timeConverter(event.end_date, false)
+                  }
+                  body={event.description}
+                  separator=".Register on ConnectHub ASAP "
+                >
+                  <EmailIcon size={32} round={true} />
+                </EmailShareButton>
+              </div>
             </div>
           </div>
         </div>
