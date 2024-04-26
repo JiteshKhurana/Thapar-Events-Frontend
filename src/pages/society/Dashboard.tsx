@@ -50,27 +50,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (societyEvents) {
-      const { upcomingEvents, pastEvents } = societyEvents.reduce(
-        (
-          acc: {
-            upcomingEvents: Event[];
-            pastEvents: Event[];
-            privateEvents: Event[];
+      const { upcomingEvents, pastEvents, privateEvents } =
+        societyEvents.reduce(
+          (
+            acc: {
+              upcomingEvents: Event[];
+              pastEvents: Event[];
+              privateEvents: Event[];
+            },
+            event: Event
+          ) => {
+            if (upcomingOrPast(event.end_date)) {
+              acc.upcomingEvents.push(event);
+            } else {
+              acc.pastEvents.push(event);
+            }
+            if (event.visibility === "false") {
+              acc.privateEvents.push(event);
+            }
+            return acc;
           },
-          event: Event
-        ) => {
-          if (upcomingOrPast(event.end_date)) {
-            acc.upcomingEvents.push(event);
-          }
-          if (event.visibility === "false") {
-            acc.privateEvents.push(event);
-          } else {
-            acc.pastEvents.push(event);
-          }
-          return acc;
-        },
-        { upcomingEvents: [], pastEvents: [], privateEvents: [] }
-      );
+          { upcomingEvents: [], pastEvents: [], privateEvents: [] }
+        );
 
       setUpcomingEvents(upcomingEvents);
       setPastEvents(pastEvents);
@@ -98,7 +99,7 @@ const Dashboard = () => {
               View and Manage all Events and see their Analytics.
             </CardDescription>
           </CardHeader>
-          <div className="grid gap-4 md:grid-cols-3 md:gap-8 lg:grid-cols-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-8 lg:grid-cols-4">
             <Card x-chunk="dashboard-01-chunk-0">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
