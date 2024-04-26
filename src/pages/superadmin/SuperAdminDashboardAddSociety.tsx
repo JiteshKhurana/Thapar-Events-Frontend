@@ -52,7 +52,7 @@ const SuperAdminDashboardAddSociety = () => {
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-6">
-          <div className="">
+          <div>
             <CardHeader className="m-0 px-0">
               <CardTitle className="text-xl">Add Society</CardTitle>
               <CardDescription>Register a new society</CardDescription>
