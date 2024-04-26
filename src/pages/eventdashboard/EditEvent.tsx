@@ -59,7 +59,6 @@ const EditEvent = () => {
         event?.hashtags[1],
         event?.hashtags[2],
       ],
-      social_media: event?.social_media,
       deadlines:
         event?.deadlines &&
         event?.deadlines.map((deadline) => ({
@@ -337,64 +336,6 @@ const EditEvent = () => {
               {...register("hashtags.2")}
               placeholder="Hashtag #3"
             />
-          </div>
-        </div>
-        <div>
-          <Label htmlFor="social_media">Social Media Handles</Label>
-          <div className="flex flex-wrap gap-2">
-            <div>
-              <Input
-                className="w-full max-w-[400px]"
-                type="text"
-                {...register("social_media.Instagram")}
-                placeholder="Instagram"
-              />
-              {errors.social_media?.Instagram && (
-                <div className="text-red-500">
-                  {errors.social_media.Instagram.message}
-                </div>
-              )}
-            </div>
-            <div>
-              {" "}
-              <Input
-                className="w-full max-w-[400px]"
-                type="text"
-                {...register("social_media.Facebook")}
-                placeholder="Facebook"
-              />
-              {errors.social_media?.Facebook && (
-                <div className="text-red-500">
-                  {errors.social_media.Facebook.message}
-                </div>
-              )}
-            </div>
-            <div>
-              <Input
-                className="w-full max-w-[400px]"
-                type="text"
-                {...register("social_media.X")}
-                placeholder="X"
-              />
-              {errors.social_media?.X && (
-                <div className="text-red-500">
-                  {errors.social_media.X.message}
-                </div>
-              )}
-            </div>
-            <div>
-              <Input
-                className="w-full max-w-[400px]"
-                type="text"
-                {...register("social_media.OfficialWebsite")}
-                placeholder="Official Website"
-              />
-              {errors.social_media?.OfficialWebsite && (
-                <div className="text-red-500">
-                  {errors.social_media.OfficialWebsite.message}
-                </div>
-              )}
-            </div>
           </div>
         </div>
 

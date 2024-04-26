@@ -21,6 +21,7 @@ const AddEventPoster = () => {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<addEventPosterFields>({
     defaultValues: {
@@ -47,6 +48,7 @@ const AddEventPoster = () => {
       })
       .then(() => {
         setSuccess(true);
+        reset();
       })
       .catch((error) =>
         setError("root", {
@@ -59,6 +61,9 @@ const AddEventPoster = () => {
       <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
         Add Event Poster
       </h1>
+      <p className="text-red-500">
+        Please ensure your image has an aspect ratio of 16:9.
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <Input {...register("photos")} type="file" accept="image/*" />
         {errors.photos && (

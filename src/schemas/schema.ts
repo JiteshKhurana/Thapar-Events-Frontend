@@ -38,7 +38,6 @@ export const userEventRegisterSchemas = z.object({
 });
 
 export const editSocietySchema = z.object({
-  name: z.string().min(2, "Too Short").max(40, "Too Long"),
   about: z.string().min(10, "Too Short").max(1000, "Too Long"),
   members: z
     .array(
@@ -47,16 +46,6 @@ export const editSocietySchema = z.object({
         email: z.string().email(),
         position: z.string().min(2, "Too Short").max(40, "Too Long"),
         instagram: z.string().min(0).url("Enter a URL").max(255),
-        linkedin: z.string().min(0).url("Enter a URL").max(255),
-      })
-    )
-    .optional(),
-  faculty: z
-    .array(
-      z.object({
-        name: z.string().min(2, "Too Short").max(40, "Too Long"),
-        email: z.string().email(),
-        position: z.string().min(2, "Too Short").max(40, "Too Long"),
         linkedin: z.string().min(0).url("Enter a URL").max(255),
       })
     )
@@ -112,17 +101,6 @@ export const editEventSchema = z.object({
     .min(2, "Too Short")
     .max(50, "Too Long"),
   hashtags: z.array(z.string().max(20, "Too Long")).optional(),
-  social_media: z.object({
-    Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
-    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
-    X: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
-    OfficialWebsite: z
-      .string()
-      .min(0)
-      .url("Enter a URL")
-      .max(255)
-      .or(z.literal("")),
-  }),
   deadlines: z
     .array(
       z.object({
@@ -183,7 +161,29 @@ export const userFeedbackSchema = z.object({
 
 // Superadmin Schemas
 export const addSocietySchema = z.object({
+  name: z.string().min(2, "Too Short").max(50, "Too Long"),
   email: z.string().email(),
+  social_media: z.object({
+    Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Youtube: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    OfficialWebsite: z
+      .string()
+      .min(0)
+      .url("Enter a URL")
+      .max(255)
+      .or(z.literal("")),
+  }),
+  faculty: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(40, "Too Long"),
+        email: z.string().email(),
+        position: z.string().min(2, "Too Short").max(40, "Too Long"),
+        linkedin: z.string().min(0).url("Enter a URL").max(255),
+      })
+    )
+    .optional(),
 });
 
 export type FormFields = z.infer<typeof editUserSchema>;

@@ -32,7 +32,6 @@ export interface Event {
   title: string;
   visibility: string;
   register: string;
-  social_media: object;
   _Eid: string;
   _Sid: string;
   _Uid: string;

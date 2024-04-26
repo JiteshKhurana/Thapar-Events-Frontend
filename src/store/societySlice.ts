@@ -13,6 +13,12 @@ interface Faculty {
   position: string;
   linkedin: string;
 }
+interface SocialMedia {
+  Instagram: string;
+  Linkedin: string;
+  Youtube: string;
+  OfficialWebsite: string;
+}
 
 export interface Society {
   _Sid: string;
@@ -25,6 +31,7 @@ export interface Society {
   image: string;
   members: Member[];
   faculty: Faculty[];
+  social_media: SocialMedia;
 }
 
 interface SocietyState {

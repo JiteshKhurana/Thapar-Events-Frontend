@@ -21,7 +21,7 @@ import { Society } from "@/store/societySlice";
 import { RootState } from "@/store/store";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BiLinkExternal } from "react-icons/bi";
+import { BiLinkExternal, BiLogoInstagram } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -79,6 +79,7 @@ const SuperAdminDashboardSocieties = () => {
                   <TableHead className="py-5">Society Name</TableHead>
                   <TableHead className="py-5">Email</TableHead>
                   <TableHead className="py-5">Society DashBoard</TableHead>
+                  <TableHead className="py-5">Instagram</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -114,6 +115,15 @@ const SuperAdminDashboardSocieties = () => {
                           >
                             <BiLinkExternal /> Society Dashboard
                           </Button>
+                        </TableCell>
+                        <TableCell>
+                          <a
+                            target="_blank"
+                            className="flex items-center gap-1 justify-center cursor-pointer text-md dark:bg-white bg-black dark:text-black text-white p-2 rounded-md w-24 font-medium "
+                            href={society.social_media.Instagram}
+                          >
+                            <BiLogoInstagram /> Follow
+                          </a>
                         </TableCell>
                       </TableRow>
                     );

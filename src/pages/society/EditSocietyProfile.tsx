@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-// import { BiEnvelope, BiLogoLinkedinSquare, BiPlus } from "react-icons/bi";
-// import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -44,16 +42,14 @@ const EditSocietyProfile = () => {
     formState: { errors, isSubmitting },
   } = useForm<editSocietyFormFields>({
     defaultValues: {
-      name: society?.name,
       about: society?.about,
       members: society?.members,
-      faculty: society?.faculty,
     },
     resolver: zodResolver(editSocietySchema),
   });
 
   if (success) {
-    toast("Sucessfully Updated!! 🥳");
+    toast("Sucessfully Sent Request to DOSA Office!! 🥳");
     setSuccess(false);
   }
 
@@ -78,10 +74,6 @@ const EditSocietyProfile = () => {
     name: "members",
     control,
   });
-  const fieldArray2 = useFieldArray({
-    name: "faculty",
-    control,
-  });
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div className="flex flex-col">
@@ -95,16 +87,10 @@ const EditSocietyProfile = () => {
           className="flex flex-col gap-y-3"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label>Name</label>
-          <input
-            {...register("name")}
-            type="text"
-            placeholder="Name"
-            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          />
-          {errors.name && (
-            <div className="text-red-500">{errors.name.message}</div>
-          )}
+          <p className="text-red-500">
+            DISCLAIMER: Your Society will not be visible to public until DOSA
+            approves your Society Description.
+          </p>
           <label>About</label>
           <textarea
             {...register("about")}
@@ -181,69 +167,6 @@ const EditSocietyProfile = () => {
             </div>
             {errors.members && (
               <div className="text-red-500">{errors.members.message}</div>
-            )}
-          </div>
-
-          {/* Faculty Members */}
-          <div>
-            <Label>Faculty Members</Label>
-            <div className="flex flex-col space-y-5">
-              {fieldArray2.fields.map((field, index) => (
-                <div
-                  key={field.id}
-                  className="space-y-5 flex flex-row justify-between space-x-5"
-                >
-                  <div className="w-full my-3">
-                    <Label>Faculty {index + 1}</Label>
-                    <div className="space-y-2">
-                      <Input
-                        {...register(`faculty.${index}.name` as const)}
-                        type="text"
-                        placeholder={`Name of Faculty ${index + 1}`}
-                      />
-                      <Input
-                        type="email"
-                        {...register(`faculty.${index}.email` as const)}
-                        placeholder={`Email of Faculty ${index + 1}`}
-                      />
-                      <Input
-                        {...register(`faculty.${index}.position` as const)}
-                        type="text"
-                        placeholder={`Position of Faculty ${index + 1}`}
-                      />
-                      <Input
-                        type="text"
-                        {...register(`faculty.${index}.linkedin` as const)}
-                        placeholder={`Linkedin of Faculty ${index + 1}`}
-                      />
-                    </div>
-                  </div>
-                  <Button
-                    className="my-auto"
-                    type="button"
-                    onClick={() => fieldArray2.remove(index)}
-                  >
-                    Remove Faculty
-                  </Button>
-                </div>
-              ))}
-              <Button
-                className="w-1/4"
-                type="button"
-                onClick={() =>
-                  fieldArray2.append({
-                    name: "",
-                    email: "",
-                    position: "",
-                    linkedin: "",
-                  })
-                }
-              >
-                Add New Faculty
-              </Button>
-            </div>
-            {errors.faculty && (
-              <div className="text-red-500">{errors.faculty.message}</div>
             )}
           </div>
 
