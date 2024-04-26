@@ -38,6 +38,7 @@ import SuperAdminDashboardSocietyProfile from "./pages/superadmin/SuperAdminDash
 import SocietyRoot from "./pages/society/Societyroot.tsx";
 import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
 import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
+import SuperAdminDashboardApproveSociety from "./pages/superadmin/SuperAdminDashboardApproveSociety.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -186,6 +187,10 @@ const appRouter = createBrowserRouter([
               {
                 path: "/superadmin/addsociety",
                 element: <SuperAdminDashboardAddSociety />,
+              },
+              {
+                path: "/superadmin/approvesociety",
+                element: <SuperAdminDashboardApproveSociety />,
               },
             ],
           },

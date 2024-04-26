@@ -4,7 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Home, LogOut, UserPlus2, Users2 } from "lucide-react";
+import { Home, LogOut, UserPlus2, Users2, CheckCheck } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
@@ -68,6 +68,18 @@ const SuperAdminRoot = () => {
                   </NavLink>
                 </TooltipTrigger>
                 <TooltipContent side="right">Add Society</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <NavLink
+                    to="/superadmin/approvesociety"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  >
+                    <CheckCheck className="h-5 w-5" />
+                    <span className="sr-only">Approve Society</span>
+                  </NavLink>
+                </TooltipTrigger>
+                <TooltipContent side="right">Approve Society</TooltipContent>
               </Tooltip>
             </TooltipProvider>
           </nav>
