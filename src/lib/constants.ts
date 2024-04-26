@@ -30,7 +30,8 @@ export const TEAM = [
     name: "Ashish",
     role: "Backend Developer",
     email: "arattan_be21@thapar.edu",
-    image: "https://media.licdn.com/dms/image/D4D03AQEDD6fs7C6nFA/profile-displayphoto-shrink_800_800/0/1681411976244?e=1719446400&v=beta&t=I3aLa4LVr9GWgMug_iB2VgFCKjF6WYrHwy5z0x-bqmk",
+    image:
+      "https://media.licdn.com/dms/image/D4D03AQEDD6fs7C6nFA/profile-displayphoto-shrink_800_800/0/1681411976244?e=1719446400&v=beta&t=I3aLa4LVr9GWgMug_iB2VgFCKjF6WYrHwy5z0x-bqmk",
     github: "https://github.com/ashishsimonrattan",
     linkedin: "https://www.linkedin.com/in/ashish-simon-rattan/",
     instagram: "https://www.instagram.com/ashish.simon.rattan/",
@@ -39,9 +40,50 @@ export const TEAM = [
     name: "Kunal",
     role: "Frontend Developer",
     email: "karora_be21@gmail.com",
-    image: "https://media.licdn.com/dms/image/D4D03AQFFTHpdmJsCkg/profile-displayphoto-shrink_800_800/0/1676393567798?e=1719446400&v=beta&t=2QUYI3Blq0PFCVDUgtAWHLV6vbva2i1eAKQkLjWKSh0",
+    image:
+      "https://media.licdn.com/dms/image/D4D03AQFFTHpdmJsCkg/profile-displayphoto-shrink_800_800/0/1676393567798?e=1719446400&v=beta&t=2QUYI3Blq0PFCVDUgtAWHLV6vbva2i1eAKQkLjWKSh0",
     github: "https://github.com/kunalarora0930",
     linkedin: "https://www.linkedin.com/in/kunal-arora-39b914216/",
     instagram: "https://www.instagram.com/kunalarora0930",
   },
+];
+
+export const EVENT_TYPES = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Technical",
+    value: "technical",
+  },
+  {
+    label: "Cultural",
+    value: "cultural",
+  },
+  {
+    label: "Sports",
+    value: "sports",
+  },
+  {
+    label: "CSR",
+    value: "csr",
+  },
+  {
+    label: "Other",
+    value: "other",
+  },
+];
+
+export const BATCHES = ["2024", "2025", "2026", "2027", "2028", "2029", "2030"];
+export const BRANCHES = [
+  "CSE",
+  "COE",
+  "ENC",
+  "ELC",
+  "MECH",
+  "CHE",
+  "BIO",
+  "CIVIL",
+  "MTE",
 ];

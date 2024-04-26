@@ -32,6 +32,7 @@ import { useEffect, useRef, useState } from "react";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import { Input } from "@/components/ui/input";
 import { Event } from "@/store/eventSlice";
+import { EVENT_TYPES } from "@/lib/constants";
 
 const Events: React.FC = () => {
   useEvents();
@@ -136,12 +137,9 @@ const Events: React.FC = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Event Type</SelectLabel>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="technical">Technical</SelectItem>
-                    <SelectItem value="cultural">Cultural</SelectItem>
-                    <SelectItem value="sports">Sports</SelectItem>
-                    <SelectItem value="mentorship">Mentorship</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
+                    {EVENT_TYPES.map((type) => (
+                      <SelectItem value={type.value}>{type.label}</SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>

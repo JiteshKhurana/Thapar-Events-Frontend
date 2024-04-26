@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 import { editUser } from "@/store/UserSlice";
-import { API_ENDPOINT } from "@/lib/constants";
+import { API_ENDPOINT, BATCHES, BRANCHES } from "@/lib/constants";
 import { toast } from "sonner";
 
 const EditUser: React.FC = () => {
@@ -137,18 +137,18 @@ const EditUser: React.FC = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Batch</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select your Batch" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="2027">2027</SelectItem>
-                      <SelectItem value="2026">2026</SelectItem>
-                      <SelectItem value="2025">2025</SelectItem>
-                      <SelectItem value="2024">2024</SelectItem>
-                      <SelectItem value="2023">2023</SelectItem>
+                      {BATCHES.map((batch, index) => (
+                        <SelectItem key={index} value={batch}>
+                          {batch}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -163,19 +163,18 @@ const EditUser: React.FC = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Branch</FormLabel>
-                  <Select onValueChange={field.onChange}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select your Branch" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="CSE">CSE</SelectItem>
-                      <SelectItem value="COE">COE</SelectItem>
-                      <SelectItem value="ENC">ENC</SelectItem>
-                      <SelectItem value="MECH">MECH</SelectItem>
-                      <SelectItem value="CHE">CHE</SelectItem>
-                      <SelectItem value="BIO">BIO</SelectItem>
+                      {BRANCHES.map((branch, index) => (
+                        <SelectItem key={index} value={branch}>
+                          {branch}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
