@@ -36,10 +36,9 @@ import Feedback from "./pages/Feedback.tsx";
 import AddPhotoGallery from "./pages/eventdashboard/AddPhotoGallery.tsx";
 import EventGallery from "./pages/EventGallery.tsx";
 import SuperAdminDashboardSocietyProfile from "./pages/superadmin/SuperAdminDashboardSocietyProfile.tsx";
-// import Societyroot from "./pages/society/Societyroot.tsx";
-// import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
-import Rooot from "./pages/society/Rooot.tsx";
-import Dashboard from "./pages/society/Dashboard.tsx";
+import SocietyRoot from "./pages/society/Societyroot.tsx";
+import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
+import Root from "./pages/eventdashboard/Root.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -105,11 +104,11 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "/society",
-            element: <Rooot />,
+            element: <SocietyRoot />,
             children: [
               {
                 path: "",
-                element: <Dashboard />,
+                element: <SocietyDashboard />,
               },
               {
                 path: "/society/societyevents",
@@ -135,7 +134,7 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "/eventdashboard/:eventId",
-            element: <EventDashboardRoot />,
+            element: <Root />,
             children: [
               {
                 path: "",

@@ -32,7 +32,7 @@ const ManageEventRegistrations = () => {
     getData();
   }, []);
   return (
-    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 m-5">
+    <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div className="heading flex flex-wrap mt-3 justify-between m-5">
         <h1 className="font-semibold text-2xl">Registrations</h1>
         <Button>Export to csv</Button>

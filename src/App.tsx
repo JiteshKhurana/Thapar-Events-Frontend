@@ -6,9 +6,11 @@ import { Provider } from "react-redux";
 import store from "./store/store.ts";
 function App() {
   const location = useLocation();
-  const hideNavOnRoutes = ["/society", "/superadmin", "/society/editprofile"]; // add routes where you want to hide the nav
+  const hideNavOnRoutes = ["/society", "/superadmin", "/eventdashboard"]; // add routes where you want to hide the nav
 
-  const showNav = !hideNavOnRoutes.includes(location.pathname);
+  const showNav = !hideNavOnRoutes.some((route) =>
+    location.pathname.startsWith(route)
+  );
   return (
     <Provider store={store}>
       {showNav && <HomeNav />}

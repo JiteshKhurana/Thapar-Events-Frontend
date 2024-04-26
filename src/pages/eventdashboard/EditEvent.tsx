@@ -100,7 +100,7 @@ const EditEvent = () => {
   }, []);
   if (!event)
     return (
-      <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
+      <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
         <CardShimmer />
       </div>
     );
@@ -155,7 +155,7 @@ const EditEvent = () => {
   };
 
   return (
-    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl py-5 my-5">
+    <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div className="flex flex-row justify-between">
         <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
           Edit Event

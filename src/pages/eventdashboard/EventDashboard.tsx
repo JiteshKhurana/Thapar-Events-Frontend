@@ -42,11 +42,9 @@ const EventDashboard = () => {
   }
   if (!event) return <CardShimmer />;
   return (
-    <div className="border shadow-2xl flex flex-col w-[90%] px-3 md:w-[70%] rounded-xl pt-5 mt-5">
-      <div className="event-cover-image bg-[url('https://www.ccstiet.com/static/home/images/01.jpeg')] h-[300px] flex justify-start items-end">
-        <div className="event-name text-white p-9 font-semibold text-5xl">
-          {event?.title}
-        </div>
+    <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+      <div className="event-name text-white p-9 font-semibold text-5xl">
+        {event?.title}
       </div>
       <div className="px-[30px] flex flex-col mt-5">
         <span className="text-2xl">Event Stats</span>
