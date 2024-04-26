@@ -89,7 +89,7 @@ const FeedbackForm = () => {
           </form>
         </div>
       </div>
-      <h2 className="text-2xl font-semibold my-8">Our Team</h2>
+      <h2 className="text-2xl font-semibold my-8">Developers at DOSA Office</h2>
       <div className="flex flex-wrap justify-center gap-5">
         {TEAM.map((teamMember) => (
           <div

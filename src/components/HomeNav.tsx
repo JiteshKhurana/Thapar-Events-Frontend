@@ -119,7 +119,7 @@ const HomeNav: React.FC = () => {
                     >
                       <img src={Logo} alt="logo" className="w-8" />
                       <h1 className="text-white text-2xl font-bold hidden md:block">
-                        ConnectHub
+                        Thapar University
                       </h1>
                     </NavLink>
                   </div>
@@ -203,7 +203,7 @@ const HomeNav: React.FC = () => {
                     >
                       <img src={Logo} alt="logo" className="w-8" />
                       <h1 className="text-2xl font-bold hidden md:block">
-                        ConnectHub
+                        Thapar University
                       </h1>
                     </NavLink>
                   </div>

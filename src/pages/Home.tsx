@@ -49,12 +49,12 @@ const Home: React.FC = () => {
         ></video>
         <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-end sm:justify-center pl-2 sm:pl-10 gap-10">
           <h1 className="text-4xl sm:text-6xl  md:text-8xl lg:text-[11vh] text-white font-semibold">
-            Competitions,
+            Student
             <br />
-            Workshops,
+            Activities at
             <br />
-            Fests at
-            <br /> <span className="text-red-600">TIET!</span>
+            Thapar
+            <br /> <span className="text-red-600">University!</span>
           </h1>
           <p className="flex flex-row sm:flex-col flex-wrap text-xl text-gray-300 font-light self-center sm:self-start">
             <span>Make the most of every opportunity to learn, enjoy</span>
