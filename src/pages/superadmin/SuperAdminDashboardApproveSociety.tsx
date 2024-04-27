@@ -44,7 +44,6 @@ const SuperAdminDashboardApproveSociety = () => {
       )
       .then(() => {
         setIsLoading(false);
-        window.location.reload();
       });
   }
   useEffect(() => {
@@ -87,23 +86,25 @@ const SuperAdminDashboardApproveSociety = () => {
             return (
               <div
                 key={society._Sid}
-                className="flex flex-col gap-2 p-4 rounded-lg shadow-md bg-black border"
+                className="flex flex-col gap-2 p-4 rounded-lg shadow-md border"
               >
                 <div className="flex justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold">{society.name}</h3>
-                    <p className="text-sm ">{society.email}</p>
-                    <p className="my-3">{society.about}</p>
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-semibold">
+                      {" " + society.name}
+                    </h3>
+                    <h3 className="text-md">{" " + society.email}</h3>
+                    <h3 className="text-md font-semibold">
+                      Society's About:
+                      <span className="font-light">{" " + society.about}</span>
+                    </h3>
                   </div>
-                  <div className="flex gap-2 items-center">
-                    <Button
-                      className="btn btn-primary"
-                      onClick={() => ApproveRequest(society.email)}
-                    >
-                      Approve
-                    </Button>
-                    <Button className="btn btn-danger">Reject</Button>
-                  </div>
+                  <Button
+                    className="my-auto"
+                    onClick={() => ApproveRequest(society.email)}
+                  >
+                    Approve
+                  </Button>
                 </div>
               </div>
             );

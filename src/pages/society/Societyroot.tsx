@@ -1,14 +1,5 @@
 import { Link } from "react-router-dom";
 import { Home, PanelLeft, Edit, LogOut } from "lucide-react";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Tooltip,
@@ -80,46 +71,22 @@ const SocietyRoot = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="overflow-hidden rounded-full"
-                    >
-                      <img
-                        src={society.image}
-                        width={36}
-                        height={36}
-                        alt="Avatar"
-                        className="overflow-hidden rounded-full"
-                      />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => navigate("editprofile")}>
-                      Edit Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={() => {
-                        cookies.remove("token");
-                        localStorage.clear();
-                        dispatch(deletecurrentSociety());
-                        navigate("/");
-                        toast("Logout successful", {
-                          description: "You have successfully logged out.",
-                        });
-                      }}
-                    >
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <Link
+                  onClick={() => {
+                    cookies.remove("token");
+                    localStorage.clear();
+                    toast("Logout successful", {
+                      description: "You have successfully logged out.",
+                    });
+                  }}
+                  to="/"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <LogOut className="h-5 w-5" />
+                  <span className="sr-only">Log Out</span>
+                </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Settings</TooltipContent>
+              <TooltipContent side="right">Log Out</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </nav>
@@ -165,6 +132,8 @@ const SocietyRoot = () => {
                   onClick={() => {
                     cookies.remove("token");
                     localStorage.clear();
+                    dispatch(deletecurrentSociety());
+                    navigate("/");
                     toast("Logout successful", {
                       description: "You have successfully logged out.",
                     });

@@ -21,9 +21,10 @@ import { Society } from "@/store/societySlice";
 import { RootState } from "@/store/store";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BiLinkExternal, BiLogoInstagram } from "react-icons/bi";
+import { BiLinkExternal } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import SocialMediaFollow from "./components/SocialMediaFollow";
 
 const SuperAdminDashboardSocieties = () => {
   useSocieties();
@@ -79,7 +80,11 @@ const SuperAdminDashboardSocieties = () => {
                   <TableHead className="py-5">Society Name</TableHead>
                   <TableHead className="py-5">Email</TableHead>
                   <TableHead className="py-5">Society DashBoard</TableHead>
+                  <TableHead className="py-5">Edit Society</TableHead>
                   <TableHead className="py-5">Instagram</TableHead>
+                  <TableHead className="py-5">Youtube</TableHead>
+                  <TableHead className="py-5">Linkedin</TableHead>
+                  <TableHead className="py-5">Official Website</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -117,14 +122,35 @@ const SuperAdminDashboardSocieties = () => {
                           </Button>
                         </TableCell>
                         <TableCell>
-                          <a
-                            target="_blank"
-                            className="flex items-center gap-1 justify-center cursor-pointer text-md dark:bg-white bg-black dark:text-black text-white p-2 rounded-md w-24 font-medium "
-                            href={society.social_media.Instagram}
+                          <Button
+                            onClick={() => {
+                              navigate(society._Sid, {
+                                state: {
+                                  data: society,
+                                },
+                              });
+                            }}
+                            className="flex items-center gap-1"
                           >
-                            <BiLogoInstagram /> Follow
-                          </a>
+                            <BiLinkExternal /> Edit Society
+                          </Button>
                         </TableCell>
+                        <SocialMediaFollow
+                          platform={society.social_media.Instagram}
+                          label="Instagram"
+                        />
+                        <SocialMediaFollow
+                          platform={society.social_media.Youtube}
+                          label="Youtube"
+                        />
+                        <SocialMediaFollow
+                          platform={society.social_media.Linkedin}
+                          label="Linkedin"
+                        />
+                        <SocialMediaFollow
+                          platform={society.social_media.OfficialWebsite}
+                          label="OfficialWebsite"
+                        />
                       </TableRow>
                     );
                   })}
