@@ -15,7 +15,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import CardShimmer from "@/components/CardShimmer";
 import { useLocation, useNavigate } from "react-router-dom";
-import { API_ENDPOINT } from "@/lib/constants";
 import { v4 as uuidv4 } from "uuid";
 
 const UserEventRegister = () => {
@@ -45,9 +44,15 @@ const UserEventRegister = () => {
       team: "false",
     };
     await axios
-      .post(API_ENDPOINT + "event/register/" + state.event._Eid, updatedData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT +
+          "event/register/" +
+          state.event._Eid,
+        updatedData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         toast("Sucessfully Registered!! 🥳");
         navigate(-1);

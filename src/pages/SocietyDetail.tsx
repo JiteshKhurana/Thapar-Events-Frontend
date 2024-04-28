@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import CardShimmer from "@/components/CardShimmer";
 import { LuInstagram, LuLinkedin, LuMail } from "react-icons/lu";
@@ -20,13 +19,21 @@ const SocietyDetail: React.FC = () => {
   const [societyEvents, setSocietyEvents] = useState<Event[] | null>(null);
   async function getSocietyDetails() {
     await axios
-      .get(API_ENDPOINT + "/soc/get?societyId=" + state.societyId)
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "/soc/get?societyId=" +
+          state.societyId
+      )
       .then((res) => setSociety(res.data))
       .catch((error) => toast(error));
   }
   async function getSocietyEvents() {
     await axios
-      .get(API_ENDPOINT + "/soc/get/events?soc_email=" + state.societyEmail)
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "/soc/get/events?soc_email=" +
+          state.societyEmail
+      )
       .then((res) => setSocietyEvents(res.data))
       .catch((error) => toast(error));
   }

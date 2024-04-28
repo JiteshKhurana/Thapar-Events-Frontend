@@ -4,6 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { TIET_LOGO_CDN_URL } from "@/lib/constants";
 import { Home, LogOut, UserPlus2, Users2, CheckCheck } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { toast } from "sonner";
@@ -14,7 +15,7 @@ const SuperAdminRoot = () => {
 
   return (
     <div className="absolute top-0 bg-background flex justify-center w-full">
-      <div className="super-admin-container w-full max-w-[1800px]">
+      <div className="w-full max-w-[1800px]">
         <div className="navbar absolute top-0 bottom-0  left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
           <nav className="flex flex-col items-center gap-4 px-2 py-4">
             <TooltipProvider>
@@ -22,12 +23,9 @@ const SuperAdminRoot = () => {
                 <TooltipTrigger asChild>
                   <NavLink
                     to="/"
-                    className="h-12 w-12 bg-black p-3 flex items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+                    className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                   >
-                    <img
-                      src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
-                      className=""
-                    />
+                    <img src={TIET_LOGO_CDN_URL} />
                     <span className="sr-only">Home</span>
                   </NavLink>
                 </TooltipTrigger>

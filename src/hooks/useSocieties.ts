@@ -1,4 +1,3 @@
-import { API_ENDPOINT } from "@/lib/constants";
 import { addSocieties } from "@/store/societySlice";
 import { RootState } from "@/store/store";
 import axios from "axios";
@@ -15,7 +14,7 @@ const useSocieties = () => {
 
   async function getSocieties() {
     await axios
-      .get(API_ENDPOINT + "soc/get")
+      .get(import.meta.env.VITE_API_ENDPOINT + "soc/get")
       .then((res) => {
         dispatch(addSocieties(res.data));
         setLoading(false);

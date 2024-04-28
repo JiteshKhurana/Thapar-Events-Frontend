@@ -1,7 +1,6 @@
 import { DataTable } from "./components/data-table";
 import { Registrations, columns } from "./components/columns";
 import axios from "axios";
-import { API_ENDPOINT } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -20,11 +19,16 @@ const ManageEventRegistrations = () => {
   );
   async function getData() {
     await axios
-      .get(API_ENDPOINT + "event/get/registrations/" + eventId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "event/get/registrations/" +
+          eventId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setEventRegistrations(res.data));
   }
   useEffect(() => {

@@ -8,7 +8,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { API_ENDPOINT } from "@/lib/constants";
 import { isAdmin } from "@/lib/helper";
 import {
   addCurrentEvent,
@@ -22,6 +21,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { TIET_LOGO_CDN_URL } from "@/lib/constants";
 
 const EventDashboardRoot = () => {
   const { eventId } = useParams();
@@ -31,17 +31,26 @@ const EventDashboardRoot = () => {
   const dispatch = useDispatch();
   async function getEvent() {
     axios
-      .get(API_ENDPOINT + "event/get?eventId=" + eventDashboardId)
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "event/get?eventId=" +
+          eventDashboardId
+      )
       .then((res) => dispatch(addCurrentEvent(res.data.event)))
       .catch((error) => toast(error));
   }
   async function getEventMetrics() {
     axios
-      .get(API_ENDPOINT + "event/dashboard/" + eventDashboardId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "event/dashboard/" +
+          eventDashboardId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => dispatch(addCurrentEventMetrics(res.data)))
       .catch((error) => toast(error));
   }
@@ -59,10 +68,7 @@ const EventDashboardRoot = () => {
             to="/"
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
-            <img
-              src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
-              className="w-8"
-            />
+            <img src={TIET_LOGO_CDN_URL} className="w-8" />
             <span className="sr-only">Thapar University</span>
           </Link>
           <TooltipProvider>
@@ -152,10 +158,7 @@ const EventDashboardRoot = () => {
                   to="#"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:text-base"
                 >
-                  <img
-                    src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
-                    className="w-8"
-                  />
+                  <img src={TIET_LOGO_CDN_URL} className="w-8" />
                   <span className="sr-only">Thapar University</span>
                 </Link>
                 <Link

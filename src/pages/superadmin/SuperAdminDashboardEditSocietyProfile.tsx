@@ -9,7 +9,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@/components/ui/label";
 import axios, { AxiosError } from "axios";
-import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -39,9 +38,13 @@ const SuperAdminDashboardEditSocietyProfile = () => {
   ) => {
     try {
       await axios
-        .post(API_ENDPOINT + "soc/update/" + state.data.email, data, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        .post(
+          import.meta.env.VITE_API_ENDPOINT + "soc/update/" + state.data.email,
+          data,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then(() => {
           toast("Society Updated successfully!! 🥳");
           reset();

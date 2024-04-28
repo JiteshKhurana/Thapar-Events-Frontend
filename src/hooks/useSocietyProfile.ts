@@ -1,4 +1,3 @@
-import { API_ENDPOINT } from "@/lib/constants";
 import {
   addSociety,
   addSocietyEvents,
@@ -28,7 +27,7 @@ const useSocietyProfile = () => {
   const societyEmail = localStorage.getItem("email");
   async function getSociety() {
     axios
-      .get(API_ENDPOINT + "soc/get?societyId=" + societyID)
+      .get(import.meta.env.VITE_API_ENDPOINT + "soc/get?societyId=" + societyID)
       .then((res) => dispatch(addSociety(res.data)))
       .catch((error) => {
         toast(error);
@@ -36,21 +35,29 @@ const useSocietyProfile = () => {
   }
   async function getSocietyMetrics() {
     await axios
-      .get(API_ENDPOINT + "soc/dashboard/" + societyEmail, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        import.meta.env.VITE_API_ENDPOINT + "soc/dashboard/" + societyEmail,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => dispatch(addSocietyMetrics(res.data)));
   }
 
   async function getSocietyEvents() {
     await axios
-      .get(API_ENDPOINT + "soc/get/events?soc_email=" + societyEmail, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "soc/get/events?soc_email=" +
+          societyEmail,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => dispatch(addSocietyEvents(res.data)));
   }
 

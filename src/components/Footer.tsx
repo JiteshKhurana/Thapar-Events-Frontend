@@ -1,3 +1,5 @@
+import { TIET_LOGO_CDN_URL } from "@/lib/constants";
+
 const Footer: React.FC = () => {
   return (
     <footer>
@@ -7,7 +9,7 @@ const Footer: React.FC = () => {
           <div className="mb-6 md:mb-0">
             <a href="https://flowbite.com/" className="flex items-center">
               <img
-                src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
+                src={TIET_LOGO_CDN_URL}
                 className="h-8 me-3"
                 alt="Thapar Logo"
               />

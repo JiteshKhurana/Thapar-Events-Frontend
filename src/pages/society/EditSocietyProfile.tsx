@@ -17,7 +17,6 @@ import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { editSocietyFormFields, editSocietySchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { API_ENDPOINT } from "@/lib/constants";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -57,9 +56,13 @@ const EditSocietyProfile = () => {
     data: editSocietyFormFields
   ) => {
     await axios
-      .post(API_ENDPOINT + "soc/update/" + society?.email, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT + "soc/update/" + society?.email,
+        data,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         setSuccess(true);
         dispatch(editSociety(res.data));

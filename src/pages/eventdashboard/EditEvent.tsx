@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { API_ENDPOINT } from "@/lib/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -105,9 +104,12 @@ const EditEvent = () => {
     );
   const deleteEvent = async () => {
     await axios
-      .delete(API_ENDPOINT + "event/delete/" + event._Eid, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(
+        import.meta.env.VITE_API_ENDPOINT + "event/delete/" + event._Eid,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         toast("Event Deleted Successfully");
         navigate("/society");
@@ -139,9 +141,13 @@ const EditEvent = () => {
     };
 
     await axios
-      .post(API_ENDPOINT + "event/update/" + event._Eid, updatedData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT + "event/update/" + event._Eid,
+        updatedData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         toast("Sucessfully Updated!! 🥳");
         dispatch(editCurrentEvent(res.data));

@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { API_ENDPOINT } from "@/lib/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -71,9 +70,13 @@ const EditRegistrationForm = () => {
 
   const onSubmit: SubmitHandler<userEventRegisterFormFields> = async (data) => {
     await axios
-      .post(API_ENDPOINT + "event/update/" + event._Eid, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT + "event/update/" + event._Eid,
+        data,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         setSuccess(true);
         dispatch(editCurrentEvent(res.data));

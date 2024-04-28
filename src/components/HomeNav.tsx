@@ -1,4 +1,4 @@
-import Logo from "../assets/tietlogo.png";
+import { TIET_LOGO_CDN_URL } from "@/lib/constants.ts";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -7,7 +7,7 @@ import { ModeToggle } from "./mode-toggle.tsx";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
-import { API_ENDPOINT, GOOGLE_API_LOGIN } from "@/lib/constants.ts";
+import { GOOGLE_API_LOGIN } from "@/lib/constants.ts";
 import SyncLoader from "react-spinners/SyncLoader";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -39,7 +39,7 @@ const HomeNav: React.FC = () => {
         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
       });
       axios
-        .post(API_ENDPOINT + "create", {
+        .post(import.meta.env.VITE_API_ENDPOINT + "create", {
           email: userInfo.data.email,
           name: userInfo.data.name,
           image: userInfo.data.picture,
@@ -117,7 +117,7 @@ const HomeNav: React.FC = () => {
                       className="flex items-center justify-center gap-3"
                       to="/"
                     >
-                      <img src={Logo} alt="logo" className="w-8" />
+                      <img src={TIET_LOGO_CDN_URL} alt="logo" className="w-8" />
                       <h1 className="text-white text-2xl font-bold hidden md:block">
                         Thapar University
                       </h1>
@@ -201,7 +201,7 @@ const HomeNav: React.FC = () => {
                       className="flex items-center justify-center gap-3"
                       to="/"
                     >
-                      <img src={Logo} alt="logo" className="w-8" />
+                      <img src={TIET_LOGO_CDN_URL} alt="logo" className="w-8" />
                       <h1 className="text-2xl font-bold hidden md:block">
                         Thapar University
                       </h1>

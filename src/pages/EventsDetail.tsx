@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { API_ENDPOINT } from "@/lib/constants";
 import CardShimmer from "@/components/CardShimmer";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
@@ -49,7 +48,9 @@ const EventsDetail: React.FC = () => {
   async function checkRegistered() {
     try {
       const res = await axios.get(
-        API_ENDPOINT + "/event/check/registrations/" + eventId,
+        import.meta.env.VITE_API_ENDPOINT +
+          "/event/check/registrations/" +
+          eventId,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -65,7 +66,7 @@ const EventsDetail: React.FC = () => {
   async function getEvents() {
     try {
       const res = await axios.get(
-        API_ENDPOINT + "/event/get?eventId=" + eventId
+        import.meta.env.VITE_API_ENDPOINT + "/event/get?eventId=" + eventId
       );
       setEvent(res.data.event);
       setRegistrations(res.data.registrations);

@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { API_ENDPOINT } from "@/lib/constants";
 import { addEventGalleryFields, addEventGallerySchema } from "@/schemas/schema";
 import { RootState } from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,9 +36,13 @@ const AddPhotoGallery = () => {
       }
     }
     await axios
-      .post(API_ENDPOINT + "event/upload/" + event?._Eid, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT + "event/upload/" + event?._Eid,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         toast("Sucessfully Updated!! 🥳");
         reset();
@@ -84,7 +87,9 @@ const AddPhotoGallery = () => {
                 onClick={async () => {
                   await axios
                     .delete(
-                      API_ENDPOINT + "event/photo/delete/" + event?._Eid,
+                      import.meta.env.VITE_API_ENDPOINT +
+                        "event/photo/delete/" +
+                        event?._Eid,
                       {
                         params: {
                           photoURL: photo,

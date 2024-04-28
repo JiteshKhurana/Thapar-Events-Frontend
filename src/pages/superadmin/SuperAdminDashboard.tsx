@@ -31,7 +31,6 @@ import { useEffect, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { Event } from "@/store/eventSlice";
-import { API_ENDPOINT } from "@/lib/constants";
 import axios, { AxiosError } from "axios";
 import Cookies from "universal-cookie";
 import { toast } from "sonner";
@@ -52,7 +51,7 @@ const SuperAdminDashboard = () => {
 
   const getPrivateEvents = async () => {
     await axios
-      .get(API_ENDPOINT + "event/get/notvisible", {
+      .get(import.meta.env.VITE_API_ENDPOINT + "event/get/notvisible", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,7 +68,7 @@ const SuperAdminDashboard = () => {
   const getUsers = async () => {
     try {
       await axios
-        .get(API_ENDPOINT + "users/get", {
+        .get(import.meta.env.VITE_API_ENDPOINT + "users/get", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

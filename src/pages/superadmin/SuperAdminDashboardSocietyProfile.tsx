@@ -10,7 +10,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Society } from "@/store/societySlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import { upcomingOrPast } from "@/lib/helper";
 import { Event } from "@/store/eventSlice";
@@ -29,17 +28,24 @@ const SuperAdminDashboardSocietyProfile = () => {
 
   async function getSocietyEvents() {
     await axios
-      .get(API_ENDPOINT + "/soc/get/events?soc_email=" + society.email)
+      .get(
+        import.meta.env.VITE_API_ENDPOINT +
+          "/soc/get/events?soc_email=" +
+          society.email
+      )
       .then((res) => setSocietyEvents(res.data))
       .catch((error) => toast(error));
   }
   async function getSocietyMetrics() {
     await axios
-      .get(API_ENDPOINT + "soc/dashboard/" + society.email, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        import.meta.env.VITE_API_ENDPOINT + "soc/dashboard/" + society.email,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setSocietyMetrics(res.data));
   }
   useEffect(() => {

@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import CardShimmer from "@/components/CardShimmer";
 import { deletecurrentSociety } from "@/store/societyProfileSlice";
+import { TIET_LOGO_CDN_URL } from "@/lib/constants";
 
 const SocietyRoot = () => {
   useSocietyProfile();
@@ -34,10 +35,7 @@ const SocietyRoot = () => {
             to="/"
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
-            <img
-              src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
-              className="w-8"
-            />
+            <img src={TIET_LOGO_CDN_URL} className="w-8" />
             <span className="sr-only">Thapar University</span>
           </Link>
           <TooltipProvider>
@@ -106,10 +104,7 @@ const SocietyRoot = () => {
                   to="/"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:text-base"
                 >
-                  <img
-                    src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
-                    className="w-8"
-                  />
+                  <img src={TIET_LOGO_CDN_URL} className="w-8" />
                   <span className="sr-only">Thapar University</span>
                 </Link>
                 <Link

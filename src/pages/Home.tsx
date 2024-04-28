@@ -16,7 +16,7 @@ import {
 import { VIDEO_CDN_URL } from "@/lib/constants";
 import Footer from "@/components/Footer";
 const localizer = momentLocalizer(moment);
-import "./index.css";
+import "./calender.css";
 import useEvents from "@/hooks/useEvents";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -35,6 +35,10 @@ const Home: React.FC = () => {
     end: new Date(timeConverter(event.end_date, true)),
     data: { event },
   }));
+
+  const upcomingEvents = events?.filter((event) =>
+    upcomingOrPast(event.end_date)
+  );
 
   return (
     <div>
@@ -72,27 +76,26 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center">
-        <div className=" flex justify-between items-center flex-col w-full my-5">
-          <h2 className="text-3xl font-bold text-center my-5">
-            Upcoming Events
-          </h2>
-          <Carousel
-            className="w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
-            plugins={[
-              Autoplay({
-                delay: 5000,
-              }),
-            ]}
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-          >
-            <CarouselContent>
-              {events
-                ?.filter((event) => upcomingOrPast(event.end_date))
-                .map(
+      {upcomingEvents && (
+        <div className="flex justify-center items-center">
+          <div className=" flex justify-between items-center flex-col w-full my-5">
+            <h2 className="text-3xl font-bold text-center my-5">
+              Upcoming Events
+            </h2>
+            <Carousel
+              className="w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
+              plugins={[
+                Autoplay({
+                  delay: 5000,
+                }),
+              ]}
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+            >
+              <CarouselContent>
+                {upcomingEvents.map(
                   (event) =>
                     event?.image && (
                       <CarouselItem
@@ -111,12 +114,13 @@ const Home: React.FC = () => {
                       </CarouselItem>
                     )
                 )}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          </div>
         </div>
-      </div>
+      )}
       <Separator />
       <div className="flex flex-col ">
         <h2 className="text-3xl font-bold text-center mt-5">Events Calendar</h2>

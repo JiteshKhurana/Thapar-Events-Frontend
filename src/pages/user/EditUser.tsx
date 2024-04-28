@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Cookies from "universal-cookie";
 import { editUser } from "@/store/UserSlice";
-import { API_ENDPOINT, BATCHES, BRANCHES } from "@/lib/constants";
+import { BATCHES, BRANCHES } from "@/lib/constants";
 import { toast } from "sonner";
 
 const EditUser: React.FC = () => {
@@ -56,9 +56,13 @@ const EditUser: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data: FormFields) => {
     await axios
-      .post(API_ENDPOINT + "users/update/" + user?.email, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT + "users/update/" + user?.email,
+        data,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         setSuccess(true);
         dispatch(editUser(res.data.user));

@@ -7,7 +7,6 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import { toast } from "sonner";
-import { API_ENDPOINT } from "@/lib/constants";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
@@ -43,9 +42,15 @@ const AddEventPoster = () => {
     }
 
     await axios
-      .post(API_ENDPOINT + "event/poster/upload/" + event?._Eid, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        import.meta.env.VITE_API_ENDPOINT +
+          "event/poster/upload/" +
+          event?._Eid,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         setSuccess(true);
         reset();

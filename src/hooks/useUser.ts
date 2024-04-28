@@ -1,4 +1,3 @@
-import { API_ENDPOINT } from "@/lib/constants";
 import { RootState } from "@/store/store";
 import { addUser, addUserRegistrations } from "@/store/UserSlice";
 import axios from "axios";
@@ -16,7 +15,7 @@ const useUser = (token: string) => {
 
   async function getUser() {
     axios
-      .get(API_ENDPOINT + "users/get?email=" + userEmail, {
+      .get(import.meta.env.VITE_API_ENDPOINT + "users/get?email=" + userEmail, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => dispatch(addUser(res.data)))
@@ -26,7 +25,7 @@ const useUser = (token: string) => {
   }
   async function getUserRegistrations() {
     axios
-      .get(API_ENDPOINT + "users/get/registrations", {
+      .get(import.meta.env.VITE_API_ENDPOINT + "users/get/registrations", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => dispatch(addUserRegistrations(res.data)))

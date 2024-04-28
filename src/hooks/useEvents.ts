@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { addEvents } from "../store/eventSlice";
 import { RootState } from "@/store/store";
-import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 
 const useEvents = () => {
@@ -12,7 +11,7 @@ const useEvents = () => {
   const events = useSelector((store: RootState) => store.events.eventsList);
   async function getEvents() {
     await axios
-      .get(API_ENDPOINT + "event/get")
+      .get(import.meta.env.VITE_API_ENDPOINT + "event/get")
       .then((res) => {
         dispatch(addEvents(res.data));
         setLoading(false);

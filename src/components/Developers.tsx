@@ -32,7 +32,7 @@ const Developers = () => {
                   rel="noopener noreferrer"
                   href={teamMember.github}
                   aria-label="GitHub"
-                  className="p-2 rounded-md  hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-red-500"
                 >
                   <LuGithub />
                 </a>
@@ -41,7 +41,7 @@ const Developers = () => {
                   href={teamMember.linkedin}
                   aria-label="linkedin"
                   target="_blank"
-                  className="p-2 rounded-md  hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-red-500"
                 >
                   <LuLinkedin />
                 </a>
@@ -50,7 +50,7 @@ const Developers = () => {
                   rel="noopener noreferrer"
                   href={teamMember.instagram}
                   aria-label="instagram"
-                  className="p-2 rounded-md  hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-red-500"
                 >
                   <LuInstagram />
                 </a>
@@ -59,7 +59,7 @@ const Developers = () => {
                   rel="noopener noreferrer"
                   href={"mailto:" + teamMember.email}
                   aria-label="Email"
-                  className="p-2 rounded-md  hover:dark:text-violet-600"
+                  className="p-2 rounded-md  hover:dark:text-red-500"
                 >
                   <LuMail />
                 </a>

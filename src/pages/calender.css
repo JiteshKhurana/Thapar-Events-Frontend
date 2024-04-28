@@ -6,7 +6,7 @@
 
 /* Toolbar styling */
 .rbc-toolbar {
-  background-color: #1a73e8;
+  background-color: #ef4444;
   color: white;
   padding: 10px;
   border-radius: 4px;
@@ -28,7 +28,8 @@
 .rbc-toolbar button:hover,
 .rbc-toolbar button:active {
   background-color: white;
-  color: #1a73e8;
+  border: 2px white solid;
+  color: #ef4444;
 }
 
 /* Event styling */
@@ -37,7 +38,7 @@
   z-index: 2;
   padding: 0px !important;
   border: none !important;
-  background-color: #1a73e8;
+  background-color: #ef4444;
   color: white;
   border-radius: 4px;
   transition: transform 0.2s ease-in-out;
@@ -50,30 +51,30 @@
 /* Today's date styling */
 .rbc-today {
   background-color: #ffeadb;
-  color: #1a73e8;
+  color: #ef4444;
 }
 
 /* Active and selected state styling */
 .rbc-day-slot .rbc-selected-cell,
 .rbc-event:active {
-  background-color: darken(#1a73e8, 10%);
+  background-color: darken(#ef4444, 10%);
 }
 
 /* Customizing the time gutter (time column on the left) */
 .rbc-time-gutter,
 .rbc-time-header-gutter {
   background-color: #f8f8f8;
-  color: #1a73e8;
+  color: #ef4444;
 }
 
 /* Customizing the time slots */
 .rbc-timeslot-group {
-  border-bottom: 1px solid #1a73e8;
+  border-bottom: 1px solid #ef4444;
 }
 
 /* Header styling */
 .rbc-header {
-  background-color: #1a73e8;
+  background-color: #ef4444;
   color: white;
   padding: 5px 0;
   border-radius: 4px;
