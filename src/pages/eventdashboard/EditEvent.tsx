@@ -156,9 +156,7 @@ const EditEvent = () => {
   return (
     <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div className="flex flex-row justify-between">
-        <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
-          Edit Event
-        </h1>
+        <h1 className="font-semibold text-2xl">Edit Event</h1>
         <div className="space-x-5 flex flex-row my-5">
           <Button
             onClick={() => {

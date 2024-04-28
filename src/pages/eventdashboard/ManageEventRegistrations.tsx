@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { DataTable } from "./components/data-table";
 import { Registrations, columns } from "./components/columns";
 import axios from "axios";
@@ -33,10 +32,7 @@ const ManageEventRegistrations = () => {
   }, []);
   return (
     <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      <div className="heading flex flex-wrap mt-3 justify-between m-5">
-        <h1 className="font-semibold text-2xl">Registrations</h1>
-        <Button>Export to csv</Button>
-      </div>
+      <h1 className="font-semibold text-2xl">Registrations</h1>
 
       <h2 className="ml-5 text-xl">
         Total Registrations: {eventMetrics?.totalregistrations}

@@ -87,9 +87,7 @@ const EditRegistrationForm = () => {
 
   return (
     <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      <h1 className="font-semibold text-2xl mt-3 flex flex-wrap m-5">
-        Edit Registration Form
-      </h1>
+      <h1 className="font-semibold text-2xl">Edit Registration Form</h1>
 
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         <div>

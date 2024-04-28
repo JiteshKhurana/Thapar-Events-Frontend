@@ -1,15 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import {
-  Edit,
-  FormInput,
-  Home,
-  LineChart,
-  Package,
-  Package2,
-  PanelLeft,
-  ShoppingCart,
-  Users2,
-} from "lucide-react";
+import { Edit, FormInput, LineChart, PanelLeft, Users2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -160,45 +150,41 @@ const EventDashboardRoot = () => {
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
                   to="#"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:text-base"
                 >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
+                  <img
+                    src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1713374232/tietlogo_paawdb.png"
+                    className="w-8"
+                  />
+                  <span className="sr-only">Thapar University</span>
                 </Link>
                 <Link
-                  to="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Link>
-                <Link
-                  to="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  Orders
-                </Link>
-                <Link
-                  to="#"
-                  className="flex items-center gap-4 px-2.5 text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Products
-                </Link>
-                <Link
-                  to="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Users2 className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  to="#"
+                  to={"/eventdashboard/" + eventId}
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                   <LineChart className="h-5 w-5" />
-                  Settings
+                  Analytics
+                </Link>
+                <Link
+                  to="registrations"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <Users2 className="h-5 w-5" />
+                  Registrations
+                </Link>
+                <Link
+                  to="editevent"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <Edit className="h-5 w-5" />
+                  Edit Event
+                </Link>
+                <Link
+                  to="editregistrationform"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <FormInput className="h-5 w-5" />
+                  Registration Form
                 </Link>
               </nav>
             </SheetContent>

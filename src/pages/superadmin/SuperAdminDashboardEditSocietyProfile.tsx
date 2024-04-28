@@ -18,7 +18,6 @@ const SuperAdminDashboardEditSocietyProfile = () => {
   const cookies = new Cookies(null, { path: "/" });
   const token = cookies.get("token");
   const { state } = useLocation();
-  console.log(state.data.email);
   const {
     register,
     handleSubmit,

@@ -28,7 +28,6 @@ const AddPhotoGallery = () => {
     },
     resolver: zodResolver(addEventGallerySchema),
   });
-  console.log(event);
   if (!event) return <div>Loading...</div>;
   const onSubmit: SubmitHandler<addEventGalleryFields> = async (data) => {
     const formData = new FormData();
