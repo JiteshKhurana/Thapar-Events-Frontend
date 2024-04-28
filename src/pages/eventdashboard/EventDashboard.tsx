@@ -181,7 +181,12 @@ const EventDashboard = () => {
               <div className="mt-5 flex  gap-2 justify-around">
                 <WhatsappShareButton
                   separator="Register on Thapar Events by clicking on this link: "
-                  url={location.href}
+                  url={
+                    "/events/" +
+                    event.title.split(" ").join("-").toLowerCase() +
+                    "/" +
+                    event._Eid
+                  }
                   title={`Hey! You know there is ${
                     event.title
                   } happening from ${timeConverter(
@@ -194,7 +199,12 @@ const EventDashboard = () => {
                   <WhatsappIcon size={32} round={true} />
                 </WhatsappShareButton>
                 <TelegramShareButton
-                  url={location.href}
+                  url={
+                    "/events/" +
+                    event.title.split(" ").join("-").toLowerCase() +
+                    "/" +
+                    event._Eid
+                  }
                   title={`Hey! You know there is ${
                     event.title
                   } happening from ${timeConverter(
@@ -207,7 +217,12 @@ const EventDashboard = () => {
                   <TelegramIcon size={32} round={true} />
                 </TelegramShareButton>
                 <TwitterShareButton
-                  url={location.href}
+                  url={
+                    "/events/" +
+                    event.title.split(" ").join("-").toLowerCase() +
+                    "/" +
+                    event._Eid
+                  }
                   title={`Hey! You know there is ${
                     event.title
                   } happening from ${timeConverter(
@@ -220,7 +235,12 @@ const EventDashboard = () => {
                   <TwitterIcon size={32} round={true} />
                 </TwitterShareButton>
                 <EmailShareButton
-                  url={location.href}
+                  url={
+                    "/events/" +
+                    event.title.split(" ").join("-").toLowerCase() +
+                    "/" +
+                    event._Eid
+                  }
                   subject={`Hey! You know there is ${
                     event.title
                   } happening from ${timeConverter(
