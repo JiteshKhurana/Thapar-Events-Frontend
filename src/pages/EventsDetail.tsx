@@ -16,6 +16,7 @@ import {
   isLoggedIn,
   isAdmin,
   isSuperAdmin,
+  isUser,
 } from "@/lib/helper";
 import {
   EmailIcon,
@@ -75,7 +76,7 @@ const EventsDetail: React.FC = () => {
   }
   useEffect(() => {
     getEvents();
-    isLoggedIn() && !isAdmin() && checkRegistered();
+    isLoggedIn() && isUser() && checkRegistered();
   }, []);
   const [copySuccess, setCopySuccess] = useState("SHARE THE EVENT");
   async function copyUrl() {

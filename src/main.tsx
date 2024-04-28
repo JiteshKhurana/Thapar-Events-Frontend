@@ -40,6 +40,7 @@ import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
 import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
 import SuperAdminDashboardApproveSociety from "./pages/superadmin/SuperAdminDashboardApproveSociety.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import SuperAdminDashboardEditSocietyProfile from "./pages/superadmin/SuperAdminDashboardEditSocietyProfile.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -188,6 +189,10 @@ const appRouter = createBrowserRouter([
               {
                 path: "/superadmin/societies/:societyId",
                 element: <SuperAdminDashboardSocietyProfile />,
+              },
+              {
+                path: "/superadmin/societies/:societyId/editsociety",
+                element: <SuperAdminDashboardEditSocietyProfile />,
               },
               {
                 path: "/superadmin/addsociety",

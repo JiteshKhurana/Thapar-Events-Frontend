@@ -43,6 +43,7 @@ const SuperAdminDashboardApproveSociety = () => {
         }
       )
       .then(() => {
+        window.location.reload();
         setIsLoading(false);
       });
   }

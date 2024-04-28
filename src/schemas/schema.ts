@@ -52,6 +52,31 @@ export const editSocietySchema = z.object({
     .optional(),
 });
 
+export const editSocietyBySuperadminSchema = z.object({
+  name: z.string().min(2, "Too Short").max(50, "Too Long"),
+  social_media: z.object({
+    Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Youtube: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    OfficialWebsite: z
+      .string()
+      .min(0)
+      .url("Enter a URL")
+      .max(255)
+      .or(z.literal("")),
+  }),
+  faculty: z
+    .array(
+      z.object({
+        name: z.string().min(2, "Too Short").max(40, "Too Long"),
+        email: z.string().email(),
+        position: z.string().min(2, "Too Short").max(40, "Too Long"),
+        linkedin: z.string().min(0).url("Enter a URL").max(255),
+      })
+    )
+    .optional(),
+});
+
 export const addEventGallerySchema = z.object({
   photos: z
     .any()
@@ -191,6 +216,9 @@ export type userEventRegisterFormFields = z.infer<
   typeof userEventRegisterSchemas
 >;
 export type editSocietyFormFields = z.infer<typeof editSocietySchema>;
+export type editSocietyBySuperadminFormFields = z.infer<
+  typeof editSocietyBySuperadminSchema
+>;
 export type editEventFormFields = z.infer<typeof editEventSchema>;
 export type addEventPosterFields = z.infer<typeof addEventPosterSchema>;
 export type addEventGalleryFields = z.infer<typeof addEventGallerySchema>;

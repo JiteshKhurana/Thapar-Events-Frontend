@@ -124,7 +124,7 @@ const SuperAdminDashboardSocieties = () => {
                         <TableCell>
                           <Button
                             onClick={() => {
-                              navigate(society._Sid, {
+                              navigate(society._Sid + "/editsociety", {
                                 state: {
                                   data: society,
                                 },

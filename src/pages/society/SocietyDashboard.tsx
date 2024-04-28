@@ -182,7 +182,6 @@ const SocietyDashboard = () => {
                       <span className="hidden">Image</span>
                     </TableHead>
                     <TableHead>Event Name</TableHead>
-                    <TableHead>Society Name</TableHead>
                     <TableHead>Visibility</TableHead>
                     <TableHead>Start Date</TableHead>
                     <TableHead>End Date</TableHead>
@@ -207,9 +206,6 @@ const SocietyDashboard = () => {
                         </TableCell>
                         <TableCell className="font-medium">
                           {event.title}
-                        </TableCell>
-                        <TableCell className="font-medium">
-                          {event.soc_name}
                         </TableCell>
                         <TableCell>
                           <Badge
