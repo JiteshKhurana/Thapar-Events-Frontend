@@ -11,15 +11,22 @@ import { useNavigate } from "react-router-dom";
 import useSocieties from "@/hooks/useSocieties";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import CardShimmer from "@/components/CardShimmer";
 
 const Society: React.FC = () => {
-  useSocieties();
+  const { loading } = useSocieties();
   const navigate = useNavigate();
   const societies = useSelector(
     (store: RootState) => store.societies.societiesList
   );
+
+  if (loading) {
+    return <CardShimmer />;
+  }
+
   if (!societies)
     return <h1 className="text-center text-3xl">No societies to display</h1>;
+
   return (
     <div>
       <div className=" flex flex-col items-center justify-start bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover">

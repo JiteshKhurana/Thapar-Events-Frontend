@@ -5,7 +5,6 @@ import { Society } from "@/store/societySlice";
 import axios from "axios";
 import { CSSProperties, useEffect, useState } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
-
 import Cookies from "universal-cookie";
 
 const SuperAdminDashboardApproveSociety = () => {
@@ -14,7 +13,7 @@ const SuperAdminDashboardApproveSociety = () => {
   const [notVisibleSocieties, setNotVisibleSocieties] = useState<
     Society[] | null
   >(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [color] = useState("#FF0000");
   const override: CSSProperties = {
     display: "block",
@@ -49,7 +48,8 @@ const SuperAdminDashboardApproveSociety = () => {
   }
   useEffect(() => {
     getNotVisibleSociety();
-  }, []);
+    if (notVisibleSocieties) setIsLoading(false);
+  }, [notVisibleSocieties]);
 
   if (isLoading)
     return (

@@ -192,12 +192,14 @@ const SocietyDashboard = () => {
                 </TableHeader>
                 <TableBody>
                   {!societyEvents ? (
-                    <h1 className="text-xl">No events</h1>
+                    <TableRow className="text-xl">
+                      <TableCell>No Events</TableCell>
+                    </TableRow>
                   ) : (
                     societyEvents.map((event) => {
                       return (
                         <TableRow key={event._Eid}>
-                          <TableCell className="hidden sm:table-cell">
+                          <TableCell>
                             <img
                               src={event.image}
                               alt="Event image"
@@ -223,10 +225,10 @@ const SocietyDashboard = () => {
                                 : "Private"}
                             </Badge>
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.start_date, true)}
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.end_date, true)}
                           </TableCell>
                           <TableCell>
@@ -280,7 +282,7 @@ const SocietyDashboard = () => {
                     upcomingEvents.map((event) => {
                       return (
                         <TableRow key={event._Eid}>
-                          <TableCell className="hidden sm:table-cell">
+                          <TableCell>
                             <img
                               src={event.image}
                               alt="Event image"
@@ -309,10 +311,10 @@ const SocietyDashboard = () => {
                                 : "Private"}
                             </Badge>
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.start_date, true)}
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.end_date, true)}
                           </TableCell>
                           <TableCell>
@@ -365,7 +367,7 @@ const SocietyDashboard = () => {
                     pastEvents.map((event) => {
                       return (
                         <TableRow key={event._Eid}>
-                          <TableCell className="hidden sm:table-cell">
+                          <TableCell>
                             <img
                               src={event.image}
                               alt="Event image"
@@ -394,10 +396,10 @@ const SocietyDashboard = () => {
                                 : "Private"}
                             </Badge>
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.start_date, true)}
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.end_date, true)}
                           </TableCell>
                           <TableCell>
@@ -450,7 +452,7 @@ const SocietyDashboard = () => {
                     privateEvents.map((event) => {
                       return (
                         <TableRow key={event._Eid}>
-                          <TableCell className="hidden sm:table-cell">
+                          <TableCell>
                             <img
                               src={event.image}
                               alt="Event image"
@@ -479,10 +481,10 @@ const SocietyDashboard = () => {
                                 : "Private"}
                             </Badge>
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.start_date, true)}
                           </TableCell>
-                          <TableCell className="hidden md:table-cell">
+                          <TableCell>
                             {timeConverter(event.end_date, true)}
                           </TableCell>
                           <TableCell>

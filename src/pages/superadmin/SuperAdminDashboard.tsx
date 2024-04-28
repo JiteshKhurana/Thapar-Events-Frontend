@@ -243,7 +243,7 @@ const SuperAdminDashboard = () => {
                         Events.map((event) => {
                           return (
                             <TableRow key={event._Eid}>
-                              <TableCell className="hidden sm:table-cell">
+                              <TableCell>
                                 <img
                                   src={event.image}
                                   alt="Event image"
@@ -272,10 +272,10 @@ const SuperAdminDashboard = () => {
                                     : "Private"}
                                 </Badge>
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.start_date, true)}
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.end_date, true)}
                               </TableCell>
                               <TableCell>
@@ -333,7 +333,7 @@ const SuperAdminDashboard = () => {
                         upcomingEvents.map((event) => {
                           return (
                             <TableRow key={event._Eid}>
-                              <TableCell className="hidden sm:table-cell">
+                              <TableCell>
                                 <img
                                   src={event.image}
                                   alt="Event image"
@@ -362,10 +362,10 @@ const SuperAdminDashboard = () => {
                                     : "Private"}
                                 </Badge>
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.start_date, true)}
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.end_date, true)}
                               </TableCell>
                               <TableCell>
@@ -422,7 +422,7 @@ const SuperAdminDashboard = () => {
                         pastEvents.map((event) => {
                           return (
                             <TableRow key={event._Eid}>
-                              <TableCell className="hidden sm:table-cell">
+                              <TableCell>
                                 <img
                                   src={event.image}
                                   alt="Event image"
@@ -451,10 +451,10 @@ const SuperAdminDashboard = () => {
                                     : "Private"}
                                 </Badge>
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.start_date, true)}
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.end_date, true)}
                               </TableCell>
                               <TableCell>
@@ -511,7 +511,7 @@ const SuperAdminDashboard = () => {
                         privateEvents.map((event) => {
                           return (
                             <TableRow key={event._Eid}>
-                              <TableCell className="hidden sm:table-cell">
+                              <TableCell>
                                 <img
                                   src={event.image}
                                   alt="Event image"
@@ -540,10 +540,10 @@ const SuperAdminDashboard = () => {
                                     : "Private"}
                                 </Badge>
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.start_date, true)}
                               </TableCell>
-                              <TableCell className="hidden md:table-cell">
+                              <TableCell>
                                 {timeConverter(event.end_date, true)}
                               </TableCell>
                               <TableCell>

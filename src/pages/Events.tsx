@@ -35,10 +35,9 @@ import { Event } from "@/store/eventSlice";
 import { EVENT_TYPES } from "@/lib/constants";
 
 const Events: React.FC = () => {
-  useEvents();
+  const { loading } = useEvents();
   const events = useSelector((store: RootState) => store.events.eventsList);
   const navigate = useNavigate();
-  const [isLoading, setisLoading] = useState(true);
   const [filteredEvents, setFilteredEvents] = useState<Event[] | null>(null);
   const [searchText, setSearchText] = useState("");
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -50,11 +49,9 @@ const Events: React.FC = () => {
         upcomingOrPast(event.end_date)
       );
       setFilteredEvents(upcomingEvents);
-      setisLoading(false);
     }
     if (searchText && events) {
       filterEvents();
-      setisLoading(false);
     }
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
@@ -105,11 +102,11 @@ const Events: React.FC = () => {
     }
   }
 
-  if (!events)
-    return <h1 className="text-center text-3xl">No events to display</h1>;
-  if (isLoading) {
+  if (loading) {
     return <CardShimmer />;
   }
+  if (!events)
+    return <h1 className="text-center text-3xl">No events to display</h1>;
 
   return (
     <div>
@@ -138,7 +135,9 @@ const Events: React.FC = () => {
                   <SelectGroup>
                     <SelectLabel>Event Type</SelectLabel>
                     {EVENT_TYPES.map((type) => (
-                      <SelectItem value={type.value}>{type.label}</SelectItem>
+                      <SelectItem key={type.value} value={type.value}>
+                        {type.label}
+                      </SelectItem>
                     ))}
                   </SelectGroup>
                 </SelectContent>

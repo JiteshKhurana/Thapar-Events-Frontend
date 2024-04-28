@@ -92,7 +92,7 @@ const SuperAdminDashboardSocieties = () => {
                   filteredSocieties.map((society) => {
                     return (
                       <TableRow key={society._Sid}>
-                        <TableCell className="hidden sm:table-cell">
+                        <TableCell>
                           <img
                             src={society.image}
                             alt="society pic"
