@@ -169,6 +169,13 @@ const EditEvent = () => {
           </Button>
           <Button
             onClick={() => {
+              navigate(`/eventdashboard/${event._Eid}/eventreport`);
+            }}
+          >
+            Add Event Report
+          </Button>
+          <Button
+            onClick={() => {
               navigate(`/eventdashboard/${event._Eid}/eventgallery`);
             }}
           >

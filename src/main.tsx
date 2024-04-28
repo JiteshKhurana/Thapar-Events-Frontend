@@ -42,6 +42,7 @@ import SuperAdminDashboardApproveSociety from "./pages/superadmin/SuperAdminDash
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import SuperAdminDashboardEditSocietyProfile from "./pages/superadmin/SuperAdminDashboardEditSocietyProfile.tsx";
 import TermsAndConditions from "./pages/TermsAndConditions.tsx";
+import AddEventReport from "./pages/eventdashboard/AddEventReport.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -162,6 +163,10 @@ const appRouter = createBrowserRouter([
               {
                 path: "eventposter",
                 element: <AddEventPoster />,
+              },
+              {
+                path: "eventreport",
+                element: <AddEventReport />,
               },
               {
                 path: "eventgallery",

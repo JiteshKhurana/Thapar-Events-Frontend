@@ -195,17 +195,28 @@ const EventsDetail: React.FC = () => {
               </div>
             )}
             <Separator />
-            <Button
-              onClick={() =>
-                navigate("eventgallery", {
-                  state: {
-                    event: event,
-                  },
-                })
-              }
-            >
-              Event Gallery
-            </Button>
+            <div className="space-x-5">
+              <Button
+                onClick={() =>
+                  navigate("eventgallery", {
+                    state: {
+                      event: event,
+                    },
+                  })
+                }
+              >
+                Event Gallery
+              </Button>
+              {event.report && (
+                <a
+                  className="bg-black dark:bg-white text-white dark:text-black px-3 py-2 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  href={event.report}
+                  target="_blank"
+                >
+                  Event Report
+                </a>
+              )}
+            </div>
             <Separator />
             {/* {event.social_media && (
               <div>
