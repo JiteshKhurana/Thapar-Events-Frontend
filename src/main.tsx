@@ -39,6 +39,7 @@ import SocietyRoot from "./pages/society/Societyroot.tsx";
 import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
 import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
 import SuperAdminDashboardApproveSociety from "./pages/superadmin/SuperAdminDashboardApproveSociety.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/privacypolicy",
+        element: <PrivacyPolicy />,
       },
       {
         path: "/events",
