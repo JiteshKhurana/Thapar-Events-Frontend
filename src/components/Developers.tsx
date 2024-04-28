@@ -37,15 +37,6 @@ const Developers = () => {
                   <LuGithub />
                 </a>
                 <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={teamMember.instagram}
-                  aria-label="instagram"
-                  className="p-2 rounded-md  hover:dark:text-violet-600"
-                >
-                  <LuInstagram />
-                </a>
-                <a
                   rel="noopener noreferrer"
                   href={teamMember.linkedin}
                   aria-label="linkedin"
@@ -53,6 +44,15 @@ const Developers = () => {
                   className="p-2 rounded-md  hover:dark:text-violet-600"
                 >
                   <LuLinkedin />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={teamMember.instagram}
+                  aria-label="instagram"
+                  className="p-2 rounded-md  hover:dark:text-violet-600"
+                >
+                  <LuInstagram />
                 </a>
                 <a
                   target="_blank"

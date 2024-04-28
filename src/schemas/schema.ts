@@ -56,7 +56,7 @@ export const editSocietyBySuperadminSchema = z.object({
   name: z.string().min(2, "Too Short").max(50, "Too Long"),
   social_media: z.object({
     Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
-    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Linkedin: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
     Youtube: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
     OfficialWebsite: z
       .string()
@@ -201,7 +201,7 @@ export const addSocietySchema = z.object({
   email: z.string().email(),
   social_media: z.object({
     Instagram: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
-    Facebook: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
+    Linkedin: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
     Youtube: z.string().min(0).url("Enter a URL").max(255).or(z.literal("")),
     OfficialWebsite: z
       .string()

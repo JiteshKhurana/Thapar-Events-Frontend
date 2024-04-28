@@ -109,12 +109,6 @@ const SuperAdminDashboard = () => {
       setPastEvents(pastEvents);
     }
   }, [Events]);
-  if (!Events)
-    return (
-      <div className="mx-5 flex min-h-screen w-full flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        Loading Events
-      </div>
-    );
 
   return (
     <div className="flex min-h-screen w-full flex-col ">
@@ -243,68 +237,72 @@ const SuperAdminDashboard = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {Events.map((event) => {
-                        return (
-                          <TableRow key={event._Eid}>
-                            <TableCell className="hidden sm:table-cell">
-                              <img
-                                src={event.image}
-                                alt="Event image"
-                                className="aspect-square rounded-md object-cover"
-                                height="64"
-                                width="64"
-                              />
-                            </TableCell>
-                            <TableCell className="font-medium">
-                              {event.title}
-                            </TableCell>
-                            <TableCell className="font-medium">
-                              {event.soc_name}
-                            </TableCell>
-                            <TableCell>
-                              <Badge
-                                className={`${
-                                  event.visibility === "true"
-                                    ? "text-green-500"
-                                    : "text-red-500"
-                                }`}
-                                variant="outline"
-                              >
-                                {event.visibility === "true"
-                                  ? "Public"
-                                  : "Private"}
-                              </Badge>
-                            </TableCell>
-                            <TableCell className="hidden md:table-cell">
-                              {timeConverter(event.start_date, true)}
-                            </TableCell>
-                            <TableCell className="hidden md:table-cell">
-                              {timeConverter(event.end_date, true)}
-                            </TableCell>
-                            <TableCell>
-                              <Badge variant="outline">
-                                {event.event_type}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>
-                              <Badge variant="outline">
-                                {event.event_mode}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>{event.venue}</TableCell>
-                            <TableCell>
-                              <Button
-                                onClick={() => {
-                                  navigate("/eventdashboard/" + event._Eid);
-                                }}
-                                className="flex items-center gap-1"
-                              >
-                                <BiLinkExternal /> Event Dashboard
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
+                      {!Events ? (
+                        <h1 className="text-xl">No Events</h1>
+                      ) : (
+                        Events.map((event) => {
+                          return (
+                            <TableRow key={event._Eid}>
+                              <TableCell className="hidden sm:table-cell">
+                                <img
+                                  src={event.image}
+                                  alt="Event image"
+                                  className="aspect-square rounded-md object-cover"
+                                  height="64"
+                                  width="64"
+                                />
+                              </TableCell>
+                              <TableCell className="font-medium">
+                                {event.title}
+                              </TableCell>
+                              <TableCell className="font-medium">
+                                {event.soc_name}
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  className={`${
+                                    event.visibility === "true"
+                                      ? "text-green-500"
+                                      : "text-red-500"
+                                  }`}
+                                  variant="outline"
+                                >
+                                  {event.visibility === "true"
+                                    ? "Public"
+                                    : "Private"}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell">
+                                {timeConverter(event.start_date, true)}
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell">
+                                {timeConverter(event.end_date, true)}
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">
+                                  {event.event_type}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">
+                                  {event.event_mode}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>{event.venue}</TableCell>
+                              <TableCell>
+                                <Button
+                                  onClick={() => {
+                                    navigate("/eventdashboard/" + event._Eid);
+                                  }}
+                                  className="flex items-center gap-1"
+                                >
+                                  <BiLinkExternal /> Event Dashboard
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })
+                      )}
                     </TableBody>
                   </Table>
                 </CardContent>

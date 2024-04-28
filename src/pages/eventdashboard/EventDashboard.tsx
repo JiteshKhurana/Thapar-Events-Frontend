@@ -178,59 +178,59 @@ const EventDashboard = () => {
               <Button onClick={copyUrl} className="w-full my-5">
                 {copySuccess}
               </Button>
-              <div className="flex flex-row gap-5 justify-around">
+              <div className="mt-5 flex  gap-2 justify-around">
                 <WhatsappShareButton
-                  separator=".Register on ConnectHub ASAP "
-                  url={url}
-                  title={
-                    "Hey! You know there is " +
-                    event.title +
-                    " happening from " +
-                    timeConverter(event.start_date, false) +
-                    " to " +
-                    timeConverter(event.end_date, false)
-                  }
+                  separator="Register on Thapar Events by clicking on this link: "
+                  url={location.href}
+                  title={`Hey! You know there is ${
+                    event.title
+                  } happening from ${timeConverter(
+                    event.start_date,
+                    true
+                  )} to ${timeConverter(event.end_date, true)} at ${
+                    event.venue
+                  }.`}
                 >
                   <WhatsappIcon size={32} round={true} />
                 </WhatsappShareButton>
                 <TelegramShareButton
-                  url={url}
-                  title={
-                    "Hey! You know there is " +
-                    event.title +
-                    " happening from " +
-                    timeConverter(event.start_date, false) +
-                    " to " +
-                    timeConverter(event.end_date, false)
-                  }
+                  url={location.href}
+                  title={`Hey! You know there is ${
+                    event.title
+                  } happening from ${timeConverter(
+                    event.start_date,
+                    true
+                  )} to ${timeConverter(event.end_date, true)} at ${
+                    event.venue
+                  } .Register on Thapar Events.`}
                 >
                   <TelegramIcon size={32} round={true} />
                 </TelegramShareButton>
                 <TwitterShareButton
-                  url={url}
-                  title={
-                    "Hey! You know there is " +
-                    event.title +
-                    " happening from " +
-                    timeConverter(event.start_date, false) +
-                    " to " +
-                    timeConverter(event.end_date, false)
-                  }
+                  url={location.href}
+                  title={`Hey! You know there is ${
+                    event.title
+                  } happening from ${timeConverter(
+                    event.start_date,
+                    true
+                  )} to ${timeConverter(event.end_date, true)} at ${
+                    event.venue
+                  } .Register on Thapar Events by clicking on this link:`}
                 >
                   <TwitterIcon size={32} round={true} />
                 </TwitterShareButton>
                 <EmailShareButton
-                  url={url}
-                  subject={
-                    "Hey! You know there is " +
-                    event.title +
-                    " happening from " +
-                    timeConverter(event.start_date, false) +
-                    " to " +
-                    timeConverter(event.end_date, false)
-                  }
+                  url={location.href}
+                  subject={`Hey! You know there is ${
+                    event.title
+                  } happening from ${timeConverter(
+                    event.start_date,
+                    true
+                  )} to ${timeConverter(event.end_date, true)} at ${
+                    event.venue
+                  } .`}
                   body={event.description}
-                  separator=".Register on ConnectHub ASAP "
+                  separator=".Register on Thapar Events by clicking on this link:"
                 >
                   <EmailIcon size={32} round={true} />
                 </EmailShareButton>

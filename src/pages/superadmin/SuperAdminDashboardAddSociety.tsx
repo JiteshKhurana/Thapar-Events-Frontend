@@ -101,12 +101,12 @@ const SuperAdminDashboardAddSociety = () => {
                   <Input
                     className="w-full max-w-[400px]"
                     type="text"
-                    {...register("social_media.Facebook")}
-                    placeholder="Facebook"
+                    {...register("social_media.Linkedin")}
+                    placeholder="Linkedin"
                   />
-                  {errors.social_media?.Facebook && (
+                  {errors.social_media?.Linkedin && (
                     <div className="text-red-500">
-                      {errors.social_media.Facebook.message}
+                      {errors.social_media.Linkedin.message}
                     </div>
                   )}
                 </div>

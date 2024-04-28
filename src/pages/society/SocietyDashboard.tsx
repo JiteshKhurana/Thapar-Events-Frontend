@@ -79,7 +79,6 @@ const SocietyDashboard = () => {
     }
   }, [societyEvents]);
 
-  if (!societyEvents) return <h1>No events to display</h1>;
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <Tabs defaultValue="all">
@@ -192,59 +191,65 @@ const SocietyDashboard = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {societyEvents.map((event) => {
-                    return (
-                      <TableRow key={event._Eid}>
-                        <TableCell className="hidden sm:table-cell">
-                          <img
-                            src={event.image}
-                            alt="Event image"
-                            className="aspect-square rounded-md object-cover"
-                            height="64"
-                            width="64"
-                          />
-                        </TableCell>
-                        <TableCell className="font-medium">
-                          {event.title}
-                        </TableCell>
-                        <TableCell>
-                          <Badge
-                            className={`${
-                              event.visibility === "true"
-                                ? "text-green-500"
-                                : "text-red-500"
-                            }`}
-                            variant="outline"
-                          >
-                            {event.visibility === "true" ? "Public" : "Private"}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {timeConverter(event.start_date, true)}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {timeConverter(event.end_date, true)}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">{event.event_type}</Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">{event.event_mode}</Badge>
-                        </TableCell>
-                        <TableCell>{event.venue}</TableCell>
-                        <TableCell>
-                          <Button
-                            onClick={() => {
-                              navigate("/eventdashboard/" + event._Eid);
-                            }}
-                            className="flex items-center gap-1"
-                          >
-                            <BiLinkExternal /> Event Dashboard
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
+                  {!societyEvents ? (
+                    <h1 className="text-xl">No events</h1>
+                  ) : (
+                    societyEvents.map((event) => {
+                      return (
+                        <TableRow key={event._Eid}>
+                          <TableCell className="hidden sm:table-cell">
+                            <img
+                              src={event.image}
+                              alt="Event image"
+                              className="aspect-square rounded-md object-cover"
+                              height="64"
+                              width="64"
+                            />
+                          </TableCell>
+                          <TableCell className="font-medium">
+                            {event.title}
+                          </TableCell>
+                          <TableCell>
+                            <Badge
+                              className={`${
+                                event.visibility === "true"
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }`}
+                              variant="outline"
+                            >
+                              {event.visibility === "true"
+                                ? "Public"
+                                : "Private"}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            {timeConverter(event.start_date, true)}
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            {timeConverter(event.end_date, true)}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">{event.event_type}</Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">{event.event_mode}</Badge>
+                          </TableCell>
+                          <TableCell>{event.venue}</TableCell>
+                          <TableCell>
+                            <Button
+                              onClick={() => {
+                                navigate("/eventdashboard/" + event._Eid);
+                              }}
+                              className="flex items-center gap-1"
+                            >
+                              <BiLinkExternal /> Event Dashboard
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
+                  )}
                 </TableBody>
               </Table>
             </CardContent>

@@ -189,8 +189,8 @@ const EditEvent = () => {
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. You will be logged out of
-                  ConnectHub.
+                  This action cannot be undone. You will be logged out of Thapar
+                  Events.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>

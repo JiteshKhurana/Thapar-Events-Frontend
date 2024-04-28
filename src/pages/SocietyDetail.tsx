@@ -8,15 +8,11 @@ import axios from "axios";
 import { API_ENDPOINT } from "@/lib/constants";
 import { toast } from "sonner";
 import CardShimmer from "@/components/CardShimmer";
-import {
-  BiEnvelope,
-  BiLogoLinkedinSquare,
-  BiLogoInstagram,
-} from "react-icons/bi";
+import { LuInstagram, LuLinkedin, LuMail } from "react-icons/lu";
+
 import { Society } from "../store/societySlice";
 import { Event } from "@/store/eventSlice";
 import { upcomingOrPast } from "@/lib/helper";
-// import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 const SocietyDetail: React.FC = () => {
   const { state } = useLocation();
@@ -45,10 +41,9 @@ const SocietyDetail: React.FC = () => {
   const pastEvents = societyEvents?.filter(
     (event) => !upcomingOrPast(event.end_date)
   );
-
   if (!society) return <CardShimmer />;
   return (
-    <div className="">
+    <div>
       <div className="society-header bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] border-b bg-no-repeat bg-cover">
         <div className="w-full h-[25vh] flex items-end justify-start gap-5 p-5 bg-black bg-opacity-40">
           <div className="heading-container flex items-center justify-start gap-5">
@@ -65,11 +60,10 @@ const SocietyDetail: React.FC = () => {
 
       <div className="flex justify-center items-center px-5">
         <div className="society-detail mt-5 w-full md:w-[80%] max-w-[1920px]">
-          <div className=""></div>
           <h2 className="text-2xl my-3 font-semibold ">About Society</h2>
           <p>{society.about}</p>
           <Separator className="mt-3" />
-          {!upcomingEvents ? (
+          {!upcomingEvents || upcomingEvents.length == 0 ? (
             <>
               <h1 className="text-2xl font-semibold">Upcoming Events</h1>
               <h2>No Upcoming Events to display</h2>
@@ -81,10 +75,10 @@ const SocietyDetail: React.FC = () => {
               itemsToMap={upcomingEvents}
             />
           )}
-          {!pastEvents ? (
+          {!pastEvents || pastEvents.length == 0 ? (
             <>
               <h1 className="text-2xl font-semibold">Past Events</h1>
-              <h2>No Past Events to display</h2>
+              <h2 className="mb-5">No Past Events to display</h2>
             </>
           ) : (
             <CardSlider
@@ -110,13 +104,13 @@ const SocietyDetail: React.FC = () => {
                     </div>
                     <div className="flex justify-center gap-5 p-3">
                       <a href={`mailto:${member.email}`} target="_blank">
-                        <BiEnvelope className="text-[1.9rem]" />
+                        <LuMail className="text-[1.3rem]" />
                       </a>
                       <a href={member.linkedin} target="_blank">
-                        <BiLogoLinkedinSquare className="text-[1.9rem]" />
+                        <LuLinkedin className="text-[1.3rem]" />
                       </a>
                       <a href={member.instagram} target="_blank">
-                        <BiLogoInstagram className="text-[1.9rem]" />
+                        <LuInstagram className="text-[1.3rem]" />
                       </a>
                     </div>
                   </div>
@@ -124,7 +118,7 @@ const SocietyDetail: React.FC = () => {
               </div>
             </div>
           )}
-          {society.faculty && (
+          {society.faculty.length > 0 && (
             <div className="editorcontainer my-5 min-h-[100vh]rounded-lg  py-3">
               <span className="flex font-semibold text-2xl  my-3">Faculty</span>
               <div className="member-list-container max-h-[90vh] flex flex-col gap-3  rounded-md my-3 overflow-y-scroll no-scrollbar">
@@ -141,10 +135,10 @@ const SocietyDetail: React.FC = () => {
                     </div>
                     <div className="flex justify-center gap-5 p-3">
                       <a href={`mailto:${faculty.email}`} target="_blank">
-                        <BiEnvelope className="text-[1.9rem]" />
+                        <LuMail className="text-[1.3rem]" />
                       </a>
                       <a href={faculty.linkedin} target="_blank">
-                        <BiLogoLinkedinSquare className="text-[1.9rem]" />
+                        <LuLinkedin className="text-[1.3rem]" />
                       </a>
                     </div>
                   </div>
@@ -161,7 +155,12 @@ const SocietyDetail: React.FC = () => {
                 {Object.entries(society.social_media).map(
                   ([key, val]) =>
                     val !== "" && (
-                      <a key={uuidv4()} href={val} target="_blank">
+                      <a
+                        className="bg-black dark:bg-white text-white dark:text-black px-3 py-2 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                        key={uuidv4()}
+                        href={val}
+                        target="_blank"
+                      >
                         {key}
                       </a>
                     )

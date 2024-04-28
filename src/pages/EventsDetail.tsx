@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -32,7 +31,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { Event } from "@/store/eventSlice";
-import { BiCalendarEvent, BiGroup, BiMap, BiTime } from "react-icons/bi";
+import { BiCalendarEvent, BiMap, BiTime } from "react-icons/bi";
 import { LuMapPin } from "react-icons/lu";
 
 import { MdGroups } from "react-icons/md";
@@ -96,11 +95,7 @@ const EventsDetail: React.FC = () => {
       <div className="coverimage w-full h-[250px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-cover bg-no-repeat"></div>
       <div className="w-full max-w-[1800px] grid grid-cols-8 lg:grid-cols-12 gap-6 mx-3 lg:mx-32 my-5">
         <div className="col-span-8 space-y-2">
-          <div className="flex gap-5 p-5  bg-white dark:bg-black shadow-xl border rounded-lg">
-            <Avatar className="h-28 w-28">
-              <AvatarImage src={event.image} />
-              <AvatarFallback>Event Pic</AvatarFallback>
-            </Avatar>
+          <div className="flex gap-5 p-5 bg-white dark:bg-black shadow-xl border rounded-lg">
             <div className="flex flex-col space-y-2 overflow-hidden">
               <h1 className="text-4xl font-semibold">{event.title}</h1>
               <span className="text-gray-500 font-semibold text-xl">
@@ -149,9 +144,9 @@ const EventsDetail: React.FC = () => {
                 details.
               </h3>
             </div>
-            <Separator />
-            {event.deadlines && (
+            {event.deadlines.length !== 0 && (
               <div>
+                <Separator />
                 <h2 className="font-semibold text-xl mb-2">
                   Important dates and deadlines:
                 </h2>
@@ -168,9 +163,9 @@ const EventsDetail: React.FC = () => {
                 ))}
               </div>
             )}
-            <Separator />
-            {event.rounds && (
+            {event.rounds.length !== 0 && (
               <div>
+                <Separator />
                 <h2 className="font-semibold text-xl mb-2">Rounds:</h2>
                 {event.rounds.map((round) => (
                   <div key={uuidv4()} className="flex flex-col my-1">
@@ -180,9 +175,9 @@ const EventsDetail: React.FC = () => {
                 ))}
               </div>
             )}
-            <Separator />
             {event.prizes && (
               <div>
+                <Separator />
                 <h2 className="font-semibold text-xl mb-2">
                   Rewards & Prizes:
                 </h2>
@@ -217,24 +212,6 @@ const EventsDetail: React.FC = () => {
                 </a>
               )}
             </div>
-            <Separator />
-            {/* {event.social_media && (
-              <div>
-                <h2 className="font-semibold text-xl mb-2">
-                  Follow on Social Media
-                </h2>
-                <div className="flex flex-row space-x-5">
-                  {Object.entries(event.social_media).map(
-                    ([key, val]) =>
-                      val !== "" && (
-                        <a key={uuidv4()} href={val} target="_blank">
-                          {key}
-                        </a>
-                      )
-                  )}
-                </div>
-              </div>
-            )} */}
           </div>
         </div>
         <div className="col-span-8 md:col-span-4 space-y-3">
@@ -275,15 +252,6 @@ const EventsDetail: React.FC = () => {
                 <span>{event.venue}</span>
               </div>
             </div>
-            {event.team === "true" && (
-              <div className="flex items-center">
-                <BiGroup className="mr-3 font-semibold text-2xl" />
-                <div className="flex flex-col">
-                  <span className="font-semibold text-lg">Team Size</span>
-                  <span>1 - 2 Members</span>
-                </div>
-              </div>
-            )}
             <div className="flex items-center">
               <MdGroups className="mr-3 font-semibold text-2xl" />
               <div className="flex flex-col">
@@ -312,58 +280,57 @@ const EventsDetail: React.FC = () => {
             </Button>
             <div className="mt-5 flex  gap-2 justify-around">
               <WhatsappShareButton
-                separator=".Register on ConnectHub ASAP "
+                separator="Register on Thapar Events by clicking on this link: "
                 url={location.href}
-                title={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
+                title={`Hey! You know there is ${
+                  event.title
+                } happening from ${timeConverter(
+                  event.start_date,
+                  true
+                )} to ${timeConverter(event.end_date, true)} at ${
+                  event.venue
+                } .Over ${registrations} students have already registered.`}
               >
                 <WhatsappIcon size={32} round={true} />
               </WhatsappShareButton>
               <TelegramShareButton
                 url={location.href}
-                title={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
+                title={`Hey! You know there is ${
+                  event.title
+                } happening from ${timeConverter(
+                  event.start_date,
+                  true
+                )} to ${timeConverter(event.end_date, true)} at ${
+                  event.venue
+                } .Over ${registrations} students have already registered.Register on Thapar Events.`}
               >
                 <TelegramIcon size={32} round={true} />
               </TelegramShareButton>
               <TwitterShareButton
                 url={location.href}
-                title={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
-                hashtags={event.hashtags}
+                title={`Hey! You know there is ${
+                  event.title
+                } happening from ${timeConverter(
+                  event.start_date,
+                  true
+                )} to ${timeConverter(event.end_date, true)} at ${
+                  event.venue
+                } .Over ${registrations} students have already registered.Register on Thapar Events by clicking on this link:`}
               >
                 <TwitterIcon size={32} round={true} />
               </TwitterShareButton>
               <EmailShareButton
                 url={location.href}
-                subject={
-                  "Hey! You know there is " +
-                  event.title +
-                  " happening from " +
-                  timeConverter(event.start_date, false) +
-                  " to " +
-                  timeConverter(event.end_date, false)
-                }
+                subject={`Hey! You know there is ${
+                  event.title
+                } happening from ${timeConverter(
+                  event.start_date,
+                  true
+                )} to ${timeConverter(event.end_date, true)} at ${
+                  event.venue
+                } .Over ${registrations} students have already registered.`}
                 body={event.description}
-                separator=".Register on ConnectHub ASAP "
+                separator=".Register on Thapar Events by clicking on this link:"
               >
                 <EmailIcon size={32} round={true} />
               </EmailShareButton>

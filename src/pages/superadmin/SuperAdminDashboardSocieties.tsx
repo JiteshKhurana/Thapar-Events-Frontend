@@ -1,4 +1,3 @@
-import CardShimmer from "@/components/CardShimmer";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -47,7 +46,6 @@ const SuperAdminDashboardSocieties = () => {
   useEffect(() => {
     filterSocieties();
   }, [searchtext, Societies]);
-  if (!Societies) return <CardShimmer />;
   return (
     <div className="flex min-h-screen w-full flex-col ">
       <div className="flex flex-col sm:gap-3 sm:py-4 sm:pl-14">
@@ -88,7 +86,9 @@ const SuperAdminDashboardSocieties = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredSocieties &&
+                {!filteredSocieties ? (
+                  <h1 className="text-xl">No Societies</h1>
+                ) : (
                   filteredSocieties.map((society) => {
                     return (
                       <TableRow key={society._Sid}>
@@ -153,7 +153,8 @@ const SuperAdminDashboardSocieties = () => {
                         />
                       </TableRow>
                     );
-                  })}
+                  })
+                )}
               </TableBody>
             </Table>
           </Card>
