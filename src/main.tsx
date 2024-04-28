@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./globals.css";
@@ -31,7 +31,6 @@ import Society from "./pages/Society.tsx";
 import AddEventPoster from "./pages/eventdashboard/AddEventPoster.tsx";
 import SuperAdminDashboardSocieties from "./pages/superadmin/SuperAdminDashboardSocieties.tsx";
 import SuperAdminDashboardAddSociety from "./pages/superadmin/SuperAdminDashboardAddSociety.tsx";
-import Feedback from "./pages/Feedback.tsx";
 import AddPhotoGallery from "./pages/eventdashboard/AddPhotoGallery.tsx";
 import EventGallery from "./pages/EventGallery.tsx";
 import SuperAdminDashboardSocietyProfile from "./pages/superadmin/SuperAdminDashboardSocietyProfile.tsx";
@@ -39,10 +38,14 @@ import SocietyRoot from "./pages/society/Societyroot.tsx";
 import SocietyDashboard from "./pages/society/SocietyDashboard.tsx";
 import EventDashboardRoot from "./pages/eventdashboard/EventDashboardRoot.tsx";
 import SuperAdminDashboardApproveSociety from "./pages/superadmin/SuperAdminDashboardApproveSociety.tsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import SuperAdminDashboardEditSocietyProfile from "./pages/superadmin/SuperAdminDashboardEditSocietyProfile.tsx";
-import TermsAndConditions from "./pages/TermsAndConditions.tsx";
 import AddEventReport from "./pages/eventdashboard/AddEventReport.tsx";
+import CardShimmer from "./components/CardShimmer.tsx";
+const FeedbackForm = React.lazy(() => import("./pages/Feedback.tsx"));
+const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy.tsx"));
+const TermsAndConditions = React.lazy(
+  () => import("./pages/TermsAndConditions.tsx")
+);
 
 const appRouter = createBrowserRouter([
   {
@@ -55,11 +58,19 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/privacypolicy",
-        element: <PrivacyPolicy />,
+        element: (
+          <Suspense fallback={<CardShimmer />}>
+            <PrivacyPolicy />,
+          </Suspense>
+        ),
       },
       {
         path: "/termsandconditions",
-        element: <TermsAndConditions />,
+        element: (
+          <Suspense fallback={<CardShimmer />}>
+            <TermsAndConditions />,
+          </Suspense>
+        ),
       },
       {
         path: "/events",
@@ -87,7 +98,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/feedback",
-        element: <Feedback />,
+        element: (
+          <Suspense fallback={<CardShimmer />}>
+            <FeedbackForm />
+          </Suspense>
+        ),
       },
       {
         path: "/profile",
