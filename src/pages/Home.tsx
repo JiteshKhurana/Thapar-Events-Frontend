@@ -55,8 +55,8 @@ const Home: React.FC = () => {
           <h1 className="text-4xl sm:text-6xl  md:text-8xl lg:text-[11vh] text-white font-light">
             Student Activities
             <br />
-            & more 
-            <br/>
+            & more
+            <br />
             at
             <span className="text-red-600 font-bold"> TIET!</span>
           </h1>
@@ -76,6 +76,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
+
       {upcomingEvents && (
         <div className="flex justify-center items-center">
           <div className=" flex justify-between items-center flex-col w-full my-5">
@@ -83,7 +85,7 @@ const Home: React.FC = () => {
               Upcoming Events
             </h2>
             <Carousel
-              className="w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
+              className=""
               plugins={[
                 Autoplay({
                   delay: 5000,
@@ -100,7 +102,7 @@ const Home: React.FC = () => {
                     event?.image && (
                       <CarouselItem
                         key={event._Eid}
-                        className="cursor-pointer w-[70%] h-[250px] md:w-[1000px] md:h-[750px]"
+                        className="cursor-pointer w-[70vw] h-[39vw]"
                         onClick={() =>
                           navigate(
                             "/events/" +
@@ -110,7 +112,7 @@ const Home: React.FC = () => {
                           )
                         }
                       >
-                        <img src={event.image} />
+                        <img src={event.image} className="w-[70vw] h-[39vw] rounded-md md:rounded-lg"/>
                       </CarouselItem>
                     )
                 )}
@@ -121,6 +123,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
+
       <Separator />
       <div className="flex flex-col ">
         <h2 className="text-3xl font-bold text-center mt-5">Events Calendar</h2>
