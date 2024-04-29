@@ -13,7 +13,7 @@ const EventComponent = ({ event }: { event: Event }) => {
             event._Eid
         )
       }
-      className="w-full hover:scale-105 hover:bg-blue-600 transition-all duration-300 rounded-lg"
+      className="w-full hover:scale-110 transition-all duration-300 rounded-lg"
     >
       <div className="flex flex-col">
         <h2 className="flex justify-center items-center overflow-scroll no-scrollbar font-semibold text-md">
