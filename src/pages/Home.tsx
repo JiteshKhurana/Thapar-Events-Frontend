@@ -23,7 +23,7 @@ import { RootState } from "@/store/store";
 import EventComponent from "./EventComponent";
 import { timeConverter, upcomingOrPast } from "@/lib/helper";
 import CardShimmer from "@/components/CardShimmer";
-import Developers from "@/components/Developers";
+// import Developers from "@/components/Developers";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -52,13 +52,13 @@ const Home: React.FC = () => {
           controls={false}
         ></video>
         <div className="absolute top-0 z-10 h-full w-full flex flex-col justify-end sm:justify-center pl-2 sm:pl-10 gap-10">
-          <h1 className="text-4xl sm:text-6xl  md:text-8xl lg:text-[11vh] text-white font-semibold">
-            Student
+          <h1 className="text-4xl sm:text-6xl  md:text-8xl lg:text-[11vh] text-white font-light">
+            Student Activities
             <br />
-            Activities at
-            <br />
-            Thapar
-            <br /> <span className="text-red-600">University!</span>
+            & more 
+            <br/>
+            at
+            <span className="text-red-600 font-bold"> TIET!</span>
           </h1>
           <p className="flex flex-row sm:flex-col flex-wrap text-xl text-gray-300 font-light self-center sm:self-start">
             <span>Make the most of every opportunity to learn, enjoy</span>
@@ -143,7 +143,7 @@ const Home: React.FC = () => {
           />
         </div>
       </div>
-      <Developers />
+      {/* <Developers /> */}
       <Footer />
     </div>
   );
