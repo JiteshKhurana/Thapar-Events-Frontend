@@ -226,7 +226,10 @@ const EventsDetail: React.FC = () => {
                 <Button
                   className="w-full"
                   disabled={
-                    isAdmin() || isSuperAdmin() || event.register === "false"
+                    isAdmin() ||
+                    isSuperAdmin() ||
+                    !isLoggedIn() ||
+                    event.register === "false"
                   }
                   onClick={() =>
                     navigate("register", {
@@ -236,7 +239,7 @@ const EventsDetail: React.FC = () => {
                     })
                   }
                 >
-                  {isAdmin() || isSuperAdmin()
+                  {isAdmin() || isSuperAdmin() || !isLoggedIn()
                     ? "You Can't Register"
                     : event.register === "true"
                     ? "Register Now"

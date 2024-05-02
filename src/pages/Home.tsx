@@ -84,7 +84,7 @@ const Home: React.FC = () => {
               Upcoming Events
             </h2>
             <Carousel
-              className=""
+              className="cursor-pointer w-[70vw] h-[39vw]"
               plugins={[
                 Autoplay({
                   delay: 5000,
