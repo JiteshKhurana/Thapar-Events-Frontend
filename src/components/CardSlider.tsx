@@ -33,7 +33,7 @@ const CardSlider: React.FC<FCProps> = ({ title, apply, itemsToMap }) => {
             key={event._Eid}
             className="min-w-[350px] flex flex-col  mb-3 overflow-hidden border rounded-md"
           >
-            <div className="event-img w-[350px] h-[175px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-cover"></div>
+            <div className="event-img w-[350px] h-[175px] bg-[url('https://res.cloudinary.com/dvmteldw0/image/upload/v1722359230/iijlpvxuxvaxetfsr9fu.jpgxw')] bg-cover"></div>
             <CardHeader className="flex flex-row gap-5">
               <Avatar className="w-16 h-16">
                 <AvatarImage src="https://res.cloudinary.com/dhrfyg57t/image/upload/v1712308980/ccs_logo_hq2ysz.jpg" />

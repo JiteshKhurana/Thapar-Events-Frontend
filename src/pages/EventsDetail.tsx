@@ -93,7 +93,7 @@ const EventsDetail: React.FC = () => {
   );
   return (
     <div className="flex flex-wrap justify-center">
-      <div className="coverimage w-full h-[250px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')] bg-cover bg-no-repeat"></div>
+      <div className="coverimage w-full h-[250px] bg-[url('https://res.cloudinary.com/dvmteldw0/image/upload/v1722359230/iijlpvxuxvaxetfsr9fu.jpg')] bg-cover bg-no-repeat"></div>
       <div className="w-full max-w-[1800px] grid grid-cols-8 lg:grid-cols-12 gap-6 mx-3 lg:mx-32 my-5">
         <div className="col-span-8 space-y-2">
           <div className="flex gap-5 p-5 bg-white dark:bg-black shadow-xl border rounded-lg">

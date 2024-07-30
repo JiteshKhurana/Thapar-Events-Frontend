@@ -112,7 +112,7 @@ const Events: React.FC = () => {
 
   return (
     <div>
-      <div className="min-h-[90vh] m-10 flex flex-col justify-start items-center bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712223505/Clip_path_group_jvxubn.svg')] bg-no-repeat bg-cover dark:bg-opacity-10">
+      <div className="min-h-[90vh] m-10 flex flex-col justify-start items-center bg-[url('https://res.cloudinary.com/dvmteldw0/image/upload/v1722359227/g73yppeecnbrxpdbhc6q.svg')] bg-no-repeat bg-cover dark:bg-opacity-10">
         <h1 className="font-semibold text-4xl mb-5 ">Explore Events at TIET</h1>
         <div>
           <Tabs
@@ -169,7 +169,7 @@ const Events: React.FC = () => {
                       key={uuidv4()}
                       className="w-[93vw] max-w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
                     >
-                      <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
+                      <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dvmteldw0/image/upload/v1722359230/iijlpvxuxvaxetfsr9fu.jpg')]"></div>
 
                       <CardHeader className="flex flex-row space-x-5 ">
                         <Avatar className="h-16 w-16">
@@ -237,7 +237,7 @@ const Events: React.FC = () => {
                       key={uuidv4()}
                       className="w-[93vw] max-w-[400px] m-5 overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300"
                     >
-                      <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dhrfyg57t/image/upload/v1712311662/01_lotoi6.jpg')]"></div>
+                      <div className="w-[400px] h-[200px] bg-[url('https://res.cloudinary.com/dvmteldw0/image/upload/v1722359230/iijlpvxuxvaxetfsr9fu.jpg')]"></div>
 
                       <CardHeader className="flex flex-row space-x-5 ">
                         <Avatar className="h-16 w-16">
