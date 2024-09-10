@@ -28,7 +28,7 @@ export const TEAM = [
     instagram: "https://www.instagram.com/jiteshkhurana_/",
   },
   {
-    name: "Ashish",
+    name: "Ashish Simon Rattan",
     role: "Backend Developer",
     email: "arattan_be21@thapar.edu",
     image:
@@ -38,13 +38,13 @@ export const TEAM = [
     instagram: "https://www.instagram.com/ashish.simon.rattan/",
   },
   {
-    name: "Kunal",
+    name: "Kunal Arora",
     role: "Frontend Developer",
     email: "karora_be21@gmail.com",
     image:
       "https://res.cloudinary.com/dvmteldw0/image/upload/v1722359232/z8wewaq8oaf4pudt0hfw.jpg",
     github: "https://github.com/kunalarora0930",
-    linkedin: "https://www.linkedin.com/in/kunal-arora-39b914216/",
+    linkedin: "https://www.linkedin.com/in/kunalarora0930/",
     instagram: "https://www.instagram.com/kunalarora0930",
   },
 ];
