@@ -48,7 +48,7 @@ const SuperAdminDashboard = () => {
   const [pastEvents, setPastEvents] = useState<Event[] | null>(null);
   const [privateEvents, setPrivateEvents] = useState<Event[] | null>(null);
   const [NoUsers, setNoUsers] = useState<number>(0);
-
+  const [allEvents, setAllEvents] = useState<Event[] | null>(null);
   const getPrivateEvents = async () => {
     await axios
       .get(import.meta.env.VITE_API_ENDPOINT + "event/get/notvisible", {
@@ -107,6 +107,11 @@ const SuperAdminDashboard = () => {
       setUpcomingEvents(upcomingEvents);
       setPastEvents(pastEvents);
     }
+    setAllEvents([
+      ...(upcomingEvents || []),
+      ...(pastEvents || []),
+      ...(privateEvents || []),
+    ]);
   }, [Events]);
 
   return (
@@ -236,10 +241,10 @@ const SuperAdminDashboard = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {!Events ? (
+                      {!allEvents ? (
                         <h1 className="text-xl">No Events</h1>
                       ) : (
-                        Events.map((event) => {
+                        allEvents.map((event) => {
                           return (
                             <TableRow key={event._Eid}>
                               <TableCell>

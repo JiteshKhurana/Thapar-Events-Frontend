@@ -69,13 +69,13 @@ export const timeConverter = (UNIX_timestamp: Date, timeNeeded: boolean) => {
   const year = a.getFullYear();
   const month = months[a.getMonth()];
   const date = a.getDate();
-  const hour = a.getHours();
-  const min = a.getMinutes();
+  const hour = String(a.getHours()).padStart(2, "0");
+  const min = String(a.getMinutes()).padStart(2, "0");
   // const sec = a.getSeconds();
   let time = "";
   timeNeeded
-    ? (time = date + " " + month + " " + year + ", " + hour + ":" + min)
-    : (time = date + " " + month + " " + year + " ");
+    ? (time = `${date} ${month} ${year}, ${hour}:${min}`)
+    : (time = `${date} ${month} ${year} `);
 
   return time;
 };
