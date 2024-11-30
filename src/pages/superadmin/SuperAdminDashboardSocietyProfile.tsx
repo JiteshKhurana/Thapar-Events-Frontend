@@ -30,12 +30,18 @@ const SuperAdminDashboardSocietyProfile = () => {
     await axios
       .get(
         import.meta.env.VITE_API_ENDPOINT +
-          "/soc/get/events?soc_email=" +
-          society.email
+          "soc/get/allevents/" +
+          society.email,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       )
       .then((res) => setSocietyEvents(res.data))
       .catch((error) => toast(error));
   }
+
   async function getSocietyMetrics() {
     await axios
       .get(

@@ -29,7 +29,10 @@ const ManageEventRegistrations = () => {
           },
         }
       )
-      .then((res) => setEventRegistrations(res.data));
+      .then((res) => {
+        setEventRegistrations(res.data);
+        console.log(res.data);
+      });
   }
   useEffect(() => {
     getData();

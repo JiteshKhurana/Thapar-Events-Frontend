@@ -49,9 +49,7 @@ const useSocietyProfile = () => {
   async function getSocietyEvents() {
     await axios
       .get(
-        import.meta.env.VITE_API_ENDPOINT +
-          "soc/get/events?soc_email=" +
-          societyEmail,
+        import.meta.env.VITE_API_ENDPOINT + "soc/get/allevents/" + societyEmail,
         {
           headers: {
             Authorization: `Bearer ${token}`,
